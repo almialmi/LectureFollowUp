@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+</head>
+<body>
+
+<nav class="navbar   fixed-top navbar-expand-md bg-dark navbar-dark">
+  <img src="assets/logonew.png" style="width: 60px; height: 60px;"/>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link " href="#" routerLink= "/home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#" routerLink= "/subAdminRegister">Registor</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLink= "/show">Show Me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"  (click)="onLogout()" value="logout">logout</a>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+
+
+<div class="container-fluid text-center py-5 ">
+  <h3 id="parttwo">Lecturers Follow Up </h3>
+  <p >The main use of this system is finding out teachers who are found in more than one campus. information of teachers is provided to the system by provided sectors. so When the concerned sectors search for a name to check whether she or he work on more than one campus the system will immediately look for the information provided to the it and show them similarity in percent. And if it is more than 90% the person is assured to be worked in more than one campus. And anyone who have right to see information of teachers found in Ethiopia he can easily get it in this system.</p>
+
+  
+</div>
+
+<div class="container py-5" >
+  <ul class="nav nav-tabs">
+      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #ffa800;font-size: 25px;" class="nav-link active" data-toggle="tab" href="#home">Admin</a></li>
+      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #ffa800;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu1">Checker</a></li>
+    
+    </ul>
+    <div class="tab-content">
+      
+<div class="container" id="home" class="tab-pane fade in active show">
+  <div class="cards py-5">
+  <div class="col-md-12">
+   
+    <div class="card" style="height: 400px;">
+      <div class="card-body">
+        <div class="card-title col-md-5" >
+          <h3>
+          why join LecturersFollower?
+          </h3>
+
+        </div>
+        <div class="card-text px-5 col-md-4 col-sm-8">
+          to track down who is working
+          in more than one campus.
+          <br>
+          to know that we need you to fill
+          this info.
+          <br/>
+          because it helps us to track down them.
+          <br/>
+          and it would be meaning less with out your help.
+        </div>
+       </div>
+       </div>
+    
+    </div>
+  
+    <div class="col-md-6 offset-md-5">
+      <div class="card " id="cardtwo">
+        <div class="card-body">
+
+          <div class="title">
+            <h5 class="card-title  text-center" >
+              Registor Admins </h5>
+              
+            </div>
+          
+              <p class="card-text text-center">one of the ultimate track down
+                ever in the history of Ethiopian Education.
+              </p>
+
+              <form #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
+                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedSuperuser._id">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">First name:</label>
+                  <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.firstName" name="firstName"  placeholder="Enter firstname" required
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
+                  
+                </div>
+                <div *ngIf="signUpForm.submitted && !firstname.valid">
+                  <label style="color: red;" class="validation-message">this field is required </label>
+
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Middle name:</label>
+                  <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.middleName" name="middleName"  placeholder="Enter middlename" required
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
+                  </div>
+                  <div *ngIf="signUpForm.submitted && !middlename.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div>
+
+                  <div class="form-group">
+                    <label   for="exampleInputPassword1">Last name:</label>
+                    <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.lastName" name="lastName"  placeholder="Enter lastname" required
+                    [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
+                    </div>
+                    <div *ngIf="signUpForm.submitted && !lastname.valid">
+                      <label style="color: red;" class="validation-message">this field is required </label>
+    
+                    </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Email:</label>
+                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.email" name="email"  placeholder="Enter email" required
+                  [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
+                </div>
+                <div *ngIf="signUpForm.submitted && email.errors">
+                  <label *ngIf="email.errors.required"style="color: red;" class="validation-message">this field is required </label>
+                  <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
+
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.password" placeholder="Password" required minlength="8"
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !password.valid}">
+
+                </div>
+                <div *ngIf="signUpForm.submitted && password.errors?.minlength">
+                  <label style="color: red;" class="validation-message">minimum 8 characters</label>
+
+                </div>
+                <div *ngIf="signUpForm.submitted && !password.valid">
+                  <label style="color: red;" class="validation-message">this field is required </label>
+
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">mobile:</label>
+                  <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.mobile" name="mobile"  placeholder="Enter mobile number" required
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
+                </div>
+                <div *ngIf="signUpForm.submitted && !mobile.valid">
+                  <label style="color: red;" class="validation-message">this field is required </label>
+
+                </div>
+              
+
+                <div class="form-group">
+                  <label for="email">university:</label>
+                  <br>
+                  <select  class="browser-default custom-select" #universtiy="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.university" name="university"  (change)="onSelect($event.target.value)" >
+                 
+                   <option *ngFor="let unv of universtiys" [value]="unv.name">
+                     {{unv.name}}
+                   </option>
+                   
+                 </select>
+                 
+                </div>
+                <div *ngIf="signUpForm.submitted && !universtiy.valid">
+                  <label style="color: red;" class="validation-message">this field is required </label>
+
+                </div>
+                
+                <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
+              <input style="background-color: #ffa800" type="submit" value="Registor">
+              </form>
+              <div class="success" *ngIf="showSucessMessage">
+                <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesfully</h1>
+
+              </div>
+
+              <div class="alert" *ngIf="serverErrorMessage">
+               <h1 style="color: red;"> {{serverErrorMessage}} </h1>
+
+              </div>
+          </div>
+          </div>
+      </div>
+
+
+
+  </div>
+
+</div>
+
+
+<!--registration page for checker-->
+<div  class="container" id="menu1"  class="tab-pane fade">
+  <div class="cards py-5">
+  <div class="col-md-12">
+   
+    <div class="card" style="height: 400px;">
+      <div class="card-body">
+        <div class="card-title col-md-5" >
+          <h3>
+          why join LecturersFollower?
+          </h3>
+
+        </div>
+        <div class="card-text px-5 col-md-4 col-sm-8">
+          to track down who is working
+          in more than one campus.
+          <br>
+          to know that we need you to fill
+          this info.
+          <br/>
+          because it helps us to track down them.
+          <br/>
+          and it would be meaning less with out your help.
+         </div>
+        </div>
+       </div>
+   </div>
+  
+    <div class="col-md-6 offset-md-5">
+      <div class="card " id="cardtwo">
+        <div class="card-body">
+
+          <div class="title">
+            <h5 class="card-title  text-center" >
+              Registore Checkers </h5>
+              
+            </div>
+          
+              <p class="card-text text-center">one of the ultimate track down
+                ever in the history of Ethiopian Education.
+              </p>
+
+              <form #signUpFormm="ngForm"  (ngSubmit) = "signUpFormm.valid && onSubmitt(signUpFormm)">
+                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedSuperuser._id">
+                
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Email:</label>
+                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.email" name="email"  placeholder="Enter email" required
+                  [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !email.valid}" >
+                </div>
+                <div *ngIf="signUpFormm.submitted && email.errors">
+                  <label *ngIf="email.errors.required"style="color: red;" class="validation-message">this field is required </label>
+                  <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
+
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.password" placeholder="Password" required minlength="8"
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !password.valid}">
+
+                </div>
+                <div *ngIf="signUpFormm.submitted && password.errors?.minlength">
+                  <label style="color: red;" class="validation-message">minimum 8 characters</label>
+
+                </div>
+                <div *ngIf="signUpForm.submitted && !password.valid">
+                  <label style="color: red;" class="validation-message">this field is required </label>
+
+                </div>
+               
+              <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
+              <input style="background-color: #ffa800" type="submit" value="Registor">
+              </form>
+              <div class="success" *ngIf="showSucessMessage">
+                <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesfully</h1>
+
+              </div>
+
+              <div class="alert" *ngIf="serverErrorMessage">
+               <h1 style="color: red;"> {{serverErrorMessage}} </h1>
+
+              </div>
+              <h1 style="color: #212121;"> Registor this clint</h1>
+              <h1 style="color: #212121;"> Registor this clint</h1>
+              <h1 style="color: #212121;"> Registor this clint</h1>
+             </div>
+              </div>
+           </div>
+          </div>
+          </div>
+    </div>
+    </div>
+
+    
+    
+
+
+    <footer class="site-footer">
+      <h4 class="text-center" style="font-family: 'Times New Roman', Times, serif;color: white;">2020 © Ministry of Science and Higher Education - All rights reserved.</h4>
+     
+     
+    </footer>
+    
+
+</body>
+</html>
+
+
+
+<script>
+  // Material Select Initialization
+$(document).ready(function() {
+$('.mdb-select').materialSelect();
+$('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+$(this).closest('.select-outline').find('label').toggleClass('active');
+$(this).closest('.select-outline').find('.caret').toggleClass('active');
+});
+});
+  </script>

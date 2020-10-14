@@ -1,0 +1,56 @@
+.container-fluid{
+    background-color:#212121;
+    
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+.card{
+    background-color:#212121;
+    border-color: #ffa800;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+input[type="radio"]{
+    margin: 0 20px 0 20px;
+}
+.rad{
+    font-size: 30px;
+    color:white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#cardtwo{
+    
+    margin-top: -430px;
+}
+.btn{
+    width: 200px;
+    height: 40px;
+    margin-left: 100px;
+    font-family: 'Times New Roman', Times, serif;
+    background-color:  #ffa800;
+    font-size: large;
+}
+.form-control{
+    background-color: #544E4E!important;
+    border-color: #544E4E;
+    color: white;
+    
+
+
+}
+select{
+    background-color: #544E4E!important;
+    border-color: #544E4E;
+    color: white;
+    
+
+}
+
+
+.form-control:focus {
+    border-color: #ffa800;
+    color: white;
+   
+  }

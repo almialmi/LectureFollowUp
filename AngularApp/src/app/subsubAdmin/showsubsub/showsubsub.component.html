@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+</head>
+<body>
+
+<nav class="navbar   fixed-top navbar-expand-md bg-dark navbar-dark">
+  <img src="assets/logonew.png" style="width: 60px; height: 60px;"/>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link " href="#" routerLink= "/homesubsub">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#" routerLink= "/registorsubsub">Registor</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" routerLink = "/showsubsub" href="#">Show Me</a>
+      </li>
+      <li class="nav-item" (click)="onLogout()" value="logout">
+        <a class="nav-link">logout</a>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+
+<div class="container">
+    
+    <div class="search-container">
+        <form action="#">
+          <input type="text" placeholder="Enter a name.." name="search" [(ngModel)]= "firstName">
+          <button type="submit" (click)="SearchTitle()">search</button>
+        </form>
+      </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+<div class="container table-responsive py-3"  >
+               
+    <table  class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Middlename</th>
+          <th>Lastname</th> 
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Universtiy</th>
+          <th>educationStatus</th> 
+          <th>role</th>
+          <th>study</th>
+          <th>educationField</th>
+          <th>department</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of  subAdminService.users | filter:firstName">
+          <td>{{user.firstName}}</td>
+          <td>{{user.middleName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.mobile}}</td>
+          <td>{{user.university}}</td>
+          <td>{{user.educationStatus}}</td>
+          <td>{{user.role}}</td>
+          <td>{{user.study}}</td>
+          <td>{{user.educationField}}</td>
+          <td>{{user.department}}</td>
+          
+          <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
+          <td><a class="action-btn" (click)="onDelete(user._id)"><i class="fas fa-trash"></i></a></td>
+        </tr>
+    
+      </tbody>
+    </table>
+  </div>
+
+  
+
+
+
+
+
+  
+ 
+
+  
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form  #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
+        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subAdminService.selectedSuperuser._id">
+       
+        <div class="form-group">
+          <label for="exampleInputEmail1">First name:</label>
+          <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.firstName" name="firstName"  placeholder="Enter firstname" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
+          
+        </div>
+        <div *ngIf="signUpForm.submitted && !firstname.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Middle name:</label>
+          <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.middleName" name="middleName"  placeholder="Enter middlename" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
+          </div>
+          <div *ngIf="signUpForm.submitted && !middlename.valid">
+            <label style="color: red;" class="validation-message">this field is required </label>
+
+          </div>
+
+          <div class="form-group">
+            <label   for="exampleInputPassword1">Last name:</label>
+            <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.lastName" name="lastName"  placeholder="Enter lastname" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
+            </div>
+            <div *ngIf="signUpForm.submitted && !lastname.valid">
+              <label style="color: red;" class="validation-message">this field is required </label>
+
+            </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Email:</label>
+          <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.email" name="email"  placeholder="Enter email" required
+          [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
+        </div>
+        <div *ngIf="signUpForm.submitted && email.errors">
+          <label *ngIf="email.errors.required"style="color: red;" class="validation-message">this field is required </label>
+          <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
+
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">mobile:</label>
+          <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.mobile" name="mobile"  placeholder="Enter mobile number" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
+        </div>
+        <div *ngIf="signUpForm.submitted && !mobile.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">university:</label>
+          <input  class="form-control" type="text" #universtiy="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.university" name="university"  placeholder="Enter unverstiy name" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !universtiy.valid}">
+        </div>
+        <div *ngIf="signUpForm.submitted && !universtiy.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">educationStatus:</label>
+            <input  class="form-control" type="text" #educationStatus="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.educationStatus" name="educationStatus"  placeholder="Enter educationStatus" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationStatus.valid}">
+          </div>
+          <div *ngIf="signUpForm.submitted && !educationStatus.valid">
+            <label style="color: red;" class="validation-message">this field is required </label>
+
+          </div>
+          <div class="form-group">
+              <label for="exampleInputPassword1">role:</label>
+              <input  class="form-control" type="text" #role="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.role" name="role"  placeholder="Enter role" required
+              [ngClass]="{'invalid-textbox' : signUpForm.submitted && !role.valid}">
+            </div>
+            <div *ngIf="signUpForm.submitted && !role.valid">
+              <label style="color: red;" class="validation-message">this field is required </label>
+
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">study:</label>
+              <input  class="form-control" type="text" #study="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.study" name="study"  placeholder="Enter study" required
+              [ngClass]="{'invalid-textbox' : signUpForm.submitted && !study.valid}">
+            </div>
+            <div *ngIf="signUpForm.submitted && !study.valid">
+              <label style="color: red;" class="validation-message">this field is required </label>
+
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">educationField:</label>
+              <input  class="form-control" type="text" #educationField="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.educationField" name="educationField"  placeholder="Enter educationField" required
+              [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationField.valid}">
+            </div>
+            <div *ngIf="signUpForm.submitted && !educationField.valid">
+              <label style="color: red;" class="validation-message">this field is required </label>
+
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">department:</label>
+              <input  class="form-control" type="text" #department="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.department" name="department"  placeholder="Enter department" required
+              [ngClass]="{'invalid-textbox' : signUpForm.submitted && !department.valid}">
+            </div>
+            <div *ngIf="signUpForm.submitted && !department.valid">
+              <label style="color: red;" class="validation-message">this field is required </label>
+
+            </div>
+            
+         
+     
+
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>--> 
+             <input style="background-color: #ffa800" type="submit" value="Update">
+           </div>
+       
+      </form>
+      <div class="success" *ngIf="showSucessMessage">
+        <h1 style="color: green; font-family: 'Times New Roman';" >updated succesfully</h1>
+
+      </div>
+    </div>
+   
+  </ng-template>
+  
+ 
+  
+ 
+  
+   
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <footer class="site-footer">
+    <h4 class="text-center" style="font-family: 'Times New Roman', Times, serif;color: white;">2020 © Ministry of Science and Higher Education - All rights reserved.</h4>
+   
+   
+  </footer>
+  <script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+    
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+    </script>
+  
+</body>
+</html>

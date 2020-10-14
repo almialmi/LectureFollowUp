@@ -1,0 +1,96 @@
+body{
+    background-color: #11100e;
+  /* background-color: white;*/
+    background-size: cover;
+}
+.card{
+   background-color:#212121;
+  /* background-color: white;*/
+    border-color: #ffa800;
+}
+.card-title{
+    color: #FFFFFF;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+.card-text{
+    color: #CBBBBB;
+    font-family: 'Times New Roman', Times, serif;
+}
+label{
+    color: #CBBBBB;
+    font-family: 'Times New Roman', Times, serif;
+}
+.form-control{
+    background-color: #544E4E!important;
+    border-color: #ffa800;
+    color: white;
+    
+
+
+}
+
+
+.form-control:focus {
+    border-color: #ffa800;
+    color: white;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+  }
+
+
+
+
+.btn-circle.btn-sm { 
+    width: 30px; 
+    height: 30px; 
+    padding: 6px 0px; 
+    border-radius: 15px; 
+    font-size: 8px; 
+    text-align: center; 
+} 
+
+
+button{
+    margin: 7px;
+    background-color:#544E4E;
+  }
+  .btn{
+      width: 350px;
+      height: 40px;
+      font-family: 'Times New Roman', Times, serif;
+      background-color:  #ffa800;
+      font-size: large;
+  }
+  .sign input{
+    background-color:#ffa800;
+    width: 400px;
+    height: 40px;
+     font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+
+  }
+  
+#forgot{
+    margin-left: 150px;
+    font-family: 'Times New Roman', Times, serif;
+}
+@media only screen and (min-width: 280px) and (max-width: 1024px) {
+    #forgot{
+        margin-left: 15px;
+    }
+    .sign input{
+        width: 250px;
+
+    }
+    
+   
+}
+@media only screen and (min-width: 280px) and (max-width: 1024px) {
+    
+    .sign input{
+        width: 200px;
+
+    }
+    
+   
+}

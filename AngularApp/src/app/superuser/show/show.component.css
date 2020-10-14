@@ -1,0 +1,48 @@
+.search-container{
+    margin-top: 100px;
+}
+.search-container button {
+    height: 38px;
+    float: center;
+    padding: 6px 10px;
+    font-family: 'Times New Roman', Times, serif;
+    
+    margin-left: 0px;
+    background: #ffa800;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+.search-container input{
+    font-family: 'Times New Roman', Times, serif;
+    height: 40px;
+
+}
+  
+  .search-container button:hover {
+    background: #ccc;
+  }
+.table{
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+.table a{
+    color: #ffa800;
+}
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+input{
+  font-family: 'Times New Roman', Times, serif;
+}
+label{
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+
