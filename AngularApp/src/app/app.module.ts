@@ -25,6 +25,7 @@ import {  LogsubComponent } from './subAdmin/logsub/logsub.component';
 import { ShowsubComponent} from './subAdmin/showsub/showsub.component';
 import {  RegistorsubComponent } from './subAdmin/registorsub/registorsub.component';
 import { HomesubComponent } from './subAdmin/homesub/homesub.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 //import { ReactiveFormsModule } from '@angular/forms';
@@ -40,6 +41,10 @@ import { CheckerhomeComponent } from './checker/checkerhome/checkerhome.componen
 import { CheckershowComponent } from './checker/checkershow/checkershow.component';
 import {CheckerService} from 'src/app/sharedcheck/checker.service';
 import { CheckersearchComponent } from './checker/checkersearch/checkersearch.component';
+import { UpdatePasswordComponent } from './superuser/update-password/update-password.component';
+import { UpdateProfileComponent } from './subAdmin/update-profile/update-profile.component';
+import { UpdateProfileCheckerComponent } from './checker/update-profile-checker/update-profile-checker.component';
+import { UpdateProfilesubsubComponent } from './subsubAdmin/update-profilesubsub/update-profilesubsub.component';
 
 
 
@@ -64,13 +69,12 @@ import { CheckersearchComponent } from './checker/checkersearch/checkersearch.co
     CheckerlogComponent,
     CheckerhomeComponent,
     CheckershowComponent,
-    CheckersearchComponent
+    CheckersearchComponent,
+    UpdatePasswordComponent,
+    UpdateProfileComponent,
+    UpdateProfileCheckerComponent,
+    UpdateProfilesubsubComponent
 
-
-
-    
-    
-    
   ],
   imports: [
     BrowserModule,
@@ -81,7 +85,8 @@ import { CheckersearchComponent } from './checker/checkersearch/checkersearch.co
     Ng2SearchPipeModule,
     //ReactiveFormsModule,
     
-    NgbModule
+    NgbModule,
+    MatIconModule
 
   ],
   providers: [ {

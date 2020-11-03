@@ -3,6 +3,7 @@ const Checker = mongoose.model('Checker');
 const Subsub = mongoose.model('Subsub');
 const Lecture = mongoose.model('Lecture');
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
 
 module.exports.register = (req,res,next) =>{
     var checker = new Checker();
@@ -86,6 +87,7 @@ module.exports.findSubsub=(req,res)=>{
             }))
         }
     })
+    
 
 }
 
@@ -114,5 +116,41 @@ module.exports.findLecture=(req,res)=>{
     })
 
 }
+module.exports.UpdateProfile= async(req,res)=>{
+    console.log("request sent");
+    if(!req.body.email && !req.body.password){
+        return res.status(400).send({
+                 message:"this content can't be empty"
+        });
+    }
+    
+    const salt = await bcrypt.genSaltSync(10);
+    const password = await req.body.password;
+    
+    Checker.findByIdAndUpdate(req.params.id,{
+        email:req.body.email,
+        password:bcrypt.hashSync(password, salt)
+    
+    }, {new: true})
+    .then(user => {
+        if(!user) {
+            return res.status(404).send({
+                message: "User not found with this " + req.params.id
+            });
+        }
+        res.send({
+               message:"Profile Update Successfully !!"
+        });
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "User not found with this " + req.params.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating user profile with id " + req.params.id
+        });
+  });
+  }
 
 

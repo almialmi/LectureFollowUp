@@ -9,8 +9,8 @@ export class SubAdmin {
     password : string;
     educationStatus : string;
     role : string;
-    
     study : string;
     educationField : string;
     department : string;
+    isSelected:boolean;
 }

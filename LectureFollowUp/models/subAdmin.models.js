@@ -75,12 +75,13 @@ subAdminSchema.pre('save',function(next){
         });
     });
 });
+/*
 subAdminSchema.methods.comparePassword = function(condidatePassword,checkPassword){
     bcrypt.compare(condidatePassword,this.password,function(err,isMatch){
         if(err) return checkPassword(err);
         checkPassword(null,isMatch);
     });
-}
+}*/
 subAdminSchema.methods.verifyPassword = function(password){
     return bcrypt.compareSync(password,this.password);
 };

@@ -17,7 +17,10 @@ router.get('/registeredLectures',jwtHelper.verifyJwtToken, checkerUser.fetchLect
 router.get('/findSubsub/:query/:query1/:query2',jwtHelper.verifyJwtToken,checkerUser.findSubsub);
 
 // search by firstName for Lectures
-router.get('/findLecture/:query/:query1/:query2',jwtHelper.verifyJwtToken,checkerUser.findLecture);
+router.get('/findLecture/:query/:query1/:query2',checkerUser.findLecture);
+
+// update profile
+router.put('/updateProfile/:id',jwtHelper.verifyJwtToken,checkerUser.UpdateProfile);
 
 
 

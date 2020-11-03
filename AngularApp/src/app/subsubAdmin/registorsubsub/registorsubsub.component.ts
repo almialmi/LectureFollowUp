@@ -114,7 +114,8 @@ export class RegistorsubsubComponent implements OnInit {
       role: '',
       study: '',
       educationField: '',
-      department : ''
+      department : '',
+      isSelected:false
   
 
     };

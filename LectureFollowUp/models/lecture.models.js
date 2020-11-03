@@ -52,7 +52,11 @@ var lectureSchema = new mongoose.Schema({
         type:String,
         require:"password can\'t be empty ",
         minlength:[4,'password must be at least 4 character']
-         },
+    },
+    isSelected:{
+        type:Boolean,
+        defaultValue:false
+    },
     salSecrete: String
 });
 

@@ -12,27 +12,14 @@ export class CheckerService {
   selectedSuperuserr:  Checker;
   selectedSuperuser :  Checker = {
     _id: '',
-    firstName : '',
-    middleName: '',
-    lastName:'',
     email : '',
-    mobile: '',
-    university: '',
     password:'',
-    educationStatus:'',
-    role: '',
-    study: '',
-    educationField: '',
-    department : ''
-
-
-  };
+   
+};
     
    
   users : Checker[];
-  lecs:SubsubAdmin[];
-  subs:SubAdmin[];
-
+  
   noAuthHeader = {headers: new HttpHeaders({'NoAuth' : 'True'})};
 
 
@@ -43,6 +30,9 @@ export class CheckerService {
   login(authCredintials){
     return this.http.post(environment.apiBaseUrlchecker + '/authenticate' , authCredintials , this.noAuthHeader);
   
+  }
+  putProfile(id:String,user:Checker){
+    return this.http.put(environment.apiBaseUrlchecker + '/updateProfile' + `/${id}`,user);
   }
   setToken(token : string){
     localStorage.setItem('token' , token);
@@ -74,9 +64,9 @@ export class CheckerService {
       return userPayload.exp > Date.now() / 1000;
       else {
         return false;
-      }
-  
-}
+      }}
+
+
 findAndMatch(firstName:string,middleName:string,lastName:string): Observable<any>{
   return this.http.get(`${environment.apiBaseUrlchecker + '/findSubsub' }/ ${firstName}/ ${middleName}/ ${lastName}`)
 
@@ -87,4 +77,14 @@ findAndMatchL(firstName:string,middleName:string,lastName:string): Observable<an
 
 }
 
+getUserId(){
+  var token = this.getToken();
+  if (token){
+    var userPayload = atob(token.split('.')[1]);
+    var user = JSON.parse(userPayload);
+    var id = user._id;
+    console.log(id);
+    return id
+   
+}}
 }

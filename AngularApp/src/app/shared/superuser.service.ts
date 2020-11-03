@@ -4,7 +4,8 @@ import { HttpClient , HttpHeaders} from '@angular/common/http';
 
 
 import {Superuser } from './superuser.=model';
-import {Checker } from './checker.model'
+import {Checker } from './checker.model';
+import { User} from './user.model';
 import { environment } from 'src/environments/environment';
 import { JsonPipe } from '@angular/common';
 
@@ -15,7 +16,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class SuperuserService {
   selectedSuperuserr: Superuser;
- selectedSuperuser : Superuser = {
+  selectedSuperuser : Superuser = {
     _id: '',
     firstName : '',
     middleName: '',
@@ -27,11 +28,15 @@ export class SuperuserService {
 
 
   };
+  selectedUser:User={
+    _id:'',
+    email:'',
+    password:''
+  }
 
-    
-   
   users :Superuser[];
   userchecker : Checker[];
+  superUser:User[];
   noAuthHeader = {headers: new HttpHeaders({'NoAuth' : 'True'})};
   constructor(public http : HttpClient) { }
 
@@ -45,9 +50,8 @@ export class SuperuserService {
 
   }
 
-
   login(authCredintials){
-    return this.http.post(environment.apiBaseUrl + '/autenticate' , authCredintials , this.noAuthHeader);
+    return this.http.post(environment.apiBaseUrl + '/authenticate' , authCredintials , this.noAuthHeader);
 
   }
   SearchUser(){
@@ -76,12 +80,16 @@ export class SuperuserService {
   putUser(user: Superuser) {
     return this.http.put(environment.apiBaseUrl + '/subAdmin'  +`/${user._id}`, user);
   }
+  putPassword(id:String,user:User){
+    return this.http.put(environment.apiBaseUrl + '/updateProfile' + `/${id}`,user);
+  }
   setToken(token : string){
     localStorage.setItem('token' , token);
-    
+   
   }
   getToken(){
     return localStorage.getItem('token');
+    
   }
   deletToken(){
     localStorage.removeItem('token');
@@ -90,7 +98,9 @@ export class SuperuserService {
     var token = this.getToken();
     if (token){
       var userPayload = atob(token.split('.')[1]);
+    //  console.log(userPayload);
       return JSON.parse(userPayload);
+
 
     }
     else
@@ -104,9 +114,16 @@ export class SuperuserService {
       else {
         return false;
       }
-
-
-
-    
-  }
+    }
+    getUserId(){
+      var token = this.getToken();
+      if (token){
+        var userPayload = atob(token.split('.')[1]);
+        var user = JSON.parse(userPayload);
+        var id = user._id;
+        console.log(id);
+        return id
+       
+    }
+}
 }

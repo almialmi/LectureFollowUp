@@ -20,8 +20,15 @@ export class CheckerlogComponent implements OnInit {
   emailRegex =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   serverErrorMessage: string;
 
+  
 
   ngOnInit(): void {
+  }
+
+  hide: boolean = true;
+
+  myFunction() {
+    this.hide = !this.hide;
   }
   onSubmit(form : NgForm){
     this.checkerService.login(form.value).subscribe(

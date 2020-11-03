@@ -25,6 +25,12 @@ export class SuperuserComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  hide: boolean = true;
+
+  myFunction() {
+    this.hide = !this.hide;
+  }
+
   onSubmit(form : NgForm){
     this.superUserService.login(form.value).subscribe(
       res => {
@@ -35,7 +41,6 @@ export class SuperuserComponent implements OnInit {
       },
       err => {
         this.serverErrorMessage  = "somthing went wrong";
-        console.log("what the fuck");
         
 
       }

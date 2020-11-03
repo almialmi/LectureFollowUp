@@ -6,15 +6,10 @@ import {SubsubAdmin} from 'src/app/sharedsubsub/subsub-admin.model';
 import {SubsubAdminService} from 'src/app/sharedsubsub/subsub-admin.service';
 import { CheckerService} from 'src/app/sharedcheck/checker.service';
 
-
-
-
-
 import { SuperuserService } from '../../shared/superuser.service';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Checker } from 'src/app/shared/checker.model';
-
+import { Checker } from 'src/app/sharedcheck/checker.model';
 
 @Component({
   selector: 'app-checkershow',
@@ -35,10 +30,12 @@ export class CheckershowComponent implements OnInit {
   constructor(public subuserservice : SubAdminService,public subsubuserservice : SubsubAdminService ,public checkerservice : CheckerService, public router : Router) { }
   emailRegex =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   showSucessMessage: boolean;
+  
 
   ngOnInit(): void {
     this.refreshuserlistchecker();
     this.refreshuserlist();
+   
    
   }
   onLogout(){
@@ -96,14 +93,19 @@ export class CheckershowComponent implements OnInit {
   searchAndMatch(selectedUser:SubAdmin){
     this.checkerservice.findAndMatch(selectedUser.firstName,selectedUser.middleName,selectedUser.lastName).subscribe(
       res =>{
-        this.subuserservice.searchUser = res;
+        this.newRowIndex++;
+        //this.subuserservice.clickMe(selectedUser._id);
+        this.subuserservice.searchUser = res as SubAdmin[];
+        
+        
       });
   }
 
   searchAndMatchL(selectedUser:SubsubAdmin){
+    
     this.checkerservice.findAndMatchL(selectedUser.firstName,selectedUser.middleName,selectedUser.lastName).subscribe(
       res =>{
-        this.subsubuserservice.searchUser = res;
+        this.subsubuserservice.searchUser = res as SubsubAdmin[];
       });
   }
 

@@ -23,6 +23,12 @@ router.get('/subSubAdmin/:query',jwtHelper.verifyJwtToken,subUser.findByName);
 // Update a subSubAdmin with subSubAdminId
 router.put('/subSuAdmin/:id', jwtHelper.verifyJwtToken,subUser.update);
 
+// update profile
+router.put('/updateProfile/:id',jwtHelper.verifyJwtToken,subUser.UpdateProfile);
+
+//selective update
+router.put('/selectiveUpdateProfile/:id',subUser.selectiveUpdateProfile);
+
 // Delete a subSubAdmin with subSubAdminId
 router.delete('/subSubAdmin/:id',jwtHelper.verifyJwtToken ,subUser.delete);
 

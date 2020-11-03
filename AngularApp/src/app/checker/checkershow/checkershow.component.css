@@ -38,5 +38,9 @@
   z-index: 9;
 }
 
+.selected {
+  background-color: red;
+}
+
 
 

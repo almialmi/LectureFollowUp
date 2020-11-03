@@ -29,6 +29,13 @@ router.put('/lecture/:id',jwtHelper.verifyJwtToken ,subsubUser.update);
 // Delete a Lecture with lectureId
 router.delete('/lecture/:id', jwtHelper.verifyJwtToken,subsubUser.delete);
 
+//updateProfile
+router.put('/updateProfile/:id',subsubUser.UpdateProfile);
+
+//selective update profile
+router.put('/selectiveUpdateProfile/:id',subsubUser.selectiveUpdateProfile);
+
+
 
 
 module.exports=router;

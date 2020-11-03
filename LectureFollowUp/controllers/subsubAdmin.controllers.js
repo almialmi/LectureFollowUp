@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Subsub = mongoose.model('Subsub');
 const Lecture = mongoose.model('Lecture');
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
 
 
 module.exports.login=(req,res,next)=>{
@@ -89,6 +90,53 @@ module.exports.fetchlectures = (req,res,next)=>{
 //     });
 
 // }
+
+module.exports.UpdateProfile= async(req,res)=>{
+    console.log("request sent");
+    if(!req.body.email && !req.body.password){
+        return res.status(400).send({
+                 message:"this content can't be empty"
+        });
+    }
+    
+    const salt = await bcrypt.genSaltSync(10);
+    const password = await req.body.password;
+    
+    Subsub.findByIdAndUpdate(req.params.id,{
+        firstName:req.body.firstName,
+        middleName:req.body.middleName,
+        lastName:req.body.lastName,
+        email:req.body.email,
+        mobile:req.body.mobile,
+        university:req.body.university,
+        educationStatus:req.body.educationStatus,
+        role:req.body.role,
+        study:req.body.study,
+        department:req.body.department,
+        password:bcrypt.hashSync(password, salt)
+    
+    }, {new: true})
+    .then(user => {
+        if(!user) {
+            return res.status(404).send({
+                message: "User not found with this " + req.params.id
+            });
+        }
+        res.send({
+               message:"Profile Update Successfully !!"
+        });
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "User not found with this " + req.params.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating user profile with id " + req.params.id
+        });
+  });
+  }
+
 module.exports.update = (req,res)=>{
     
     // Validate Request
@@ -174,4 +222,45 @@ module.exports.findByName=(req,res)=>{
      })
  
  }
+ module.exports.selectiveUpdateProfile= async(req,res)=>{
+    console.log("request sent");
+    if(!req.body.email && !req.body.password){
+        return res.status(400).send({
+                 message:"this content can't be empty"
+        });
+    }
+    
+    const salt = await bcrypt.genSaltSync(10);
+    const password = await req.body.password;
+    
+    Subsub.findByIdAndUpdate(req.params.id,{
+        $set:{
+            email:req.body.email,
+            mobile:req.body.mobile,
+            password:bcrypt.hashSync(password, salt)
+
+        }
+       
+    
+    }, {new: true})
+    .then(user => {
+        if(!user) {
+            return res.status(404).send({
+                message: "User not found with this " + req.params.id
+            });
+        }
+        res.send({
+               message:"Profile Update Successfully !!"
+        });
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "User not found with this " + req.params.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating user profile with id " + req.params.id
+        });
+  });
+  }
  

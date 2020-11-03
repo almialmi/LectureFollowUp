@@ -11,7 +11,7 @@ var userSchema = new mongoose.Schema({
     password:{
         type:String,
         require:"password can\'t be empty ",
-        minlength:[4,'password must be at least 4 character']
+        minlength:[8,'password must be at least 8 character']
     },
     salSecrete: String
 });
@@ -21,21 +21,21 @@ userSchema.path('email').validate((val)=>{
     return emailRegex.test(val);
     },'Invalid e-mail');
 
-userSchema.pre('save',function(next){
+ userSchema.pre('save',function(next){
     bcrypt.genSalt(10,(err,salt)=>{
         bcrypt.hash(this.password,salt,(err,hash)=>{
             this.password = hash;
-            this.salSecrete =salt;
+           this.salSecrete =salt;
             next();
         });
     });
 });
-userSchema.methods.comparePassword = function(condidatePassword,checkPassword){
+/*userSchema.methods.comparePassword = function(condidatePassword,checkPassword){
     bcrypt.compare(condidatePassword,this.password,function(err,isMatch){
         if(err) return checkPassword(err);
         checkPassword(null,isMatch);
     });
-}
+}*/
 userSchema.methods.verifyPassword = function (password){
     return bcrypt.compareSync(password , this.password);
 };

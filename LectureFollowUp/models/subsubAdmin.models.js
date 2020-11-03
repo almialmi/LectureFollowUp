@@ -55,6 +55,11 @@ var subsubAdminSchema = new mongoose.Schema({
         require:"password can\'t be empty ",
         minlength:[4,'password must be at least 4 character']
     },
+    isSelected:{
+        type:Boolean,
+        defaultValue:false
+
+    },
     salSecrete: String
 });
 

@@ -7,7 +7,7 @@ const jwtHelper = require('../config/jwtHelper');
 //for login
 router.post('/register',ctrlUser.register);
 router.post('/login',ctrlUser.login);
-router.post('/autenticate' , ctrlUser.autenticate);
+router.post('/authenticate' , ctrlUser.autenticate);
 
 //register Checker
 router.post('/registerChecker',jwtHelper.verifyJwtToken,ctrlUser.registerChecker,);
@@ -24,15 +24,18 @@ router.get('/userProfile' ,jwtHelper.verifyJwtToken,ctrlUser.userProfile );
 router.put('/CheckerUpdate/:id',jwtHelper.verifyJwtToken,ctrlUser.CheckerUpdate);
 
 //delete checker
-router.delete('/CheckerDelete/:id',ctrlUser.CheckerDelete);
+router.delete('/CheckerDelete/:id',jwtHelper.verifyJwtToken,ctrlUser.CheckerDelete);
 
 // find by name 
-router.get('/subAdmin/:query',ctrlUser.findByName);
+router.get('/subAdmin/:query',jwtHelper.verifyJwtToken,ctrlUser.findByName);
 
-// Update a Note with noteId
-router.put('/subAdmin/:id',jwtHelper.verifyJwtToken, ctrlUser.update);
+// Update a Note with Id
+router.put('/subAdmin/:id',jwtHelper.verifyJwtToken,ctrlUser.update);
 
-// Delete a Note with noteId
+//update password
+router.put('/updateProfile/:id',jwtHelper.verifyJwtToken,ctrlUser.UpdateProfile);
+
+// Delete a Note with Id
 router.delete('/subAdmin/:id',jwtHelper.verifyJwtToken, ctrlUser.delete);
 
 

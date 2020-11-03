@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { SubAdmin } from '../../sharedsub/sub-admin.model';;
+import { SubAdmin } from '../../sharedsub/sub-admin.model';
 
 import {  SubAdminService } from 'src/app/sharedsub/sub-admin.service';
 import { NgForm } from '@angular/forms';

@@ -4,6 +4,7 @@ const { response } = require('express');
 const User = mongoose.model('User');
 const Sub= mongoose.model('Sub');
 const _ = require('lodash');
+const bcrypt = require('bcryptjs');
 const Checker = mongoose.model('Checker');
 module.exports.register = (req,res,next) =>{
       var user = new User();
@@ -155,6 +156,42 @@ module.exports.findByName=(req,res)=>{
         }
     })
 }
+module.exports.UpdateProfile= async(req,res)=>{
+    console.log("request sent");
+    if(!req.body.email && !req.body.password){
+        return res.status(400).send({
+                 message:"this content can't be empty"
+        });
+    }
+    
+    const salt = await bcrypt.genSaltSync(10);
+    const password = await req.body.password;
+    
+    User.findByIdAndUpdate(req.params.id,{
+        email:req.body.email,
+        password:bcrypt.hashSync(password, salt)
+    
+    }, {new: true})
+    .then(user => {
+        if(!user) {
+            return res.status(404).send({
+                message: "User not found with this " + req.params.id
+            });
+        }
+        res.send({
+               message:"Profile Update Successfully !!"
+        });
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "User not found with this " + req.params.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating user profile with id " + req.params.id
+        });
+  });
+  }
 
 module.exports.update = (req,res)=>{
     
@@ -173,7 +210,7 @@ module.exports.update = (req,res)=>{
             email:req.body.email,
             mobile:req.body.mobile,
             university:req.body.university,
-             password:req.body.password
+            password:req.body.password
 
         }, {new: true})
         .then(sub => {
@@ -286,3 +323,5 @@ module.exports.CheckerDelete=(req,res)=>{
     });
 
 }
+
+

@@ -26,14 +26,15 @@ export class SubsubAdminService {
     role: '',
     study: '',
     educationField: '',
-    department : ''
+    department : '',
+    isSelected:false
 
 
   };
     
    
   users :SubsubAdmin[];
-  searchUser:SubsubAdmin;
+  searchUser:SubsubAdmin[];
   noAuthHeader = {headers: new HttpHeaders({'NoAuth' : 'True'})};
 
   constructor(public http : HttpClient) { }
@@ -62,6 +63,11 @@ deleteuser(_id : string){
 putUser(user: SubsubAdmin) {
   return this.http.put(environment.apiBaseUrlsubsub + '/lecture'  +`/${user._id}`, user);
 }
+putProfile(id:String ,sub:SubsubAdmin){
+  return this.http.put(environment.apiBaseUrlsubsub + '/selectiveUpdateProfile'  +`/${id}`, sub);
+
+}
+
 setToken(token : string){
   localStorage.setItem('token' , token);
   
@@ -98,6 +104,18 @@ getUserPaylod(){
 FindbyName(firstName): Observable<any>{
   return this.http.get(`${environment.apiBaseUrlsubsub + '/lecture/'}${firstName}`)
   //return this.http.get(`${environment.apiBaseUrlsubsub + '/lecture' }? = ${title}`)
+
+}
+getUserId(){
+  var token = this.getToken();
+  if (token){
+    var userPayload = atob(token.split('.')[1]);
+    var user = JSON.parse(userPayload);
+    var id = user._id;
+    console.log(id);
+    return id
+   
+}
 
 }
 
