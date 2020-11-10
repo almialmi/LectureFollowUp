@@ -66,7 +66,7 @@ module.exports.registerChecker = (req,res,next) =>{
   }
 module.exports.autenticate = (req , res , next) => {
     //call for passport autentication
-    passport.authenticate('local' , (err , user , info) => {
+    passport.authenticate('local', (err , user , info) => {
         //error from passport middle ware
         if (err) return res.status(400).json(err);
 
@@ -278,7 +278,8 @@ module.exports.CheckerUpdate = (req,res)=>{
     // Find note and update it with the request body
     Checker.findByIdAndUpdate(req.params.id, {
         email:req.body.email,
-        password:req.body.password
+        password:req.body.password,
+        isActive:req.body.isActive
 
     }, {new: true})
     .then(check => {
@@ -323,5 +324,80 @@ module.exports.CheckerDelete=(req,res)=>{
     });
 
 }
+
+module.exports.activateDeactivate= async(req,res)=>{
+    /*   if(!req.body.email && !req.body.password){
+         return res.status(400).send({
+                  message:"this content can't be empty"
+         });
+     }*/ 
+     console.log(req.body.isActive);
+     const isActive = !req.body.isActive
+     console.log(isActive)
+     Checker.findByIdAndUpdate(req.params.id,{
+
+         $set:{
+         isActive:isActive
+ 
+       }  
+  }, {new: true})
+     .then(user => {
+         if(!user) {
+             return res.status(404).send({
+                 message: "User not found with this " + req.params.id
+             });
+         }
+         res.send({
+                message:"Deactivate Successfully !!"
+         });
+     }).catch(err => {
+         if(err.kind === 'ObjectId') {
+             return res.status(404).send({
+                 message: "User not found with this " + req.params.id
+             });                
+         }
+         return res.status(500).send({
+             message: "Error updating user profile with id " + req.params.id
+         });
+   });
+   }
+
+   module.exports.activateDeactivateSub= async(req,res)=>{
+    /*   if(!req.body.email && !req.body.password){
+         return res.status(400).send({
+                  message:"this content can't be empty"
+         });
+     }*/ 
+     console.log(req.body.isActive);
+     const isActive = !req.body.isActive
+     console.log(isActive)
+     Sub.findByIdAndUpdate(req.params.id,{
+
+         $set:{
+         isActive:isActive
+ 
+       }  
+  }, {new: true})
+     .then(user => {
+         if(!user) {
+             return res.status(404).send({
+                 message: "User not found with this " + req.params.id
+             });
+         }
+         res.send({
+                message:"Deactivate Successfully !!"
+         });
+     }).catch(err => {
+         if(err.kind === 'ObjectId') {
+             return res.status(404).send({
+                 message: "User not found with this " + req.params.id
+             });                
+         }
+         return res.status(500).send({
+             message: "Error updating user profile with id " + req.params.id
+         });
+   });
+   }
+ 
 
 

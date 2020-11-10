@@ -1,10 +1,11 @@
 require('./config/config');
 require('./models/db');
-require('./config/passportConfig');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
+require('./config/passportConfig')(passport);
+var fileupload = require("express-fileupload");
 
 
 var app = express();
@@ -19,12 +20,14 @@ const checker = require('./routes/checker.router');
  
 app.use(bodyParser.json());
 app.use(cors({origin:'http://localhost:4200'}));
+app.use(fileupload());
 app.use('/api',rstIndex);
 app.use('/api2',subAdmin);
 app.use('/api3',subsubAdmin);
 app.use('/api4',checker);
 //app.use('/api5' ,role );
 app.use(passport.initialize());
+app.use(passport.session())
 
 
 app.use((err,req,res,next) =>{

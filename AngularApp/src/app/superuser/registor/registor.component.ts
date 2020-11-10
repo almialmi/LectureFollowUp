@@ -109,6 +109,8 @@ export class RegistorComponent implements OnInit {
       email : '',
       university : '',
       password : '',
+      isActive:true
+     
 
     };
     form.resetForm();

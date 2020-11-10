@@ -29,29 +29,10 @@ var subAdminSchema = new mongoose.Schema({
         require:"University can\'t be empty "
 
     },
-     educationStatus:{
-            type:String,
-            require:"Education Status can\'t be empty"
-    },
-    role:{
-        type:String,
-        require:"role can\'t be empty"
-    },
-
-   
-    study:{
-           type:String,
-           require:"Study can\'t be empty"
-    },
-  
-    
-    educationField:{
-          type:String,
-          require:"Education Filed can\'t be empty"
-    },
-    department:{
-           type:String,
-           require:"Department can\'t be empty"
+    isActive:{
+        type:Boolean,
+        index:true,
+        default:true
     },
     password:{
         type:String,

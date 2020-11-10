@@ -25,7 +25,7 @@ export class UpdateProfileCheckerComponent implements OnInit {
 
   onLogout(){
     this.checkerservice.deletToken();
-    this.router.navigate(['/logchecke']);
+    this.router.navigate(['/logchecker']);
   }
 
   OnSubmit(form : NgForm){

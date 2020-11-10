@@ -78,7 +78,8 @@
           
           
           <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
-          <td><a class="action-btn" (click)="onDelete(user._id)"><i class="fas fa-trash"></i></a></td>
+        <!--  <td><a class="action-btn" (click)="onDelete(user._id)"><i class="fas fa-trash"></i></a></td> -->
+          <td> <a class="action-btn"  (click)="activateDeactivateSubsub(user._id,user)" ><i class="fa {{ user.isActive ? 'fa-unlock' : 'fa-lock' }}"></i></a></td>
         </tr>
     
       </tbody>

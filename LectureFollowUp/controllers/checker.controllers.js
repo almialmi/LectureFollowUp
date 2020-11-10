@@ -153,4 +153,39 @@ module.exports.UpdateProfile= async(req,res)=>{
   });
   }
 
+  // Activate or deactivate user
+
+  module.exports.activateDeactivate= async(req,res)=>{
+   /*   if(!req.body.email && !req.body.password){
+        return res.status(400).send({
+                 message:"this content can't be empty"
+        });
+    }*/ 
+    Checker.findByIdAndUpdate(req.params.id,{
+      $set:{
+        isActive:req.body.isActive
+
+      }  
+ }, {new: true})
+    .then(user => {
+        if(!user) {
+            return res.status(404).send({
+                message: "User not found with this " + req.params.id
+            });
+        }
+        res.send({
+               message:"Deactivate Successfully !!"
+        });
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "User not found with this " + req.params.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating user profile with id " + req.params.id
+        });
+  });
+  }
+
 

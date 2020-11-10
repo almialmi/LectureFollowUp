@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Checker } from 'src/app/sharedcheck/checker.model';
 
+
 @Component({
   selector: 'app-checkershow',
   templateUrl: './checkershow.component.html',
@@ -102,13 +103,17 @@ export class CheckershowComponent implements OnInit {
   }
 
   searchAndMatchL(selectedUser:SubsubAdmin){
+     let url = `/checkersearch/${selectedUser.firstName}/${selectedUser.middleName}/${selectedUser.lastName}`
+    this.router.navigate([url])
     
-    this.checkerservice.findAndMatchL(selectedUser.firstName,selectedUser.middleName,selectedUser.lastName).subscribe(
+    /*this.checkerservice.findAndMatchL(selectedUser.firstName,selectedUser.middleName,selectedUser.lastName).subscribe(
       res =>{
         this.subsubuserservice.searchUser = res as SubsubAdmin[];
+        console.log(res);
       });
-  }
+  }*/
 
   
 
+}
 }

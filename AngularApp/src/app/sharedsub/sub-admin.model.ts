@@ -12,5 +12,5 @@ export class SubAdmin {
     study : string;
     educationField : string;
     department : string;
-    isSelected:boolean;
+    isActive:boolean;
 }

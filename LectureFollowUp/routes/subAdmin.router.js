@@ -32,6 +32,10 @@ router.put('/selectiveUpdateProfile/:id',subUser.selectiveUpdateProfile);
 // Delete a subSubAdmin with subSubAdminId
 router.delete('/subSubAdmin/:id',jwtHelper.verifyJwtToken ,subUser.delete);
 
+// activate deactivate sub sub admin
+router.put('/activateDeactivateSubsub/:id',subUser.activateDeactivateSubsub);
+
+
 
 
 module.exports=router;

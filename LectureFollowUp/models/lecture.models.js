@@ -47,17 +47,8 @@ var lectureSchema = new mongoose.Schema({
     department:{
            type:String,
            require:"Department can\'t be empty"
-    },
-    password:{
-        type:String,
-        require:"password can\'t be empty ",
-        minlength:[4,'password must be at least 4 character']
-    },
-    isSelected:{
-        type:Boolean,
-        defaultValue:false
-    },
-    salSecrete: String
+    }
+    
 });
 
 lectureSchema.path('email').validate((val)=>{

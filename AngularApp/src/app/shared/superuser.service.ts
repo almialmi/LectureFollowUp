@@ -24,14 +24,20 @@ export class SuperuserService {
     email : '',
     mobile: '',
     university: '',
-    password:''
-
-
-  };
+    password:'',
+    isActive:true,
+};
   selectedUser:User={
     _id:'',
     email:'',
     password:''
+  }
+
+  selectedChecker:Checker={
+    _id:'',
+    email:'',
+    isActive:true
+
   }
 
   users :Superuser[];
@@ -75,6 +81,13 @@ export class SuperuserService {
   }
   putChecker(user: Superuser) {
     return this.http.put(environment.apiBaseUrl + '/CheckerUpdate'  +`/${user._id}`, user);
+  }
+  putActivateDeactivate(_id:String ,user:Checker){
+    return this.http.put(environment.apiBaseUrl + '/activateDeactivate' + `/${_id}`,user);
+  }
+  putActivateDeactivateSub(_id:String,user:Superuser){
+    return this.http.put(environment.apiBaseUrl + '/activateDeactivateSub' + `/${_id}`,user);
+
   }
   
   putUser(user: Superuser) {

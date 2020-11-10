@@ -68,12 +68,12 @@ export class CheckerService {
 
 
 findAndMatch(firstName:string,middleName:string,lastName:string): Observable<any>{
-  return this.http.get(`${environment.apiBaseUrlchecker + '/findSubsub' }/ ${firstName}/ ${middleName}/ ${lastName}`)
+  return this.http.get(`${environment.apiBaseUrlchecker + '/findSubsub' }/${firstName}/${middleName}/${lastName}`)
 
 }
 
 findAndMatchL(firstName:string,middleName:string,lastName:string): Observable<any>{
-  return this.http.get(`${environment.apiBaseUrlchecker + '/findLecture' }/ ${firstName}/ ${middleName} / ${lastName}`)
+  return this.http.get(`${environment.apiBaseUrlchecker + '/findLecture' }/${firstName}/${middleName}/${lastName}`)
 
 }
 

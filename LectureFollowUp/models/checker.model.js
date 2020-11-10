@@ -8,6 +8,12 @@ var checkerSchema = new mongoose.Schema({
         require:"Email can\'t be empty ",
         unique:true
     },
+   isActive:{
+       type:Boolean,
+       index:true,
+       default:true
+
+    },
     password:{
         type:String,
         require:"password can\'t be empty ",
@@ -30,6 +36,7 @@ checkerSchema.pre('save',function(next){
         });
     });
 });
+
 checkerSchema.methods.comparePassword = function(condidatePassword,checkPassword){
     bcrypt.compare(condidatePassword,this.password,function(err,isMatch){
         if(err) return checkPassword(err);

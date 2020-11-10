@@ -41,55 +41,8 @@
 
 </div>
 
-
-
-<div class="container py-5" >
-  <ul class="nav nav-tabs">
-      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #ffa800;font-size: 25px;" class="nav-link active" data-toggle="tab" href="#home">DepHead</a></li>
-      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #ffa800;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu1">Lecturer</a></li>
-    
-    </ul>
-    <div class="tab-content">
-     
-    
-<div class="container table-responsive py-3 highlight" id="home" class="tab-pane fade in active show" >
-               
-    <table  class="table table-bordered">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Middle Name</th>
-          <th>Last Name</th> 
-          <th>Email</th>
-          <th>Mobile</th>
-          <th>UniversIty</th>
-          <th>educationStatus</th>
-          <th>role</th>
-          <th>study</th>
-       </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let sub of  subuserservice.searchUser">
-        <td>{{sub.firstName}}</td>
-          <td>{{sub.middleName}}</td>
-          <td>{{sub.lastName}}</td>
-          <td>{{sub.email}}</td>
-          <td>{{sub.mobile}}</td>
-          <td>{{sub.university}}</td>
-          <td>{{sub.educationStatus}}</td>
-          <td>{{sub.role}}</td>
-          <td>{{sub.study}}</td>
-          
-        </tr>
-    
-      </tbody>
-    </table>
-  </div>
-
-
-
-  <!--this code is for -->
-  <div class="container table-responsive py-3" id="menu1"  class="tab-pane fade">
+<!--this code is for -->
+  <div class="container table-responsive py-3" >
                
     <table  class="table table-bordered">
       <thead>
@@ -106,7 +59,7 @@
            </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let lec of  subsubuserservice.searchUser">
+        <tr *ngFor="let lec of  searchUser">
             <td>{{lec.firstName}}</td>
             <td>{{lec.middleName}}</td>
             <td>{{lec.lastName}}</td>
@@ -123,8 +76,7 @@
       </tbody>
     </table>
   </div>
-</div>
-</div>
+
 
   
 

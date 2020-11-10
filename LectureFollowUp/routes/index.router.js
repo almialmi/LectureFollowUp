@@ -10,7 +10,7 @@ router.post('/login',ctrlUser.login);
 router.post('/authenticate' , ctrlUser.autenticate);
 
 //register Checker
-router.post('/registerChecker',jwtHelper.verifyJwtToken,ctrlUser.registerChecker,);
+router.post('/registerChecker',ctrlUser.registerChecker,);
 router.get('/registeredChecker',jwtHelper.verifyJwtToken,ctrlUser.fetchChecker);
 
 
@@ -37,6 +37,12 @@ router.put('/updateProfile/:id',jwtHelper.verifyJwtToken,ctrlUser.UpdateProfile)
 
 // Delete a Note with Id
 router.delete('/subAdmin/:id',jwtHelper.verifyJwtToken, ctrlUser.delete);
+
+// activate deactivate checker account
+router.put('/activateDeactivate/:id',ctrlUser.activateDeactivate);
+
+// activate deactivate sub admin
+router.put('/activateDeactivateSub/:id',ctrlUser.activateDeactivateSub);
 
 
 

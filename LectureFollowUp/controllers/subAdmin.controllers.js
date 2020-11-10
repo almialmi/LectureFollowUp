@@ -4,6 +4,9 @@ const Subsub = mongoose.model('Subsub');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
+
+
+
 module.exports.login=(req,res,next)=>{
     Sub.findOne({'email':req.body.email},(err,sub)=>{
         if(!sub) res.json({message:'Login failed,user not found '});
@@ -258,3 +261,51 @@ module.exports.selectiveUpdateProfile= async(req,res)=>{
         });
   });
   }
+
+  module.exports.activateDeactivateSubsub= async(req,res)=>{
+    /*   if(!req.body.email && !req.body.password){
+         return res.status(400).send({
+                  message:"this content can't be empty"
+         });
+     }*/ 
+     console.log(req.body.isActive);
+     const isActive = !req.body.isActive
+     console.log(isActive)
+     Subsub.findByIdAndUpdate(req.params.id,{
+
+         $set:{
+         isActive:isActive
+ 
+       }  
+  }, {new: true})
+     .then(user => {
+         if(!user) {
+             return res.status(404).send({
+                 message: "User not found with this " + req.params.id
+             });
+         }
+         res.send({
+                message:"Deactivate Successfully !!"
+         });
+     }).catch(err => {
+         if(err.kind === 'ObjectId') {
+             return res.status(404).send({
+                 message: "User not found with this " + req.params.id
+             });                
+         }
+         return res.status(500).send({
+             message: "Error updating user profile with id " + req.params.id
+         });
+   });
+   }  
+
+
+  
+ 
+
+
+
+
+ 
+
+

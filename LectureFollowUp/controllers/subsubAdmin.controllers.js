@@ -5,6 +5,16 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
 
+// for export excel data
+const fs = require('fs');
+const multer = require('multer');
+const excelToJson = require('convert-excel-to-json');
+
+
+
+
+
+
 module.exports.login=(req,res,next)=>{
     Subsub.findOne({'email':req.body.email},(err,subsub)=>{
         if(!subsub) res.json({message:'Login failed,user not found '});
@@ -264,3 +274,90 @@ module.exports.findByName=(req,res)=>{
   });
   }
  
+
+// export file from excel
+
+global.__basedir = __dirname;
+
+// -> Multer Upload Storage
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        console.log("i am here");
+        cb(null, __basedir + '/uploads/')
+    },
+    filename: (req, file, cb) => {
+        console.log('yes me too');
+        cb(null, file.fieldname + "-" + Date.now() + "-" + file.originalname)
+    }
+});
+const upload = multer({storage: storage}).single("uploadfile");
+ 
+// -> Express Upload RestAPIs
+module.exports.uploadFile= (req, res) =>{
+    
+    console.log('inside post')
+    upload(req, res, function (err) {
+        console.log('inside upload')
+        if (err) {
+            return res.end("Error uploading file.");
+        } else {
+            
+         // importExcelData2MongoDB(__basedir + '/uploads/' + req.file.filename);
+          return  res.json({
+             'msg': 'File uploaded/import successfully!', 'file': req.file
+            });
+          
+          
+        }
+      });
+}
+ 
+// -> Import Excel File to MongoDB database
+function importExcelData2MongoDB(filePath){
+    // -> Read Excel File to Json Data
+    const excelData = excelToJson({
+        sourceFile: filePath,
+        sheets:[{
+            // Excel Sheet Name
+            name: 'UniversityStaff',
+ 
+            // Header Row -> be skipped and will not be present at our result object.
+            header:{
+               rows: 1
+            },
+			
+            // Mapping columns to keys
+            columnToKey: {
+                A: 'firstName',
+                B: 'middleName',
+                C: 'lastName',
+                D:'email',
+                E:'mobile',
+                F:'university',
+                G:'educationStatus',
+                H:'role',
+                I:'study',
+                J:'educationField',
+                K:'department'
+            }
+        }]
+    });
+ 
+    // -> Log Excel Data to Console
+    console.log(excelData);
+ 
+
+    // Insert Json-Object to MongoDB
+    Lecture.insertMany(excelData.UniversityStaff, (err, res) => {
+            if (err) throw err;
+            console.log("Number of documents inserted: " + res.insertedCount);
+        });
+ 
+			
+    fs.unlinkSync(filePath);
+}
+
+
+
+
+

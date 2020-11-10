@@ -4,6 +4,7 @@ const jwtHelper = require('../config/jwtHelper');
 
 const subsubUser = require('../controllers/subsubAdmin.controllers');
 
+
 //login
 router.post('/login',subsubUser.login);
 router.post('/autenticate' , subsubUser.autenticate);
@@ -34,6 +35,11 @@ router.put('/updateProfile/:id',subsubUser.UpdateProfile);
 
 //selective update profile
 router.put('/selectiveUpdateProfile/:id',subsubUser.selectiveUpdateProfile);
+
+
+ 
+router.post('/uploadFile',subsubUser.uploadFile);
+
 
 
 

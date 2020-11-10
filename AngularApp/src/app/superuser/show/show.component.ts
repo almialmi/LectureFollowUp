@@ -170,4 +170,58 @@ export class ShowComponent implements OnInit {
 
   }
 
+  active: boolean = true;
+
+  activateDeactivate(_id:string,user:Checker) {
+  
+    if(user.isActive === true){
+      console.log(user.isActive);
+      if(confirm('Are you sure you want to lock this record?') == true){
+        this.superuserservice.putActivateDeactivate(_id,user).subscribe((res) => {
+          this.refreshuserlistchecker();
+          console.log(user.isActive)
+         });
+      }
+     }
+     else{
+      console.log(user.isActive);
+      if(confirm('Are you sure you want to unlock this record?') == true){
+        this.superuserservice.putActivateDeactivate(_id,user).subscribe((res) => {
+          this.refreshuserlistchecker();
+         console.log (user.isActive)
+        });
+      }
+
+     }
+    
+    
+  }
+
+  activateDeactivateSub(_id:string,user:Superuser) {
+  
+    if(user.isActive === true){
+      console.log(user.isActive);
+      if(confirm('Are you sure you want to lock this record?') == true){
+        this.superuserservice.putActivateDeactivateSub(_id,user).subscribe((res) => {
+          this.refreshuserlist();
+          console.log(user.isActive)
+         });
+      }
+     }
+     else{
+      console.log(user.isActive);
+      if(confirm('Are you sure you want to unlock this record?') == true){
+        this.superuserservice.putActivateDeactivateSub(_id,user).subscribe((res) => {
+          this.refreshuserlist();
+         console.log (user.isActive)
+        });
+      }
+
+     }
+    
+    
+  }
+
 }
+
+

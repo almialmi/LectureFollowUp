@@ -119,4 +119,29 @@ export class ShowsubComponent implements OnInit {
 
   }
 
+  activateDeactivateSubsub(_id:string,user:SubAdmin) {
+  
+    if(user.isActive === true){
+      console.log(user.isActive);
+      if(confirm('Are you sure you want to lock this record?') == true){
+        this.subAdminService.putActivateDeactivateSubsub(_id,user).subscribe((res) => {
+          this.refreshuserlist();
+          console.log(user.isActive)
+         });
+      }
+     }
+     else{
+      console.log(user.isActive);
+      if(confirm('Are you sure you want to unlock this record?') == true){
+        this.subAdminService.putActivateDeactivateSubsub(_id,user).subscribe((res) => {
+          this.refreshuserlist();
+         console.log (user.isActive)
+        });
+      }
+
+     }
+    
+    
+  }
+
 }

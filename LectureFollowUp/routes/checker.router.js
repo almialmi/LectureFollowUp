@@ -22,6 +22,9 @@ router.get('/findLecture/:query/:query1/:query2',checkerUser.findLecture);
 // update profile
 router.put('/updateProfile/:id',jwtHelper.verifyJwtToken,checkerUser.UpdateProfile);
 
+// activate deactivate
+//router.put('/activateDeactivate/:id',checkerUser.activateDeactivate);
+
 
 
 module.exports=router;

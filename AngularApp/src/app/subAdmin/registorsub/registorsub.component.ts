@@ -119,7 +119,7 @@ export class RegistorsubComponent implements OnInit {
       study : '',
       educationField : '',
       department : '',
-      isSelected:false
+      isActive:true
 
     };
     form.resetForm();

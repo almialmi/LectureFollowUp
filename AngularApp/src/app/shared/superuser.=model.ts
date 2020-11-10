@@ -7,5 +7,7 @@ export class Superuser {
    mobile : string;
    university : string;
    password : string;
+   isActive:boolean;
+   
    
 }

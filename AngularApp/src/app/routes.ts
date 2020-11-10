@@ -110,7 +110,7 @@ export const appRoutes : Routes = [
        // children : [{path : '' , component : RegistorComponent }]
     },
     {
-        path : "checkersearch" , component : CheckersearchComponent
+        path : "checkersearch/:firstName/:middleName/:lastName" , component : CheckersearchComponent
        // children : [{path : '' , component : RegistorComponent }]
     },
     {

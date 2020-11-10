@@ -31,7 +31,7 @@ export class SubAdminService {
     study : '',
     educationField : '',
     department : '',
-    isSelected: false
+    isActive: true
 
 };
 selectedSub:Sub={
@@ -83,6 +83,10 @@ selectedSub:Sub={
     return this.http.put(environment.apiBaseUrlsub + '/selectiveUpdateProfile'  +`/${id}`, sub);
 
   }
+  putActivateDeactivateSubsub(_id:String,user:SubAdmin){
+    return this.http.put(environment.apiBaseUrlsub + '/activateDeactivateSubsub' + `/${_id}`,user);
+
+  }
   setToken(token : string){
     localStorage.setItem('token' , token);
     
@@ -119,11 +123,11 @@ selectedSub:Sub={
     return this.http.get(`${environment.apiBaseUrlchecker + '/registerdSubsubAdmins' }? = ${title}`)
   
   }
-  clickMe(id:String){
+ /* clickMe(id:String){
     this.users.map(x=>x.isSelected=false);
     this.users.find(x=>x._id === id).isSelected=true;
 
-  }
+  }*/
   getUserId(){
     var token = this.getToken();
     if (token){
