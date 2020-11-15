@@ -35,10 +35,21 @@ export class SuperuserComponent implements OnInit {
     this.superUserService.login(form.value).subscribe(
       res => {
        this.superUserService.setToken(res['token']); 
+       var role = this.superUserService.getUserRole()
+       if(role=='SuperAdmin'){
         this.router.navigateByUrl('/home');
-        console.log("good to go");
-
-      },
+       }
+       else if(role == 'UnivAdmin'){
+         this.router.navigateByUrl('/homesub')
+       }
+       else if(role=='UnivHr'){
+         this.router.navigateByUrl('/homesubsub')
+       }
+       else if(role == 'Checker'){
+         this.router.navigateByUrl('/homechecker')
+       }
+        
+},
       err => {
         this.serverErrorMessage  = "somthing went wrong";
         

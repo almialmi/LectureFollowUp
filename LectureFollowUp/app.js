@@ -4,30 +4,20 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
-require('./config/passportConfig')(passport);
-var fileupload = require("express-fileupload");
+ const { success , error } = require('consola');
 
 
 var app = express();
 
 const rstIndex = require('./routes/index.router');
-const subAdmin = require('./routes/subAdmin.router');
-const subsubAdmin = require('./routes/subsubAdmin.router');
-const checker = require('./routes/checker.router');
-//const role = require('./routes/role.router');
 
 
- 
 app.use(bodyParser.json());
 app.use(cors({origin:'http://localhost:4200'}));
-app.use(fileupload());
-app.use('/api',rstIndex);
-app.use('/api2',subAdmin);
-app.use('/api3',subsubAdmin);
-app.use('/api4',checker);
-//app.use('/api5' ,role );
 app.use(passport.initialize());
-app.use(passport.session())
+require("./config/passportConfig")(passport);
+app.use('/api',rstIndex);
+
 
 
 app.use((err,req,res,next) =>{

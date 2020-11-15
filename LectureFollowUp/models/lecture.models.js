@@ -3,74 +3,59 @@ const bcrypt = require('bcryptjs');
 var lectureSchema = new mongoose.Schema({
     firstName:{
         type:String,
-        require:"First Name can\'t be empty "
+        require:true
       },
     middleName:{
         type:String,
-        require:"Middle Name can\'t be empty "
-
+        require:true
     },  
     lastName:{
         type:String,
-        require:"Last Name can\'t be empty ",
+        require:true
      },
     email:{
         type:String,
-        require:"Email can\'t be empty "
+        require:true
     },
     mobile:{
         type:String,
-        require:"Phone number can\'t be empty "
+        require:true
        
     },
     university:{
         type:String,
-        require:"University can\'t be empty "
+        require:true
 
     },
     educationStatus:{
             type:String,
-            require:"Education Status can\'t be empty"
+            require:true
     },
     role:{
           type:String,
-          require:"Role can\'t be empty"
+          require:true
     },
     study:{
            type:String,
-           require:"Study can\'t be empty"
+           require:true
     },
     educationField:{
           type:String,
-          require:"Education Filed can\'t be empty"
+          require:true
     },
     department:{
            type:String,
-           require:"Department can\'t be empty"
+           require:true
     }
     
-});
+},{timestamps:true});
 
 lectureSchema.path('email').validate((val)=>{
     emailRegex =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     return emailRegex.test(val);
-    },'Invalid e-mail');
+},'Invalid e-mail');
 
-lectureSchema.pre('save',function(next){
-    bcrypt.genSalt(10,(err,salt)=>{
-        bcrypt.hash(this.password,salt,(err,hash)=>{
-            this.password = hash;
-            this.salSecrete =salt;
-            next();
-        });
-    });
-});
-lectureSchema.methods.comparePassword = function(condidatePassword,checkPassword){
-    bcrypt.compare(condidatePassword,this.password,function(err,isMatch){
-        if(err) return checkPassword(err);
-        checkPassword(null,isMatch);
-    });
-}
+
 
 lectureSchema.index({firstName:'text', middleName:'text',lastName:'text'});
 

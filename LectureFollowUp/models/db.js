@@ -11,7 +11,5 @@ mongoose.connect(process.env.MONGODB_URI,{
 });
 
 require('./user.models');
-require('./subAdmin.models');
-require('./subsubAdmin.models');
 require('./lecture.models');
-require('./checker.model');
+

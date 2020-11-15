@@ -138,5 +138,17 @@ export class SuperuserService {
         return id
        
     }
-}
+  }
+  getUserRole(){
+    var token = this.getToken();
+    if(token){
+      var userPayload = atob(token.split('.')[1]);
+      var user = JSON.parse(userPayload);
+      var role=user.role;
+      console.log(role)
+      return role;
+
+    }
+      
+  }
 }

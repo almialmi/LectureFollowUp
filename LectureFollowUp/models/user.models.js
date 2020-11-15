@@ -3,18 +3,50 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 var userSchema = new mongoose.Schema({
+    firstName:{
+        type:String,
+        require:true
+      },
+    middleName:{
+        type:String,
+        require:true
+
+    },  
+    lastName:{
+        type:String,
+        require:true
+     },
     email:{
         type:String,
-        require:"Email can\'t be empty ",
-        unique:true
+        require:true
+    },
+    mobile:{
+        type:Number,
+    },
+    university:{
+        type: String
+    },
+    compass:{
+        type: String
+
+    },
+    isActive:{
+        type:Boolean,
+        index:true,
+        default:true
     },
     password:{
         type:String,
-        require:"password can\'t be empty ",
-        minlength:[8,'password must be at least 8 character']
+        require:true
     },
+    role: {
+        type: String,
+         default: 'SuperAdmin',
+         enum: ["SuperAdmin", "UnivAdmin", "UnivHr","Checker"]
+    
+        },
     salSecrete: String
-});
+},{timestamps:true});
 
 userSchema.path('email').validate((val)=>{
     emailRegex =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -30,21 +62,15 @@ userSchema.path('email').validate((val)=>{
         });
     });
 });
-/*userSchema.methods.comparePassword = function(condidatePassword,checkPassword){
-    bcrypt.compare(condidatePassword,this.password,function(err,isMatch){
-        if(err) return checkPassword(err);
-        checkPassword(null,isMatch);
-    });
-}*/
 userSchema.methods.verifyPassword = function (password){
     return bcrypt.compareSync(password , this.password);
 };
 userSchema.methods.generateJwt = function(){
-    return jwt.sign({_id : this._id},
-        process.env.JWT_SECRET,
-        {
-            expiresIn :process.env.JWT_EXP
- } );
+    return jwt.sign({_id : this._id,
+                    role:this.role,
+                    email:this.email },
+                 process.env.JWT_SECRET,
+               { expiresIn :process.env.JWT_EXP });
     
  
 }
