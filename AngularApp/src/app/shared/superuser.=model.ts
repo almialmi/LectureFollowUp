@@ -8,6 +8,7 @@ export class Superuser {
    university : string;
    password : string;
    isActive:boolean;
+   role:string;
    
    
 }

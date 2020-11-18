@@ -27,7 +27,7 @@ export class UpdateProfilesubsubComponent implements OnInit {
   }
   onLogout(){
     this.subAdminService.deletToken();
-    this.router.navigate(['/loginsubsub']);
+    this.router.navigate(['/login']);
   }
   OnSubmit(form : NgForm){
     var id=this.subAdminService.getUserId();

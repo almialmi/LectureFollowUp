@@ -13,7 +13,7 @@ import { SuperuserService } from '../shared/superuser.service';
          return next.handle(req.clone());
          else{
              const clonedreq = req.clone({
-                 headers: req.headers.set("Authorization" ,"Mekdi " + this.superUserService.getToken())
+                 headers: req.headers.set("Authorization" ,"Bearer " + this.superUserService.getToken())
              });
              return next.handle(clonedreq).pipe(tap(
 

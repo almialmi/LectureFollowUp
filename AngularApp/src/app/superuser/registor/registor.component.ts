@@ -46,61 +46,43 @@ export class RegistorComponent implements OnInit {
   }
   
   onSubmit(form : NgForm){
-    this.superuserservice.postUser(form.value).subscribe(
+    this.superuserservice.postUnivAdmin(form.value).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
         this.resetForm(form);
-       
-
-        
-       
       },
       err => {
         if( err.status == 422){
           this.serverErrorMessage = err.error.join('<br>');
-
-          
-          
         }
         else
           this.serverErrorMessage = 'something went wrong'
-        
-        
-
       }
     );
 
   }
   onSubmitt(form : NgForm){
-    this.superuserservice.postchecker(form.value).subscribe(
+    console.log("i am here")
+    this.superuserservice.postChecker(form.value).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
-        this.resetForm(form);
-       
-
-        
-       
+        this.resetFormChe(form);
       },
       err => {
         if( err.status == 422){
-          this.serverErrorMessage = err.error.join('<br>');
-
-          
+          this.serverErrorMessage = err.error.join('<br>')
           
         }
         else
           this.serverErrorMessage = 'something went wrong'
-        
-        
-
       }
     );
 
   }
   resetForm(form : NgForm){
-    this.superuserservice.selectedSuperuser = {
+    this.superuserservice.selectedUnivAdmin = {
       _id : '',
       firstName : '',
       middleName: '',
@@ -109,13 +91,33 @@ export class RegistorComponent implements OnInit {
       email : '',
       university : '',
       password : '',
-      isActive:true
+      isActive:true,
+      role:''
      
 
     };
     form.resetForm();
     this.serverErrorMessage = '';
   }
+  resetFormChe(form : NgForm){
+    this.superuserservice.selectedChecker = {
+      _id : '',
+      firstName : '',
+      middleName: '',
+      lastName: '',
+      mobile:'',
+      email : '',
+      university : '',
+      password : '',
+      isActive:true,
+      role:''
+     
+
+    };
+    form.resetForm();
+    this.serverErrorMessage = '';
+  }
+
 
   onLogout(){
     this.superuserservice.deletToken();

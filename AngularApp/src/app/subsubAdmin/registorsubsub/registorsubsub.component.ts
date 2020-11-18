@@ -125,7 +125,7 @@ export class RegistorsubsubComponent implements OnInit {
 
   onLogout(){
     this.subsubAdminService.deletToken();
-    this.router.navigate(['/loginsubsub']);
+    this.router.navigate(['/login']);
   }
 
 

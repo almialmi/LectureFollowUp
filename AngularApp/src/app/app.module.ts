@@ -30,7 +30,6 @@ import {MatIconModule} from '@angular/material/icon';
 
 //import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MainComponent } from './main/main.component';
 import { ShowsubsubComponent } from './subsubAdmin/showsubsub/showsubsub.component';
 import { RegistorsubsubComponent } from './subsubAdmin/registorsubsub/registorsubsub.component';
 import { HomesubsubComponent } from './subsubAdmin/homesubsub/homesubsub.component';
@@ -56,7 +55,6 @@ import { UpdateProfilesubsubComponent } from './subsubAdmin/update-profilesubsub
     RegistorComponent,
     ShowComponent,
     HomeComponent,
-    MainComponent,
     LogsubComponent,
     ShowsubComponent,
     RegistorsubComponent,

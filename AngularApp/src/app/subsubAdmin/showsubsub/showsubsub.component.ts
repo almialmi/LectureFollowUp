@@ -54,7 +54,7 @@ export class ShowsubsubComponent implements OnInit {
  }
   onLogout(){
     this.subAdminService.deletToken();
-    this.router.navigate(['/loginsubsub']);
+    this.router.navigate(['/login']);
   }
   refreshuserlist(){
     this.subAdminService.showuser().subscribe(

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import {Superuser } from '../../shared/superuser.=model';
-import {Checker  } from '../../shared/checker.model';
 
 import { SuperuserService } from '../../shared/superuser.service';
 import { NgForm } from '@angular/forms';
-//import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 declare var M:any;
@@ -54,18 +52,15 @@ export class ShowComponent implements OnInit {
   ngOnInit(): void {
     this.refreshuserlistchecker();
     this.refreshuserlist();
-   
-    
-   
  }
   onLogout(){
     this.superuserservice.deletToken();
     this.router.navigate(['/login']);
   }
   refreshuserlist(){
-    this.superuserservice.showuser().subscribe(
+    this.superuserservice.showUnivAdmin().subscribe(
       res =>{
-        this.superuserservice.users = res as Superuser[];
+        this.superuserservice.UnivAdmins = res as Superuser[];
 
       },
       err =>{
@@ -76,9 +71,9 @@ export class ShowComponent implements OnInit {
   }
   //show users for checker
   refreshuserlistchecker(){
-    this.superuserservice.showchecker().subscribe(
+    this.superuserservice.showChecker().subscribe(
       res =>{
-        this.superuserservice.userchecker = res as Checker[];
+        this.superuserservice.checkers = res as Superuser[];
 
       },
       err =>{
@@ -87,22 +82,11 @@ export class ShowComponent implements OnInit {
     );
 
   }
-  Search(){
-    this.superuserservice.SearchUser().subscribe(
-      res =>{
-        this.superuserservice.users = res as Superuser[];
-
-      },
-      err =>{
-
-      }
-    )
-  }
   
   onSubmit(form : NgForm){
    
     if(form.value._id == ""){
-      this.superuserservice.postUser(form.value).subscribe((res) =>{
+      this.superuserservice.postUnivAdmin(form.value).subscribe((res) =>{
        // this.resetForm(form);
         this.refreshuserlist();
         M.toast({html: 'saved successfull!' , class: 'rounded'});
@@ -110,7 +94,7 @@ export class ShowComponent implements OnInit {
   
       });
     }else{
-      this.superuserservice.putUser(form.value).subscribe((res) =>{
+      this.superuserservice.putAllUser(form.value).subscribe((res) =>{
        // this.resetForm(form);
         this.refreshuserlist();
         this.showSucessMessage = true;
@@ -125,7 +109,7 @@ export class ShowComponent implements OnInit {
   onSubmitchecker(form : NgForm){
    
     if(form.value._id == ""){
-      this.superuserservice.postchecker(form.value).subscribe((res) =>{
+      this.superuserservice.postChecker(form.value).subscribe((res) =>{
        // this.resetForm(form);
         this.refreshuserlistchecker();
         M.toast({html: 'saved successfull!' , class: 'rounded'});
@@ -133,7 +117,7 @@ export class ShowComponent implements OnInit {
   
       });
     }else{
-      this.superuserservice.putChecker(form.value).subscribe((res) =>{
+      this.superuserservice.putAllUser(form.value).subscribe((res) =>{
        // this.resetForm(form);
         this.refreshuserlistchecker();
         this.showSucessMessage = true;
@@ -145,19 +129,19 @@ export class ShowComponent implements OnInit {
     }
    
   }
-  onDelete(_id: string){
+ /* onDelete(_id: string){
     if(confirm('Are you sure you want to delete this record?') == true){
-      this.superuserservice.deleteuser(_id).subscribe((res) => {
+      this.superuserservice.deleteChecker(_id).subscribe((res) => {
         this.refreshuserlist();
         M.toast({html: 'Deleted successfully' , classes: 'rounded'});
       });
     }
 
-  }
+  }*/
 
   onDeletechecker(_id: string){
     if(confirm('Are you sure you want to delete this record?') == true){
-      this.superuserservice.deletechecker(_id).subscribe((res) => {
+      this.superuserservice.deleteChecker(_id).subscribe((res) => {
         this.refreshuserlistchecker();
         M.toast({html: 'Deleted successfully' , classes: 'rounded'});
       });
@@ -166,19 +150,19 @@ export class ShowComponent implements OnInit {
   }
 
   onEdit(user : Superuser){
-    this.superuserservice.selectedSuperuser = user;
+    this.superuserservice.selectedUnivAdmin = user;
 
   }
 
   active: boolean = true;
 
-  activateDeactivate(_id:string,user:Checker) {
+  activateDeactivateUnivAdmin(_id:string,user:Superuser) {
   
     if(user.isActive === true){
       console.log(user.isActive);
       if(confirm('Are you sure you want to lock this record?') == true){
-        this.superuserservice.putActivateDeactivate(_id,user).subscribe((res) => {
-          this.refreshuserlistchecker();
+        this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
+          this.refreshuserlist();
           console.log(user.isActive)
          });
       }
@@ -186,8 +170,8 @@ export class ShowComponent implements OnInit {
      else{
       console.log(user.isActive);
       if(confirm('Are you sure you want to unlock this record?') == true){
-        this.superuserservice.putActivateDeactivate(_id,user).subscribe((res) => {
-          this.refreshuserlistchecker();
+        this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
+          this.refreshuserlist();
          console.log (user.isActive)
         });
       }
@@ -197,13 +181,13 @@ export class ShowComponent implements OnInit {
     
   }
 
-  activateDeactivateSub(_id:string,user:Superuser) {
+  activateDeactivate(_id:string,user:Superuser) {
   
     if(user.isActive === true){
       console.log(user.isActive);
       if(confirm('Are you sure you want to lock this record?') == true){
-        this.superuserservice.putActivateDeactivateSub(_id,user).subscribe((res) => {
-          this.refreshuserlist();
+        this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
+          this.refreshuserlistchecker();
           console.log(user.isActive)
          });
       }
@@ -211,8 +195,8 @@ export class ShowComponent implements OnInit {
      else{
       console.log(user.isActive);
       if(confirm('Are you sure you want to unlock this record?') == true){
-        this.superuserservice.putActivateDeactivateSub(_id,user).subscribe((res) => {
-          this.refreshuserlist();
+        this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
+          this.refreshuserlistchecker();
          console.log (user.isActive)
         });
       }

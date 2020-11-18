@@ -24,6 +24,7 @@ export class SuperuserComponent implements OnInit {
   serverErrorMessage: string;
 
   ngOnInit(): void {
+   
   }
   hide: boolean = true;
 
@@ -35,6 +36,9 @@ export class SuperuserComponent implements OnInit {
     this.superUserService.login(form.value).subscribe(
       res => {
        this.superUserService.setToken(res['token']); 
+       this.superUserService.getUserId();
+       this.superUserService.getUserUniversity();
+     // console.log(university);
        var role = this.superUserService.getUserRole()
        if(role=='SuperAdmin'){
         this.router.navigateByUrl('/home');

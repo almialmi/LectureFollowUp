@@ -4,8 +4,6 @@ import { HttpClient , HttpHeaders} from '@angular/common/http';
 
 
 import {Superuser } from './superuser.=model';
-import {Checker } from './checker.model';
-import { User} from './user.model';
 import { environment } from 'src/environments/environment';
 import { JsonPipe } from '@angular/common';
 
@@ -15,8 +13,8 @@ import { JsonPipe } from '@angular/common';
   providedIn: 'root'
 })
 export class SuperuserService {
-  selectedSuperuserr: Superuser;
-  selectedSuperuser : Superuser = {
+
+  selectedUnivAdmin : Superuser = {
     _id: '',
     firstName : '',
     middleName: '',
@@ -26,75 +24,82 @@ export class SuperuserService {
     university: '',
     password:'',
     isActive:true,
+    role:'',
 };
-  selectedUser:User={
-    _id:'',
-    email:'',
-    password:''
+selectedUnivHr:Superuser={
+  _id: '',
+  firstName : '',
+  middleName: '',
+  lastName:'',
+  email : '',
+  mobile: '',
+  university: '',
+  password:'',
+  isActive:true,
+  role:'',
+
+}
+selectedChecker:Superuser={
+     _id: '',
+    firstName : '',
+    middleName: '',
+    lastName:'',
+    email : '',
+    mobile: '',
+    university: '',
+    password:'',
+    isActive:true,
+    role:'',
+
+}
+
+
+  
+UnivAdmins :Superuser[];
+UnivHr:Superuser[];
+checkers:Superuser[];
+
+
+noAuthHeader = {headers: new HttpHeaders({'NoAuth' : 'True'})};
+constructor(public http : HttpClient) { }
+
+
+  postUnivAdmin(user : Superuser){
+    return  this.http.post(environment.apiBaseUrl + '/register-univ-admin' , user);
+
   }
-
-  selectedChecker:Checker={
-    _id:'',
-    email:'',
-    isActive:true
-
-  }
-
-  users :Superuser[];
-  userchecker : Checker[];
-  superUser:User[];
-  noAuthHeader = {headers: new HttpHeaders({'NoAuth' : 'True'})};
-  constructor(public http : HttpClient) { }
-
-
-  postUser(user : Superuser){
-    return  this.http.post(environment.apiBaseUrl + '/subAdminRegister' , user);
-
-  }
-  postchecker(user : Superuser){
-    return  this.http.post(environment.apiBaseUrl + '/registerChecker' , user);
+  postChecker(user : Superuser){
+    return  this.http.post(environment.apiBaseUrl + '/register-checker' , user);
 
   }
 
   login(authCredintials){
-    return this.http.post(environment.apiBaseUrl + '/authenticate' , authCredintials , this.noAuthHeader);
+    return this.http.post(environment.apiBaseUrl + '/login' , authCredintials , this.noAuthHeader);
 
   }
-  SearchUser(){
-    return this.http.get(environment.apiBaseUrl + '/subAdmin' + '/selectedSuperuser.firstName');
+  showUnivAdmin(){
+    return this.http.get(environment.apiBaseUrl + '/fetchUnivAdmin');
   }
-  showuser(){
-    return this.http.get(environment.apiBaseUrl + '/subAdminRegister');
-  }
-  showchecker(){
-    return this.http.get(environment.apiBaseUrl + '/registeredChecker');
-
-  }
-  deleteuser(_id : string){
-    return this.http.delete(environment.apiBaseUrl + '/subAdmin' + `/${_id}`);
-  
-
-  }
-  deletechecker(_id : String){
-    return this.http.delete(environment.apiBaseUrl + '/CheckerDelete' + `/${_id}`);
-
-  }
-  putChecker(user: Superuser) {
-    return this.http.put(environment.apiBaseUrl + '/CheckerUpdate'  +`/${user._id}`, user);
-  }
-  putActivateDeactivate(_id:String ,user:Checker){
-    return this.http.put(environment.apiBaseUrl + '/activateDeactivate' + `/${_id}`,user);
-  }
-  putActivateDeactivateSub(_id:String,user:Superuser){
-    return this.http.put(environment.apiBaseUrl + '/activateDeactivateSub' + `/${_id}`,user);
+  showChecker(){
+    return this.http.get(environment.apiBaseUrl + '/fetchChecker');
 
   }
   
-  putUser(user: Superuser) {
-    return this.http.put(environment.apiBaseUrl + '/subAdmin'  +`/${user._id}`, user);
+  deleteChecker(_id : String){
+    return this.http.delete(environment.apiBaseUrl + '/deleteChecker' + `/${_id}`);
+
   }
-  putPassword(id:String,user:User){
-    return this.http.put(environment.apiBaseUrl + '/updateProfile' + `/${id}`,user);
+  putAllUser(user: Superuser) {
+    return this.http.put(environment.apiBaseUrl + '/updateProfile'  +`/${user._id}`, user);
+  }
+  
+  putActivateDeactivateUser(_id:String,user:Superuser){
+    return this.http.put(environment.apiBaseUrl + '/ActivateDeactivate' + `/${_id}`,user);
+
+  }
+  
+  putOwnProfile(id:String,user:Superuser){
+    return this.http.put(environment.apiBaseUrl + '/updateOwnProfile' + `/${id}`,user);
   }
   setToken(token : string){
     localStorage.setItem('token' , token);
@@ -128,15 +133,15 @@ export class SuperuserService {
         return false;
       }
     }
-    getUserId(){
-      var token = this.getToken();
-      if (token){
-        var userPayload = atob(token.split('.')[1]);
-        var user = JSON.parse(userPayload);
-        var id = user._id;
-        console.log(id);
-        return id
-       
+  getUserId(){
+    var token = this.getToken();
+    if(token){
+      var userPayload = atob(token.split('.')[1]);
+      var user = JSON.parse(userPayload);
+      var id=user.user_id;
+      console.log(id)
+      return id;
+
     }
   }
   getUserRole(){
@@ -150,5 +155,27 @@ export class SuperuserService {
 
     }
       
+  }
+  getUserUniversity(){
+    var token = this.getToken();
+    if(token){
+      var userPayload = atob(token.split('.')[1]);
+      var user = JSON.parse(userPayload);
+      var university = user.university;
+      console.log(university)
+      return university;
+
+    }
+  }
+  getUserCompass(){
+    var token = this.getToken();
+    if(token){
+      var userPayload = atob(token.split('.')[1]);
+      var user = JSON.parse(userPayload);
+      var compass = user.compass;
+      console.log(compass)
+      return compass;
+
+    }
   }
 }
