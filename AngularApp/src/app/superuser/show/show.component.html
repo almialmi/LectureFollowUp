@@ -63,22 +63,24 @@
         <th>Email</th>
         <th>Mobile</th>
         <th>UniversIty</th>
+        <th>Role</th>
         
         
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of  superuserservice.users | filter:searchedKeyword" >
+      <tr *ngFor="let user of  superuserservice.UnivAdmins | filter:searchedKeyword" >
         <td>{{user.firstName}}</td>
         <td>{{user.middleName}}</td>
         <td>{{user.lastName}}</td>
         <td>{{user.email}}</td>
         <td>{{user.mobile}}</td>
         <td>{{user.university}}</td>
+        <td>{{user.role}}</td>
         
         <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
        <!-- <td><a class="action-btn" (click)="onDelete(user._id)"><i class="fas fa-trash"></i></a></td> -->
-         <td> <a class="action-btn"  (click)="activateDeactivateSub(user._id,user)" ><i class="fa {{ user.isActive ? 'fa-unlock' : 'fa-lock' }}"></i></a></td>
+         <td> <a class="action-btn"  (click)="activateDeactivateUnivAdmin(user._id,user)" ><i class="fa {{ user.isActive ? 'fa-unlock' : 'fa-lock' }}"></i></a></td>
       </tr>
   
     </tbody>
@@ -93,14 +95,24 @@
     <table  class="table table-bordered">
       <thead>
         <tr>
-          <th>Email</th>
+        <th>First Name</th>
+        <th>Middle Name</th>
+        <th>Last Name</th> 
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Role</th>
          
 
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of  superuserservice.userchecker | filter:searchedKeyword">
-         <td>{{user.email}}</td>
+        <tr *ngFor="let user of  superuserservice.checkers | filter:searchedKeyword">
+          <td>{{user.firstName}}</td>
+          <td>{{user.middleName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.mobile}}</td>
+          <td>{{user.role}}</td>
          <td><a class="action-btn"  (click)="open(contentt)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
         <td><a class="action-btn" (click)="onDeletechecker(user._id)"><i class="fas fa-trash"></i></a></td> 
          <td> <a class="action-btn"  (click)="activateDeactivate(user._id,user)" ><i class="fa {{ user.isActive ? 'fa-unlock' : 'fa-lock' }}"></i></a></td>
@@ -121,11 +133,11 @@
     </div>
     <div class="modal-body">
       <form  #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
-        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedSuperuser._id">
+        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin._id">
      
         <div class="form-group">
           <label for="exampleInputEmail1">First name:</label>
-          <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.firstName" name="firstName"  placeholder="Enter firstname" required
+          <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.firstName" name="firstName"  placeholder="Enter firstname" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
           
         </div>
@@ -135,7 +147,7 @@
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Middle name:</label>
-          <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.middleName" name="middleName"  placeholder="Enter middlename" required
+          <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.middleName" name="middleName"  placeholder="Enter middlename" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
           </div>
           <div *ngIf="signUpForm.submitted && !middlename.valid">
@@ -145,7 +157,7 @@
 
           <div class="form-group">
             <label   for="exampleInputPassword1">Last name:</label>
-            <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.lastName" name="lastName"  placeholder="Enter lastname" required
+            <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.lastName" name="lastName"  placeholder="Enter lastname" required
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
             </div>
             <div *ngIf="signUpForm.submitted && !lastname.valid">
@@ -154,7 +166,7 @@
             </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Email:</label>
-          <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.email" name="email"  placeholder="Enter email" required
+          <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.email" name="email"  placeholder="Enter email" required
           [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
         </div>
         <div *ngIf="signUpForm.submitted && email.errors">
@@ -164,7 +176,7 @@
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">mobile:</label>
-          <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.mobile" name="mobile"  placeholder="Enter mobile number" required
+          <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.mobile" name="mobile"  placeholder="Enter mobile number" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
         </div>
         <div *ngIf="signUpForm.submitted && !mobile.valid">
@@ -173,7 +185,7 @@
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">university:</label>
-          <input  class="form-control" type="text" #universtiy="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.university" name="university"  placeholder="Enter unverstiy name" required
+          <input  class="form-control" type="text" #universtiy="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.university" name="university"  placeholder="Enter unverstiy name" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !universtiy.valid}">
         </div>
         <div *ngIf="signUpForm.submitted && !universtiy.valid">
@@ -204,12 +216,40 @@
     </div>
     <div class="modal-body">
       <form  #signUpFormm="ngForm"  (ngSubmit) = "signUpFormm.valid && onSubmitchecker(signUpFormm)">
-        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedSuperuser._id">
+        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedChecker._id">
      
-       
+        <div class="form-group">
+          <label for="exampleInputEmail1">First name:</label>
+          <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="superuserservice.selectedChecker.firstName" name="firstName"  placeholder="Enter firstname" required
+          [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !firstname.valid}">
+          
+        </div>
+        <div *ngIf="signUpFormm.submitted && !firstname.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Middle name:</label>
+          <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="superuserservice.selectedChecker.middleName" name="middleName"  placeholder="Enter middlename" required
+          [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !middlename.valid}">
+          </div>
+          <div *ngIf="signUpFormm.submitted && !middlename.valid">
+            <label style="color: red;" class="validation-message">this field is required </label>
+
+          </div>
+
+          <div class="form-group">
+            <label   for="exampleInputPassword1">Last name:</label>
+            <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="superuserservice.selectedChecker.lastName" name="lastName"  placeholder="Enter lastname" required
+            [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !lastname.valid}">
+            </div>
+            <div *ngIf="signUpFormm.submitted && !lastname.valid">
+              <label style="color: red;" class="validation-message">this field is required </label>
+
+            </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Email:</label>
-          <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedSuperuser.email" name="email"  placeholder="Enter email" required
+          <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedChecker.email" name="email"  placeholder="Enter email" required
           [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !email.valid}" >
         </div>
         <div *ngIf="signUpFormm.submitted && email.errors">
@@ -217,7 +257,15 @@
           <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
 
         </div>
-        
+        <div class="form-group">
+          <label for="exampleInputPassword1">mobile:</label>
+          <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="superuserservice.selectedChecker.mobile" name="mobile"  placeholder="Enter mobile number" required
+          [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !mobile.valid}">
+        </div>
+        <div *ngIf="signUpFormm.submitted && !mobile.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div>
         <div class="modal-footer">
           <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>--> 
              <input  style="background-color: #ffa800;" type="submit" value="update">

@@ -3,49 +3,54 @@ const bcrypt = require('bcryptjs');
 var lectureSchema = new mongoose.Schema({
     firstName:{
         type:String,
-        require:true
+        required:true
       },
     middleName:{
         type:String,
-        require:true
+        required:true
     },  
     lastName:{
         type:String,
-        require:true
+        required:true
      },
     email:{
         type:String,
-        require:true
+        required:true
     },
     mobile:{
         type:String,
-        require:true
+        required:true
        
     },
     university:{
         type:String,
-        require:true
+        required:true
+
+    },
+    compass:{
+        type:String,
+        required:true
 
     },
     educationStatus:{
             type:String,
-            require:true
+            required:true
     },
     role:{
           type:String,
-          require:true
+          required:true
     },
     study:{
            type:String,
-           require:true
+           required:true
     },
     educationField:{
           type:String,
-          require:true
+          required:true
     },
     department:{
            type:String,
-           require:true
+           required:true
     }
     
 },{timestamps:true});

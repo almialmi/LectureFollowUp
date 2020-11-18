@@ -23,6 +23,8 @@ export class UpdatePasswordComponent implements OnInit {
   ngOnInit(): void {
    // this.superuserservice.getUserPaylod();
     this.superuserservice.getUserId();
+    this.superuserservice.getUserRole();
+   
   }
 
   onLogout(){
@@ -37,7 +39,7 @@ export class UpdatePasswordComponent implements OnInit {
 
   OnSubmit(form : NgForm){
     var id=this.superuserservice.getUserId();
-    this.superuserservice.putPassword(id,form.value).subscribe(
+    this.superuserservice.putOwnProfile(id,form.value).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
@@ -54,11 +56,17 @@ export class UpdatePasswordComponent implements OnInit {
 
   }
   resetForm(form : NgForm){
-    this.superuserservice.selectedUser = {
-      _id: '',
+    this.superuserservice.selectedUnivAdmin = {
+      _id : '',
+      firstName : '',
+      middleName: '',
+      lastName: '',
+      mobile:'',
       email : '',
-      password:''
-
+      university : '',
+      password : '',
+      isActive:true,
+      role:''
     };
     
     form.resetForm();

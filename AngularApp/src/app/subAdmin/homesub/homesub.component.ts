@@ -18,7 +18,7 @@ export class HomesubComponent implements OnInit {
   }
   onLogout(){
     this.subAdminService .deletToken();
-    this.router.navigate(['/loginsub']);
+    this.router.navigate(['/login']);
   } 
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

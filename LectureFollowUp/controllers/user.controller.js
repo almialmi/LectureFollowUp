@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const User = mongoose.model('User');
 const Lecture=mongoose.model('Lecture');
+const University=mongoose.model('University');
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -30,6 +32,7 @@ const userRegister = async(userDets,role,res) =>{
     });
     await newUser.save();
     return res.status(201).json({
+        data:newUser,
         message:'successfully register.Now Login',
         success:true
     })
@@ -46,7 +49,20 @@ const userRegister = async(userDets,role,res) =>{
 }
 
 const fetchUser = async(role,res)=>{
-    User.find({role:role},{password: 0,salSecrete:0,__v:0},(err,result)=>{
+   
+        User.find({role:role},{password: 0,salSecrete:0,__v:0},(err,result)=>{
+            if(err){
+                res.send(err)
+    
+            }else{
+                res.send(result)
+            }
+        })
+}
+
+const fetchUnivHr=async(role,university,res)=>{
+   
+    User.find({role:role,university:university},{password: 0,salSecrete:0,__v:0},(err,result)=>{
         if(err){
             res.send(err)
 
@@ -54,21 +70,24 @@ const fetchUser = async(role,res)=>{
             res.send(result)
         }
     })
-
 }
+
+
+
 
 const validateEmail = async email =>{
     let user = await User.findOne({email});
     return user ? false:true
 }
 
+// register user
 module.exports.registerSuperAdmin = async(req,res) =>{
     await userRegister(req.body,"SuperAdmin",res);
 }
 
 module.exports.registerUnivAdmin = async(req,res)=>{
+    console.log('i am Admin');
     await userRegister(req.body,"UnivAdmin",res);
-
 }
 
 module.exports.registerUnivHr = async(req,res)=>{
@@ -77,9 +96,11 @@ module.exports.registerUnivHr = async(req,res)=>{
 }
 
 module.exports.registerChecker = async(req,res)=>{
+    console.log('i am checker');
     await userRegister(req.body,"Checker",res);
     
 }
+//login User
 
 module.exports.login = async(req , res , next) => {
     try {
@@ -103,11 +124,13 @@ module.exports.login = async(req , res , next) => {
             let token = jwt.sign({
                 user_id:user._id,
                 role:user.role,
-                email:user.email},
+                email:user.email,
+                university:user.university,
+                compass:user.compass },
             process.env.JWT_SECRET,
           { expiresIn :process.env.JWT_EXP });
           let result ={
-              token:`Bearer ${token}`
+              token: `${token}`
              }
          return res.status(200).json({
               ...result,
@@ -128,7 +151,9 @@ module.exports.login = async(req , res , next) => {
        } 
 }
 
-module.exports.Authenticate = passport.authenticate("jwt",{session:false})
+module.exports.Authenticate = passport.authenticate("jwt",{session:false});
+
+// fetch User
 
 module.exports.fetchUnivAdmin = async (req,res)=>{
     await fetchUser('UnivAdmin',res);
@@ -136,7 +161,7 @@ module.exports.fetchUnivAdmin = async (req,res)=>{
 }
 
 module.exports.fetchUnivHr = async (req,res)=>{
-    await fetchUser('UnivHr',res);
+    await fetchUnivHr('UnivHr',req.params.university,res);
 
 }
 
@@ -145,6 +170,7 @@ module.exports.fetchChecker = async (req,res)=>{
     
 
 }
+
 
 module.exports.updateProfile = async(req,res)=>{
     
@@ -332,16 +358,21 @@ module.exports.universityStaffRegister = async (req,res)=>{
 }
 
 // fetch university staff
+const getUniversityStaff=async(university,compass,res)=>{
+   Lecture.find({university:university,compass:compass},{password: 0,salSecrete:0,__v:0},(err,result)=>{
+        if(err){
+            res.send(err)
+
+        }else{
+            res.send(result)
+        }
+    })
+}
+
+
 
 module.exports.fetchUniversityStaff = (req,res)=>{
-    Lecture.find({password: 0,salSecrete:0,__v:0},(err,result)=>{
-          if(err){
-              res.send(err);
-        }
-          else{
-              res.send(result);
-          }
-    });
+    getUniversityStaff(req.params.university,req.params.compass,res);
 }
 
 // university staff update
@@ -419,6 +450,20 @@ module.exports.deleteUniversityStaff=(req,res)=>{
     });
 
 } 
+
+// fetch University Staff for Checker
+module.exports.fetchUniversityStaffForChecker = async(req,res)=>{
+    Lecture.find({__v:0},(err,result)=>{
+             if(err){
+                 res.send(err)
+     
+             }else{
+                 res.send(result)
+             }
+         })
+    
+}
+
 
 
 // university staff search and match
@@ -517,5 +562,35 @@ const importExcelData2MongoDB= (filePath)=>{
 			
     fs.unlinkSync(filePath);
 } 
+
+// register University
+
+module.exports.registerUniversity = async (req, res) => {
+    try {
+       //validate req.body data before saving
+       const university = new University(req.body);
+       await university.save();
+       res.status(201).json({success:true, data: university });
+ 
+    } catch (err) {
+       res.status(400).json({success: false, message:err.message});
+    }
+ }
+
+ module.exports.fetchUniversity= async (req, res) => {
+    University.find({__v:0},(err,result)=>{
+        if(err){
+            res.send(err)
+
+        }else{
+            res.send(result)
+        }
+    })
+ }
+
+
+
+ 
+
 
  

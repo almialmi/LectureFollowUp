@@ -24,10 +24,11 @@ var userSchema = new mongoose.Schema({
         type:Number,
     },
     university:{
-        type: String
+         type:String
+         
     },
     compass:{
-        type: String
+        type:String
 
     },
     isActive:{

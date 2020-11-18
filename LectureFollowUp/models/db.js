@@ -12,4 +12,5 @@ mongoose.connect(process.env.MONGODB_URI,{
 
 require('./user.models');
 require('./lecture.models');
+require('./university.models');
 
