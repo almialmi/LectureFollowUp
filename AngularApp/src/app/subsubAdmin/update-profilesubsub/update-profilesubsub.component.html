@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+</head>
+<body>
+
+<nav class="navbar   fixed-top navbar-expand-md bg-dark navbar-dark">
+  <img src="assets/logonew.png" style="width: 60px; height: 60px;"/>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link " href="#" routerLink= "/homesubsub">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#" routerLink= "/registorsubsub">Registor</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " routerLink = "/showsubsub" href="#">Show Me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" routerLink = "/updateProfileSubsub" href="#">Update Profile</a>
+      </li>
+      <li class="nav-item" (click)="onLogout()" value="logout">
+        <a class="nav-link">logout</a>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+
+<div  class="container" >
+    <div class="cards py-5">
+      <div class="col-md-6 offset-md-5">
+        <div class="card ">
+          <div class="card-body" >
+              <form #updateForm="ngForm"  (ngSubmit) = "updateForm.valid && OnSubmit(updateForm)">
+                  <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]=" subAdminService.selectedSuperuser._id">
+                  
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Email:</label>
+                    <input   class="form-control" type="text" #email="ngModel" [(ngModel)]=" subAdminService.selectedSuperuser.email" name="email"  placeholder="Enter your new Email" required
+                    [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : updateForm.submitted && !email.valid}" >
+                  </div>
+                  <div *ngIf="updateForm.submitted && email.errors">
+                    <label *ngIf="email.errors.required"style="color: red;" class="validation-message">this field is required </label>
+                    <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
+  
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">mobile:</label>
+                    <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.mobile" name="mobile"  placeholder="Enter Your mobile number" required
+                    [ngClass]="{'invalid-textbox' : updateForm.submitted && !mobile.valid}">
+                  </div>
+                  <div *ngIf="updateForm.submitted && !mobile.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div>
+                  <span class="input-placeholder">
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.password" placeholder=" Enter Your Updated Password " 
+                      required minlength="8" [type]="hide ? 'password' : 'text'"
+                      [ngClass]="{'invalid-textbox' : updateForm.submitted && !password.valid}">
+                      <mat-icon class="placeholder" (click)="myFunction()">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    
+                    </div>
+                    </span>
+                  <div *ngIf="updateForm.submitted && password.errors?.minlength">
+                    <label style="color: red;" class="validation-message">minimum 8 characters</label>
+  
+                  </div>
+                  <div *ngIf="updateForm.submitted && !password.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div>
+                 
+                <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
+                <input style="background-color: #ffa800" type="submit" value="Update Profile" >
+                </form>
+                <div class="success" *ngIf="showSucessMessage">
+                  <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">Update successfully</h1>
+  
+                </div>
+  
+                <div class="alert" *ngIf="serverErrorMessage">
+                 <h1 style="color: red;"> {{serverErrorMessage}} </h1>
+  
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+            </div>
+
+
+
+
+
+<footer class="site-footer">
+    <h4 class="text-center" style="font-family: 'Times New Roman', Times, serif;color: white;">2020 © Ministry of Science and Higher Education - All rights reserved.</h4>
+   
+   
+  </footer>
+</body>
+</html>

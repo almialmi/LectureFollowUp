@@ -1,0 +1,114 @@
+<html>
+  <div class="container">
+    <div class="col-md-12 col-xs-12">
+      <div class="cards py-5 ">
+        <div class="d-flex flex-row justify-content-center flex-wrap">
+          <div class="card">
+            <div class="card-body">
+
+              <div class="title">
+                <h5 class="card-title py-3" >
+                  WELCOME TO LECTURERS FOLLOWUP </h5>
+                  
+                </div>
+              
+                  <p class="card-text text-center">please fill your detail</p>
+
+                  <form #signInForm="ngForm" (ngSubmit) = "signInForm.valid && onSubmit(signInForm)">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input class="form-control" type="text"  name="email" #email="ngModel" [(ngModel)]="model.email"  placeholder="Enter email" [pattern]="emailRegex" required
+                      [ngClass]="{'invalid-textbox' : signInForm.submitted && !email.valid}">
+                      <div>
+
+                      </div>
+                      
+                    </div>
+                    <div *ngIf="signInForm.submitted && email.errors?.pattern">
+                      <label style="color: red;" class="validation-message">Invalid email adress </label>
+
+                    </div>
+                    <span class="input-placeholder">
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="model.password" placeholder=" Password " 
+                        required minlength="8" [type]="hide ? 'password' : 'text'"
+                        [ngClass]="{'invalid-textbox' : signInForm.submitted && !password.valid}">
+                        <mat-icon class="placeholder" (click)="myFunction()">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      
+                      </div>
+                      </span>
+                     <div *ngIf="signInForm.submitted && password.errors?.minlength">
+                      <label style="color: red;" class="validation-message">minimum 8 characters</label>
+
+                    </div>
+
+                    <p class="forgot px-5 text-center " id="forgot" style="color: white;" ><a href="">forgot password</a><a href=""></a></p>
+                   
+                   <!-- <button  type="submit" class="btn  btn-sm px-5" value="Sign In">submit</button>-->
+                   <div class="sign">
+                   <input   type="submit" value="Sign In">
+                   </div>
+                  </form>
+                  
+                  <div class="alert" *ngIf= "serverErrorMessage">
+                   <h1 style="color: red; font-family: 'Times New Roman', Times, serif;"> {{serverErrorMessage}}</h1>
+
+                  </div>
+
+
+           </div>
+
+
+
+          </div>
+
+          <div class="card"  style="width: 26.5rem;" >
+            <div class="card-body">
+              <img src="assets/logonew.png" class="img-fluid text-center px-5" style="height: 250px;"/>
+              <p class="card-text"> our aim is sustainably building an education and trainig
+                system that ensures quality and equitable education for all
+                citizens and that continously produces a competent work force
+                fueling the countrys development.</p>
+
+               <div class="button px-5 py-5 btn-toolbar"   >
+                <button type="button" class=" btn-circle btn-sm" style="background-color: #FFFFFF;"></button> 
+                <button type="button" class="btn-circle btn-sm"></button> 
+               <button type="button" class="btn-circle btn-sm"></button> 
+              <button type="button" class=" btn-circle btn-sm"></button> 
+
+</div>
+</div>
+ </div>
+  </div>
+</div>
+ </div>
+</div>
+ </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
