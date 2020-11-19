@@ -21,7 +21,6 @@ import { SuperuserService } from './shared/superuser.service';
 import {AuthGuard} from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {  LogsubComponent } from './subAdmin/logsub/logsub.component';
 import { ShowsubComponent} from './subAdmin/showsub/showsub.component';
 import {  RegistorsubComponent } from './subAdmin/registorsub/registorsub.component';
 import { HomesubComponent } from './subAdmin/homesub/homesub.component';
@@ -33,9 +32,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShowsubsubComponent } from './subsubAdmin/showsubsub/showsubsub.component';
 import { RegistorsubsubComponent } from './subsubAdmin/registorsubsub/registorsubsub.component';
 import { HomesubsubComponent } from './subsubAdmin/homesubsub/homesubsub.component';
-import { LogsubsubComponent } from './subsubAdmin/logsubsub/logsubsub.component';
 
-import { CheckerlogComponent } from './checker/checkerlog/checkerlog.component';
+
+
 import { CheckerhomeComponent } from './checker/checkerhome/checkerhome.component';
 import { CheckershowComponent } from './checker/checkershow/checkershow.component';
 import {CheckerService} from 'src/app/sharedcheck/checker.service';
@@ -55,16 +54,15 @@ import { UpdateProfilesubsubComponent } from './subsubAdmin/update-profilesubsub
     RegistorComponent,
     ShowComponent,
     HomeComponent,
-    LogsubComponent,
     ShowsubComponent,
     RegistorsubComponent,
     HomesubComponent,
     ShowsubsubComponent,
     RegistorsubsubComponent,
     HomesubsubComponent,
-    LogsubsubComponent,
+   
     
-    CheckerlogComponent,
+    
     CheckerhomeComponent,
     CheckershowComponent,
     CheckersearchComponent,

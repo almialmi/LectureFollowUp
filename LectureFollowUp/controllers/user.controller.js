@@ -473,7 +473,7 @@ module.exports.findAndMatchUniversityStaff=(req,res)=>{
     var query1 = req.params.query1;
     var query2 = req.params.query2;
     console.log(query + " "+ query1 + " " + query2);
-    Lecture.find({salSecrete:0,__v:0},{
+    Lecture.find({
         "$and":[{"firstName":{$regex:query}},{"middleName":{$regex:query1}},{"lastName":{$regex:query2}}]
 
      }, function(err, result) {

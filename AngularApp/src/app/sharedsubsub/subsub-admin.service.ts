@@ -12,8 +12,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SubsubAdminService {
-  selectedSuperuserr: SubsubAdmin;
-  selectedSuperuser : SubsubAdmin = {
+  selectedStaff : SubsubAdmin = {
     _id: '',
     firstName : '',
     middleName: '',
@@ -21,14 +20,12 @@ export class SubsubAdminService {
     email : '',
     mobile: '',
     university: '',
-    password:'',
+    compass:'',
     educationStatus:'',
     role: '',
     study: '',
     educationField: '',
     department : '',
-    isSelected:false
-
 
   };
     
@@ -39,32 +36,29 @@ export class SubsubAdminService {
 
   constructor(public http : HttpClient) { }
 
-postUser(user : SubsubAdmin){
-  return  this.http.post(environment.apiBaseUrlsubsub + '/registerLecture' , user);
+postUniversityStaff(user : SubsubAdmin){
+  return  this.http.post(environment.apiBaseUrl + '/registerUniversityStaff' , user);
 
 }
-
-
-login(authCredintials){
-  return this.http.post(environment.apiBaseUrlsubsub + '/autenticate' , authCredintials , this.noAuthHeader);
-
-}
-SearchUser(){
-  return this.http.get(environment.apiBaseUrlsubsub + '/subAdmin' + '/selectedSuperuser.firstName');
-}
-showuser(){
-  return this.http.get(environment.apiBaseUrlsubsub + '/registerLecture');
-}
-deleteuser(_id : string){
-  return this.http.delete(environment.apiBaseUrlsubsub + '/lecture' + `/${_id}`);
+postFromExcelFile(user:SubsubAdmin){
+  return  this.http.post(environment.apiBaseUrl + '/uploadFile' , user);
 
 
 }
-putUser(user: SubsubAdmin) {
-  return this.http.put(environment.apiBaseUrlsubsub + '/lecture'  +`/${user._id}`, user);
+
+showUniversityStaff(university:string,compass:string){
+  return this.http.get(environment.apiBaseUrl + '/fetchUniversityStaff' + `/${university}` + `/${compass}`);
 }
-putProfile(id:String ,sub:SubsubAdmin){
-  return this.http.put(environment.apiBaseUrlsubsub + '/selectiveUpdateProfile'  +`/${id}`, sub);
+deleteUniversityStaff(_id : string){
+  return this.http.delete(environment.apiBaseUrl + '/deleteUniversityStaff' + `/${_id}`);
+
+
+}
+putUniversityStaff(user: SubsubAdmin) {
+  return this.http.put(environment.apiBaseUrl + '/updateUniversityStaffProfile'  +`/${user._id}`, user);
+}
+putOwnProfile(id:String ,sub:SubsubAdmin){
+  return this.http.put(environment.apiBaseUrl + '/updateOwnProfile'  +`/${id}`, sub);
 
 }
 
@@ -101,22 +95,38 @@ getUserPaylod(){
 
   
 }
-FindbyName(firstName): Observable<any>{
-  return this.http.get(`${environment.apiBaseUrlsubsub + '/lecture/'}${firstName}`)
-  //return this.http.get(`${environment.apiBaseUrlsubsub + '/lecture' }? = ${title}`)
-
-}
 getUserId(){
   var token = this.getToken();
   if (token){
     var userPayload = atob(token.split('.')[1]);
     var user = JSON.parse(userPayload);
-    var id = user._id;
+    var id = user.user_id;
     console.log(id);
     return id
    
+}}
+getUserUniversity(){
+  var token = this.getToken();
+  if (token){
+    var userPayload = atob(token.split('.')[1]);
+    var user = JSON.parse(userPayload);
+    var university = user.university;
+    console.log(university);
+    return university
+   
+}
 }
 
+getUserCompass(){
+  var token = this.getToken();
+  if (token){
+    var userPayload = atob(token.split('.')[1]);
+    var user = JSON.parse(userPayload);
+    var compass = user.compass;
+    console.log(compass);
+    return compass
+   
+}
 }
 
 

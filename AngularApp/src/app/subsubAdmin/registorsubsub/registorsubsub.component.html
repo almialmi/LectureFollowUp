@@ -92,10 +92,10 @@
               </p>
 
               <form #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
-                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser._id">
+                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subsubAdminService.selectedStaff._id">
                 <div class="form-group">
                   <label for="exampleInputEmail1">First name:</label>
-                  <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.firstName" name="firstName"  placeholder="Enter firstname" required
+                  <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.firstName" name="firstName"  placeholder="Enter firstname" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
                   
                 </div>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Middle name:</label>
-                  <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.middleName" name="middleName"  placeholder="Enter middlename" required
+                  <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.middleName" name="middleName"  placeholder="Enter middlename" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
                   </div>
                   <div *ngIf="signUpForm.submitted && !middlename.valid">
@@ -115,7 +115,7 @@
 
                   <div class="form-group">
                     <label   for="exampleInputPassword1">Last name:</label>
-                    <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.lastName" name="lastName"  placeholder="Enter lastname" required
+                    <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.lastName" name="lastName"  placeholder="Enter lastname" required
                     [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
                     </div>
                     <div *ngIf="signUpForm.submitted && !lastname.valid">
@@ -124,7 +124,7 @@
                     </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Email:</label>
-                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.email" name="email"  placeholder="Enter email" required
+                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.email" name="email"  placeholder="Enter email" required
                   [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
                 </div>
                 <div *ngIf="signUpForm.submitted && email.errors">
@@ -133,23 +133,8 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.password" placeholder="Password" required minlength="8"
-                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !password.valid}">
-
-                </div>
-                <div *ngIf="signUpForm.submitted && !password.valid">
-                  <label style="color: red;" class="validation-message">this field is required </label>
-
-                </div>
-                <div *ngIf="signUpForm.submitted && password.errors?.minlength">
-                  <label style="color: red;" class="validation-message">minimum 8 characters</label>
-
-                </div>
-
-                <div class="form-group">
                   <label for="exampleInputPassword1">mobile:</label>
-                  <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.mobile" name="mobile"  placeholder="Enter mobile number" required
+                  <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.mobile" name="mobile"  placeholder="Enter mobile number" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
                 </div>
                 <div *ngIf="signUpForm.submitted && !mobile.valid">
@@ -159,7 +144,7 @@
                 <div class="form-group">
                   <label for="email">universtiy:</label>
                   <br>
-                  <select  class="browser-default custom-select" #university="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.university" name="university" >
+                  <select  class="browser-default custom-select" #university="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.university" name="university" >
                     <input type="text" placeholder="enter here wey"/>
                   
                    <option *ngFor="let unv of  universtiys" [value]="unv.name">
@@ -172,7 +157,7 @@
                 <div class="form-group">
                   <label for="email">Role:</label>
                   <br>
-                  <select  class="browser-default custom-select" #role="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.role" name="role" >
+                  <select  class="browser-default custom-select" #role="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.role" name="role" >
                   
                    <option *ngFor="let ro of rol" [value]="ro.name">
                      {{ro.name}}
@@ -186,7 +171,7 @@
                 <div class="form-group">
                   <label for="email">educationStatus:</label>
                   <br>
-                  <select  class="browser-default custom-select" #educationStatus="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.educationStatus" name="educationStatus" >
+                  <select  class="browser-default custom-select" #educationStatus="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationStatus" name="educationStatus" >
                   
                    <option *ngFor="let stat of status" [value]="stat.name">
                      {{stat.name}}
@@ -198,7 +183,7 @@
                 <div class="form-group">
                   <label for="email">study:</label>
                   <br>
-                  <select  class="browser-default custom-select" #study="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.study" name="study"  (change)="onSelect($event.target.value)" >
+                  <select  class="browser-default custom-select" #study="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.study" name="study"  (change)="onSelect($event.target.value)" >
                   
                    <option *ngFor="let stu of studys" [value]="stu.name">
                      {{stu.name}}
@@ -210,7 +195,7 @@
                 <div class="form-group">
                   <label for="email">educationField:</label>
                   <br>
-                  <select  class="browser-default custom-select" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.educationField" name="educationField"  (change)="onSelectt($event.target.value)" >
+                  <select  class="browser-default custom-select" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField" name="educationField"  (change)="onSelectt($event.target.value)" >
                     
                 <!-- <option *ngIf=' selectedStudy.id == 0' value="0">--Select--</option>-->
                    <option *ngFor="let field of  fields" [value]="field.name">
@@ -222,7 +207,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">if it is not from the above list:</label>
-                  <input  class="form-control" type="text" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.educationField" name="educationField"  placeholder="Enter educational field here" required
+                  <input  class="form-control" type="text" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField" name="educationField"  placeholder="Enter educational field here" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationField.valid}">
                 </div>
                 <div *ngIf="signUpForm.submitted && !educationField.valid">
@@ -233,7 +218,7 @@
                 <div class="form-group">
                   <label for="email">Department:</label>
                   <br>
-                  <select  class="browser-default custom-select" #department ="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.department " name="department"  >
+                  <select  class="browser-default custom-select" #department ="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.department " name="department"  >
                  <!-- <option *ngIf=' selectedStudyy.id == 0' value="0">--Select--</option>-->
                    <option *ngFor="let de of  dept" [value]="de.name">
                      {{de.name}}
@@ -244,7 +229,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">if it is not from the above list:</label>
-                  <input  class="form-control" type="text" #department="ngModel" [(ngModel)]="subsubAdminService.selectedSuperuser.department" name="department"  placeholder="Enter department here" required
+                  <input  class="form-control" type="text" #department="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.department" name="department"  placeholder="Enter department here" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !department.valid}">
                 </div>
                 <div *ngIf="signUpForm.submitted && !department.valid">

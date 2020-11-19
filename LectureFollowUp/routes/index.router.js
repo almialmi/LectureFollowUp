@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const ctrlUser = require('../controllers/user.controller');
-const ctrUpload = require('../controllers/uploadfile.controller');
 const jwtHelper = require('../config/jwtHelper');
 
 // register for route super Admin

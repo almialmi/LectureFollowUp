@@ -41,6 +41,8 @@ export class RegistorsubsubComponent implements OnInit {
     { name: "Teacher"},
     { name: "DepartmentHead"},
     { name: "Both"},
+    { name: "Secretary"},
+    
 
   ];
 
@@ -74,7 +76,7 @@ export class RegistorsubsubComponent implements OnInit {
                  .filter((item)=> item.fieldname == countryidd);
   }
   onSubmit(form : NgForm){
-    this.subsubAdminService.postUser(form.value).subscribe(
+    this.subsubAdminService.postUniversityStaff(form.value).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
@@ -101,7 +103,7 @@ export class RegistorsubsubComponent implements OnInit {
 
   }
   resetForm(form : NgForm){
-    this.subsubAdminService.selectedSuperuser = {
+    this.subsubAdminService.selectedStaff = {
       _id : '',
       firstName : '',
       middleName: '',
@@ -109,16 +111,13 @@ export class RegistorsubsubComponent implements OnInit {
       mobile:'',
       email : '',
       university : '',
-      password : '',
+      compass : '',
       educationStatus:'',
       role: '',
       study: '',
       educationField: '',
       department : '',
-      isSelected:false
-  
-
-    };
+};
     form.resetForm();
     this.serverErrorMessage = '';
   }

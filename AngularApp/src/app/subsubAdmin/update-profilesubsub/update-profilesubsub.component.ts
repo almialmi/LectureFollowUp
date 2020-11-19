@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { SubsubAdmin } from '../../sharedsubsub/subsub-admin.model';;
-
+import { SubsubAdmin } from '../../sharedsubsub/subsub-admin.model';
+import {  SubAdminService } from 'src/app/sharedsub/sub-admin.service';
 import {  SubsubAdminService } from 'src/app/sharedsubsub/subsub-admin.service';
 import { NgForm } from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class UpdateProfilesubsubComponent implements OnInit {
 
-  constructor(public subAdminService : SubsubAdminService , public router : Router) { }
+  constructor(public subsubAdminService : SubsubAdminService ,public subadminservice :SubAdminService , public router : Router) { }
   emailRegex =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   serverErrorMessage : string;
   showSucessMessage: boolean;
@@ -26,12 +26,12 @@ export class UpdateProfilesubsubComponent implements OnInit {
     this.hide = !this.hide;
   }
   onLogout(){
-    this.subAdminService.deletToken();
+    this.subsubAdminService.deletToken();
     this.router.navigate(['/login']);
   }
   OnSubmit(form : NgForm){
-    var id=this.subAdminService.getUserId();
-    this.subAdminService.putProfile (id ,form.value).subscribe(
+    var id=this.subsubAdminService.getUserId();
+    this.subsubAdminService.putOwnProfile (id ,form.value).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
@@ -48,23 +48,20 @@ export class UpdateProfilesubsubComponent implements OnInit {
 
   }
  resetForm(form : NgForm){
-    this.subAdminService.selectedSuperuser = {
-      _id: '',
+  this.subadminservice.selectedUnivHr = {
+    _id : '',
     firstName : '',
     middleName: '',
-    lastName:'',
+    lastName: '',
+    mobile:'',
     email : '',
-    mobile: '',
-    university: '',
-    password:'',
-    educationStatus:'',
+    university : '',
+    compass : '',
     role: '',
-    study: '',
-    educationField: '',
-    department : '',
-    isSelected:false
-
-    };
+    password:'',
+    isActive:true
+    
+};
     
     form.resetForm();
     this.serverErrorMessage = '';

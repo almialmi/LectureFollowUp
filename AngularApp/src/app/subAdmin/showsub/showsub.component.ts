@@ -58,7 +58,8 @@ export class ShowsubComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   refreshuserlist(){
-    this.subAdminService.showuser().subscribe(
+    var university = this.subAdminService.getUserUniversity();
+    this.subAdminService.showUnivHr(university).subscribe(
       res =>{
         this.subAdminService.users = res as SubAdmin[];
 
@@ -69,22 +70,11 @@ export class ShowsubComponent implements OnInit {
     );
 
   }
-  Search(){
-    this.subAdminService.SearchUser().subscribe(
-      res =>{
-        this.subAdminService.users = res as SubAdmin[];
-
-      },
-      err =>{
-
-      }
-    )
-  }
   
   onSubmit(form : NgForm){
    
     if(form.value._id == ""){
-      this.subAdminService.postUser(form.value).subscribe((res) =>{
+      this.subAdminService.postUnivHr(form.value).subscribe((res) =>{
        // this.resetForm(form);
        this.newRowIndex++;
         this.refreshuserlist();
@@ -93,7 +83,7 @@ export class ShowsubComponent implements OnInit {
   
       });
     }else{
-      this.subAdminService.putUser(form.value).subscribe((res) =>{
+      this.subAdminService.putUnivHr(form.value).subscribe((res) =>{
        // this.resetForm(form);
         this.refreshuserlist();
         this.showSucessMessage = true;
@@ -105,17 +95,9 @@ export class ShowsubComponent implements OnInit {
     }
    
   }
-  onDelete(_id: string){
-    if(confirm('Are you sure you want to delete this record?') == true){
-      this.subAdminService.deleteuser(_id).subscribe((res) => {
-        this.refreshuserlist();
-       // M.toast({html: 'Deleted successfully' , classes: 'rounded'});
-      });
-    }
-
-  }
+ 
   onEdit(user : SubAdmin){
-    this.subAdminService.selectedSuperuser = user;
+    this.subAdminService.selectedUnivHr = user;
 
   }
 
@@ -124,7 +106,7 @@ export class ShowsubComponent implements OnInit {
     if(user.isActive === true){
       console.log(user.isActive);
       if(confirm('Are you sure you want to lock this record?') == true){
-        this.subAdminService.putActivateDeactivateSubsub(_id,user).subscribe((res) => {
+        this.subAdminService.putActivateDeactivate(_id,user).subscribe((res) => {
           this.refreshuserlist();
           console.log(user.isActive)
          });
@@ -133,7 +115,7 @@ export class ShowsubComponent implements OnInit {
      else{
       console.log(user.isActive);
       if(confirm('Are you sure you want to unlock this record?') == true){
-        this.subAdminService.putActivateDeactivateSubsub(_id,user).subscribe((res) => {
+        this.subAdminService.putActivateDeactivate(_id,user).subscribe((res) => {
           this.refreshuserlist();
          console.log (user.isActive)
         });

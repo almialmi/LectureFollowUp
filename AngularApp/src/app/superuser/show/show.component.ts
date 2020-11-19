@@ -129,16 +129,7 @@ export class ShowComponent implements OnInit {
     }
    
   }
- /* onDelete(_id: string){
-    if(confirm('Are you sure you want to delete this record?') == true){
-      this.superuserservice.deleteChecker(_id).subscribe((res) => {
-        this.refreshuserlist();
-        M.toast({html: 'Deleted successfully' , classes: 'rounded'});
-      });
-    }
-
-  }*/
-
+ 
   onDeletechecker(_id: string){
     if(confirm('Are you sure you want to delete this record?') == true){
       this.superuserservice.deleteChecker(_id).subscribe((res) => {
@@ -153,6 +144,8 @@ export class ShowComponent implements OnInit {
     this.superuserservice.selectedUnivAdmin = user;
 
   }
+  
+  
 
   active: boolean = true;
 

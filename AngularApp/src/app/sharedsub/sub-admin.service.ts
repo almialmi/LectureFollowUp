@@ -5,7 +5,7 @@ import { HttpClient , HttpHeaders} from '@angular/common/http';
 
 
 import {SubAdmin } from './sub-admin.model';
-import {Sub} from './sub.model';
+
 import { environment } from 'src/environments/environment';
 import { JsonPipe } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -16,8 +16,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SubAdminService {
-  selectedSuperuserr: SubAdmin;
-  selectedSuperuser : SubAdmin = {
+ 
+  selectedUnivHr : SubAdmin = {
     _id: '',
     firstName : '',
     middleName: '',
@@ -25,66 +25,39 @@ export class SubAdminService {
     email : '',
     mobile: '',
     university: '',
+    compass:'',
     password:'',
-    educationStatus : '',
     role : '',
-    study : '',
-    educationField : '',
-    department : '',
     isActive: true
 
 };
-selectedSub:Sub={
-  _id: '',
-  firstName : '',
-  middleName: '',
-  lastName:'',
-  email : '',
-  mobile: '',
-  university: '',
-  password:''
 
-}
     
    
   users :SubAdmin[];
   searchUser: SubAdmin[];
-  sub :Sub[];
+ 
   noAuthHeader = {headers: new HttpHeaders({'NoAuth' : 'True'})};
 
   constructor(public http : HttpClient) { }
 
-  postUser(user : SubAdmin){
-    return  this.http.post(environment.apiBaseUrlsub + '/registersubsubAdmin' , user);
+  postUnivHr(user : SubAdmin){
+    return  this.http.post(environment.apiBaseUrl + '/register-univ-hr' , user);
 
   }
-
-
-  login(authCredintials){
-    return this.http.post(environment.apiBaseUrlsub + '/autenticate' , authCredintials , this.noAuthHeader);
-
-  }
-  SearchUser(){
-    return this.http.get(environment.apiBaseUrlchecker + '/registerdSubsubAdmins');
-  }
-  showuser(){
-    return this.http.get(environment.apiBaseUrlsub + '/registersubsubAdmin');
-  }
-  deleteuser(_id : string){
-    return this.http.delete(environment.apiBaseUrlsub + '/subSubAdmin' + `/${_id}`);
-  
-
+  showUnivHr(university:string){
+    return this.http.get(environment.apiBaseUrl + '/fetchUnivHr'+ `/${university}`);
   }
   
-  putUser(user: SubAdmin) {
-    return this.http.put(environment.apiBaseUrlsub + '/subSuAdmin'  +`/${user._id}`, user);
+  putUnivHr(user: SubAdmin) {
+    return this.http.put(environment.apiBaseUrl + '/updateProfile'  +`/${user._id}`, user);
   }
-  putProfile(id:String ,sub:Sub){
-    return this.http.put(environment.apiBaseUrlsub + '/selectiveUpdateProfile'  +`/${id}`, sub);
+  putOwnProfile(id:String ,sub:SubAdmin){
+    return this.http.put(environment.apiBaseUrl + '/updateOwnProfile'  +`/${id}`, sub);
 
   }
-  putActivateDeactivateSubsub(_id:String,user:SubAdmin){
-    return this.http.put(environment.apiBaseUrlsub + '/activateDeactivateSubsub' + `/${_id}`,user);
+  putActivateDeactivate(_id:String,user:SubAdmin){
+    return this.http.put(environment.apiBaseUrl + '/ActivateDeactivate' + `/${_id}`,user);
 
   }
   setToken(token : string){
@@ -116,29 +89,28 @@ selectedSub:Sub={
         return false;
       }
   }
-
-  
-
-  FindbyName(title): Observable<any>{
-    return this.http.get(`${environment.apiBaseUrlchecker + '/registerdSubsubAdmins' }? = ${title}`)
-  
-  }
- /* clickMe(id:String){
-    this.users.map(x=>x.isSelected=false);
-    this.users.find(x=>x._id === id).isSelected=true;
-
-  }*/
   getUserId(){
     var token = this.getToken();
     if (token){
       var userPayload = atob(token.split('.')[1]);
       var user = JSON.parse(userPayload);
-      var id = user._id;
+      var id = user.user_id;
       console.log(id);
       return id
      
   }
   
+}
+getUserUniversity(){
+  var token = this.getToken();
+  if(token){
+    var userPayload = atob(token.split('.')[1]);
+    var user = JSON.parse(userPayload);
+    var university = user.university;
+    console.log(university)
+    return university;
+
+  }
 }
 
 

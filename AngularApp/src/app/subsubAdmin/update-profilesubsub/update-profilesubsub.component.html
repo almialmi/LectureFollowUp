@@ -38,11 +38,11 @@
         <div class="card ">
           <div class="card-body" >
               <form #updateForm="ngForm"  (ngSubmit) = "updateForm.valid && OnSubmit(updateForm)">
-                  <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]=" subAdminService.selectedSuperuser._id">
+                  <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subadminservice.selectedUnivHr._id">
                   
                   <div class="form-group">
                     <label for="exampleInputPassword1">Email:</label>
-                    <input   class="form-control" type="text" #email="ngModel" [(ngModel)]=" subAdminService.selectedSuperuser.email" name="email"  placeholder="Enter your new Email" required
+                    <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="subadminservice.selectedUnivHr.email" name="email"  placeholder="Enter your new Email" required
                     [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : updateForm.submitted && !email.valid}" >
                   </div>
                   <div *ngIf="updateForm.submitted && email.errors">
@@ -52,7 +52,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">mobile:</label>
-                    <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.mobile" name="mobile"  placeholder="Enter Your mobile number" required
+                    <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subadminservice.selectedUnivHr.mobile" name="mobile"  placeholder="Enter Your mobile number" required
                     [ngClass]="{'invalid-textbox' : updateForm.submitted && !mobile.valid}">
                   </div>
                   <div *ngIf="updateForm.submitted && !mobile.valid">
@@ -62,7 +62,7 @@
                   <span class="input-placeholder">
                     <div class="form-group">
                       <label for="exampleInputPassword1">Password</label>
-                      <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="subAdminService.selectedSuperuser.password" placeholder=" Enter Your Updated Password " 
+                      <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="subadminservice.selectedUnivHr.password" placeholder=" Enter Your Updated Password " 
                       required minlength="8" [type]="hide ? 'password' : 'text'"
                       [ngClass]="{'invalid-textbox' : updateForm.submitted && !password.valid}">
                       <mat-icon class="placeholder" (click)="myFunction()">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
