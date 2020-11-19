@@ -1,4 +1,7 @@
-
+.body{
+    position: relative;
+    min-height: 100vh;
+}
 .banner{
     position: relative;
     
@@ -22,6 +25,8 @@
     font-family: 'Times New Roman', Times, serif;
     
 }
+
+
 .higher{
     font-family: 'Times New Roman', Times, serif;
 }

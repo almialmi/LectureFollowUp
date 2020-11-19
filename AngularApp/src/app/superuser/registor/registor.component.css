@@ -1,9 +1,4 @@
-.container-fluid{
-    background-color:#e0e0d1;
-    
-    color: white;
-    font-family: 'Times New Roman', Times, serif;
-}
+
 .card{
     background-color:white ;
     border-color:#056f8f;
@@ -13,6 +8,9 @@
 }
 input[type="radio"]{
     margin: 0 20px 0 20px;
+    color: black;
+}
+input{
     color: black;
 }
 .rad{
@@ -38,9 +36,11 @@ input[type="radio"]{
     border-color: #7a7575;
     color: black;
     
+    
 
 
 }
+
 .ministry{
     color: #056f8f;
     font-size: 20px;
@@ -58,6 +58,6 @@ select{
 
 .form-control:focus {
     border-color: #056f8f;
-    color: white;
+
    
   }
