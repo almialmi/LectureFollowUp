@@ -5,10 +5,12 @@
 </head>
 <body>
 
-<nav class="navbar   fixed-top navbar-expand-md bg-dark navbar-dark">
+<nav style="border-width: 2px;border-style: solid;border-color: #e0e0d1;" class="navbar   fixed-top navbar-expand-md bg-white navbar-white  shadow-lg  mb-5 bg-white rounded">
   <img src="assets/logonew.png" style="width: 60px; height: 60px;"/>
+  <span class="ministry">Ministry of Science and Higher Education</span>
+
   
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+  <button class="navbar-toggler"  data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="navbarResponsive">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
@@ -26,6 +28,12 @@
         <a class="nav-link " href="#" routerLink = "/updateProfile">Update Profile</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="#" routerLink= "/show">Contact us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#" routerLink = "/updateProfile">About us</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link"  (click)="onLogout()" value="logout">logout</a>
       </li>    
     </ul>
@@ -33,17 +41,18 @@
 </nav>
 
 
-<div class="container-fluid text-center py-5 ">
+<!--<div class="container-fluid text-center py-5 ">
   <h3 id="parttwo">Lecturers Follow Up </h3>
   <p >The main use of this system is finding out teachers who are found in more than one campus. information of teachers is provided to the system by provided sectors. so When the concerned sectors search for a name to check whether she or he work on more than one campus the system will immediately look for the information provided to the it and show them similarity in percent. And if it is more than 90% the person is assured to be worked in more than one campus. And anyone who have right to see information of teachers found in Ethiopia he can easily get it in this system.</p>
 
   
-</div>
+</div>-->
+<h1 style="color: white;">clicking on items to registor</h1>
 
 <div class="container py-5" >
   <ul class="nav nav-tabs">
-      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #ffa800;font-size: 25px;" class="nav-link active" data-toggle="tab" href="#home">Admin</a></li>
-      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #ffa800;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu1">Checker</a></li>
+      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link active" data-toggle="tab" href="#home">Admin</a></li>
+      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu1">Checker</a></li>
     
     </ul>
     <div class="tab-content">
@@ -52,7 +61,7 @@
   <div class="cards py-5">
   <div class="col-md-12">
    
-    <div class="card" style="height: 400px;">
+    <div class="card shadow-lg  rounded" style="height: 400px;">
       <div class="card-body">
         <div class="card-title col-md-5" >
           <h3>
@@ -174,7 +183,7 @@
                 </div>
                 
                 <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
-              <input style="background-color: #ffa800" type="submit" value="Registor">
+              <input style="background-color: #056f8f" type="submit" value="Registor">
               </form>
               <div class="success" *ngIf="showSucessMessage">
                 <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesfully</h1>
@@ -198,10 +207,10 @@
 
 <!--registration page for checker-->
 <div  class="container" id="menu1"  class="tab-pane fade">
-  <div class="cards py-5">
+  <div class="cards py-5 ">
   <div class="col-md-12">
    
-    <div class="card" style="height: 400px;">
+    <div class="card shadow-lg  rounded" style="height: 400px;">
       <div class="card-body">
         <div class="card-title col-md-5" >
           <h3>
@@ -307,7 +316,7 @@
                 </div>
                
               <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
-              <input style="background-color: #ffa800" type="submit" value="Registor">
+              <input style="background-color: #056f8f" type="submit" value="Registor">
               </form>
               <div class="success" *ngIf="showSucessMessage">
                 <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesfully</h1>
@@ -318,9 +327,9 @@
                <h1 style="color: red;"> {{serverErrorMessage}} </h1>
 
               </div>
-              <h1 style="color: #212121;"> Registor this clint</h1>
-              <h1 style="color: #212121;"> Registor this clint</h1>
-              <h1 style="color: #212121;"> Registor this clint</h1>
+              <h1 style="color: #e0e0d1;"> Registor this clint</h1>
+              <h1 style="color: #e0e0d1;"> Registor this clint</h1>
+              <h1 style="color: #e0e0d1;"> Registor this clint</h1>
              </div>
               </div>
            </div>

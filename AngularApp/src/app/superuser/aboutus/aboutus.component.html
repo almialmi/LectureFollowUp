@@ -28,10 +28,10 @@
         <a class="nav-link " href="#" routerLink = "/updateProfile">Update Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLink= "/contactus">Contact us</a>
+        <a class="nav-link" href="#" routerLink= "/show">Contact us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="#" routerLink = "/aboutus">About us</a>
+        <a class="nav-link " href="#" routerLink = "/updateProfile">About us</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)="onLogout()" value="logout">logout</a>
@@ -41,81 +41,22 @@
 </nav>
 
 
-<div class="container-fluid py-5">
-    <div class="row">
-        <div class="banner">
-            <img src="assets/ministor.png"/>
-           
+
+<h1>ministry of education</h1>
+
+
+<div class="container text-center col-md-8 py-5"  >
+  <div class="card">
+
+  <div class="card-title">
+    <img src="assets/logonew.png" style="width: 100px; height: 100px;"/>
+    
   </div>
-
-
-
-
-    </div >
- 
-   
-</div>
-<div class="container py-3 text-center higher">
-  <h1 style="color: #056f8f;">Ministry of Science and Higher Education</h1>
-  <p>The Ministry of Science and Higher Education (MoSHE),established by proclamation number 1097/2018 in October 2018, is responsible to check who is working in more than one Universtiy Ethiopia.</p>
-  
-</div>
-
-<div  class="container py-3 text-center">
-  <h1 style="color:#056f8f ;font-family: 'Times New Roman', Times, serif;" > Services</h1>
-  <div class="row">
-
-  <div class="card col-md-3" style="margin-left: 55px;" >
-    <div class="card-title">
-      Registor All instructors
-
-    </div>
-    <div class="card-body">
-      you can registor admins who can represent one universtiy and checkers who can check the registored instructors whether they are working on one universtiy or more.
-      </div>
-  </div>
-
-  <div class="card col-md-3" style="margin-left: 55px;" >
-    <div class="card-title">
-      Registor All instructors
-
-    </div>
-    <div class="card-body">
-      you can registor admins who can represent one universtiy and checkers who can check the registored instructors whether they are working on one universtiy or more.
-      </div>
-  </div>
-
-  <div class="card col-md-3" style="margin-left: 55px;">
-    <div class="card-title">
-      Registor All instructors
-
-    </div>
-    <div class="card-body">
-      you can registor admins who can represent one universtiy and checkers who can check the registored instructors whether they are working on one universtiy or more.
-      </div>
-  </div>
-
-
-
-
-
-  </div>
-
-
-
-</div>
-
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <img src="assets/logonew.png" style="width: 60px; height: 60px;"/>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body" style="font-family: 'Times New Roman', Times, serif;">
+  <div class="card-body" style="font-family: 'Times New Roman', Times, serif;">
     <div>
      <h4> Ministry of Science and Higher Education</h4>
+
+    The Ministry of Science and Higher Education (MoSHE),established by proclamation number 1097/2018 in October 2018, is responsible to lead the development of science, higher education as well as the technical and vocational education and training (TVET) in Ethiopia.
      <h3>Mission</h3>
      The Ministry of Science and Higher Education (MoSHE),established by proclamation number 1097/2018 in October 2018, is responsible to lead the development of science, higher education as well as the technical and vocational education and training (TVET) in Ethiopia.The Ministry of Science and Higher Education (MoSHE),established by proclamation number 1097/2018 in October 2018, is responsible to lead the development of science, higher education as well as the technical and vocational education and training (TVET) in Ethiopia.
      <h3>Vision</h3>
@@ -126,8 +67,10 @@
    
     
   </div>
+  </div>
+</div>
  
-</ng-template>
+
 
 
 

@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
- 
-</head>
-<body>
 
-<nav class="navbar   fixed-top navbar-expand-md bg-dark navbar-dark">
+
+<nav class="navbar  border-style: solid;border-color: #e0e0d1;  fixed-top navbar-expand-md bg-white navbar-white shadow-lg  mb-5 bg-white rounded">
   <img src="assets/logonew.png" style="width: 60px; height: 60px;"/>
+  <span class="ministry">Ministry of Science and Higher Education</span>
   
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -24,6 +20,12 @@
       </li>
       <li class="nav-item">
         <a class="nav-link " href="#" routerLink = "/updateProfile">Update Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLink= "/show">Contact us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#" routerLink = "/updateProfile">About us</a>
       </li>
       <li class="nav-item" (click)="onLogout()" value="logout">
         <a class="nav-link">logout</a>
@@ -47,8 +49,8 @@
 
 <div class="container py-5" >
   <ul class="nav nav-tabs">
-      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #ffa800;font-size: 25px;" class="nav-link active" data-toggle="tab" href="#home">Admin</a></li>
-      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #ffa800;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu1">Checker</a></li>
+      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link active" data-toggle="tab" href="#home">Admin</a></li>
+      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu1">Checker</a></li>
   </ul>
 <div class="tab-content">
     
@@ -194,7 +196,7 @@
         </div>
         <div class="modal-footer">
           <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>--> 
-             <input  style="background-color: #ffa800;" type="submit" value="update">
+             <input  style="background-color: #056f8f;" type="submit" value="update">
            </div>
        
       </form>
@@ -268,7 +270,7 @@
         </div>
         <div class="modal-footer">
           <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>--> 
-             <input  style="background-color: #ffa800;" type="submit" value="update">
+             <input  style="background-color: #056f8f;" type="submit" value="update">
            </div>
        
       </form>
@@ -283,29 +285,6 @@
  
   
  
-  
-   
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <footer class="site-footer">
-    <h4 class="text-center" style="font-family: 'Times New Roman', Times, serif;color: white;">2020 © Ministry of Science and Higher Education - All rights reserved.</h4>
-   
-  </footer>
-  
   <script>
     function openForm() {
       document.getElementById("myForm").style.display = "block";
@@ -316,5 +295,7 @@
     }
     </script>
   
-</body>
-</html>
+
+
+
+

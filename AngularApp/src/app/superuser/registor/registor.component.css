@@ -1,22 +1,23 @@
 .container-fluid{
-    background-color:#212121;
+    background-color:#e0e0d1;
     
     color: white;
     font-family: 'Times New Roman', Times, serif;
 }
 .card{
-    background-color:#212121;
-    border-color: #ffa800;
-    color: white;
+    background-color:white ;
+    border-color:#056f8f;
+    color: black;
     font-family: 'Times New Roman', Times, serif;
     
 }
 input[type="radio"]{
     margin: 0 20px 0 20px;
+    color: black;
 }
 .rad{
     font-size: 30px;
-    color:white;
+    color:black;
     font-family: 'Times New Roman', Times, serif;
 }
 
@@ -29,28 +30,34 @@ input[type="radio"]{
     height: 40px;
     margin-left: 100px;
     font-family: 'Times New Roman', Times, serif;
-    background-color:  #ffa800;
+    background-color:  #056f8f;
     font-size: large;
 }
 .form-control{
-    background-color: #544E4E!important;
-    border-color: #544E4E;
-    color: white;
+    background-color: white !important;
+    border-color: #7a7575;
+    color: black;
     
 
 
 }
+.ministry{
+    color: #056f8f;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
 select{
-    background-color: #544E4E!important;
+    background-color: #f2f2f2 !important;
     border-color: #544E4E;
-    color: white;
+    color: black;
     
 
 }
 
 
 .form-control:focus {
-    border-color: #ffa800;
+    border-color: #056f8f;
     color: white;
    
   }

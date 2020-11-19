@@ -543,7 +543,7 @@ nav ul a:hover{
     /*home.html444444444444444444444/*/
 
     body{
-        background-color: #11100e ;
+        background-color: white;
         width: 100%;
         margin:  auto;
     }
@@ -557,7 +557,7 @@ nav ul a:hover{
         text-decoration: none; 
     }
     nav ul a.active,nav ul a:active{
-        border-bottom: 2px solid #ffa800;
+        border-bottom: 2px solid #056f8f;
         background: rgba(0,0,0,.05);  
     }
     nav ul a:hover{

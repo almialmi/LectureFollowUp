@@ -20,6 +20,8 @@ import { CheckerhomeComponent } from './checker/checkerhome/checkerhome.componen
 import {  CheckershowComponent } from './checker/checkershow/checkershow.component';
 import { CheckersearchComponent } from './checker/checkersearch/checkersearch.component';
 import {UpdateProfileCheckerComponent} from './checker/update-profile-checker/update-profile-checker.component'
+import { AboutusComponent } from './superuser/aboutus/aboutus.component';
+import { ContactusComponent } from './superuser/contactus/contactus.component';
 
 
 
@@ -97,6 +99,14 @@ export const appRoutes : Routes = [
     {
         path: "updateProfileChecker" , component:UpdateProfileCheckerComponent,canActivate:[AuthGuard]
     },
+    {
+        path: "aboutus" , component:AboutusComponent, canActivate:[AuthGuard]
+    },
+    {
+        path: "contactus" , component:ContactusComponent, canActivate:[AuthGuard]
+    },
+    
+
     {
         path: '',redirectTo: '/login' , pathMatch : 'full'
     }

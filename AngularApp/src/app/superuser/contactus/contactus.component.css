@@ -1,0 +1,16 @@
+.form-comment{
+    font-family: 'Times New Roman', Times, serif;
+}
+.form-comment h3{
+    color:  #056f8f;
+}
+.form-comment button{
+    background-color:  #056f8f;
+    color: white;
+}
+.ministry{
+    color: #056f8f;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
