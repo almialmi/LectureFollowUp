@@ -46,6 +46,8 @@ import { UpdateProfileCheckerComponent } from './checker/update-profile-checker/
 import { UpdateProfilesubsubComponent } from './subsubAdmin/update-profilesubsub/update-profilesubsub.component';
 import { AboutusComponent } from './superuser/aboutus/aboutus.component';
 import { ContactusComponent } from './superuser/contactus/contactus.component';
+import { HeaderComponent } from './shared/componets/header/header.component';
+import { FooterComponent } from './shared/componets/footer/footer.component';
 
 
 
@@ -75,7 +77,9 @@ import { ContactusComponent } from './superuser/contactus/contactus.component';
     UpdateProfileCheckerComponent,
     UpdateProfilesubsubComponent,
     AboutusComponent,
-    ContactusComponent
+    ContactusComponent,
+    HeaderComponent,
+    FooterComponent
 
   ],
   imports: [

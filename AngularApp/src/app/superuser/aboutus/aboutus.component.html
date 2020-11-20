@@ -1,47 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
- 
-</head>
-<body>
-
-  <nav style="border-width: 2px;border-style: solid;border-color: #e0e0d1;" class="navbar   fixed-top navbar-expand-md bg-white navbar-white  shadow-lg  mb-5 bg-white rounded">
-  <img src="assets/logonew.png" style="width: 60px; height: 60px;"/>
-  <span class="ministry">Ministry of Science and Higher Education</span>
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="#"  routerLink= "/home" >Home</a>
-      </li>
-      <li class="nav-item">
-        <a   class="nav-link " href="#" routerLink= "/subAdminRegister">Registor</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#" routerLink = "/show">Show Me</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#" routerLink = "/updateProfile">Update Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" routerLink= "/show">Contact us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#" routerLink = "/updateProfile">About us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="onLogout()" value="logout">logout</a>
-      </li>    
-    </ul>
-  </div>  
-</nav>
 
 
-
+<app-header></app-header>
 <h1>ministry of education</h1>
 
 
@@ -78,12 +37,4 @@
 
 
 
-<footer class="site-footer">
-  <h4 class="text-center" style="font-family: 'Times New Roman', Times, serif;color: white;">2020 © Ministry of Science and Higher Education - All rights reserved.</h4>
- 
- 
-</footer>
-
-
-</body>
-</html>
+<app-footer></app-footer>
