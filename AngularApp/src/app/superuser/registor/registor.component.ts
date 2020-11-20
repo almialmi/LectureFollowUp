@@ -68,7 +68,7 @@ export class RegistorComponent implements OnInit {
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
-        this.resetFormChe(form);
+        this.resetForm(form);
       },
       err => {
         if( err.status == 422){
@@ -99,26 +99,7 @@ export class RegistorComponent implements OnInit {
     form.resetForm();
     this.serverErrorMessage = '';
   }
-  resetFormChe(form : NgForm){
-    this.superuserservice.selectedChecker = {
-      _id : '',
-      firstName : '',
-      middleName: '',
-      lastName: '',
-      mobile:'',
-      email : '',
-      university : '',
-      password : '',
-      isActive:true,
-      role:''
-     
-
-    };
-    form.resetForm();
-    this.serverErrorMessage = '';
-  }
-
-
+ 
   onLogout(){
     this.superuserservice.deletToken();
     this.router.navigate(['/login']);

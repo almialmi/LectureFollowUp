@@ -5,9 +5,9 @@
     font-family: 'Times New Roman', Times, serif;
 }
 .card{
-    background-color:#212121;
-    border-color: #ffa800;
-    color: white;
+    background-color:white;
+    border-color:  #056f8f;
+    color: black;
     font-family: 'Times New Roman', Times, serif;
     
 }
@@ -33,9 +33,9 @@ input[type="radio"]{
     font-size: large;
 }
 .form-control{
-    background-color: #544E4E!important;
+    background-color: white!important;
     border-color: #544E4E;
-    color: white;
+    color: black;
     
 
 
@@ -50,8 +50,8 @@ select{
 
 
 .form-control:focus {
-    border-color: #ffa800;
-    color: white;
+    border-color:  #056f8f;
+
    
   }
  

@@ -9,7 +9,7 @@ import { CheckerService} from 'src/app/sharedcheck/checker.service';
 import { SuperuserService } from '../../shared/superuser.service';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Checker } from 'src/app/sharedcheck/checker.model';
+import { Superuser } from 'src/app/shared/superuser.=model';
 
 
 @Component({
@@ -34,7 +34,6 @@ export class CheckershowComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.refreshuserlistchecker();
     this.refreshuserlist();
    
    
@@ -43,77 +42,41 @@ export class CheckershowComponent implements OnInit {
     this.subuserservice.deletToken();
     this.router.navigate(['/login']);
   }
+  
   refreshuserlist(){
-    this.subuserservice.showuser().subscribe(
+    this.checkerservice.showUniversityStaff().subscribe(
       res =>{
         this.newRowIndex++;
-        this.subuserservice.users = res as SubAdmin[];
+        this.subsubuserservice.users = res as SubsubAdmin[];
 
       }
      
     );
 
   }
-  //show users for checker
-  refreshuserlistchecker(){
-    this.subsubuserservice.showuser().subscribe(
-      res =>{
-        this.newRowIndex++;
-        this.subsubuserservice.users = res as SubsubAdmin[];
-
-      }
-    );
-
-  }
-  Search(){
-    this.subuserservice.SearchUser().subscribe(
-      res =>{
-        this.subuserservice.users = res as SubAdmin[];
-
-      },
-      err =>{
-
-      }
-    )
-  }
-  SearchTitle(): void{
-    this.subuserservice.FindbyName(this.title).subscribe(
-      data =>{
-        this.names = data;
-
-      },
-      error =>{
-        console.log(error)
-
-      }
-      
-
-    );
-  }
   
-  searchAndMatch(selectedUser:SubAdmin){
-    this.checkerservice.findAndMatch(selectedUser.firstName,selectedUser.middleName,selectedUser.lastName).subscribe(
-      res =>{
-        this.newRowIndex++;
-        //this.subuserservice.clickMe(selectedUser._id);
-        this.subuserservice.searchUser = res as SubAdmin[];
-        
-        
-      });
-  }
-
+  
+  
   searchAndMatchL(selectedUser:SubsubAdmin){
      let url = `/checkersearch/${selectedUser.firstName}/${selectedUser.middleName}/${selectedUser.lastName}`
     this.router.navigate([url])
-    
-    /*this.checkerservice.findAndMatchL(selectedUser.firstName,selectedUser.middleName,selectedUser.lastName).subscribe(
-      res =>{
-        this.subsubuserservice.searchUser = res as SubsubAdmin[];
-        console.log(res);
-      });
-  }*/
-
-  
-
 }
+
+
+ViewedOrtNotViewed(_id:string,user:SubsubAdmin) {
+  
+  if(user.isViewed === false){
+    console.log(user.isViewed);
+    if(confirm('Is this Staff Checked?') == true){
+      this.subsubuserservice.putViewedOrNot(_id,user).subscribe((res) => {
+        this.refreshuserlist();
+        console.log(user.isViewed)
+       });
+    }
+   }
+  
+  
+}
+
+
 }

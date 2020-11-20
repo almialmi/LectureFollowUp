@@ -23,7 +23,7 @@ export class ShowsubsubComponent implements OnInit {
   submitted = false;
   searchedKeyword: string;
 
-  constructor(public subAdminService : SubsubAdminService , public router : Router  ,private modalService: NgbModal) { }
+  constructor(public subsubAdminService : SubsubAdminService , public router : Router  ,private modalService: NgbModal) { }
 
   emailRegex =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   showSucessMessage: boolean;
@@ -53,13 +53,15 @@ export class ShowsubsubComponent implements OnInit {
    
  }
   onLogout(){
-    this.subAdminService.deletToken();
+    this.subsubAdminService.deletToken();
     this.router.navigate(['/login']);
   }
   refreshuserlist(){
-    this.subAdminService.showuser().subscribe(
+    var university = this.subsubAdminService.getUserUniversity();
+    var compass= this.subsubAdminService.getUserCompass()
+    this.subsubAdminService.showUniversityStaff(university,compass).subscribe(
       res =>{
-        this.subAdminService.users = res as SubsubAdmin[];
+        this.subsubAdminService.users = res as SubsubAdmin[];
 
       },
       err =>{
@@ -69,6 +71,7 @@ export class ShowsubsubComponent implements OnInit {
 
   }
   Search(){
+    /*
     this.subAdminService.SearchUser().subscribe(
       res =>{
         this.subAdminService.users = res as SubsubAdmin[];
@@ -77,13 +80,13 @@ export class ShowsubsubComponent implements OnInit {
       err =>{
 
       }
-    )
+    )*/
   }
   
   onSubmit(form : NgForm){
    
     if(form.value._id == ""){
-      this.subAdminService.postUser(form.value).subscribe((res) =>{
+      this.subsubAdminService.postUniversityStaff(form.value).subscribe((res) =>{
        // this.resetForm(form);
         this.refreshuserlist();
       //  M.toast({html: 'saved successfull!' , class: 'rounded'});
@@ -91,7 +94,7 @@ export class ShowsubsubComponent implements OnInit {
   
       });
     }else{
-      this.subAdminService.putUser(form.value).subscribe((res) =>{
+      this.subsubAdminService.putUniversityStaff(form.value).subscribe((res) =>{
        // this.resetForm(form);
         this.refreshuserlist();
         this.showSucessMessage = true;
@@ -105,7 +108,7 @@ export class ShowsubsubComponent implements OnInit {
   }
   onDelete(_id: string){
     if(confirm('Are you sure you want to delete this record?') == true){
-      this.subAdminService.deleteuser(_id).subscribe((res) => {
+      this.subsubAdminService.deleteUniversityStaff(_id).subscribe((res) => {
         this.refreshuserlist();
        // M.toast({html: 'Deleted successfully' , classes: 'rounded'});
       });
@@ -113,26 +116,11 @@ export class ShowsubsubComponent implements OnInit {
 
   }
   onEdit(user : SubsubAdmin){
-    this.subAdminService.selectedSuperuser = user;
+    this.subsubAdminService.selectedStaff = user;
 
   }
 
-  SearchTitle(): void{
-    this.subAdminService.FindbyName(this.firstName).subscribe(
-      data =>{
-        this.names = data;
-        console.log("sertual")
-
-      },
-      error =>{
-        console.log(error)
-        
-
-      }
-      
-
-    );
-  }
+  
 
 }
 

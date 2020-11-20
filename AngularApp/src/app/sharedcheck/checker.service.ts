@@ -1,38 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
-import { Checker } from './checker.model';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import {SubsubAdmin  } from '../sharedsubsub/subsub-admin.model';
-import {SubAdmin  } from '../sharedsub/sub-admin.model';
+import { Superuser  } from '../shared/superuser.=model';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CheckerService {
-  selectedSuperuserr:  Checker;
-  selectedSuperuser :  Checker = {
+  selectedChecker:Superuser={
     _id: '',
-    email : '',
-    password:'',
+   firstName : '',
+   middleName: '',
+   lastName:'',
+   email : '',
+   mobile: '',
+   university: '',
+   password:'',
+   isActive:true,
+   role:'',
+
+}
+
    
-};
-    
-   
-  users : Checker[];
+  checkers:Superuser[];
   
   noAuthHeader = {headers: new HttpHeaders({'NoAuth' : 'True'})};
 
 
   constructor(public http : HttpClient) { }
 
+  putOwnProfile(id:String,user:Superuser){
+    return this.http.put(environment.apiBaseUrl + '/updateOwnProfile' + `/${id}`,user);
+  }
 
-
-  login(authCredintials){
-    return this.http.post(environment.apiBaseUrlchecker + '/authenticate' , authCredintials , this.noAuthHeader);
+  findAndMatchUniversityStaff(firstName:string,middleName:string,lastName:string): Observable<any>{
+    return this.http.get(`${environment.apiBaseUrl + '/findAndMatchUniversityStaff' }/${firstName}/${middleName}/${lastName}`)
   
   }
-  putProfile(id:String,user:Checker){
-    return this.http.put(environment.apiBaseUrlchecker + '/updateProfile' + `/${id}`,user);
+  showUniversityStaff(){
+    return this.http.get(environment.apiBaseUrl + '/fetchUniversityStaffByChecker');
+
   }
   setToken(token : string){
     localStorage.setItem('token' , token);
@@ -67,22 +75,14 @@ export class CheckerService {
       }}
 
 
-findAndMatch(firstName:string,middleName:string,lastName:string): Observable<any>{
-  return this.http.get(`${environment.apiBaseUrlchecker + '/findSubsub' }/${firstName}/${middleName}/${lastName}`)
 
-}
-
-findAndMatchL(firstName:string,middleName:string,lastName:string): Observable<any>{
-  return this.http.get(`${environment.apiBaseUrlchecker + '/findLecture' }/${firstName}/${middleName}/${lastName}`)
-
-}
 
 getUserId(){
   var token = this.getToken();
   if (token){
     var userPayload = atob(token.split('.')[1]);
     var user = JSON.parse(userPayload);
-    var id = user._id;
+    var id = user.user_id;
     console.log(id);
     return id
    

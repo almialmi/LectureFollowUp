@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckerService} from 'src/app/sharedcheck/checker.service';
+import {SuperuserService} from 'src/app/shared/superuser.service';
 import { Router } from "@angular/router";
 import { NgForm } from '@angular/forms';
 
@@ -10,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class UpdateProfileCheckerComponent implements OnInit {
 
-  constructor(public checkerservice : CheckerService, public router : Router) { }
+  constructor(public checkerservice : CheckerService,public superuserservice:SuperuserService ,public router : Router) { }
   emailRegex =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   serverErrorMessage : string;
   showSucessMessage: boolean;
@@ -30,7 +31,7 @@ export class UpdateProfileCheckerComponent implements OnInit {
 
   OnSubmit(form : NgForm){
     var id=this.checkerservice.getUserId();
-    this.checkerservice.putProfile(id,form.value).subscribe(
+    this.checkerservice.putOwnProfile(id,form.value).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
@@ -47,11 +48,17 @@ export class UpdateProfileCheckerComponent implements OnInit {
 
   }
   resetForm(form : NgForm){
-    this.checkerservice.selectedSuperuser = {
+    this.checkerservice.selectedChecker = {
       _id: '',
+      firstName : '',
+      middleName: '',
+      lastName:'',
       email : '',
-      password:''
-
+      mobile: '',
+      university: '',
+      password:'',
+      isActive:true,
+      role:'',
     };
     
     form.resetForm();

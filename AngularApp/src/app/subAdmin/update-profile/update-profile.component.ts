@@ -36,7 +36,7 @@ export class UpdateProfileComponent implements OnInit {
   }
   OnSubmit(form : NgForm){
     var id=this.subAdminService.getUserId();
-    this.subAdminService.putProfile (id ,form.value).subscribe(
+    this.subAdminService.putOwnProfile (id ,form.value).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
@@ -53,7 +53,7 @@ export class UpdateProfileComponent implements OnInit {
 
   }
  resetForm(form : NgForm){
-    this.subAdminService.selectedSub = {
+    this.subAdminService.selectedUnivHr = {
       _id: '',
       firstName : '',
       middleName: '',
@@ -61,7 +61,10 @@ export class UpdateProfileComponent implements OnInit {
       email : '',
       mobile: '',
       university: '',
-      password:''
+      compass:'',
+      role:'',
+      password:'',
+      isActive:true
 
     };
     

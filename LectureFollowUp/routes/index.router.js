@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const ctrlUser = require('../controllers/user.controller');
-const ctrUpload = require('../controllers/uploadfile.controller');
 const jwtHelper = require('../config/jwtHelper');
 
 // register for route super Admin
@@ -82,6 +81,8 @@ router.get('/fetchUniversityStaffByChecker',ctrlUser.Authenticate,jwtHelper.veri
 
 // search university staff by checker
 router.get('/findAndMatchUniversityStaff/:query/:query1/:query2',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.findAndMatchUniversityStaff);
+
+router.put('/isViewedOrNot/:id',ctrlUser.isViewedOrNot);
 
 
 module.exports=router;

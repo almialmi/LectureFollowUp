@@ -67,6 +67,7 @@ export class RegistorsubComponent implements OnInit {
   serverErrorMessage : string;
 
   ngOnInit(): void {
+    this.subAdminService.getUserUniversity();
   }
   onSelect(countryidd) {
     this.fields = this._dataService.getFields()
@@ -78,7 +79,7 @@ export class RegistorsubComponent implements OnInit {
   }
   
   onSubmit(form : NgForm){
-    this.subAdminService.postUser(form.value).subscribe(
+    this.subAdminService.postUnivHr(form.value).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
@@ -105,7 +106,7 @@ export class RegistorsubComponent implements OnInit {
 
   }
   resetForm(form : NgForm){
-    this.subAdminService.selectedSuperuser = {
+    this.subAdminService.selectedUnivHr = {
       _id : '',
       firstName : '',
       middleName: '',
@@ -113,12 +114,9 @@ export class RegistorsubComponent implements OnInit {
       mobile:'',
       email : '',
       university : '',
+      compass:'',
       role : '',
       password : '',
-      educationStatus : '',
-      study : '',
-      educationField : '',
-      department : '',
       isActive:true
 
     };

@@ -8,7 +8,7 @@
     font-family: 'Times New Roman', Times, serif;
     
     margin-left: 0px;
-    background: #ffa800;
+    background: #056f8f;
     font-size: 17px;
     border: none;
     cursor: pointer;
@@ -29,7 +29,7 @@ label{
     background: #ccc;
   }
 .table{
-    color: white;
+    color: black;
     font-family: 'Times New Roman', Times, serif;
 }
 .table a{

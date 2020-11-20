@@ -6,14 +6,12 @@ export class SubsubAdmin {
     email : string;
     mobile : string;
     university : string;
-    password : string;
+    compass:string;
     educationStatus : string;
     role : string;
     study : string;
     educationField : string;
     department : string;
-    isSelected:boolean;
+    isViewed:boolean
     
-
-  
 }

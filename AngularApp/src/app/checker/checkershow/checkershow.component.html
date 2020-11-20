@@ -1,33 +1,5 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-</head>
-<body>
-
-<nav class="navbar   fixed-top navbar-expand-md bg-dark navbar-dark">
-  <img src="assets/logonew.png" style="width: 60px; height: 60px;"/>
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link " href="#" routerLink= "/homechecker">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" routerLink = "/showchecker" href="#">Show Me</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink = "/updateProfileChecker" href="#">Update Profile</a>
-      </li>
-      <li class="nav-item" (click)="onLogout()" value="logout">
-        <a class="nav-link">logout</a>
-      </li>    
-    </ul>
-  </div>  
-</nav>
+<app-headerchecker></app-headerchecker>
 
 <div class="container">
     
@@ -56,6 +28,7 @@
             <th>role</th>
             <th>study</th>
             <th>Match</th>
+            
            </tr>
       </thead>
       <tbody>
@@ -70,6 +43,7 @@
             <td>{{user.role}}</td>
             <td>{{user.study}}</td>
            <td><a class="action-btn" ><i class="fas fa-check-circle"  (click)="searchAndMatchL(user)" ></i> </a></td>
+           <td> <a class="action-btn"  (click)="ViewedOrtNotViewed(user._id,user)" ><i class="fas {{ user.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"></i></a></td>
        </tr>
     
       </tbody>
@@ -109,11 +83,6 @@
 
 
 
-<footer class="site-footer">
-  <h4 class="text-center" style="font-family: 'Times New Roman', Times, serif;color: white;">2020 © Ministry of Science and Higher Education - All rights reserved.</h4>
- 
- 
-</footer>
   <script>
     function openForm() {
       document.getElementById("myForm").style.display = "block";
@@ -123,6 +92,3 @@
       document.getElementById("myForm").style.display = "none";
     }
     </script>
-  
-</body>
-</html>

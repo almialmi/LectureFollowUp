@@ -1,13 +1,8 @@
-.container-fluid{
-    background-color:#212121;
-    
-    color: white;
-    font-family: 'Times New Roman', Times, serif;
-}
+
 .card{
-    background-color:#212121;
-    border-color: #ffa800;
-    color: white;
+    background-color:white;
+    border-color: #056f8f;
+    color: black;
     font-family: 'Times New Roman', Times, serif;
     margin-top: 100px;
 }
@@ -20,27 +15,28 @@
     height: 40px;
     margin-left: 100px;
     font-family: 'Times New Roman', Times, serif;
-    background-color:  #ffa800;
+    background-color:  #056f8f;
     font-size: large;
 }
 .form-control{
-    background-color: #544E4E!important;
+    background-color: white!important;
     border-color: #544E4E;
-    color: white;
+    color: black;
     
 
 
 }
 select{
-    background-color: #544E4E!important;
+    background-color: white!important;
     border-color: #544E4E;
-    color: white;
+    color: black;
+
     
 
 }
 
 .form-control:focus {
-    border-color: #ffa800;
-    color: white;
+    border-color: #056f8f;
+
    
   }

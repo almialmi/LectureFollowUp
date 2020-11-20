@@ -69,8 +69,7 @@
             <td>{{lec.educationStatus}}</td>
             <td>{{lec.role}}</td>
             <td>{{lec.study}}</td>
-          
-     
+            <td> <a class="action-btn"  (click)="ViewedOrtNotViewed(lec._id,lec)" ><i class="fas {{ lec.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"></i></a></td>
         </tr>
     
       </tbody>

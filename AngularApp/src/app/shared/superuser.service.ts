@@ -26,19 +26,6 @@ export class SuperuserService {
     isActive:true,
     role:'',
 };
-selectedUnivHr:Superuser={
-  _id: '',
-  firstName : '',
-  middleName: '',
-  lastName:'',
-  email : '',
-  mobile: '',
-  university: '',
-  password:'',
-  isActive:true,
-  role:'',
-
-}
 selectedChecker:Superuser={
      _id: '',
     firstName : '',
