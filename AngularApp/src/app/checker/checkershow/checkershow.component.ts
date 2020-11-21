@@ -61,4 +61,22 @@ export class CheckershowComponent implements OnInit {
      let url = `/checkersearch/${selectedUser.firstName}/${selectedUser.middleName}/${selectedUser.lastName}`
     this.router.navigate([url])
 }
+
+
+ViewedOrtNotViewed(_id:string,user:SubsubAdmin) {
+  
+  if(user.isViewed === false){
+    console.log(user.isViewed);
+    if(confirm('Is this Staff Checked?') == true){
+      this.subsubuserservice.putViewedOrNot(_id,user).subscribe((res) => {
+        this.refreshuserlist();
+        console.log(user.isViewed)
+       });
+    }
+   }
+  
+  
+}
+
+
 }

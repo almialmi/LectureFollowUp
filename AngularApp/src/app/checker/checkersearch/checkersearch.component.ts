@@ -9,6 +9,7 @@ import { CheckerService} from 'src/app/sharedcheck/checker.service';
   styleUrls: ['./checkersearch.component.css']
 })
 export class CheckersearchComponent implements OnInit {
+  newRowIndex = 0;
   searchedKeyword: string;
   searchUser:SubsubAdmin[]=[];
   constructor(public subsubuserservice : SubsubAdminService ,public checkerservice : CheckerService, public router : Router, private activatedRouter:ActivatedRoute) { }
@@ -23,6 +24,17 @@ export class CheckersearchComponent implements OnInit {
   }
 
   Search(){}
+  refreshuserlist(){
+    this.checkerservice.showUniversityStaff().subscribe(
+      res =>{
+        this.newRowIndex++;
+        this.subsubuserservice.users = res as SubsubAdmin[];
+
+      }
+     
+    );
+
+  }
 
   searchAndMatchL(){
     let firstName =this.activatedRouter.snapshot.params['firstName'].trim()
@@ -35,6 +47,21 @@ export class CheckersearchComponent implements OnInit {
         this.searchUser = res as SubsubAdmin[];
         console.log(res);
       });
+  }
+
+  ViewedOrtNotViewed(_id:string,user:SubsubAdmin) {
+  
+    if(user.isViewed === false){
+      console.log(user.isViewed);
+      if(confirm('Is this Staff Checked?') == true){
+        this.subsubuserservice.putViewedOrNot(_id,user).subscribe((res) => {
+          this.refreshuserlist();
+          console.log(user.isViewed)
+         });
+      }
+     }
+    
+    
   }
 
 

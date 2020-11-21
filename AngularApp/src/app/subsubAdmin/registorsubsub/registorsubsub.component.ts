@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {  SubsubAdminService } from 'src/app/sharedsubsub/subsub-admin.service';
-import { NgForm }  from '@angular/forms';
+import { FormGroup, NgForm,FormBuilder}  from '@angular/forms';
 import { Router } from "@angular/router";
 import { Educstatus } from "src/app/sharedsub/educstatus.model";
 import {Role} from "src/app/sharedsub/role.model";
@@ -9,6 +9,10 @@ import { Study } from "src/app/sharedsub/study.model";
 import { Educationalfield } from 'src/app/sharedsub/educationalfield.model';
 import {Department} from 'src/app/sharedsub/department.model';
 import { DataService } from 'src/app/subAdmin/registorsub/dataService';
+import { from } from 'rxjs';
+import { $ } from 'protractor';
+
+
 
 @Component({
   selector: 'app-registorsubsub',
@@ -18,6 +22,7 @@ import { DataService } from 'src/app/subAdmin/registorsub/dataService';
  providers: [DataService]
 })
 export class RegistorsubsubComponent implements OnInit {
+  fileToUpload: File = null;
   selectedStudy:Study = new Study(0, 'Natural'); 
   selectedStudyy:Educationalfield= new Educationalfield(0 ,"Natural", "medicine") ;
   studys : Study[];
@@ -46,7 +51,7 @@ export class RegistorsubsubComponent implements OnInit {
 
   ];
 
-  constructor(public subsubAdminService : SubsubAdminService , public router : Router , private _dataService: DataService) {
+  constructor(public subsubAdminService : SubsubAdminService , public router : Router , private _dataService: DataService,private formBuilder: FormBuilder) {
     this.studys = this._dataService.getStudy();
     this.universtiys = this._dataService.getCountries();
    }
@@ -66,6 +71,7 @@ export class RegistorsubsubComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
   }
   onSelect(countryidd) {
     this.fields = this._dataService.getFields()
@@ -117,6 +123,7 @@ export class RegistorsubsubComponent implements OnInit {
       study: '',
       educationField: '',
       department : '',
+      isViewed:false
 };
     form.resetForm();
     this.serverErrorMessage = '';
@@ -127,6 +134,22 @@ export class RegistorsubsubComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+}
+onFormSubmit(form: NgForm){
+  this.subsubAdminService.postFromExcelFile(this.fileToUpload).subscribe(data => {
+       this.showSucessMessage = true;
+        setTimeout(() => this.showSucessMessage = false,4000);  
+        form.form.reset();
+        
+  }, error => {
+      console.log(error);
+    });
+  
+}
+  
+  
 
 
 

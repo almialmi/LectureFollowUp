@@ -12,5 +12,6 @@ export class SubsubAdmin {
     study : string;
     educationField : string;
     department : string;
+    isViewed:boolean
     
 }

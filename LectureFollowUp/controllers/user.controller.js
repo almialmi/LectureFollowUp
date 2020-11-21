@@ -12,6 +12,7 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const multer = require('multer');
 const excelToJson = require('convert-excel-to-json');
+const csv=require('csvtojson')
 
 
 const userRegister = async(userDets,role,res) =>{
@@ -512,11 +513,20 @@ const upload = multer({storage: storage,
  
 // -> Express Upload RestAPIs
 module.exports.uploadFileAndRegisterUniversityStaff= async (req, res) =>{
-    
-   await upload(req, res, function (err) {
+    await upload(req, res, function (err) {
+       console.log(req.file);
         if (err) {
             return res.end("Error uploading file.");
         } else {
+           /*
+            const csvFilePath = __basedir + '/uploads/' + req.file.filename
+            csv().fromFile(csvFilePath)
+            .then((jsonObj)=>{
+                console.log(jsonObj);
+                Lecture.insertMany(jsonObj, (err, res) => {
+                     if (err) throw err;
+                     console.log("Number of documents inserted: " + res.insertedCount);});}) */
+ 
         importExcelData2MongoDB(__basedir + '/uploads/' + req.file.filename);
           return  res.json({
              'msg': 'File uploaded/import successfully!', 'file': req.file
@@ -547,6 +557,7 @@ const importExcelData2MongoDB= (filePath)=>{
                 I:'study',
                 J:'educationField',
                 K:'department'
+               
             }
         }]
     });
@@ -587,6 +598,38 @@ module.exports.registerUniversity = async (req, res) => {
         }
     })
  }
+
+ module.exports.isViewedOrNot= async(req,res)=>{
+
+    console.log(req.body.isViewed);
+     const isViewed = !req.body.isViewed
+     console.log(isViewed)
+     await Lecture.findByIdAndUpdate(req.params.id,{
+       $set:{
+        isViewed:isViewed
+ 
+       }  
+     }, {new: true})
+     .then(staff => {
+         if(!staff) {
+             return res.status(404).send({
+                 message: "User not found with this " + req.params.id
+             });
+         }
+         res.send({
+                message:"This Staff is checked!!"
+         });
+     }).catch(err => {
+         if(err.kind === 'ObjectId') {
+             return res.status(404).send({
+                 message: "User not found with this " + req.params.id
+             });                
+         }
+         return res.status(500).send({
+             message: "Error viewing user profile with id " + req.params.id
+         });
+   });
+   }
 
 
 

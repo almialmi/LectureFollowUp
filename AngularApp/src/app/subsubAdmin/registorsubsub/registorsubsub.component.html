@@ -41,6 +41,23 @@
   
 </div>
 
+<form  #form="ngForm" (ngSubmit)="onFormSubmit(form)">
+<div class="row" style="padding-top: 20px;padding-left: 50px;">
+<div class="form-group">
+  <input style="color: white;" type="file" name="uploadfile" #file id="file" (change)="handleFileInput($event.target.files)">
+  <button  ng-click="angular.copy(files)" type="reset">X</button>
+</div>
+
+<div class="col-sm-6 text-center">
+  <button class="btn btn-primary" type="submit">Upload</button>
+</div>
+</div>
+</form>
+<div class="success" *ngIf="showSucessMessage">
+  <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">upload Successfully</h1>
+
+</div>
+
 <div class="container">
   <div class="cards py-5">
   <div class="col-md-12">
@@ -284,7 +301,7 @@
 
 
 
-<script>
+<script>  
   // Material Select Initialization
 $(document).ready(function() {
 $('.mdb-select').materialSelect();

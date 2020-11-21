@@ -26,6 +26,7 @@ export class SubsubAdminService {
     study: '',
     educationField: '',
     department : '',
+    isViewed:false
 
   };
     
@@ -40,8 +41,10 @@ postUniversityStaff(user : SubsubAdmin){
   return  this.http.post(environment.apiBaseUrl + '/registerUniversityStaff' , user);
 
 }
-postFromExcelFile(user:SubsubAdmin){
-  return  this.http.post(environment.apiBaseUrl + '/uploadFile' , user);
+postFromExcelFile(fileToUpload: File){
+  const formData: FormData = new FormData();
+  formData.append('uploadfile', fileToUpload, fileToUpload.name);
+  return  this.http.post(environment.apiBaseUrl + '/uploadFile' ,formData);
 
 
 }
@@ -56,6 +59,10 @@ deleteUniversityStaff(_id : string){
 }
 putUniversityStaff(user: SubsubAdmin) {
   return this.http.put(environment.apiBaseUrl + '/updateUniversityStaffProfile'  +`/${user._id}`, user);
+}
+putViewedOrNot(_id:String,user:SubsubAdmin){
+  return this.http.put(environment.apiBaseUrl + '/isViewedOrNot'  +`/${_id}`, user);
+
 }
 putOwnProfile(id:String ,sub:SubsubAdmin){
   return this.http.put(environment.apiBaseUrl + '/updateOwnProfile'  +`/${id}`, sub);

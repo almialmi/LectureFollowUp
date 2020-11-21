@@ -51,6 +51,11 @@ var lectureSchema = new mongoose.Schema({
     department:{
            type:String,
            required:true
+    },
+    isViewed:{
+        type:Boolean,
+        index:true,
+        default:false
     }
     
 },{timestamps:true});

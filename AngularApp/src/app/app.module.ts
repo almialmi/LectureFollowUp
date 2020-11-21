@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import {FileUploadModule} from 'ng2-file-upload';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -78,6 +79,8 @@ import { UpdateProfilesubsubComponent } from './subsubAdmin/update-profilesubsub
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     FormsModule,
+    FileUploadModule,
+    ReactiveFormsModule,
     Ng2SearchPipeModule,
     //ReactiveFormsModule,
     

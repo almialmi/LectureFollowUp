@@ -82,5 +82,7 @@ router.get('/fetchUniversityStaffByChecker',ctrlUser.Authenticate,jwtHelper.veri
 // search university staff by checker
 router.get('/findAndMatchUniversityStaff/:query/:query1/:query2',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.findAndMatchUniversityStaff);
 
+router.put('/isViewedOrNot/:id',ctrlUser.isViewedOrNot);
+
 
 module.exports=router;
