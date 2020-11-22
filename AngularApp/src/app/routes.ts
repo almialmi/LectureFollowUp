@@ -4,6 +4,8 @@ import { RegistorComponent } from './superuser/registor/registor.component';
 import { HomeComponent } from './superuser/home/home.component';
 import { ShowComponent } from './superuser/show/show.component';
 import {UpdatePasswordComponent} from './superuser/update-password/update-password.component'
+import {ForgotpasswordComponent} from './superuser/forgotpassword/forgotpassword.component'
+import {ResponseResetPasswordComponent} from './superuser/response-reset-password/response-reset-password.component'
 import {AuthGuard} from './auth/auth.guard';
 import {RegistorsubComponent} from './subAdmin/registorsub/registorsub.component';
 import { ShowsubComponent } from './subAdmin/showsub/showsub.component';
@@ -46,6 +48,12 @@ export const appRoutes : Routes = [
     {
         path:"updateProfile" , component:UpdatePasswordComponent,canActivate:[AuthGuard]
 
+    },
+    {
+        path:"forgotPassword" ,component:ForgotpasswordComponent
+    },
+    {
+        path:"response-reset-password/:token",component:ResponseResetPasswordComponent
     },
     {
         path : "homesub" , component : HomesubComponent, canActivate:[AuthGuard]

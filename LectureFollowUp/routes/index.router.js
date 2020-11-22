@@ -84,5 +84,10 @@ router.get('/findAndMatchUniversityStaff/:query/:query1/:query2',ctrlUser.Authen
 
 router.put('/isViewedOrNot/:id',ctrlUser.isViewedOrNot);
 
+// forgot password
+router.post('/req-reset-password',ctrlUser.forgotPassword);
+router.post('/validateToken',ctrlUser.validateToken);
+router.post('/valid-password-token',ctrlUser.NewPassword);
+
 
 module.exports=router;

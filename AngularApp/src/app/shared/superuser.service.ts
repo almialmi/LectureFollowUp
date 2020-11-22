@@ -6,6 +6,7 @@ import { HttpClient , HttpHeaders} from '@angular/common/http';
 import {Superuser } from './superuser.=model';
 import { environment } from 'src/environments/environment';
 import { JsonPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 
 
@@ -88,6 +89,19 @@ constructor(public http : HttpClient) { }
   putOwnProfile(id:String,user:Superuser){
     return this.http.put(environment.apiBaseUrl + '/updateOwnProfile' + `/${id}`,user);
   }
+
+  requestReset(body): Observable<any> {
+    return this.http.post(environment.apiBaseUrl + '/req-reset-password', body);
+  }
+
+  newPassword(body): Observable<any> {
+    return this.http.post(environment.apiBaseUrl + '/new-password', body);
+  }
+
+  ValidPasswordToken(body): Observable<any> {
+    return this.http.post(environment.apiBaseUrl +'/valid-password-token', body);
+  }
+
   setToken(token : string){
     localStorage.setItem('token' , token);
    

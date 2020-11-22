@@ -44,6 +44,7 @@ import { UpdatePasswordComponent } from './superuser/update-password/update-pass
 import { UpdateProfileComponent } from './subAdmin/update-profile/update-profile.component';
 import { UpdateProfileCheckerComponent } from './checker/update-profile-checker/update-profile-checker.component';
 import { UpdateProfilesubsubComponent } from './subsubAdmin/update-profilesubsub/update-profilesubsub.component';
+import { ResponseResetPasswordComponent } from './superuser/response-reset-password/response-reset-password.component';
 
 
 
@@ -70,7 +71,8 @@ import { UpdateProfilesubsubComponent } from './subsubAdmin/update-profilesubsub
     UpdatePasswordComponent,
     UpdateProfileComponent,
     UpdateProfileCheckerComponent,
-    UpdateProfilesubsubComponent
+    UpdateProfilesubsubComponent,
+    ResponseResetPasswordComponent
 
   ],
   imports: [
