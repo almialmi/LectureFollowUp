@@ -17,7 +17,7 @@ import {Department} from 'src/app/sharedsub/department.model';
   selector: 'app-registorsub',
   templateUrl: './registorsub.component.html',
   styleUrls: ['./registorsub.component.css'],
-//  providers: [SubAdminService]
+ // providers: [SubAdminService]
 providers: [DataService]
 })
 export class RegistorsubComponent implements OnInit {
@@ -82,6 +82,8 @@ export class RegistorsubComponent implements OnInit {
     this.subAdminService.postUnivHr(form.value).subscribe(
       res => {
         this.showSucessMessage = true;
+        console.log("yaaaayyyy")
+        console.log(form.value)
         setTimeout(() => this.showSucessMessage = false,4000);
         this.resetForm(form);
        
@@ -90,14 +92,20 @@ export class RegistorsubComponent implements OnInit {
        
       },
       err => {
-        if( err.status == 422){
-          this.serverErrorMessage = err.error.join('<br>');
+        // if( err.status == 422){
+        //   this.serverErrorMessage = err.error.join('<br>');
 
           
           
+        // }
+        if(err.status==500){
+          console.log(form.value)
+       console.log(err)
+      
         }
         else
           this.serverErrorMessage = 'something went wrong'
+          console.log("yaaaayyyy")
         
         
 

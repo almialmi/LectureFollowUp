@@ -42,7 +42,7 @@ export class SubAdminService {
   constructor(public http : HttpClient) { }
 
   postUnivHr(user : SubAdmin){
-    return  this.http.post(environment.apiBaseUrl + '/register-univ-hr' , user);
+    return  this.http.post(environment.apiBaseUrl + '/register-univ-hr' , user );
 
   }
   showUnivHr(university:string){

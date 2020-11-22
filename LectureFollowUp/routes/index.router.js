@@ -4,18 +4,17 @@ const router = express.Router();
 const ctrlUser = require('../controllers/user.controller');
 const jwtHelper = require('../config/jwtHelper');
 
-// register for route super Admin
 router.post('/register-super-admin',ctrlUser.registerSuperAdmin);
 
 // register for univAdmin
-router.post('/register-univ-admin',ctrlUser.registerUnivAdmin);
+router.post('/register-univ-admin',ctrlUser.Authenticate,jwtHelper.verifyJwtToken , ctrlUser.registerUnivAdmin);
 
 // register for univHr
-router.post('/register-univ-hr',ctrlUser.registerUnivHr);
+router.post('/register-univ-hr',  ctrlUser.registerUnivHr);
 
 // register for Checker
 
-router.post('/register-checker',ctrlUser.registerChecker);
+router.post('/register-checker', ctrlUser.registerChecker);
 
 
 // login route for all user

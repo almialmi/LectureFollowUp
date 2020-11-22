@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { Router } from "@angular/router";
 import {Superuser } from '../../shared/superuser.=model';
 
 import { SuperuserService } from '../../shared/superuser.service';
 import { NgForm } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 declare var M:any;
 
@@ -22,6 +23,13 @@ export class ShowComponent implements OnInit {
  // signUpForm: FormGroup;
   submitted = false;
   searchedKeyword: string;
+  popoverTitle = 'Are you sure?';
+  popoverMessage = 'Are you really <b>sure</b> you want to do this?';
+  confirmText = 'Yes <i class="fas fa-check"></i>';
+  cancelText = 'No <i class="fas fa-times"></i>';
+  confirmClicked = true;
+  cancelClicked = false;
+  trackByValue: TrackByFunction<string> = (index, value) => value;
 
 
 
@@ -131,7 +139,7 @@ export class ShowComponent implements OnInit {
   }
  
   onDeletechecker(_id: string){
-    if(confirm('Are you sure you want to delete this record?') == true){
+    if( this.confirmClicked == true){
       this.superuserservice.deleteChecker(_id).subscribe((res) => {
         this.refreshuserlistchecker();
         M.toast({html: 'Deleted successfully' , classes: 'rounded'});
@@ -153,8 +161,9 @@ export class ShowComponent implements OnInit {
   
     if(user.isActive === true){
       console.log(user.isActive);
-      if(confirm('Are you sure you want to lock this record?') == true){
+      if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
+          console.log("confirm clicked")
           this.refreshuserlist();
           console.log(user.isActive)
          });
@@ -162,7 +171,7 @@ export class ShowComponent implements OnInit {
      }
      else{
       console.log(user.isActive);
-      if(confirm('Are you sure you want to unlock this record?') == true){
+      if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
           this.refreshuserlist();
          console.log (user.isActive)
@@ -178,7 +187,7 @@ export class ShowComponent implements OnInit {
   
     if(user.isActive === true){
       console.log(user.isActive);
-      if(confirm('Are you sure you want to lock this record?') == true){
+      if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
           this.refreshuserlistchecker();
           console.log(user.isActive)
@@ -187,7 +196,7 @@ export class ShowComponent implements OnInit {
      }
      else{
       console.log(user.isActive);
-      if(confirm('Are you sure you want to unlock this record?') == true){
+      if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
           this.refreshuserlistchecker();
          console.log (user.isActive)
