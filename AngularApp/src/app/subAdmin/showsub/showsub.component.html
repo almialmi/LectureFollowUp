@@ -1,36 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-</head>
-<body>
 
-<nav class="navbar   fixed-top navbar-expand-md bg-dark navbar-dark">
-  <img src="assets/logonew.png" style="width: 60px; height: 60px;"/>
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link " href="#" routerLink= "/homesub">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#" routerLink= "/registorsub">Registor</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" routerLink = "/showsub" href="#">Show Me</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink = "/updateProfileSub" href="#">Update Profile</a>
-      </li>
-      <li class="nav-item" (click)="onLogout()" value="logout">
-        <a class="nav-link">logout</a>
-      </li>    
-    </ul>
-  </div>  
-</nav>
-
+<app-headersub></app-headersub>
 <div class="container">
     
     <div class="search-container">
@@ -171,7 +140,7 @@
         </div> 
         <div class="modal-footer">
           <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>--> 
-             <input style="background-color:#ffa800 ;" type="submit" value="Update">
+             <input style="background-color:#056f8f ;" type="submit" value="Update">
            </div>
        
       </form>
@@ -183,11 +152,7 @@
    
   </ng-template>
   
-  <footer class="site-footer">
-    <h4 class="text-center" style="font-family: 'Times New Roman', Times, serif;color: white;">2020 © Ministry of Science and Higher Education - All rights reserved.</h4>
-   
-   
-  </footer>
+  
   <script>
     function openForm() {
       document.getElementById("myForm").style.display = "block";
@@ -197,6 +162,3 @@
       document.getElementById("myForm").style.display = "none";
     }
     </script>
-  
-</body>
-</html>

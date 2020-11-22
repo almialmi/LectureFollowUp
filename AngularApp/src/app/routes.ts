@@ -22,6 +22,14 @@ import { CheckerhomeComponent } from './checker/checkerhome/checkerhome.componen
 import {  CheckershowComponent } from './checker/checkershow/checkershow.component';
 import { CheckersearchComponent } from './checker/checkersearch/checkersearch.component';
 import {UpdateProfileCheckerComponent} from './checker/update-profile-checker/update-profile-checker.component'
+import { AboutusComponent } from './superuser/aboutus/aboutus.component';
+import { ContactusComponent } from './superuser/contactus/contactus.component';
+import { AboutussubComponent } from './subAdmin/aboutussub/aboutussub.component';
+import { ContactussubComponent } from './subAdmin/contactussub/contactussub.component';
+import { AboutussubsubComponent } from './subsubAdmin/aboutussubsub/aboutussubsub.component';
+import { ContactsubsubComponent } from './subsubAdmin/contactsubsub/contactsubsub.component';
+import { AboutcheckerComponent } from './checker/aboutchecker/aboutchecker.component';
+import { ContactcheckerComponent } from './checker/contactchecker/contactchecker.component';
 
 
 
@@ -105,6 +113,32 @@ export const appRoutes : Routes = [
     {
         path: "updateProfileChecker" , component:UpdateProfileCheckerComponent,canActivate:[AuthGuard]
     },
+    {
+        path: "aboutus" , component:AboutusComponent, canActivate:[AuthGuard]
+    },
+    {
+        path: "contactus" , component:ContactusComponent, canActivate:[AuthGuard]
+    },
+    {
+        path: "aboutussub" , component:AboutussubComponent, canActivate:[AuthGuard]
+    },
+    {
+        path: "contactussub" , component:ContactussubComponent, canActivate:[AuthGuard]
+    },
+    {
+        path: "aboutussubsub" , component:AboutussubsubComponent, canActivate:[AuthGuard]
+    },
+    {
+        path: "contactussubsub" , component:ContactsubsubComponent, canActivate:[AuthGuard]
+    },
+    {
+        path: "aboutuschecker" , component:AboutcheckerComponent, canActivate:[AuthGuard]
+    },
+    {
+        path: "contactuschecker" , component:ContactcheckerComponent, canActivate:[AuthGuard]
+    },
+    
+
     {
         path: '',redirectTo: '/login' , pathMatch : 'full'
     }

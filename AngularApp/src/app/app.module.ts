@@ -44,7 +44,25 @@ import { UpdatePasswordComponent } from './superuser/update-password/update-pass
 import { UpdateProfileComponent } from './subAdmin/update-profile/update-profile.component';
 import { UpdateProfileCheckerComponent } from './checker/update-profile-checker/update-profile-checker.component';
 import { UpdateProfilesubsubComponent } from './subsubAdmin/update-profilesubsub/update-profilesubsub.component';
+<<<<<<< HEAD
 import { ResponseResetPasswordComponent } from './superuser/response-reset-password/response-reset-password.component';
+=======
+import { AboutusComponent } from './superuser/aboutus/aboutus.component';
+import { ContactusComponent } from './superuser/contactus/contactus.component';
+import { HeaderComponent } from './shared/componets/header/header.component';
+import { FooterComponent } from './shared/componets/footer/footer.component';
+import { HeadersubComponent } from './sharedsub/componets/headersub/headersub.component';
+import { AboutussubComponent } from './subAdmin/aboutussub/aboutussub.component';
+import { ContactussubComponent } from './subAdmin/contactussub/contactussub.component';
+import { AboutComponent } from './shared/componets/about/about.component';
+import { ContactComponent } from './shared/componets/contact/contact.component';
+import { HeadersubsubComponent } from './sharedsubsub/componets/headersubsub/headersubsub.component';
+import { AboutussubsubComponent } from './subsubAdmin/aboutussubsub/aboutussubsub.component';
+import { ContactsubsubComponent } from './subsubAdmin/contactsubsub/contactsubsub.component';
+import { HeadercheckerComponent } from './sharedcheck/componets/headerchecker/headerchecker.component';
+import { AboutcheckerComponent } from './checker/aboutchecker/aboutchecker.component';
+import { ContactcheckerComponent } from './checker/contactchecker/contactchecker.component';
+>>>>>>> mekdi
 
 
 
@@ -72,7 +90,25 @@ import { ResponseResetPasswordComponent } from './superuser/response-reset-passw
     UpdateProfileComponent,
     UpdateProfileCheckerComponent,
     UpdateProfilesubsubComponent,
+<<<<<<< HEAD
     ResponseResetPasswordComponent
+=======
+    AboutusComponent,
+    ContactusComponent,
+    HeaderComponent,
+    FooterComponent,
+    HeadersubComponent,
+    AboutussubComponent,
+    ContactussubComponent,
+    AboutComponent,
+    ContactComponent,
+    HeadersubsubComponent,
+    AboutussubsubComponent,
+    ContactsubsubComponent,
+    HeadercheckerComponent,
+    AboutcheckerComponent,
+    ContactcheckerComponent
+>>>>>>> mekdi
 
   ],
   imports: [

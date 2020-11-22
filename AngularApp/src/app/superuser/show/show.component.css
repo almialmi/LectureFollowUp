@@ -8,7 +8,7 @@
     font-family: 'Times New Roman', Times, serif;
     
     margin-left: 0px;
-    background: #ffa800;
+    background: #056f8f;
     font-size: 17px;
     border: none;
     cursor: pointer;
@@ -18,16 +18,30 @@
     height: 40px;
 
 }
+.ministry{
+  color: #056f8f;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  
+}
+.site-footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  
+}
   
   .search-container button:hover {
     background: #ccc;
   }
 .table{
-    color: white;
+    color: black;
     font-family: 'Times New Roman', Times, serif;
 }
 .table a{
-    color: #ffa800;
+    color: #056f8f;
 }
 .form-popup {
   display: none;
