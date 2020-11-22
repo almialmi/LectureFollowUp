@@ -44,9 +44,9 @@ import { UpdatePasswordComponent } from './superuser/update-password/update-pass
 import { UpdateProfileComponent } from './subAdmin/update-profile/update-profile.component';
 import { UpdateProfileCheckerComponent } from './checker/update-profile-checker/update-profile-checker.component';
 import { UpdateProfilesubsubComponent } from './subsubAdmin/update-profilesubsub/update-profilesubsub.component';
-<<<<<<< HEAD
+
 import { ResponseResetPasswordComponent } from './superuser/response-reset-password/response-reset-password.component';
-=======
+
 import { AboutusComponent } from './superuser/aboutus/aboutus.component';
 import { ContactusComponent } from './superuser/contactus/contactus.component';
 import { HeaderComponent } from './shared/componets/header/header.component';
@@ -62,7 +62,7 @@ import { ContactsubsubComponent } from './subsubAdmin/contactsubsub/contactsubsu
 import { HeadercheckerComponent } from './sharedcheck/componets/headerchecker/headerchecker.component';
 import { AboutcheckerComponent } from './checker/aboutchecker/aboutchecker.component';
 import { ContactcheckerComponent } from './checker/contactchecker/contactchecker.component';
->>>>>>> mekdi
+
 
 
 
@@ -90,9 +90,9 @@ import { ContactcheckerComponent } from './checker/contactchecker/contactchecker
     UpdateProfileComponent,
     UpdateProfileCheckerComponent,
     UpdateProfilesubsubComponent,
-<<<<<<< HEAD
-    ResponseResetPasswordComponent
-=======
+
+    ResponseResetPasswordComponent,
+
     AboutusComponent,
     ContactusComponent,
     HeaderComponent,
@@ -108,7 +108,7 @@ import { ContactcheckerComponent } from './checker/contactchecker/contactchecker
     HeadercheckerComponent,
     AboutcheckerComponent,
     ContactcheckerComponent
->>>>>>> mekdi
+
 
   ],
   imports: [
