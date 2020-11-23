@@ -23,7 +23,7 @@
   <div class="container table-responsive py-3" >
                
     <table  class="table table-bordered highlight">
-      <thead style="color: black;"> 
+      <thead> 
         <tr>
             <th>First Name</th>
             <th>Middle Name</th>
@@ -37,7 +37,7 @@
             <th>compass</th>
            </tr>
       </thead>
-      <tbody style="color: black;">
+      <tbody >
         <tr *ngFor="let lec of  searchUser">
             <td>{{lec.firstName}}</td>
             <td>{{lec.middleName}}</td>
@@ -49,7 +49,20 @@
             <td>{{lec.role}}</td>
             <td>{{lec.study}}</td>
             <td>{{lec.compass}}</td>
-            <td> <a class="action-btn"  (click)="ViewedOrtNotViewed(lec._id,lec)" ><i class="fas {{ lec.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"></i></a></td>
+            <td> <a class="action-btn" ><i class="fas {{ lec.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"
+              mwlConfirmationPopover
+              [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage"
+              [confirmText]="confirmText"
+              [cancelText]="cancelText"
+             
+              (confirm)="ViewedOrtNotViewed(lec._id,lec)"
+              (cancel)="cancelClicked = true"
+              confirmButtonType="danger"
+              cancelButtonType="outline-secondary"
+              
+              [appendToBody]="true"
+              ></i></a></td>
         </tr>
     
       </tbody>

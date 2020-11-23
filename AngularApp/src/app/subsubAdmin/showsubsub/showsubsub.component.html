@@ -54,7 +54,21 @@
           <td>{{user.department}}</td>
           
           <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
-          <td><a class="action-btn" (click)="onDelete(user._id)"><i class="fas fa-trash"></i></a></td>
+          <td><a class="action-btn"><i class="fas fa-trash"
+        
+            mwlConfirmationPopover
+            [popoverTitle]="popoverTitle"
+            [popoverMessage]="popoverMessage"
+            [confirmText]="confirmText"
+            [cancelText]="cancelText"
+           
+            (confirm)="onDelete(user._id)"
+            (cancel)="cancelClicked = true"
+            confirmButtonType="danger"
+            cancelButtonType="outline-secondary"
+         
+            [appendToBody]="true">
+          </i></a></td> 
         </tr>
     
       </tbody>

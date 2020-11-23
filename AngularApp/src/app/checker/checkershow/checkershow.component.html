@@ -45,7 +45,20 @@
             <td>{{user.study}}</td>
             <td>{{user.compass}}</td>
            <td><a class="action-btn" ><i class="fas fa-check-circle"  (click)="searchAndMatchL(user)" ></i> </a></td>
-           <td> <a class="action-btn"  (click)="ViewedOrtNotViewed(user._id,user)" ><i class="fas {{ user.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"></i></a></td>
+           <td> <a class="action-btn" ><i class="fas {{ user.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"
+            mwlConfirmationPopover
+            [popoverTitle]="popoverTitle"
+            [popoverMessage]="popoverMessage"
+            [confirmText]="confirmText"
+            [cancelText]="cancelText"
+           
+            (confirm)="ViewedOrtNotViewed(user._id,user)"
+            (cancel)="cancelClicked = true"
+            confirmButtonType="danger"
+            cancelButtonType="outline-secondary"
+            
+            [appendToBody]="true"
+            ></i></a></td>
        </tr>
     
       </tbody>

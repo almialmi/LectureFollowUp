@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TrackByFunction } from '@angular/core';
 import { Router } from "@angular/router";
 import { SubAdmin } from '../../sharedsub/sub-admin.model';
 
@@ -6,6 +6,7 @@ import {  SubAdminService } from 'src/app/sharedsub/sub-admin.service';
 import { NgForm } from '@angular/forms';
 //import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 @Component({
   selector: 'app-showsub',
@@ -21,6 +22,13 @@ export class ShowsubComponent implements OnInit {
   submitted = false;
   searchedKeyword: string;
   newRowIndex = 0;
+  popoverTitle = 'Are you sure?';
+  popoverMessage = 'Are you really <b>sure</b> you want to do this?';
+  confirmText = 'Yes <i class="fas fa-check"></i>';
+  cancelText = 'No <i class="fas fa-times"></i>';
+  confirmClicked = true;
+  cancelClicked = false;
+  trackByValue: TrackByFunction<string> = (index, value) => value;
 
 
   constructor(public subAdminService : SubAdminService , public router : Router  ,private modalService: NgbModal) { }
@@ -105,7 +113,7 @@ export class ShowsubComponent implements OnInit {
   
     if(user.isActive === true){
       console.log(user.isActive);
-      if(confirm('Are you sure you want to lock this record?') == true){
+      if(this.confirmClicked == true){
         this.subAdminService.putActivateDeactivate(_id,user).subscribe((res) => {
           this.refreshuserlist();
           console.log(user.isActive)
@@ -114,7 +122,7 @@ export class ShowsubComponent implements OnInit {
      }
      else{
       console.log(user.isActive);
-      if(confirm('Are you sure you want to unlock this record?') == true){
+      if(this.confirmClicked == true){
         this.subAdminService.putActivateDeactivate(_id,user).subscribe((res) => {
           this.refreshuserlist();
          console.log (user.isActive)
