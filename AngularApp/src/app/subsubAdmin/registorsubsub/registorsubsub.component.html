@@ -7,7 +7,7 @@
 <form  #form="ngForm" (ngSubmit)="onFormSubmit(form)">
 <div class="row" style="padding-top: 20px;padding-left: 50px;">
 <div class="form-group">
-  <input style="color: white;" type="file" name="uploadfile" #file id="file" (change)="handleFileInput($event.target.files)">
+  <input style="color: black;" type="file" name="uploadfile" #file id="file" (change)="handleFileInput($event.target.files)">
   <button  ng-click="angular.copy(files)" type="reset">X</button>
 </div>
 
@@ -104,7 +104,7 @@
                     </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Email:</label>
-                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.email" name="email"  placeholder="Enter email" required
+                  <input   class="form-control" type="email" #email="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.email" name="email"  placeholder="Enter email" required
                   [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
                 </div>
                 <div *ngIf="signUpForm.submitted && email.errors">
@@ -122,7 +122,7 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="email">universtiy:</label>
+                  <label for="exampleInputPassword1">university:</label>
                   <br>
                   <select  class="browser-default custom-select" #university="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.university" name="university" >
                     <input type="text" placeholder="enter here wey"/>
@@ -135,7 +135,16 @@
                  
                 </div>
                 <div class="form-group">
-                  <label for="email">Role:</label>
+                  <label   for="exampleInputPassword1">Compass:</label>
+                  <input class="form-control" type="text" #compass="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.compass" name="compass"  placeholder="Enter compass" required
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !compass.valid}">
+                  </div>
+                  <div *ngIf="signUpForm.submitted && !compass.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Role:</label>
                   <br>
                   <select  class="browser-default custom-select" #role="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.role" name="role" >
                   
@@ -149,7 +158,7 @@
                 
                
                 <div class="form-group">
-                  <label for="email">educationStatus:</label>
+                  <label for="exampleInputPassword1">educationStatus:</label>
                   <br>
                   <select  class="browser-default custom-select" #educationStatus="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationStatus" name="educationStatus" >
                   
@@ -161,7 +170,7 @@
                  
                 </div>
                 <div class="form-group">
-                  <label for="email">study:</label>
+                  <label for="exampleInputPassword1">study:</label>
                   <br>
                   <select  class="browser-default custom-select" #study="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.study" name="study"  (change)="onSelect($event.target.value)" >
                   
@@ -173,7 +182,7 @@
                  
                 </div>
                 <div class="form-group">
-                  <label for="email">educationField:</label>
+                  <label for="exampleInputPassword1">educationField:</label>
                   <br>
                   <select  class="browser-default custom-select" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField" name="educationField"  (change)="onSelectt($event.target.value)" >
                     
@@ -196,7 +205,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="email">Department:</label>
+                  <label for="exampleInputPassword1">Department:</label>
                   <br>
                   <select  class="browser-default custom-select" #department ="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.department " name="department"  >
                  <!-- <option *ngIf=' selectedStudyy.id == 0' value="0">--Select--</option>-->

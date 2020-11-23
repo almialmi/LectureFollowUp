@@ -38,7 +38,7 @@ export class SubsubAdminService {
   constructor(public http : HttpClient) { }
 
 postUniversityStaff(user : SubsubAdmin){
-  return  this.http.post(environment.apiBaseUrl + '/registerUniversityStaff' , user);
+  return  this.http.post(environment.apiBaseUrl + '/registerLectures' , user);
 
 }
 postFromExcelFile(fileToUpload: File){

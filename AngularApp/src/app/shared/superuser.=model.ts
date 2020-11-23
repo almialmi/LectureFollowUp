@@ -9,7 +9,4 @@ export class Superuser {
    password : string;
    isActive:boolean;
    role:string;
-   
-   
-   
 }

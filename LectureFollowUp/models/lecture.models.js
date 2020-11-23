@@ -45,8 +45,7 @@ var lectureSchema = new mongoose.Schema({
            required:true
     },
     educationField:{
-          type:String,
-          required:true
+          type:String
     },
     department:{
            type:String,

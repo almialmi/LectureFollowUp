@@ -6,29 +6,7 @@
 </head>
 <body>
 
-<nav class="navbar   fixed-top navbar-expand-md bg-dark navbar-dark">
-  <img src="assets/logonew.png" style="width: 60px; height: 60px;"/>
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link " href="#" routerLink= "/homechecker">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" routerLink = "/showchecker" href="#">Show Me</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink = "/updateProfileChecker" href="#">Update Profile</a>
-      </li>
-      <li class="nav-item" (click)="onLogout()" value="logout">
-        <a class="nav-link">logout</a>
-      </li>    
-    </ul>
-  </div>  
-</nav>
+
 
 <div class="container">
     
@@ -44,8 +22,8 @@
 <!--this code is for -->
   <div class="container table-responsive py-3" >
                
-    <table  class="table table-bordered">
-      <thead>
+    <table  class="table table-bordered highlight">
+      <thead style="color: black;"> 
         <tr>
             <th>First Name</th>
             <th>Middle Name</th>
@@ -56,9 +34,10 @@
             <th>educationStatus</th>
             <th>role</th>
             <th>study</th>
+            <th>compass</th>
            </tr>
       </thead>
-      <tbody>
+      <tbody style="color: black;">
         <tr *ngFor="let lec of  searchUser">
             <td>{{lec.firstName}}</td>
             <td>{{lec.middleName}}</td>
@@ -69,6 +48,7 @@
             <td>{{lec.educationStatus}}</td>
             <td>{{lec.role}}</td>
             <td>{{lec.study}}</td>
+            <td>{{lec.compass}}</td>
             <td> <a class="action-btn"  (click)="ViewedOrtNotViewed(lec._id,lec)" ><i class="fas {{ lec.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"></i></a></td>
         </tr>
     
@@ -77,27 +57,7 @@
   </div>
 
 
-  
 
-
-
-
-
-  
- 
-  
- 
-  
- 
-  
- 
-  
-
-<footer class="site-footer">
-  <h4 class="text-center" style="font-family: 'Times New Roman', Times, serif;color: white;">2020 © Ministry of Science and Higher Education - All rights reserved.</h4>
- 
- 
-</footer>
   <script>
     function openForm() {
       document.getElementById("myForm").style.display = "block";

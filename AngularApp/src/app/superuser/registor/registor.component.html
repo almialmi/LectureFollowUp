@@ -66,7 +66,7 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Middle name:</label>
+                  <label for="exampleInputEmail1">Middle name:</label>
                   <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.middleName" name="middleName"  placeholder="Enter middlename" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
                   </div>
@@ -76,7 +76,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label   for="exampleInputPassword1">Last name:</label>
+                    <label   for="exampleInputEmail1">Last name:</label>
                     <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.lastName" name="lastName"  placeholder="Enter lastname" required
                     [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
                     </div>
@@ -85,7 +85,7 @@
     
                     </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Email:</label>
+                  <label for="exampleInputEmail1">Email:</label>
                   <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.email" name="email"  placeholder="Enter email" required
                   [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
                 </div>
@@ -94,12 +94,16 @@
                   <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
 
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.password" placeholder="Password" required minlength="8"
-                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !password.valid}">
-
-                </div>
+                <span class="input-placeholder">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.password" placeholder=" Enter Your Updated Password " 
+                    required minlength="8" [type]="hide ? 'password' : 'text'"
+                    [ngClass]="{'invalid-textbox' : signUpForm.submitted && !password.valid}">
+                    <mat-icon class="placeholder" (click)="myFunction()">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  
+                  </div>
+                  </span>
                 <div *ngIf="signUpForm.submitted && password.errors?.minlength">
                   <label style="color: red;" class="validation-message">minimum 8 characters</label>
 
@@ -109,7 +113,7 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">mobile:</label>
+                  <label for="exampleInputEmail1">mobile:</label>
                   <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.mobile" name="mobile"  placeholder="Enter mobile number" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
                 </div>
@@ -120,7 +124,7 @@
               
 
                 <div class="form-group">
-                  <label for="email">university:</label>
+                  <label for="exampleInputEmail1">university:</label>
                   <br>
                   <select  class="browser-default custom-select" #universtiy="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.university" name="university"  (change)="onSelect($event.target.value)" >
                  
@@ -204,40 +208,40 @@
               <form #signUpFormm="ngForm"  (ngSubmit) = "signUpFormm.valid && onSubmitt(signUpFormm)">
                 <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedChecker._id">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">First name:</label>
-                  <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="superuserservice.selectedChecker.firstName" name="firstName"  placeholder="Enter firstname" required
-                  [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !firstname.valid}">
+                  <label for="exampleInputPassword1">First name:</label>
+                  <input   class="form-control" type="text" #fname="ngModel" [(ngModel)]="superuserservice.selectedChecker.firstName" name="firstName"  placeholder="Enter firstname" required
+                  [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !fname.valid}">
                   
                 </div>
-                <div *ngIf="signUpFormm.submitted && !firstname.valid">
+                <div *ngIf="signUpFormm.submitted && !fname.valid">
                   <label style="color: red;" class="validation-message">this field is required </label>
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Middle name:</label>
-                  <input   class="form-control" type="text" #middlename="ngModel" [(ngModel)]="superuserservice.selectedChecker.middleName" name="middleName"  placeholder="Enter middlename" required
-                  [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !middlename.valid}">
+                  <label for="exampleInputPassword1">Middle name:</label>
+                  <input   class="form-control" type="text" #mname="ngModel" [(ngModel)]="superuserservice.selectedChecker.middleName" name="middleName"  placeholder="Enter middlename" required
+                  [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !mname.valid}">
                   
                 </div>
-                <div *ngIf="signUpFormm.submitted && !middlename.valid">
+                <div *ngIf="signUpFormm.submitted && !mname.valid">
                   <label style="color: red;" class="validation-message">this field is required </label>
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Last name:</label>
-                  <input   class="form-control" type="text" #lastname="ngModel" [(ngModel)]="superuserservice.selectedChecker.lastName" name="lastName"  placeholder="Enter lastname" required
-                  [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !lastname.valid}">
+                  <label for="exampleInputPassword1">Last name:</label>
+                  <input   class="form-control" type="text" #lname="ngModel" [(ngModel)]="superuserservice.selectedChecker.lastName" name="lastName"  placeholder="Enter lastname" required
+                  [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !lname.valid}">
                   
                 </div>
-                <div *ngIf="signUpFormm.submitted && !lastname.valid">
+                <div *ngIf="signUpFormm.submitted && !lname.valid">
                   <label style="color: red;" class="validation-message">this field is required </label>
 
                 </div>
                 
                 <div class="form-group">
                   <label for="exampleInputPassword1">Email:</label>
-                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedChecker.email" name="email"  placeholder="Enter email" required
-                  [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !email.valid}" >
+                  <input   class="form-control" type="text" #cemail="ngModel" [(ngModel)]="superuserservice.selectedChecker.email" name="email"  placeholder="Enter email" required
+                  [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !cemail.valid}" >
                 </div>
                 <div *ngIf="signUpFormm.submitted && email.errors">
                   <label *ngIf="email.errors.required"style="color: red;" class="validation-message">this field is required </label>
@@ -245,21 +249,25 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">mobile:</label>
-                  <input   class="form-control" type="text" #mobile="ngModel" [(ngModel)]="superuserservice.selectedChecker.mobile" name="mobile"  placeholder="Enter mobile" required
-                  [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !mobile.valid}">
+                  <label for="exampleInputPassword1">mobile:</label>
+                  <input   class="form-control" type="text" #cmobile="ngModel" [(ngModel)]="superuserservice.selectedChecker.mobile" name="mobile"  placeholder="Enter mobile" required
+                  [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !cmobile.valid}">
                   
                 </div>
-                <div *ngIf="signUpFormm.submitted && !mobile.valid">
+                <div *ngIf="signUpFormm.submitted && !cmobile.valid">
                   <label style="color: red;" class="validation-message">this field is required </label>
 
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="superuserservice.selectedChecker.password" placeholder="Password" required minlength="8"
-                  [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !password.valid}">
-
-                </div>
+                <span class="input-placeholder">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="superuserservice.selectedChecker.password" placeholder=" Enter Your Updated Password " 
+                    required minlength="8" [type]="hide ? 'password' : 'text'"
+                    [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !password.valid}">
+                    <mat-icon class="placeholder" (click)="myFunction()">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  
+                  </div>
+                  </span>
                 <div *ngIf="signUpFormm.submitted && password.errors?.minlength">
                   <label style="color: red;" class="validation-message">minimum 8 characters</label>
 
@@ -281,9 +289,6 @@
                <h1 style="color: red;"> {{serverErrorMessage}} </h1>
 
               </div>
-              <h1 style="color: #e0e0d1;"> Registor this clint</h1>
-              <h1 style="color: #e0e0d1;"> Registor this clint</h1>
-              <h1 style="color: #e0e0d1;"> Registor this clint</h1>
              </div>
               </div>
            </div>

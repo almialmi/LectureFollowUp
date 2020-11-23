@@ -61,3 +61,19 @@ select{
 
    
   }
+  .placeholder{
+    position: absolute;
+    top: 24px;
+    bottom: 0;
+    height: 24px;
+    font-size: 25px;
+    left: -28px;
+    margin: auto;
+    margin-left: 480px;
+    color:black;
+    margin-top: 15px;
+}
+
+.input-placeholder {
+  position: relative;
+}

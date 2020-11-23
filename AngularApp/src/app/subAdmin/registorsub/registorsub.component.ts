@@ -77,10 +77,16 @@ export class RegistorsubComponent implements OnInit {
     this.dept = this._dataService.getDepartment()
                  .filter((item)=> item.fieldname == countryidd);
   }
+  hide: boolean = true;
+
+  myFunction() {
+    this.hide = !this.hide;
+  }
   
   onSubmit(form : NgForm){
     this.subAdminService.postUnivHr(form.value).subscribe(
       res => {
+        console.log(res);
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
         this.resetForm(form);

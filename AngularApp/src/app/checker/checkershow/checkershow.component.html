@@ -16,7 +16,7 @@
   <div class="container table-responsive py-3" >
                
     <table  class="table table-bordered highlight">
-      <thead>
+      <thead >
         <tr>
             <th>First Name</th>
             <th>Middle Name</th>
@@ -27,6 +27,7 @@
             <th>educationStatus</th>
             <th>role</th>
             <th>study</th>
+            <th>compass</th>
             <th>Match</th>
             
            </tr>
@@ -42,6 +43,7 @@
             <td>{{user.educationStatus}}</td>
             <td>{{user.role}}</td>
             <td>{{user.study}}</td>
+            <td>{{user.compass}}</td>
            <td><a class="action-btn" ><i class="fas fa-check-circle"  (click)="searchAndMatchL(user)" ></i> </a></td>
            <td> <a class="action-btn"  (click)="ViewedOrtNotViewed(user._id,user)" ><i class="fas {{ user.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"></i></a></td>
        </tr>

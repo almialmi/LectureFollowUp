@@ -123,7 +123,7 @@ export class RegistorsubsubComponent implements OnInit {
       study: '',
       educationField: '',
       department : '',
-      isViewed:false
+      isViewed:false,
 };
     form.resetForm();
     this.serverErrorMessage = '';

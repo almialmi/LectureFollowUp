@@ -2,20 +2,23 @@ const express = require('express');
 const router = express.Router();
 
 const ctrlUser = require('../controllers/user.controller');
+const regUser= require('../controllers/register.controllers');
 const jwtHelper = require('../config/jwtHelper');
 
-// register for route super Admin
-router.post('/register-super-admin',ctrlUser.registerSuperAdmin);
+// register staff
+router.post('/registerLectures',jwtHelper.verifyJwtToken,regUser.lectureRegister);
 
 // register for univAdmin
-router.post('/register-univ-admin',ctrlUser.registerUnivAdmin);
-
-// register for univHr
-router.post('/register-univ-hr',ctrlUser.registerUnivHr);
+router.post('/registerUnivAdmin',jwtHelper.verifyJwtToken,regUser.universityAdminRegister);
 
 // register for Checker
+router.post('/checkerRegister',jwtHelper.verifyJwtToken,regUser.checkerRegister);
 
-router.post('/register-checker',ctrlUser.registerChecker);
+// register for univHr
+router.post('/univHrRegister',jwtHelper.verifyJwtToken,regUser.univHrRegister);
+
+// register for route super Admin
+router.post('/superAdminRegister',jwtHelper.verifyJwtToken,regUser.superAdminRegister);
 
 
 // login route for all user
@@ -56,10 +59,6 @@ router.put('/updateOwnProfile/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToke
 
 router.delete('/deleteChecker/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.deleteChecker);
 
-
-// register university staff by univHr
-
-router.post('/registerUniversityStaff',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.universityStaffRegister);
 
 // export from excel and register
 router.post('/uploadFile',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.uploadFileAndRegisterUniversityStaff);

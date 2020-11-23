@@ -44,8 +44,14 @@ export class RegistorComponent implements OnInit {
     this.states = this._dataService.getStates()
                  .filter((item)=> item.countryname == countryidd);
   }
+  hide: boolean = true;
+
+  myFunction() {
+    this.hide = !this.hide;
+  }
   
   onSubmit(form : NgForm){
+    console.log(form.value);
     this.superuserservice.postUnivAdmin(form.value).subscribe(
       res => {
         this.showSucessMessage = true;

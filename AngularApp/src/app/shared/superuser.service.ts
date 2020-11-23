@@ -53,11 +53,11 @@ constructor(public http : HttpClient) { }
 
 
   postUnivAdmin(user : Superuser){
-    return  this.http.post(environment.apiBaseUrl + '/register-univ-admin' , user);
+    return  this.http.post(environment.apiBaseUrl + '/registerUnivAdmin' , user);
 
   }
   postChecker(user : Superuser){
-    return  this.http.post(environment.apiBaseUrl + '/register-checker' , user);
+    return  this.http.post(environment.apiBaseUrl + '/checkerRegister' , user);
 
   }
 
