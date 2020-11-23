@@ -62,6 +62,7 @@ import { ContactsubsubComponent } from './subsubAdmin/contactsubsub/contactsubsu
 import { HeadercheckerComponent } from './sharedcheck/componets/headerchecker/headerchecker.component';
 import { AboutcheckerComponent } from './checker/aboutchecker/aboutchecker.component';
 import { ContactcheckerComponent } from './checker/contactchecker/contactchecker.component';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 
 
@@ -123,7 +124,10 @@ import { ContactcheckerComponent } from './checker/contactchecker/contactchecker
     //ReactiveFormsModule,
     
     NgbModule,
-    MatIconModule
+    MatIconModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger', // set defaults here
+    }),
 
   ],
   providers: [ {

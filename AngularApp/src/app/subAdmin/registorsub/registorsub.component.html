@@ -53,7 +53,7 @@
                 ever in the history of Ethiopian Education.
               </p>
 
-              <form #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
+              <form #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)"> 
                 <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subAdminService.selectedUnivHr._id">
                 <div class="form-group">
                   <label for="exampleInputEmail1">First name:</label>

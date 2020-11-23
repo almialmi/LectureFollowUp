@@ -52,7 +52,28 @@
         
         <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
        <!-- <td><a class="action-btn" (click)="onDelete(user._id)"><i class="fas fa-trash"></i></a></td> -->
-         <td> <a class="action-btn"  (click)="activateDeactivateUnivAdmin(user._id,user)" ><i class="fa {{ user.isActive ? 'fa-unlock' : 'fa-lock' }}"></i></a></td>
+         <td><a class="action-btn"  ><i class="fa {{ user.isActive ? 'fa-unlock' : 'fa-lock' }}"
+
+          
+          mwlConfirmationPopover
+          [popoverTitle]="popoverTitle"
+          [popoverMessage]="popoverMessage"
+          [confirmText]="confirmText"
+          [cancelText]="cancelText"
+         
+          (confirm)="activateDeactivateUnivAdmin(user._id,user)"
+          (cancel)="cancelClicked = true"
+          confirmButtonType="danger"
+          cancelButtonType="outline-secondary"
+          
+          [appendToBody]="true">
+       
+        
+         </i></a>
+
+         
+        
+        </td>
       </tr>
   
     </tbody>
@@ -86,8 +107,35 @@
           <td>{{user.mobile}}</td>
           <td>{{user.role}}</td>
          <td><a class="action-btn"  (click)="open(contentt)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
-        <td><a class="action-btn" (click)="onDeletechecker(user._id)"><i class="fas fa-trash"></i></a></td> 
-         <td> <a class="action-btn"  (click)="activateDeactivate(user._id,user)" ><i class="fa {{ user.isActive ? 'fa-unlock' : 'fa-lock' }}"></i></a></td>
+        <td><a class="action-btn"><i class="fas fa-trash"
+        
+          mwlConfirmationPopover
+          [popoverTitle]="popoverTitle"
+          [popoverMessage]="popoverMessage"
+          [confirmText]="confirmText"
+          [cancelText]="cancelText"
+         
+          (confirm)="onDeletechecker(user._id)"
+          (cancel)="cancelClicked = true"
+          confirmButtonType="danger"
+          cancelButtonType="outline-secondary"
+       
+          [appendToBody]="true">
+        </i></a></td> 
+         <td> <a class="action-btn"><i class="fa {{ user.isActive ? 'fa-unlock' : 'fa-lock' }}"
+
+          mwlConfirmationPopover
+          [popoverTitle]="popoverTitle"
+          [popoverMessage]="popoverMessage"
+          [confirmText]="confirmText"
+          [cancelText]="cancelText"
+         
+          (confirm)="activateDeactivate(user._id,user)"
+          (cancel)="cancelClicked = true"
+          confirmButtonType="danger"
+          cancelButtonType="outline-secondary"
+          [appendToBody]="true">
+         </i></a></td>
         </tr>
     
       </tbody>

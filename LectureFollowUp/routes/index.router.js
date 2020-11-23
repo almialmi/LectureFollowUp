@@ -5,20 +5,34 @@ const ctrlUser = require('../controllers/user.controller');
 const regUser= require('../controllers/register.controllers');
 const jwtHelper = require('../config/jwtHelper');
 
+<<<<<<< HEAD
 // register staff
 router.post('/registerLectures',jwtHelper.verifyJwtToken,regUser.lectureRegister);
 
 // register for univAdmin
 router.post('/registerUnivAdmin',jwtHelper.verifyJwtToken,regUser.universityAdminRegister);
+=======
+router.post('/register-super-admin',ctrlUser.registerSuperAdmin);
+
+// register for univAdmin
+router.post('/register-univ-admin',ctrlUser.Authenticate,jwtHelper.verifyJwtToken , ctrlUser.registerUnivAdmin);
+
+// register for univHr
+router.post('/register-univ-hr',  ctrlUser.registerUnivHr);
+>>>>>>> 5c6aea00d5664a02b4371b3441e7269636d1a40c
 
 // register for Checker
 router.post('/checkerRegister',jwtHelper.verifyJwtToken,regUser.checkerRegister);
 
+<<<<<<< HEAD
 // register for univHr
 router.post('/univHrRegister',jwtHelper.verifyJwtToken,regUser.univHrRegister);
 
 // register for route super Admin
 router.post('/superAdminRegister',jwtHelper.verifyJwtToken,regUser.superAdminRegister);
+=======
+router.post('/register-checker', ctrlUser.registerChecker);
+>>>>>>> 5c6aea00d5664a02b4371b3441e7269636d1a40c
 
 
 // login route for all user
