@@ -1,36 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SuperuserService } from 'src/app/shared/superuser.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SuperuserService } from '../../shared/superuser.service';
 
 @Component({
-  selector: 'app-response-reset-password',
+  selector: 'app-request-reset',
   templateUrl: './response-reset-password.component.html',
-  styleUrls: ['./response-reset-password.component.css']
+  styleUrls: ['./response-reset-password.component.css'],
+
 })
 export class ResponseResetPasswordComponent implements OnInit {
   ResponseResetForm: FormGroup;
   errorMessage: string;
   successMessage: string;
-  resetToken: null;
+  resetToken:string;
   CurrentState: any;
   IsResetFormValid = true;
+  constructor(
+    private superuserservice: SuperuserService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder ) {
 
-  constructor(public superUserService : SuperuserService , private router: Router,private route: ActivatedRoute,private fb: FormBuilder) { 
     this.CurrentState = 'Wait';
     this.route.params.subscribe(params => {
-    this.resetToken = params.token;
-    
-    console.log(this.resetToken);
+      this.resetToken = params.token;
+      console.log(this.resetToken);
       this.VerifyToken();
     });
   }
 
-  ngOnInit(): void {
+
+  ngOnInit() {
     this.Init();
   }
+
   VerifyToken() {
-    this.superUserService.ValidPasswordToken({ resettoken: this.resetToken }).subscribe(
+    this.superuserservice.ValidPasswordToken({ resettoken: this.resetToken }).subscribe(
       data => {
         this.CurrentState = 'Verified';
       },
@@ -72,7 +78,7 @@ export class ResponseResetPasswordComponent implements OnInit {
     console.log(form.get('confirmPassword'));
     if (form.valid) {
       this.IsResetFormValid = true;
-      this.superUserService.newPassword(this.ResponseResetForm.value).subscribe(
+      this.superuserservice.newPassword(this.ResponseResetForm.value).subscribe(
         data => {
           this.ResponseResetForm.reset();
           this.successMessage = data.message;
@@ -89,5 +95,4 @@ export class ResponseResetPasswordComponent implements OnInit {
       );
     } else { this.IsResetFormValid = false; }
   }
-
 }

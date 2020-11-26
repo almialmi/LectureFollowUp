@@ -561,8 +561,8 @@ module.exports.forgotPassword = async(req,res)=>{
           service: 'Gmail',
           port: 465,
           auth: {
-            user: 'user',
-            pass: 'password'
+            user: 'almialmi61621@gmail.com',
+            pass: 'cybma12345'
           }
         });
         var mailOptions = {
@@ -571,12 +571,18 @@ module.exports.forgotPassword = async(req,res)=>{
         subject: 'Lecture FollowUp Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-        'http://'+ req.headers.host + '/response-reset-password/' + resettoken.resettoken + '\n\n' +
+        'http://localhost:4200/response-reset-password/' + resettoken.resettoken + '\n\n' +
         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
         }
         console.log(resettoken.resettoken);
         console.log(user.email); 
-       transporter.sendMail(mailOptions, (err, info) => { })
+       transporter.sendMail(mailOptions, (error, response) => { 
+         if(error){
+            console.log(error);
+        }else{
+            console.log("Message sent: " + response.msg);
+        }
+       })
 
 
 }
@@ -585,25 +591,25 @@ module.exports.forgotPassword = async(req,res)=>{
 
 module.exports.validateToken = async(req,res)=>{
     if (!req.body.resettoken) {
-        return res .status(500).json({ 
-            message: 'Token is required' 
-        });
+        return res.status(500).json({ message: 'Token is required' });
         }
         const user = await passwordResetToken.findOne({
             resettoken: req.body.resettoken
         });
         if (!user) {
-        return res.status(409).json({ message: 'Invalid URL' });
+        return res.status(409) .json({ 
+            message: 'Invalid URL' 
+        });
         }
-        await User.findOneAndUpdate({ _id: user._userId }).then(() => {
-             res.status(200).json({ message: 'Token verified successfully.' });
+        User.findOneAndUpdate({id: user._userId }).then(() => {
+            res.status(200).json({ message: 'Token verified successfully.' });
         }).catch((err) => {
-            return res.status(500).send({ msg: err.message });
+        return res.status(500).send({ msg: err.message });
         });
 
 }
 
-module.exports.NewPassword= async(req,res)=>{
+module.exports.newPassword= async(req,res)=>{
     passwordResetToken.findOne({ resettoken: req.body.resettoken }, function (err, userToken, next) {
         if (!userToken) {
           return res .status(409) .json({ 
@@ -611,21 +617,15 @@ module.exports.NewPassword= async(req,res)=>{
             });
         }
   
-        User.findOne({ _id: userToken._userId
+         User.findOne({ _id: userToken._userId
         }, function (err, userEmail, next) {
           if (!userEmail) {
             return res .status(409) .json({ 
                 message: 'User does not exist'
              });
           }
-          return  bcrypt.hash(req.body.newPassword, 10, (err, hash) => {
-            if (err) {
-              return res.status(400).json({ 
-                  message: 'Error hashing password' 
-                });
-            }
-            userEmail.password = hash;
-            userEmail.save(function (err) {
+          userEmail.password = req.body.newPassword;
+          userEmail.save(function (err) {
               if (err) {
                 return res.status(400) .json({ 
                     message: 'Password can not reset.' 
@@ -638,7 +638,7 @@ module.exports.NewPassword= async(req,res)=>{
               }
   
             });
-          });
+       
         });
   
       })

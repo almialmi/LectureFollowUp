@@ -3,6 +3,7 @@ const Lecture = mongoose.model('Lecture');
 const User = mongoose.model('User');
 
 
+
 module.exports.lectureRegister = (req,res,next)=>{
     var lecture = new Lecture();
     lecture.firstName =req.body.firstName;
@@ -22,8 +23,8 @@ module.exports.lectureRegister = (req,res,next)=>{
         if(!err)
             res.send(doc);
         else{
-            if(err.code  == 11000)
-                res.status(422).send(['Duplicate email address found.']);
+            if(err)
+                res.status(422).send("hello something wrong!!!");
             else
                 return next(err);    
         }
