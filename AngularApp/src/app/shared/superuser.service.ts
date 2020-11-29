@@ -45,7 +45,6 @@ selectedUniversity:University={
   _id:'',
   name:'',
   location:'',
-  pox:'',
   email:'',
 
 }

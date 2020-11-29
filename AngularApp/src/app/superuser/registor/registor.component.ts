@@ -128,7 +128,6 @@ export class RegistorComponent implements OnInit {
       _id : '',
       name : '',
       location: '',
-      pox: '',
       email : ''
    };
     form.resetForm();

@@ -21,6 +21,7 @@
   <ul class="nav nav-tabs">
       <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link active" data-toggle="tab" href="#home">Admin</a></li>
       <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu1">Checker</a></li>
+      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu2">University</a></li>
   </ul>
 <div class="tab-content">
     
@@ -141,6 +142,33 @@
       </tbody>
     </table>
   </div>
+
+  <!--this for university-->
+  <div class="container table-responsive py-3" id="menu2" class="tab-pane fade" >
+               
+    <table  class="table table-bordered">
+      <thead>
+        <tr>
+          <th>University Name</th>
+          <th>Location</th> 
+          <th>Email</th>    
+          
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let univ of  superuserservice.universitys | filter:searchedKeyword" >
+          <td>{{univ.name}}</td>
+          <td>{{univ.location}}</td>
+          <td>{{univ.email}}</td>
+          <td><a class="action-btn"  (click)="open(contentUniv)" (click) = "onEditU(univ)"><i class="fas fa-pen-alt"></i> </a></td>
+        </tr>
+    
+      </tbody>
+    </table>
+    </div>
+  
+  
+
 </div>
 </div>
 
@@ -294,6 +322,62 @@
       </form>
       <div class="success" *ngIf="showSucessMessage">
         <h1 style="color: green; font-family: 'Times New Roman';" >updated succesfully</h1>
+
+      </div>
+    </div>
+   
+  </ng-template>
+
+  <!--edit for university-->
+
+  <ng-template #contentUniv let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title" style="font-family: 'Times New Roman', Times, serif;">Update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form  #signUpForm1="ngForm"  (ngSubmit) = "signUpForm1.valid && onSubmitUnivForm(signUpForm1)">
+        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedUniversity._id">
+     
+        <div class="form-group">
+          <label for="exampleInputEmail1">University Name:</label>
+          <input   class="form-control" type="text" #uname="ngModel" [(ngModel)]="superuserservice.selectedUniversity.name" name="uname"  placeholder="Enter university name" required
+          [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !uname.valid}">
+          
+        </div>
+        <div *ngIf="signUpForm1.submitted && !uname.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Location:</label>
+          <input  class="form-control" type="text" #location="ngModel" [(ngModel)]="superuserservice.selectedUniversity.location" name="location"  placeholder="Enter Location" required
+          [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !location.valid}">
+          </div>
+          <div *ngIf="signUpForm1.submitted && !location.valid">
+            <label style="color: red;" class="validation-message">this field is required </label>
+
+          </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Email:</label>
+          <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedUniversity.email" name="email"  placeholder="Enter email" required
+          [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !email.valid}" >
+        </div>
+        <div *ngIf="signUpForm1.submitted && email.errors">
+          <label *ngIf="email.errors.required"style="color: red;" class="validation-message">this field is required </label>
+          <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
+
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>--> 
+             <input  style="background-color: #056f8f;" type="submit" value="update">
+           </div>
+       
+      </form>
+      <div class="success" *ngIf="showSucessMessage">
+        <h1 style="color: green; font-family: 'Times New Roman';" >updated successfully</h1>
 
       </div>
     </div>

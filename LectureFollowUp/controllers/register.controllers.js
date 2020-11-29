@@ -163,7 +163,7 @@ module.exports.registerUniversity = async (req, res,next) => {
  }
 
  module.exports.updateUniversity =(req,res)=>{
-    if(!req.body.name && !req.body.location && !req.body.Pox && !req.body.email) {
+    if(!req.body.name && !req.body.location && !req.body.email) {
         return res.status(400).send({
             message: " this contents can not be empty"
         });
@@ -172,8 +172,7 @@ module.exports.registerUniversity = async (req, res,next) => {
      University.findByIdAndUpdate(req.params.id, {
         $set:{
             name:req.body.name,
-            location:req.body,location,
-            Pox:req.body.Pox,
+            location:req.body.location,
             email:req.body.email
         }
         

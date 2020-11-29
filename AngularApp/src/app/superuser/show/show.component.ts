@@ -1,6 +1,7 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { Router } from "@angular/router";
 import {Superuser } from '../../shared/superuser.=model';
+import {University} from '../../shared/unive.models';
 
 import { SuperuserService } from '../../shared/superuser.service';
 import { NgForm } from '@angular/forms';
@@ -60,6 +61,7 @@ export class ShowComponent implements OnInit {
   ngOnInit(): void {
     this.refreshuserlistchecker();
     this.refreshuserlist();
+    this.refreshUniveList();
  }
   onLogout(){
     this.superuserservice.deletToken();
@@ -77,6 +79,17 @@ export class ShowComponent implements OnInit {
     );
 
   }
+ refreshUniveList(){
+   this.superuserservice.fetchUniversity().subscribe(res =>{
+    this.superuserservice.universitys = res as University[];
+
+  },
+  err =>{
+
+  }
+   );
+ }
+
   //show users for checker
   refreshuserlistchecker(){
     this.superuserservice.showChecker().subscribe(
@@ -90,6 +103,28 @@ export class ShowComponent implements OnInit {
     );
 
   }
+
+  onSubmitUnivForm(form : NgForm){
+   
+    if(form.value._id == ""){
+      this.superuserservice.registerUniversity(form.value).subscribe((res) =>{
+       // this.resetForm(form);
+        this.refreshUniveList();
+       });
+    }else{
+      this.superuserservice.updateUniversity(form.value).subscribe((res) =>{
+       // this.resetForm(form);
+        this.refreshUniveList();
+        this.showSucessMessage = true;
+        setTimeout(() => this.showSucessMessage = false,4000);
+  
+      });
+  
+    }
+   
+  }
+
+
   
   onSubmit(form : NgForm){
    
@@ -97,7 +132,7 @@ export class ShowComponent implements OnInit {
       this.superuserservice.postUnivAdmin(form.value).subscribe((res) =>{
        // this.resetForm(form);
         this.refreshuserlist();
-        M.toast({html: 'saved successfull!' , class: 'rounded'});
+       
       
   
       });
@@ -107,7 +142,7 @@ export class ShowComponent implements OnInit {
         this.refreshuserlist();
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
-        M.toast({html: 'update successfull!' , class: 'rounded'});
+       
   
       });
   
@@ -120,7 +155,7 @@ export class ShowComponent implements OnInit {
       this.superuserservice.postChecker(form.value).subscribe((res) =>{
        // this.resetForm(form);
         this.refreshuserlistchecker();
-        M.toast({html: 'saved successfull!' , class: 'rounded'});
+        
       
   
       });
@@ -130,7 +165,7 @@ export class ShowComponent implements OnInit {
         this.refreshuserlistchecker();
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
-        M.toast({html: 'update successfull!' , class: 'rounded'});
+       
   
       });
   
@@ -142,7 +177,7 @@ export class ShowComponent implements OnInit {
     if( this.confirmClicked == true){
       this.superuserservice.deleteChecker(_id).subscribe((res) => {
         this.refreshuserlistchecker();
-        M.toast({html: 'Deleted successfully' , classes: 'rounded'});
+       
       });
     }
 
@@ -150,6 +185,11 @@ export class ShowComponent implements OnInit {
 
   onEdit(user : Superuser){
     this.superuserservice.selectedUnivAdmin = user;
+
+  }
+
+  onEditU(univ : University){
+    this.superuserservice.selectedUniversity = univ;
 
   }
   

@@ -9,10 +9,6 @@ var universitySchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    pox:{
-        type:String
-       
-    },
     email:{
         type:String,
         required:true

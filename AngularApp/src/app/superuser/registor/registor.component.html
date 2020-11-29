@@ -10,7 +10,7 @@
       <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu2">University</a></li>
     
     </ul>
-    <div class="tab-content">
+  <div class="tab-content">
       
 <div class="container" id="home" class="tab-pane fade in active show">
   <div class="cards py-5">
@@ -295,10 +295,10 @@
            </div>
           </div>
           </div>
-    </div>
-    </div>
 
-  <!--register university-->
+
+
+          <!--register university-->
   <div  class="container" id="menu2"  class="tab-pane fade">
     <div class="cards py-5 ">
     <div class="col-md-12">
@@ -361,18 +361,7 @@
                   <div *ngIf="signUpForm1.submitted && !location.valid">
                     <label style="color: red;" class="validation-message">this field is required </label>
   
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">P.O.X:</label>
-                    <input   class="form-control" type="text" #pox="ngModel" [(ngModel)]="superuserservice.selectedUniversity.pox" name="pox"  placeholder="Enter P.O.X" required
-                    [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !pox.valid}">
-                    
-                  </div>
-                  <div *ngIf="signUpForm1.submitted && !pox.valid">
-                    <label style="color: red;" class="validation-message">this field is required </label>
-  
-                  </div>
-                  
+                  </div> 
                   <div class="form-group">
                     <label for="exampleInputPassword1">Email:</label>
                     <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedUniversity.email" name="email"  placeholder="Enter University Email" required
@@ -402,12 +391,12 @@
             </div>
             </div>
       
+    </div>
+    </div>
+
+  
       
-    
-    
-
-
-  <app-footer></app-footer>
+<app-footer></app-footer>
 
 
 
