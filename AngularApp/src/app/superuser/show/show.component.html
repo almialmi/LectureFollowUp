@@ -247,7 +247,7 @@
        
       </form>
       <div class="success" *ngIf="showSucessMessage">
-        <h1 style="color: green; font-family: 'Times New Roman';" >updated succesfully</h1>
+        <h1 style="color: green; font-family: 'Times New Roman';" >updated successfully</h1>
 
       </div>
     </div>
@@ -321,7 +321,7 @@
        
       </form>
       <div class="success" *ngIf="showSucessMessage">
-        <h1 style="color: green; font-family: 'Times New Roman';" >updated succesfully</h1>
+        <h1 style="color: green; font-family: 'Times New Roman';" >updated successfully</h1>
 
       </div>
     </div>
@@ -342,12 +342,12 @@
         <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedUniversity._id">
      
         <div class="form-group">
-          <label for="exampleInputEmail1">University Name:</label>
-          <input   class="form-control" type="text" #uname="ngModel" [(ngModel)]="superuserservice.selectedUniversity.name" name="uname"  placeholder="Enter university name" required
-          [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !uname.valid}">
+          <label for="exampleInputPassword1">University Name:</label>
+          <input   class="form-control" type="text" #name="ngModel" [(ngModel)]="superuserservice.selectedUniversity.name" name="name"  placeholder="Enter university name" required
+          [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !name.valid}">
           
         </div>
-        <div *ngIf="signUpForm1.submitted && !uname.valid">
+        <div *ngIf="signUpForm1.submitted && !name.valid">
           <label style="color: red;" class="validation-message">this field is required </label>
 
         </div>

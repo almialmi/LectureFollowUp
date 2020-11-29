@@ -122,7 +122,7 @@ constructor(public http : HttpClient) { }
   }
 
   updateUniversity(univ:University){
-    return this.http.put(environment.apiBaseUrl + '/updateUniversity'  +`/${univ._id}`, univ);
+    return this.http.put(environment.apiBaseUrl + '/universityUpdate'  +`/${univ._id}`, univ);
 
   }
 

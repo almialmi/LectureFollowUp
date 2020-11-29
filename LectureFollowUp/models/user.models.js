@@ -21,11 +21,10 @@ var userSchema = new mongoose.Schema({
         required:true
     },
     mobile:{
-        type:String,
+        type:String
     },
     university:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "University"
+        type: String
     },
     compass:{
         type:String

@@ -37,7 +37,7 @@ router.post('/registerUniversity',ctrlUser.Authenticate,jwtHelper.verifyJwtToken
 
 router.get('/fetchUniversity' ,ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.fetchUniversity);
 
-router.put('/updateUniversity/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.updateUniversity);
+router.put('/universityUpdate/:id',regUser.updateUniversity);
 
 
 //fetch by role

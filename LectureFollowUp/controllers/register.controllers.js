@@ -144,7 +144,6 @@ module.exports.registerUniversity = async (req, res,next) => {
     var univ = new University({
         name:req.body.name,
         location:req.body.location,
-        Pox:req.body.Pox,
         email:req.body.email
     });
     
