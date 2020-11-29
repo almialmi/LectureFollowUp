@@ -140,7 +140,7 @@ module.exports.univHrRegister = (req,res,next)=>{
     });
 }
 
-module.exports.registerUniversity = async (req, res) => {
+module.exports.registerUniversity = async (req, res,next) => {
     var univ = new University({
         name:req.body.name,
         location:req.body.location,

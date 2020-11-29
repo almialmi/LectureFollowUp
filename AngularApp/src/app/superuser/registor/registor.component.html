@@ -7,6 +7,7 @@
   <ul class="nav nav-tabs">
       <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link active" data-toggle="tab" href="#home">Admin</a></li>
       <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu1">Checker</a></li>
+      <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu2">University</a></li>
     
     </ul>
     <div class="tab-content">
@@ -297,6 +298,111 @@
     </div>
     </div>
 
+  <!--register university-->
+  <div  class="container" id="menu2"  class="tab-pane fade">
+    <div class="cards py-5 ">
+    <div class="col-md-12">
+     
+      <div class="card shadow-lg  rounded" style="height: 400px;">
+        <div class="card-body">
+          <div class="card-title col-md-5" >
+            <h3>
+            why join LecturersFollower?
+            </h3>
+  
+          </div>
+          <div class="card-text px-5 col-md-4 col-sm-8">
+            to track down who is working
+            in more than one campus.
+            <br>
+            to know that we need you to fill
+            this info.
+            <br/>
+            because it helps us to track down them.
+            <br/>
+            and it would be meaning less with out your help.
+           </div>
+          </div>
+         </div>
+     </div>
+    
+      <div class="col-md-6 offset-md-5">
+        <div class="card " id="cardtwo">
+          <div class="card-body">
+  
+            <div class="title">
+              <h5 class="card-title  text-center" >
+                Register University </h5>
+                
+              </div>
+            
+                <p class="card-text text-center">one of the ultimate track down
+                  ever in the history of Ethiopian Education.
+                </p>
+  
+                <form #signUpForm1="ngForm"  (ngSubmit) = "signUpForm1.valid && onSubmitForm(signUpForm1)">
+                  <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedUniversity._id">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">University Name:</label>
+                    <input   class="form-control" type="text" #Uname="ngModel" [(ngModel)]="superuserservice.selectedUniversity.name" name="name"  placeholder="Enter University name" required
+                    [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !Uname.valid}">
+                    
+                  </div>
+                  <div *ngIf="signUpForm1.submitted && !Uname.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Location:</label>
+                    <input   class="form-control" type="text" #location="ngModel" [(ngModel)]="superuserservice.selectedUniversity.location" name="location"  placeholder="Where the University Located" required
+                    [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !location.valid}">
+                    
+                  </div>
+                  <div *ngIf="signUpForm1.submitted && !location.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">P.O.X:</label>
+                    <input   class="form-control" type="text" #pox="ngModel" [(ngModel)]="superuserservice.selectedUniversity.pox" name="pox"  placeholder="Enter P.O.X" required
+                    [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !pox.valid}">
+                    
+                  </div>
+                  <div *ngIf="signUpForm1.submitted && !pox.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Email:</label>
+                    <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedUniversity.email" name="email"  placeholder="Enter University Email" required
+                    [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !email.valid}" >
+                  </div>
+                  <div *ngIf="signUpForm1.submitted && email.errors">
+                    <label *ngIf="email.errors.required"style="color: red;" class="validation-message">this field is required </label>
+                    <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
+  
+                  </div>
+                 
+                <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
+                <input style="background-color: #056f8f" type="submit" value="Register">
+                </form>
+                <div class="success" *ngIf="showSucessMessage">
+                  <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesfully</h1>
+  
+                </div>
+  
+                <div class="alert" *ngIf="serverErrorMessage">
+                 <h1 style="color: red;"> {{serverErrorMessage}} </h1>
+  
+                </div>
+               </div>
+                </div>
+             </div>
+            </div>
+            </div>
+      
+      
     
     
 

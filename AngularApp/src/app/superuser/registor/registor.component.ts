@@ -99,9 +99,38 @@ export class RegistorComponent implements OnInit {
       password : '',
       isActive:true,
       role:''
-     
+   };
+    form.resetForm();
+    this.serverErrorMessage = '';
+  }
 
-    };
+  onSubmitForm(form : NgForm){
+    console.log(form.value);
+    this.superuserservice.registerUniversity(form.value).subscribe(
+      res => {
+        this.showSucessMessage = true;
+        setTimeout(() => this.showSucessMessage = false,4000);
+        this.resetFormUni(form);
+      },
+      err => {
+        if( err.status == 422){
+          this.serverErrorMessage = err.error.join('<br>');
+        }
+        else
+          this.serverErrorMessage = 'something went wrong'
+      }
+    );
+
+  }
+
+  resetFormUni(form : NgForm){
+    this.superuserservice.selectedUniversity = {
+      _id : '',
+      name : '',
+      location: '',
+      pox: '',
+      email : ''
+   };
     form.resetForm();
     this.serverErrorMessage = '';
   }

@@ -4,6 +4,7 @@ import { HttpClient , HttpHeaders} from '@angular/common/http';
 
 
 import {Superuser } from './superuser.=model';
+import{University} from './unive.models'
 import { environment } from 'src/environments/environment';
 import { JsonPipe } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -40,12 +41,21 @@ selectedChecker:Superuser={
     role:'',
 
 }
+selectedUniversity:University={
+  _id:'',
+  name:'',
+  location:'',
+  pox:'',
+  email:'',
+
+}
 
 
   
 UnivAdmins :Superuser[];
 UnivHr:Superuser[];
 checkers:Superuser[];
+universitys:University[];
 
 
 noAuthHeader = {headers: new HttpHeaders({'NoAuth' : 'True'})};
@@ -100,6 +110,21 @@ constructor(public http : HttpClient) { }
 
   ValidPasswordToken(body): Observable<any> {
     return this.http.post(environment.apiBaseUrl +'/valid-password-token', body);
+  }
+
+  registerUniversity(univ:University){
+    return  this.http.post(environment.apiBaseUrl + '/registerUniversity' , univ);
+
+  }
+
+  fetchUniversity(){
+    return this.http.get(environment.apiBaseUrl + '/fetchUniversity');
+
+  }
+
+  updateUniversity(univ:University){
+    return this.http.put(environment.apiBaseUrl + '/updateUniversity'  +`/${univ._id}`, univ);
+
   }
 
   setToken(token : string){
