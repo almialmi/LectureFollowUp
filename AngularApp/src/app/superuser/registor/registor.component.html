@@ -142,10 +142,10 @@
                 </div>
                 
                 <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
-              <input style="background-color: #056f8f" type="submit" value="Registor">
+              <input style="background-color: #056f8f" type="submit" value="Register">
               </form>
               <div class="success" *ngIf="showSucessMessage">
-                <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesfully</h1>
+                <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved successfully</h1>
 
               </div>
 
@@ -241,8 +241,8 @@
                 
                 <div class="form-group">
                   <label for="exampleInputPassword1">Email:</label>
-                  <input   class="form-control" type="text" #cemail="ngModel" [(ngModel)]="superuserservice.selectedChecker.email" name="email"  placeholder="Enter email" required
-                  [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !cemail.valid}" >
+                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedChecker.email" name="email"  placeholder="Enter email" required
+                  [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !email.valid}" >
                 </div>
                 <div *ngIf="signUpFormm.submitted && email.errors">
                   <label *ngIf="email.errors.required"style="color: red;" class="validation-message">this field is required </label>
@@ -279,10 +279,10 @@
                 </div>
                
               <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
-              <input style="background-color: #056f8f" type="submit" value="Registor">
+              <input style="background-color: #056f8f" type="submit" value="Register">
               </form>
               <div class="success" *ngIf="showSucessMessage">
-                <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesfully</h1>
+                <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved successfully</h1>
 
               </div>
 
@@ -343,7 +343,7 @@
                 <form #signUpForm1="ngForm"  (ngSubmit) = "signUpForm1.valid && onSubmitForm(signUpForm1)">
                   <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedUniversity._id">
                   <div class="form-group">
-                    <label for="exampleInputPassword1">University Name:</label>
+                    <label for="exampleInput">University Name:</label>
                     <input   class="form-control" type="text" #Uname="ngModel" [(ngModel)]="superuserservice.selectedUniversity.name" name="name"  placeholder="Enter University name" required
                     [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !Uname.valid}">
                     
@@ -353,17 +353,7 @@
   
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Location:</label>
-                    <input   class="form-control" type="text" #location="ngModel" [(ngModel)]="superuserservice.selectedUniversity.location" name="location"  placeholder="Where the University Located" required
-                    [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !location.valid}">
-                    
-                  </div>
-                  <div *ngIf="signUpForm1.submitted && !location.valid">
-                    <label style="color: red;" class="validation-message">this field is required </label>
-  
-                  </div> 
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Email:</label>
+                    <label for="exampleInput">Email:</label>
                     <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedUniversity.email" name="email"  placeholder="Enter University Email" required
                     [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !email.valid}" >
                   </div>
@@ -372,12 +362,22 @@
                     <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
   
                   </div>
+                  <div class="form-group">
+                    <label for="exampleInput">Location:</label>
+                    <input   class="form-control" type="text" #location="ngModel" [(ngModel)]="superuserservice.selectedUniversity.location" name="location"  placeholder="Where the University Located" required
+                    [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !location.valid}">
+                    
+                  </div>
+                  <div *ngIf="signUpForm1.submitted && !location.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div> 
                  
                 <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
                 <input style="background-color: #056f8f" type="submit" value="Register">
                 </form>
                 <div class="success" *ngIf="showSucessMessage">
-                  <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesfully</h1>
+                  <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved successfully</h1>
   
                 </div>
   
