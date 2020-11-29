@@ -33,9 +33,11 @@ router.post('/login',ctrlUser.login);
 
 // register university
 
-router.post('/registerUniversity',ctrlUser.registerUniversity);
+router.post('/registerUniversity',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.registerUniversity);
 
-router.get('/fetchUniversity' ,ctrlUser.fetchUniversity);
+router.get('/fetchUniversity' ,ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.fetchUniversity);
+
+router.put('/updateUniversity/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.updateUniversity);
 
 
 //fetch by role
@@ -45,6 +47,8 @@ router.get('/fetchUnivAdmin',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrl
 router.get('/fetchUnivHr/:university',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchUnivHr);
 
 router.get('/fetchChecker',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchChecker);
+
+router.get('/fetchDuplicatedUniversityStaff',regUser.fetchDuplicatedUniversityStaff);
 
 
 

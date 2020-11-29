@@ -479,29 +479,6 @@ const importExcelData2MongoDB= (filePath)=>{
 
 // register University
 
-module.exports.registerUniversity = async (req, res) => {
-    try {
-       //validate req.body data before saving
-       const university = new University(req.body);
-       await university.save();
-       res.status(201).json({success:true, data: university });
- 
-    } catch (err) {
-       res.status(400).json({success: false, message:err.message});
-    }
- }
-
- module.exports.fetchUniversity= async (req, res) => {
-    University.find({__v:0},(err,result)=>{
-        if(err){
-            res.send(err)
-
-        }else{
-            res.send(result)
-        }
-    })
- }
-
  module.exports.isViewedOrNot= async(req,res)=>{
 
     console.log(req.body.isViewed);

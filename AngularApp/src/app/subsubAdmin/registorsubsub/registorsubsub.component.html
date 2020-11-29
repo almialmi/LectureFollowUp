@@ -185,7 +185,7 @@
                 <div class="form-group">
                   <label for="exampleInputPassword1">educationField:</label>
                   <br>
-                  <select  class="browser-default custom-select" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField" name="educationField"  (change)="onSelectt($event.target.value)" >
+                  <select  class="browser-default custom-select" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField"  name="educationField"  (change)="onSelectt($event.target.value)" >
                     
                 <!-- <option *ngIf=' selectedStudy.id == 0' value="0">--Select--</option>-->
                    <option *ngFor="let field of  fields" [value]="field.name">

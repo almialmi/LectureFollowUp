@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Lecture = mongoose.model('Lecture');
 const User = mongoose.model('User');
+const University = mongoose.model('University')
 
 
 
@@ -137,4 +138,99 @@ module.exports.univHrRegister = (req,res,next)=>{
         }
             
     });
+}
+
+module.exports.registerUniversity = async (req, res) => {
+    var univ = new University({
+        name:req.body.name,
+        location:req.body.location,
+        Pox:req.body.Pox,
+        email:req.body.email
+    });
+    
+    univ.save((err,doc)=>{
+        if(!err)
+            res.send(doc);
+        else{
+            if(err.code  == 11000)
+                res.status(422).send(['Duplicate university email address found.']);
+            else
+                return next(err);    
+        }
+            
+    });
+    
+ }
+
+ module.exports.updateUniversity =(req,res)=>{
+    if(!req.body.name && !req.body.location && !req.body.Pox && !req.body.email) {
+        return res.status(400).send({
+            message: " this contents can not be empty"
+        });
+    }
+    // Find note and update it with the request body
+     University.findByIdAndUpdate(req.params.id, {
+        $set:{
+            name:req.body.name,
+            location:req.body,location,
+            Pox:req.body.Pox,
+            email:req.body.email
+        }
+        
+    }, {new: true})
+    .then(univ => {
+        if(!univ) {
+            return res.status(404).send({
+                message: "University not found with id " + req.params.id
+            });
+        }
+        res.status(200).send({
+            message:"successfully update the University ",
+            success:true
+        });
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "University not found with id " + req.params.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating University with id " + req.params.id
+        });
+    });
+ }
+
+
+ module.exports.fetchUniversity= async (req, res) => {
+    University.find({__v:0},(err,result)=>{
+        if(err){
+            res.send(err)
+
+        }else{
+            res.send(result)
+        }
+    })
+ }
+// fetch duplicated staffs
+
+module.exports.fetchDuplicatedUniversityStaff =(req,res)=>{
+    Lecture.aggregate([
+         { $group: {
+            _id: { firstName: "$firstName", middleName: "$middleName" ,lastName:"$lastName" },
+            University: { $addToSet: "$university"},
+            COUNTER: { $sum: 1 }
+         } },
+         { $match: {
+            COUNTER: { $gte: 2 }
+         } },
+         { $sort : { COUNTER : -1} }
+      ],function (err, result) {
+        if (result) {
+            res.json(result)
+        }else {
+            res.send(JSON.stringify({
+                error : 'Error'
+            }))
+        }
+})
 }

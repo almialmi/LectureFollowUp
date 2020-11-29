@@ -5,7 +5,15 @@ var universitySchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    compass:{
+    location:{
+        type:String,
+        required:true
+    },
+    Pox:{
+        type:String,
+        required:true
+    },
+    email:{
         type:String,
         required:true
     }
