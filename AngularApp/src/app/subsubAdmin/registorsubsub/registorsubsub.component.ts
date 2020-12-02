@@ -31,6 +31,8 @@ export class RegistorsubsubComponent implements OnInit {
   dept:  Department[];
   selectedCountry:Universtiy = new Universtiy(0, 'Ambo University'); 
   universtiys : Universtiy[];
+  universty;
+  compass;
 
 
   status:  Educstatus[] = [
@@ -54,6 +56,8 @@ export class RegistorsubsubComponent implements OnInit {
   constructor(public subsubAdminService : SubsubAdminService , public router : Router , private _dataService: DataService,private formBuilder: FormBuilder) {
     this.studys = this._dataService.getStudy();
     this.universtiys = this._dataService.getCountries();
+    this.universty = this.myUniversity();
+    this.compass = this.myCompus();
    }
   model = {
     firstName: '',
@@ -151,6 +155,20 @@ onFormSubmit(form: NgForm){
   
   
 }
+univ:string = '';
+myUniversity(){
+  this.univ = this.subsubAdminService.getUserUniversity();
+  return this.univ
+
+}
+comp:string = '';
+myCompus(){
+  this.comp = this.subsubAdminService.getUserCompass();
+  return this.comp
+ 
+
+}
+  
   
   
 

@@ -10,6 +10,7 @@ import { DataService } from './dataService';
 import { Study } from "src/app/sharedsub/study.model";
 import { Educationalfield } from 'src/app/sharedsub/educationalfield.model';
 import {Department} from 'src/app/sharedsub/department.model';
+import { config } from 'process';
  
 
 
@@ -29,6 +30,7 @@ export class RegistorsubComponent implements OnInit {
   dept:  Department[];
   selectedCountry:Universtiy = new Universtiy(0, 'Ambo University'); 
   universtiys : Universtiy[];
+  universty;
 
 
   status:  Educstatus[] = [
@@ -51,6 +53,9 @@ export class RegistorsubComponent implements OnInit {
   constructor(public subAdminService : SubAdminService , public router : Router ,private _dataService: DataService) {
     this.studys = this._dataService.getStudy();
     this.universtiys = this._dataService.getCountries();
+    this.universty = this.myUniversity()
+    console.log(this.myUniversity())
+    console.log("mekdi")
    }
   model = {
     firstName: '',
@@ -58,7 +63,7 @@ export class RegistorsubComponent implements OnInit {
     lastname: '',
     mobile:'',
     email: '',
-    universtiy:'',
+    university: '',
     
 
   };
@@ -80,8 +85,12 @@ export class RegistorsubComponent implements OnInit {
   univ:string = '';
   myUniversity(){
     this.univ = this.subAdminService.getUserUniversity();
-    console.log(this.univ)
+    return this.univ
+   //console.log(this.univ)
+    // console.log("mekdiwa")
+
   }
+  
 
   hide: boolean = true;
 

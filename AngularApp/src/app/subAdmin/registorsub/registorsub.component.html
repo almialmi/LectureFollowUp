@@ -104,7 +104,10 @@
                   <label style="color: red;" class="validation-message">this field is required </label>
 
                 </div>
-                <div class="form-group">
+
+
+                
+              <!-- <div class="form-group">
                   <label for="email">universtiy:</label>
                   <br>
                   <select  class="browser-default custom-select" #university="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.university" name="university" >
@@ -115,7 +118,15 @@
                    </option>
                    
                  </select>
+                </div>--> 
+                <div class="form-group">
+                 
+                  <input   class="form-control" type="hidden"   [(ngModel)]="universty" name="university"  placeholder="Enter universtiy" 
+                  >
                 </div>
+            
+
+
                 <div class="form-group">
                   <label for="exampleInputPassword1">Compass:</label>
                   <input   class="form-control" type="text" #compass="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.compass" name="compass"  placeholder="Enter compass" required

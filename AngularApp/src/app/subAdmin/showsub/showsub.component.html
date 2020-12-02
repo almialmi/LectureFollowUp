@@ -35,7 +35,7 @@
           <td>{{user.lastName}}</td>
           <td>{{user.email}}</td>
           <td>{{user.mobile}}</td>
-          <td>{{user.university}}</td>
+          <td>{{user.university.name}}</td>
           <td>{{user.role}}</td>
           <td>{{user.compass}}</td>  
           
@@ -119,15 +119,7 @@
 
         </div>
       
-        <div class="form-group">
-          <label for="exampleInputPassword1">university:</label>
-          <input  class="form-control" type="text" #universtiy="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.university" name="university"  placeholder="Enter unverstiy name" required
-          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !universtiy.valid}">
-        </div>
-        <div *ngIf="signUpForm.submitted && !universtiy.valid">
-          <label style="color: red;" class="validation-message">this field is required </label>
-
-        </div>
+     
         <div class="form-group">
           <label for="exampleInputPassword1">Compass:</label>
           <input   class="form-control" type="text" #compass="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.compass" name="compass"  placeholder="Enter compass" required

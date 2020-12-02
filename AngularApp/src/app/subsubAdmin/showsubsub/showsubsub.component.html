@@ -31,8 +31,9 @@
           <th>Email</th>
           <th>Mobile</th>
           <th>Universtiy</th>
+          <th>Compus</th>
           <th>educationStatus</th> 
-          <th>role</th>
+           <th>role</th>
           <th>study</th>
           <th>educationField</th>
           <th>department</th>
@@ -46,7 +47,8 @@
           <td>{{user.lastName}}</td>
           <td>{{user.email}}</td>
           <td>{{user.mobile}}</td>
-          <td>{{user.university}}</td>
+          <td>{{user.university.name}}</td>
+          <td>{{user.compass}}</td>
           <td>{{user.educationStatus}}</td>
           <td>{{user.role}}</td>
           <td>{{user.study}}</td>
@@ -144,15 +146,7 @@
           <label style="color: red;" class="validation-message">this field is required </label>
 
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">university:</label>
-          <input  class="form-control" type="text" #universtiy="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.university" name="university"  placeholder="Enter unverstiy name" required
-          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !universtiy.valid}">
-        </div>
-        <div *ngIf="signUpForm.submitted && !universtiy.valid">
-          <label style="color: red;" class="validation-message">this field is required </label>
-
-        </div>
+       
         <div class="form-group">
             <label for="exampleInputPassword1">educationStatus:</label>
             <input  class="form-control" type="text" #educationStatus="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationStatus" name="educationStatus"  placeholder="Enter educationStatus" required
@@ -204,7 +198,7 @@
 
         <div class="modal-footer">
           <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>--> 
-             <input style="background-color: #ffa800" type="submit" value="Update">
+             <input style="background-color: #056f8f" type="submit" value="Update">
            </div>
        
       </form>
