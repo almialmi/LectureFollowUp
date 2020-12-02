@@ -36,7 +36,7 @@ const fetchUnivHr=async(role,university,res)=>{
         }else{
             res.send(result)
         }
-    })
+    }).populate('university');
 }
 
 
@@ -128,8 +128,7 @@ module.exports.updateProfile = async(req,res)=>{
             middleName:req.body.middleName,
             lastName:req.body.lastName,
             email:req.body.email,
-            mobile:req.body.mobile,
-            university:req.body.university
+            mobile:req.body.mobile
 
         }
         
@@ -262,7 +261,7 @@ const getUniversityStaff=async(university,compass,res)=>{
         }else{
             res.send(result)
         }
-    })
+    }).populate('university');
 }
 
 
@@ -293,7 +292,6 @@ module.exports.updateUniversityStaffProfile = (req,res)=>{
             lastName:req.body.lastName,
             email:req.body.email,
             mobile:req.body.mobile,
-            university:req.body.university,
             educationStatus:req.body.educationStatus,
             role:req.body.role,
             study:req.body.study,
@@ -356,7 +354,7 @@ module.exports.fetchUniversityStaffForChecker = async(req,res)=>{
              }else{
                  res.send(result)
              }
-         })
+         }).populate('university');
     
 }
 
@@ -381,7 +379,7 @@ module.exports.findAndMatchUniversityStaff=(req,res)=>{
                  error : 'Error'
              }))
          }
-     })
+     }).populate('university');
  
  }
 
