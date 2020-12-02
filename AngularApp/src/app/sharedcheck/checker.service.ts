@@ -3,6 +3,7 @@ import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Superuser  } from '../shared/superuser.=model';
+import {RepeatedStaff} from './repeatedStaff.models'
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,19 @@ export class CheckerService {
    role:'',
 
 }
+selectedRepeatedStaff:RepeatedStaff={
+  _id:{
+    firstName:'',
+    middleName:'',
+    lastName:'',
+  },
+  university:'',
+  counter:0,
+}
 
    
   checkers:Superuser[];
+  RepeatedStaffs:RepeatedStaff[];
   
   noAuthHeader = {headers: new HttpHeaders({'NoAuth' : 'True'})};
 
@@ -38,6 +49,10 @@ export class CheckerService {
     return this.http.get(`${environment.apiBaseUrl + '/findAndMatchUniversityStaff' }/${firstName}/${middleName}/${lastName}`)
   
   }
+  showRepeatedUnivStaff(){
+  return this.http.get(environment.apiBaseUrl + '/fetchDuplicatedUniversityStaff');
+   }
+
   showUniversityStaff(){
     return this.http.get(environment.apiBaseUrl + '/fetchUniversityStaffByChecker');
 

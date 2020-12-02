@@ -1,0 +1,88 @@
+
+<app-headerchecker></app-headerchecker>
+
+<div class="container">
+    
+    <div class="search-container">
+        <form action="#">
+          <input type="text" placeholder="Enter a name.." name="search" [(ngModel)]= "searchedKeyword" >
+          <button type="submit" >search</button>
+        </form>
+      </div>
+
+</div>
+
+<!--this code is for -->
+  <div class="container table-responsive py-3" >
+               
+    <table  class="table table-bordered highlight">
+      <thead >
+        <tr>
+            
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>last Name</th>
+            <th>University</th>
+            <th>Counter</th> 
+            <th>Match</th>
+            
+           </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of  checkerservice.RepeatedStaffs | filter:searchedKeyword">
+            
+        <td>{{user._id.firstName}}</td>
+        <td>{{user._id.middleName}}</td>
+        <td>{{user._id.lastName}}</td>
+        <td>{{user.University}}</td>
+        <td>{{user.counter}}</td>
+        <td><a class="action-btn" ><i class="fas fa-check-circle"  (click)="searchAndMatchL(user._id)" ></i> </a></td>
+       </tr>
+    
+      </tbody>
+    </table>
+  </div>
+
+
+
+  
+
+
+
+
+
+  
+ 
+  
+ 
+  
+ 
+  
+ 
+  
+   
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+    
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+    </script>
+

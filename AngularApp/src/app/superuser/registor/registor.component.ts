@@ -3,6 +3,7 @@ import { SuperuserService } from 'src/app/shared/superuser.service';
 import { NgForm }  from '@angular/forms';
 import { Router } from "@angular/router";
 import { Universtiy } from "src/app/shared/universtiy.model";
+import {University} from "src/app/shared/unive.models"
 import { DataService } from './dataService';
 import { State } from 'src/app/shared/state.model';
  

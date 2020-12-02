@@ -107,7 +107,7 @@ getUserUniversity(){
     var userPayload = atob(token.split('.')[1]);
     var user = JSON.parse(userPayload);
     var university = user.university;
-    console.log(university)
+   // console.log(university)
     return university;
 
   }

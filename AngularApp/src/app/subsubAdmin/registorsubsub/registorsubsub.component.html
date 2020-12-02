@@ -7,12 +7,11 @@
 <form  #form="ngForm" (ngSubmit)="onFormSubmit(form)">
 <div class="row" style="padding-top: 20px;padding-left: 50px;">
 <div class="form-group">
-  <input style="color: black;" type="file" name="uploadfile" #file id="file" (change)="handleFileInput($event.target.files)">
+  <input style="color: black;" type="file" name="uploadfile" #file id="file" (change)="handleFileInput($event.target.files)" required>
   <button  ng-click="angular.copy(files)" type="reset">X</button>
 </div>
-
 <div class="col-sm-6 text-center">
-  <button class="btn btn-primary" type="submit">Upload</button>
+  <button style="background-color: #056f8f" type="submit">Upload</button>
 </div>
 </div>
 </form>
@@ -63,7 +62,7 @@
 
           <div class="title">
             <h5 class="card-title  text-center" >
-              Register Lecture </h5>
+              Register University Staff </h5>
               
             </div>
           
@@ -143,102 +142,59 @@
                     <label style="color: red;" class="validation-message">this field is required </label>
   
                   </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Role:</label>
-                  <br>
-                  <select  class="browser-default custom-select" #role="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.role" name="role" >
-                  
-                   <option *ngFor="let ro of rol" [value]="ro.name">
-                     {{ro.name}}
-                   </option>
-                   
-                 </select>
-                 
-                </div>
+                  <div class="form-group">
+                    <label   for="exampleInputPassword1">Role:</label>
+                    <input class="form-control" type="text" #role="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.role" name="role"  placeholder="Enter Role" required
+                    [ngClass]="{'invalid-textbox' : signUpForm.submitted && !role.valid}">
+                    </div>
+                    <div *ngIf="signUpForm.submitted && !role.valid">
+                      <label style="color: red;" class="validation-message">this field is required </label>
+    
+                    </div>
                 
                
-                <div class="form-group">
-                  <label for="exampleInputPassword1">educationStatus:</label>
-                  <br>
-                  <select  class="browser-default custom-select" #educationStatus="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationStatus" name="educationStatus" >
-                  
-                   <option *ngFor="let stat of status" [value]="stat.name">
-                     {{stat.name}}
-                   </option>
-                   
-                 </select>
-                 
+                  <div class="form-group">
+                      <label   for="exampleInputPassword1">educationStatus:</label>
+                      <input class="form-control" type="text" #educationStatus="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationStatus" name="educationStatus"  placeholder="Enter educationStatus" required
+                      [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationStatus.valid}">
+                      </div>
+                      <div *ngIf="signUpForm.submitted && !educationStatus.valid">
+                        <label style="color: red;" class="validation-message">this field is required </label>
+      
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">study:</label>
-                  <br>
-                  <select  class="browser-default custom-select" #study="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.study" name="study"  (change)="onSelect($event.target.value)" >
-                  
-                   <option *ngFor="let stu of studys" [value]="stu.name">
-                     {{stu.name}}
-                   </option>
-                   
-                 </select>
-                 
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputPassword1">educationField:</label>
-                  <br>
-                  <select  class="browser-default custom-select" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField"  name="educationField"  (change)="onSelectt($event.target.value)" >
-                    
-                <!-- <option *ngIf=' selectedStudy.id == 0' value="0">--Select--</option>-->
-                   <option *ngFor="let field of  fields" [value]="field.name">
-                     {{field.name}}
-                   </option>
-                   
-                 </select>
-                 
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">if it is not from the above list:</label>
-                  <input  class="form-control" type="text" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField" name="educationField"  placeholder="Enter educational field here" required
-                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationField.valid}">
-                </div>
-                <div *ngIf="signUpForm.submitted && !educationField.valid">
-                  <label style="color: red;" class="validation-message">this field is required </label>
-
-                </div>
-
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Department:</label>
-                  <br>
-                  <select  class="browser-default custom-select" #department ="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.department " name="department"  >
-                 <!-- <option *ngIf=' selectedStudyy.id == 0' value="0">--Select--</option>-->
-                   <option *ngFor="let de of  dept" [value]="de.name">
-                     {{de.name}}
-                   </option>
-                   
-                 </select>
-                 
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">if it is not from the above list:</label>
-                  <input  class="form-control" type="text" #department="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.department" name="department"  placeholder="Enter department here" required
-                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !department.valid}">
-                </div>
-                <div *ngIf="signUpForm.submitted && !department.valid">
-                  <label style="color: red;" class="validation-message">this field is required </label>
-
-                </div>
+                  <label   for="exampleInputPassword1">Study:</label>
+                  <input class="form-control" type="text" #study="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.study" name="study"  placeholder="Enter study" required
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !study.valid}">
+                  </div>
+                  <div *ngIf="signUpForm.submitted && !study.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
   
-
-
-
-
+                  </div>
                 
-                
-                
+                  <div class="form-group">
+                    <label   for="exampleInputPassword1">educationField:</label>
+                    <input class="form-control" type="text" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField" name="educationField"  placeholder="Enter educationField" required
+                    [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationField.valid}">
+                    </div>
+                    <div *ngIf="signUpForm.submitted && !educationField.valid">
+                      <label style="color: red;" class="validation-message">this field is required </label>
+    
+                  </div>
+                  <div class="form-group">
+                    <label   for="exampleInputPassword1">Department:</label>
+                    <input class="form-control" type="text" #department="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.department" name="department"  placeholder="Enter Department" required
+                    [ngClass]="{'invalid-textbox' : signUpForm.submitted && !department.valid}">
+                    </div>
+                    <div *ngIf="signUpForm.submitted && !department.valid">
+                      <label style="color: red;" class="validation-message">this field is required </label>
+    
+                   </div>
               <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
               <input style="background-color: #056f8f" type="submit" value="Registor">
               </form>
               <div class="success" *ngIf="showSucessMessage">
-                <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesfully</h1>
+                <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved successfully</h1>
 
               </div>
 

@@ -77,6 +77,12 @@ export class RegistorsubComponent implements OnInit {
     this.dept = this._dataService.getDepartment()
                  .filter((item)=> item.fieldname == countryidd);
   }
+  univ:string = '';
+  myUniversity(){
+    this.univ = this.subAdminService.getUserUniversity();
+    console.log(this.univ)
+  }
+
   hide: boolean = true;
 
   myFunction() {

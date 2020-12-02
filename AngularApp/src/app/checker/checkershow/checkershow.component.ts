@@ -66,7 +66,7 @@ export class CheckershowComponent implements OnInit {
   
   
   
-  searchAndMatchL(selectedUser:SubsubAdmin){
+searchAndMatchL(selectedUser:SubsubAdmin){
      let url = `/checkersearch/${selectedUser.firstName}/${selectedUser.middleName}/${selectedUser.lastName}`
     this.router.navigate([url])
 }

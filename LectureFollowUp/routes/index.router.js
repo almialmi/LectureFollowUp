@@ -3,6 +3,7 @@ const router = express.Router();
 
 const ctrlUser = require('../controllers/user.controller');
 const regUser= require('../controllers/register.controllers');
+const upload = require('../controllers/uploadExcel.controllers');
 const jwtHelper = require('../config/jwtHelper');
 
 
@@ -71,7 +72,7 @@ router.delete('/deleteChecker/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToke
 
 
 // export from excel and register
-router.post('/uploadFile',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.uploadFileAndRegisterUniversityStaff);
+router.post('/uploadFile',upload.uploadFileAndRegisterUniversityStaff);
 
 // fetch university staff by hr 
 //fetch university staff

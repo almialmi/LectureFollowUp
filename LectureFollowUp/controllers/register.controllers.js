@@ -216,12 +216,12 @@ module.exports.fetchDuplicatedUniversityStaff =(req,res)=>{
          { $group: {
             _id: { firstName: "$firstName", middleName: "$middleName" ,lastName:"$lastName" },
             University: { $addToSet: "$university"},
-            COUNTER: { $sum: 1 }
+            counter: { $sum: 1 }
          } },
          { $match: {
-            COUNTER: { $gte: 2 }
+            counter: { $gte: 2 }
          } },
-         { $sort : { COUNTER : -1} }
+         { $sort : { counter : -1} }
       ],function (err, result) {
         if (result) {
             res.json(result)

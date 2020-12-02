@@ -11,12 +11,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-//upload file from excel
 
-const fs = require('fs');
-const multer = require('multer');
-const excelToJson = require('convert-excel-to-json');
-const csv=require('csvtojson')
 
 
 
@@ -125,8 +120,6 @@ module.exports.updateProfile = async(req,res)=>{
             message: " this contents can not be empty"
         });
     }
-    const salt = await bcrypt.genSaltSync(10);
-    const password = await req.body.password;
 
     // Find note and update it with the request body
     await User.findByIdAndUpdate(req.params.id, {
@@ -136,8 +129,7 @@ module.exports.updateProfile = async(req,res)=>{
             lastName:req.body.lastName,
             email:req.body.email,
             mobile:req.body.mobile,
-            university:req.body.university,
-           // password:bcrypt.hashSync(password, salt)
+            university:req.body.university
 
         }
         
@@ -395,87 +387,7 @@ module.exports.findAndMatchUniversityStaff=(req,res)=>{
 
  // export file from excel
 
-global.__basedir = __dirname;
 
-// -> Multer Upload Storage
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, __basedir + '/uploads/')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + "-" + Date.now() + "-" + file.originalname)
-    }
-});
-const upload = multer({storage: storage,
-               fileFilter : function(req, file, callback) { //file filter
-                    if (['xls', 'xlsx'].indexOf(file.originalname.split('.')[file.originalname.split('.').length-1]) === -1) {
-                        return callback(new Error('Wrong extension type'));
-                    }
-                    callback(null, true);
-                }}).single("uploadfile");
- 
-// -> Express Upload RestAPIs
-module.exports.uploadFileAndRegisterUniversityStaff= async (req, res) =>{
-    await upload(req, res, function (err) {
-       console.log(req.file);
-        if (err) {
-            return res.end("Error uploading file.");
-        } else {
-           /*
-            const csvFilePath = __basedir + '/uploads/' + req.file.filename
-            csv().fromFile(csvFilePath)
-            .then((jsonObj)=>{
-                console.log(jsonObj);
-                Lecture.insertMany(jsonObj, (err, res) => {
-                     if (err) throw err;
-                     console.log("Number of documents inserted: " + res.insertedCount);});}) */
- 
-        importExcelData2MongoDB(__basedir + '/uploads/' + req.file.filename);
-          return  res.json({
-             'msg': 'File uploaded/import successfully!', 'file': req.file
-            });
-            
-        }
-      });
-}
- 
-// -> Import Excel File to MongoDB database
-const importExcelData2MongoDB= (filePath)=>{
-    const excelData = excelToJson({
-        sourceFile: filePath,
-        sheets:[{
-            name: 'UniversityStaff',
-            header:{
-               rows: 1
-            },
-            columnToKey: {
-                A:'firstName',
-                B:'middleName',
-                C:'lastName',
-                D:'email',
-                E:'mobile',
-                F:'university',
-                G:'educationStatus',
-                H:'role',
-                I:'study',
-                J:'educationField',
-                K:'department'
-               
-            }
-        }]
-    });
-    console.log(excelData);
- 
-    Lecture.insertMany(excelData.UniversityStaff, (err, res) => {
-            if (err) throw err;
-            console.log("Number of documents inserted: " + res.insertedCount);
-    });
-
-    
- 
-			
-    fs.unlinkSync(filePath);
-} 
 
 // register University
 

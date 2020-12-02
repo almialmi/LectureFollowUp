@@ -22,6 +22,7 @@ import { CheckerhomeComponent } from './checker/checkerhome/checkerhome.componen
 import {  CheckershowComponent } from './checker/checkershow/checkershow.component';
 import { CheckersearchComponent } from './checker/checkersearch/checkersearch.component';
 import {UpdateProfileCheckerComponent} from './checker/update-profile-checker/update-profile-checker.component'
+import {ShowRepeatedStaffComponent} from './checker/show-repeated-staff/show-repeated-staff.component'
 import { AboutusComponent } from './superuser/aboutus/aboutus.component';
 import { ContactusComponent } from './superuser/contactus/contactus.component';
 import { AboutussubComponent } from './subAdmin/aboutussub/aboutussub.component';
@@ -136,6 +137,10 @@ export const appRoutes : Routes = [
     },
     {
         path: "contactuschecker" , component:ContactcheckerComponent, canActivate:[AuthGuard]
+    },
+    {
+        path:"showRepeatedStaff" ,component:ShowRepeatedStaffComponent,canActivate:[AuthGuard]
+
     },
     
 

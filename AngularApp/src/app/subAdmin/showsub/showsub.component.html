@@ -137,20 +137,6 @@
           <label style="color: red;" class="validation-message">this field is required </label>
 
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.password" placeholder="Password" required minlength="8"
-          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !password.valid}">
-
-        </div>
-        <div *ngIf="signUpForm.submitted && password.errors?.minlength">
-          <label style="color: red;" class="validation-message">minimum 8 characters</label>
-
-        </div>
-        <div *ngIf="signUpForm.submitted && !password.valid">
-          <label style="color: red;" class="validation-message">this field is required </label>
-
-        </div> 
         <div class="modal-footer">
           <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>--> 
              <input style="background-color:#056f8f ;" type="submit" value="Update">
@@ -158,7 +144,7 @@
        
       </form>
       <div class="success" *ngIf="showSucessMessage">
-        <h1 style="color: green; font-family: 'Times New Roman';" >updated succesfully</h1>
+        <h1 style="color: green; font-family: 'Times New Roman';" >updated successfully</h1>
 
       </div>
     </div>

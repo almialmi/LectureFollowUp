@@ -63,6 +63,7 @@ import { HeadercheckerComponent } from './sharedcheck/componets/headerchecker/he
 import { AboutcheckerComponent } from './checker/aboutchecker/aboutchecker.component';
 import { ContactcheckerComponent } from './checker/contactchecker/contactchecker.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ShowRepeatedStaffComponent } from './checker/show-repeated-staff/show-repeated-staff.component';
 
 
 
@@ -108,7 +109,8 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     ContactsubsubComponent,
     HeadercheckerComponent,
     AboutcheckerComponent,
-    ContactcheckerComponent
+    ContactcheckerComponent,
+    ShowRepeatedStaffComponent
 
 
   ],
