@@ -129,7 +129,7 @@
                   <br>
                   <select  class="browser-default custom-select" #universtiy="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.university" name="university"  (change)="onSelect($event.target.value)" >
                  
-                   <option *ngFor="let unv of universtiys" [value]="unv.name">
+                   <option *ngFor="let unv of superuserservice.universitys" [value]="unv._id">
                      {{unv.name}}
                    </option>
                    

@@ -43,7 +43,7 @@ router.put('/universityUpdate/:id',regUser.updateUniversity);
 
 //fetch by role
 
-router.get('/fetchUnivAdmin',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchUnivAdmin);
+router.get('/fetchUnivAdmin',ctrlUser.fetchUnivAdmin);
 
 router.get('/fetchUnivHr/:university',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchUnivHr);
 

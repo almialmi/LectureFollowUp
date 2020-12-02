@@ -38,7 +38,6 @@
         <th>University</th>
         <th>Role</th>
         
-        
     </tr>
     </thead>
     <tbody>
@@ -48,7 +47,7 @@
         <td>{{user.lastName}}</td>
         <td>{{user.email}}</td>
         <td>{{user.mobile}}</td>
-        <td>{{user.university}}</td>
+        <td>{{user.university.name}}</td>
         <td>{{user.role}}</td>
         
         <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>

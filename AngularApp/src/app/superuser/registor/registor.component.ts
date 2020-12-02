@@ -6,6 +6,7 @@ import { Universtiy } from "src/app/shared/universtiy.model";
 import {University} from "src/app/shared/unive.models"
 import { DataService } from './dataService';
 import { State } from 'src/app/shared/state.model';
+
  
 
 @Component({
@@ -40,6 +41,7 @@ export class RegistorComponent implements OnInit {
   showSucessMessage: boolean;
   serverErrorMessage : string;
   ngOnInit(): void {
+    this.refreshUniveList();
   }
   onSelect(countryidd) {
     this.states = this._dataService.getStates()
@@ -50,6 +52,18 @@ export class RegistorComponent implements OnInit {
   myFunction() {
     this.hide = !this.hide;
   }
+
+  refreshUniveList(){
+    this.superuserservice.fetchUniversity().subscribe(res =>{
+     this.superuserservice.universitys = res as University[];
+ 
+   },
+   err =>{
+ 
+   }
+    );
+  }
+ 
   
   onSubmit(form : NgForm){
     console.log(form.value);

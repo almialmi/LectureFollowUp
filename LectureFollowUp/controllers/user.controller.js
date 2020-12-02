@@ -24,7 +24,7 @@ const fetchUser = async(role,res)=>{
             }else{
                 res.send(result)
             }
-        })
+        }).populate('university');
 }
 
 const fetchUnivHr=async(role,university,res)=>{

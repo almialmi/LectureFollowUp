@@ -24,7 +24,8 @@ var userSchema = new mongoose.Schema({
         type:String
     },
     university:{
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "University"
     },
     compass:{
         type:String

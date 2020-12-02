@@ -2,6 +2,9 @@
 import { Injectable } from '@angular/core';
 import { Universtiy } from "src/app/shared/universtiy.model";
 import { State } from 'src/app/shared/state.model';
+import{University} from 'src/app/shared/unive.models';
+
+
  
 @Injectable()
 export class DataService {
