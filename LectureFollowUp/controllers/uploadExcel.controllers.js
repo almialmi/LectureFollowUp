@@ -64,7 +64,8 @@ const importExcelData2MongoDB= (filePath)=>{
                 H:'role',
                 I:'study',
                 J:'educationField',
-                K:'department'
+                K:'department',
+                L:'compass'
                
             }
         }]
@@ -73,7 +74,7 @@ const importExcelData2MongoDB= (filePath)=>{
  
     Lecture.insertMany(excelData.UniversityStaff, (err, res) => {
             if (err) throw err;
-            console.log("Number of documents inserted: " + res.insertedCount);
+            console.log(`Number of documents inserted: ${res.length}`);
     });
 
     

@@ -72,7 +72,7 @@ router.delete('/deleteChecker/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToke
 
 
 // export from excel and register
-router.post('/uploadFile',upload.uploadFileAndRegisterUniversityStaff);
+router.post('/uploadFile',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,upload.uploadFileAndRegisterUniversityStaff);
 
 // fetch university staff by hr 
 //fetch university staff
