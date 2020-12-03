@@ -128,7 +128,8 @@ module.exports.updateProfile = async(req,res)=>{
             middleName:req.body.middleName,
             lastName:req.body.lastName,
             email:req.body.email,
-            mobile:req.body.mobile
+            mobile:req.body.mobile,
+            compass:req.body.compass
 
         }
         

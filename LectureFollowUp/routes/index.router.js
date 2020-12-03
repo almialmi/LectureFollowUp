@@ -87,7 +87,7 @@ router.put('/updateUniversityStaffProfile/:id',ctrlUser.Authenticate,jwtHelper.v
 router.delete('/deleteUniversityStaff/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.deleteUniversityStaff);
 
 // fetch university staff by checker
-router.get('/fetchUniversityStaffByChecker',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchUniversityStaffForChecker);
+router.get('/fetchUniversityStaffByChecker',ctrlUser.fetchUniversityStaffForChecker);
 
 // search university staff by checker
 router.get('/findAndMatchUniversityStaff/:query/:query1/:query2',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.findAndMatchUniversityStaff);

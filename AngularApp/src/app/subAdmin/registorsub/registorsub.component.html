@@ -55,7 +55,6 @@
 
               <form #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)"> 
                 <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subAdminService.selectedUnivHr._id">
-                <input type="hidden"  name="university"  #university="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.university" >
                 <div class="form-group">
                   <label for="exampleInputEmail1">First name:</label>
                   <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.firstName" name="firstName"  placeholder="Enter firstname" required
