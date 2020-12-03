@@ -17,7 +17,7 @@ module.exports.lectureRegister = (req,res,next)=>{
     lecture.educationStatus = req.body.educationStatus;
     lecture.role = req.body.role;
     lecture.study = req.body.study;
-    lecture.field = req.body.field;
+    lecture.educationField = req.body.educationField;
     lecture.department = req.body.department;
 
     lecture.save((err,doc)=>{
@@ -25,7 +25,7 @@ module.exports.lectureRegister = (req,res,next)=>{
             res.send(doc);
         else{
             if(err)
-                res.status(422).send("hello something wrong!!!");
+                res.status(422).send(err);
             else
                 return next(err);    
         }
