@@ -29,6 +29,8 @@
             <th>role</th>
             <th>study</th>
             <th>compass</th>
+            <th>educationField</th>
+            <th>Department</th>
            </tr>
       </thead>
       <tbody >
@@ -43,6 +45,8 @@
             <td>{{lec.role}}</td>
             <td>{{lec.study}}</td>
             <td>{{lec.compass}}</td>
+            <td>{{lec.educationField}}</td>
+            <td>{{lec.department}}</td>
             <td> <a class="action-btn" ><i class="fas {{ lec.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"
               mwlConfirmationPopover
               [popoverTitle]="popoverTitle"
