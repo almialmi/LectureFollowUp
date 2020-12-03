@@ -215,7 +215,7 @@ module.exports.fetchDuplicatedUniversityStaff =(req,res)=>{
     Lecture.aggregate([
          { $group: {
             _id: { firstName: "$firstName", middleName: "$middleName" ,lastName:"$lastName" },
-            University: { $addToSet: "$university"},
+            University: { $addToSet: "$role"},
             counter: { $sum: 1 }
          } },
          { $match: {
