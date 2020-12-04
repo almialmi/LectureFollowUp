@@ -3,5 +3,7 @@ export class University {
    name:string;
    location:string;
    email:string;
+   poBox:number;
+   fax:string;
 
  }

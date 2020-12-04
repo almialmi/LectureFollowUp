@@ -46,6 +46,8 @@ selectedUniversity:University={
   name:'',
   location:'',
   email:'',
+  poBox:0,
+  fax:'',
 
 }
 

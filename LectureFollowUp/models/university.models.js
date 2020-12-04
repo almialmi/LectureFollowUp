@@ -12,6 +12,14 @@ var universitySchema = new mongoose.Schema({
     email:{
         type:String,
         required:true
+    },
+    poBox:{
+        type:Number,
+        required:true
+    },
+    fax:{
+        type:String,
+        required:true
     }
    });
 

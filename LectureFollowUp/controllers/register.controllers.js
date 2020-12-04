@@ -144,7 +144,9 @@ module.exports.registerUniversity = async (req, res,next) => {
     var univ = new University({
         name:req.body.name,
         location:req.body.location,
-        email:req.body.email
+        email:req.body.email,
+        poBox:req.body.poBox,
+        fax:req.body.fax
     });
     
     univ.save((err,doc)=>{
@@ -172,7 +174,9 @@ module.exports.registerUniversity = async (req, res,next) => {
         $set:{
             name:req.body.name,
             location:req.body.location,
-            email:req.body.email
+            email:req.body.email,
+            poBox:req.body.poBox,
+            fax:req.body.fax
         }
         
     }, {new: true})

@@ -372,6 +372,26 @@
                     <label style="color: red;" class="validation-message">this field is required </label>
   
                   </div> 
+                  <div class="form-group">
+                    <label for="exampleInput">P.O.Box:</label>
+                    <input   class="form-control" type="number" #poBox="ngModel" [(ngModel)]="superuserservice.selectedUniversity.poBox" name="poBox"  placeholder="Where the University P.O.Box" required
+                    [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !poBox.valid}">
+                    
+                  </div>
+                  <div *ngIf="signUpForm1.submitted && !poBox.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div> 
+                  <div class="form-group">
+                    <label for="exampleInput">Fax:</label>
+                    <input   class="form-control" type="text" #fax="ngModel" [(ngModel)]="superuserservice.selectedUniversity.fax" name="fax"  placeholder="Where the University Fax" required
+                    [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !fax.valid}">
+                    
+                  </div>
+                  <div *ngIf="signUpForm1.submitted && !fax.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div> 
                  
                 <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
                 <input style="background-color: #056f8f" type="submit" value="Register">

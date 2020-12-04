@@ -34,7 +34,7 @@ router.post('/login',ctrlUser.login);
 
 // register university
 
-router.post('/registerUniversity',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.registerUniversity);
+router.post('/registerUniversity',regUser.registerUniversity);
 
 router.get('/fetchUniversity' ,ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.fetchUniversity);
 
