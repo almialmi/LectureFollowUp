@@ -8,21 +8,21 @@ const jwtHelper = require('../config/jwtHelper');
 
 
 // register staff
-router.post('/registerLectures',jwtHelper.verifyJwtToken,regUser.lectureRegister);
+router.post('/registerLectures',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.lectureRegister);
 
 // register for univAdmin
-router.post('/registerUnivAdmin',jwtHelper.verifyJwtToken,regUser.universityAdminRegister);
+router.post('/registerUnivAdmin',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.universityAdminRegister);
 
 
 // register for Checker
-router.post('/checkerRegister',jwtHelper.verifyJwtToken,regUser.checkerRegister);
+router.post('/checkerRegister',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.checkerRegister);
 
 
 // register for univHr
-router.post('/univHrRegister',jwtHelper.verifyJwtToken,regUser.univHrRegister);
+router.post('/univHrRegister',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.univHrRegister);
 
 // register for route super Admin
-router.post('/superAdminRegister',jwtHelper.verifyJwtToken,regUser.superAdminRegister);
+router.post('/superAdminRegister',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.superAdminRegister);
 
 
 
@@ -34,22 +34,22 @@ router.post('/login',ctrlUser.login);
 
 // register university
 
-router.post('/registerUniversity',regUser.registerUniversity);
+router.post('/registerUniversity',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.registerUniversity);
 
 router.get('/fetchUniversity' ,ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.fetchUniversity);
 
-router.put('/universityUpdate/:id',regUser.updateUniversity);
+router.put('/universityUpdate/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.updateUniversity);
 
 
 //fetch by role
 
-router.get('/fetchUnivAdmin',ctrlUser.fetchUnivAdmin);
+router.get('/fetchUnivAdmin',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchUnivAdmin);
 
 router.get('/fetchUnivHr/:university',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchUnivHr);
 
 router.get('/fetchChecker',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchChecker);
 
-router.get('/fetchDuplicatedUniversityStaff',regUser.fetchDuplicatedUniversityStaff);
+router.get('/fetchDuplicatedUniversityStaff',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.fetchDuplicatedUniversityStaff);
 
 
 
@@ -87,12 +87,12 @@ router.put('/updateUniversityStaffProfile/:id',ctrlUser.Authenticate,jwtHelper.v
 router.delete('/deleteUniversityStaff/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.deleteUniversityStaff);
 
 // fetch university staff by checker
-router.get('/fetchUniversityStaffByChecker',ctrlUser.fetchUniversityStaffForChecker);
+router.get('/fetchUniversityStaffByChecker',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchUniversityStaffForChecker);
 
 // search university staff by checker
 router.get('/findAndMatchUniversityStaff/:query/:query1/:query2',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.findAndMatchUniversityStaff);
 
-router.put('/isViewedOrNot/:id',ctrlUser.isViewedOrNot);
+router.put('/isViewedOrNot/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.isViewedOrNot);
 
 // forgot password
 router.post('/req-reset-password',ctrlUser.forgotPassword);
