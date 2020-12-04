@@ -23,15 +23,16 @@ export class CheckersearchComponent implements OnInit {
   constructor(public subsubuserservice : SubsubAdminService ,public checkerservice : CheckerService, public router : Router, private activatedRouter:ActivatedRoute) { }
 
   ngOnInit(): void {
-    //this.searchuserlist()
+    this.refreshuserlist()
     this.searchAndMatchL()
+    
   }
   onLogout(){
     this.checkerservice.deletToken();
     this.router.navigate(['/login']);
   }
 
-  Search(){}
+  
   refreshuserlist(){
     this.checkerservice.showUniversityStaff().subscribe(
       res =>{
