@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {FileUploadModule} from 'ng2-file-upload';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxPaginationModule} from 'ngx-pagination';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -119,6 +121,8 @@ import { ShowRepeatedStaffComponent } from './checker/show-repeated-staff/show-r
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    NgxPaginationModule,
+    
     FormsModule,
     FileUploadModule,
     ReactiveFormsModule,

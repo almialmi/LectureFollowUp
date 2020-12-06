@@ -15,6 +15,11 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
   providers : [SubAdminService]
 })
 export class ShowsubComponent implements OnInit {
+ data : Array<any>
+ //data : SubAdmin[]
+  totalRecords : Number
+  page:Number = 1
+  results = [];
   closeResult = '';
   userDetails;
   showModal: boolean;
@@ -31,7 +36,9 @@ export class ShowsubComponent implements OnInit {
   trackByValue: TrackByFunction<string> = (index, value) => value;
 
 
-  constructor(public subAdminService : SubAdminService , public router : Router  ,private modalService: NgbModal) { }
+  constructor(public subAdminService : SubAdminService , public router : Router  ,private modalService: NgbModal) {
+    this.data = new Array<any>()
+   }
 
   
   emailRegex =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -67,9 +74,15 @@ export class ShowsubComponent implements OnInit {
   }
   refreshuserlist(){
     var university = this.subAdminService.getUserUniversity();
-    this.subAdminService.showUnivHr(university).subscribe(
-      res =>{
-        this.subAdminService.users = res as SubAdmin[];
+    this.subAdminService.showUnivHr(university).subscribe( res =>{
+     // const { data, totalRecords } = res;
+      //  this.data = data;
+       // this.totalRecords = totalRecords;
+          console.log(res);
+          this.subAdminService.users= res as unknown as SubAdmin[];
+    //  this.totalRecords = data.results.length
+      
+       // this.subAdminService.users = res as unknown as SubAdmin[];
 
       },
       err =>{

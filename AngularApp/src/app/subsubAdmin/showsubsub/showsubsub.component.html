@@ -41,7 +41,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of  subsubAdminService.users | filter:firstName">
+        <tr *ngFor="let user of  subsubAdminService.users | filter:firstName | paginate:{id: 'listing_pagination',
+        itemsPerPage: 3,
+        currentPage: page,
+        totalItems:totalRecords}"
+ >
           <td>{{user.firstName}}</td>
           <td>{{user.middleName}}</td>
           <td>{{user.lastName}}</td>
@@ -75,6 +79,9 @@
     
       </tbody>
     </table>
+    <div>
+      <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
+    </div>
   </div>
 
   
