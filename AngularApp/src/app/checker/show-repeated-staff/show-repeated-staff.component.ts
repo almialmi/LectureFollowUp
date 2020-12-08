@@ -12,6 +12,9 @@ import {SubsubAdminService} from 'src/app/sharedsubsub/subsub-admin.service';
   styleUrls: ['./show-repeated-staff.component.css']
 })
 export class ShowRepeatedStaffComponent implements OnInit {
+  data : Array<any>
+  totalRecords : number
+  page:number = 1
   newRowIndex = 0;
   searchedKeyword: string;
 

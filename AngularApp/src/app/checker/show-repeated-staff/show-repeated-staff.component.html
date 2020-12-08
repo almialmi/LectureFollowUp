@@ -29,7 +29,10 @@
            </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of  checkerservice.RepeatedStaffs | filter:searchedKeyword">
+        <tr *ngFor="let user of  checkerservice.RepeatedStaffs | filter:searchedKeyword | paginate:{id: 'listing_pagination',
+        itemsPerPage: 3,
+        currentPage: page,
+        totalItems:totalRecords}">
             
         <td>{{user._id.firstName}}</td>
         <td>{{user._id.middleName}}</td>
@@ -41,6 +44,9 @@
     
       </tbody>
     </table>
+    <div>
+      <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
+    </div>
   </div>
 
 
