@@ -1,42 +1,37 @@
 
 
 <app-headersubsub></app-headersubsub>
-<div class="container">
-    
-    <div class="search-container">
-        <form action="#">
-          <input type="text" placeholder="Enter a name.." name="search" [(ngModel)]= "firstName">
-          <button type="submit" >search</button>
-        </form>
-      </div>
-
-
-
-
-
-
-
-</div>
-
-
 
 <div class="container table-responsive py-3"  >
-               
-    <table  class="table table-bordered">
+
+  <div class="container">
+      
+      <div style="margin-bottom: 20px;" class="search-container" > 
+          <form action="#" class="row">
+            <input type="text" placeholder="Enter a name.." name="search" [(ngModel)]= "firstName">
+            <button type="submit" >search</button>
+            <p style="margin-top: 20px;margin-left:100px ;">Export as XLSX by clicking the this button</p>
+           <button style="margin-left: 20px;" (click)="exportAsXLSX()"><i class="fa fa-file-excel-o" style="font-size:48px;color:blue"></i></button>
+          </form>
+        </div>
+  </div>
+
+  <div class="table-responsive">       
+    <table  class="table table-bordered" #staffTable>
       <thead>
         <tr>
-          <th>Firstname</th>
-          <th>Middlename</th>
-          <th>Lastname</th> 
-          <th>Email</th>
-          <th>Mobile</th>
-          <th>Universtiy</th>
-          <th>Compus</th>
-          <th>educationStatus</th> 
-           <th>role</th>
-          <th>study</th>
-          <th>educationField</th>
-          <th>department</th>
+          <th scope="col">firstName</th>
+          <th scope="col">middleName</th>
+          <th scope="col">lastName</th> 
+          <th scope="col">email</th>
+          <th scope="col">mobile</th>
+          <th scope="col">university</th>
+          <th scope="col">compass</th>
+          <th scope="col">educationStatus</th> 
+          <th scope="col">role</th>
+          <th scope="col">study</th>
+          <th scope="col">educationField</th>
+          <th scope="col">department</th>
           
         </tr>
       </thead>
@@ -57,7 +52,6 @@
           
           <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
           <td><a class="action-btn"><i class="fas fa-trash"
-        
             mwlConfirmationPopover
             [popoverTitle]="popoverTitle"
             [popoverMessage]="popoverMessage"
@@ -76,17 +70,10 @@
       </tbody>
     </table>
   </div>
+  </div>
 
   
 
-
-
-
-
-  
- 
-
-  
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Update</h4>

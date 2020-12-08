@@ -1,4 +1,4 @@
-import { Component, OnInit,TrackByFunction } from '@angular/core';
+import { Component, OnInit,TrackByFunction,ViewChild, ElementRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { SubsubAdmin } from '../../sharedsubsub/subsub-admin.model';;
 
@@ -31,6 +31,8 @@ export class ShowsubsubComponent implements OnInit {
   confirmClicked = true;
   cancelClicked = false;
   trackByValue: TrackByFunction<string> = (index, value) => value;
+  data: [][];
+  @ViewChild('staffTable')staffTable: ElementRef;
 
   constructor(public subsubAdminService : SubsubAdminService , public router : Router  ,private modalService: NgbModal) { }
 
@@ -127,6 +129,9 @@ export class ShowsubsubComponent implements OnInit {
   onEdit(user : SubsubAdmin){
     this.subsubAdminService.selectedStaff = user;
 
+  }
+  exportAsXLSX():void {
+    this.subsubAdminService.exportAsExcelFile(this.staffTable, 'UniversityStaff');
   }
 
   

@@ -28,6 +28,8 @@ router.post('/superAdminRegister',ctrlUser.Authenticate,jwtHelper.verifyJwtToken
 
 
 
+
+
 // login route for all user
 
 router.post('/login',ctrlUser.login);
@@ -35,6 +37,8 @@ router.post('/login',ctrlUser.login);
 // register university
 
 router.post('/registerUniversity',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.registerUniversity);
+
+router.post('/registerFromExcel',upload.registerFromExcel);
 
 router.get('/fetchUniversity' ,ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.fetchUniversity);
 

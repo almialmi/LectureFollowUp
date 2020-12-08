@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit,ViewChild} from '@angular/core';
 import {  SubsubAdminService } from 'src/app/sharedsubsub/subsub-admin.service';
 import { FormGroup, NgForm,FormBuilder}  from '@angular/forms';
 import { Router } from "@angular/router";
@@ -11,6 +11,7 @@ import {Department} from 'src/app/sharedsub/department.model';
 import { DataService } from 'src/app/subAdmin/registorsub/dataService';
 import { from } from 'rxjs';
 import { $ } from 'protractor';
+import * as XLSX from 'xlsx';
 
 
 
@@ -52,6 +53,10 @@ export class RegistorsubsubComponent implements OnInit {
     
 
   ];
+  data: [][];
+  dataValues = [];
+  editField: string;
+  @ViewChild('myInput') myInputVariable: ElementRef;
 
   constructor(public subsubAdminService : SubsubAdminService , public router : Router , private _dataService: DataService,private formBuilder: FormBuilder) {
     this.studys = this._dataService.getStudy();
@@ -77,6 +82,9 @@ export class RegistorsubsubComponent implements OnInit {
   ngOnInit(): void {
     
   }
+  reset() {
+    this.myInputVariable.nativeElement.value = '';
+  }
   onSelect(countryidd) {
     this.fields = this._dataService.getFields()
                  .filter((item)=> item.studyname == countryidd);
@@ -92,22 +100,13 @@ export class RegistorsubsubComponent implements OnInit {
         setTimeout(() => this.showSucessMessage = false,4000);
         this.resetForm(form);
        
-
-        
-       
       },
       err => {
         if( err.status == 422){
           this.serverErrorMessage = err.error.join('<br>');
-
-          
-          
         }
         else
           this.serverErrorMessage = 'something went wrong'
-        
-        
-
       }
     );
 
@@ -141,15 +140,20 @@ export class RegistorsubsubComponent implements OnInit {
 handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
 }
-onFormSubmit(form: NgForm){
-    this.subsubAdminService.postFromExcelFile(this.fileToUpload).subscribe(data => {
+registerFromExcelData(dataValues){
+    this.subsubAdminService.postFromExcelFile(dataValues).subscribe(data => {
       this.showSucessMessage = true;
        setTimeout(() => this.showSucessMessage = false,4000);  
-       form.form.reset();
        
- }, error => {
-     console.log(error);
-   });
+ },err => {
+  if( err.status == 422){
+    this.serverErrorMessage = err.error.join('<br>');
+  }
+  else
+    this.serverErrorMessage = 'something went wrong'
+
+    
+});
 
   
   
@@ -168,11 +172,59 @@ myCompus(){
  
 
 }
+onFileChange(evt: any) {
+  let workBook = null;
+  let jsonData = null;
+  //const target : DataTransfer =  <DataTransfer>(evt.target);
   
-  
+  //if (target.files.length !== 1) throw new Error('Cannot use multiple files');
   
 
+const reader: FileReader = new FileReader();
+  
+  const file = evt.target.files[0];
 
+  reader.onload = (event: any) => {
+    const data = reader.result;
+
+    workBook = XLSX.read(data,{ type: 'binary' , sheetRows:100});
+    jsonData = workBook.SheetNames.reduce((initial, name) => {
+      const sheet = workBook.Sheets[name];
+      initial[name] = XLSX.utils.sheet_to_json(sheet);
+      this.data = initial[name]
+     // console.log(initial);
+      return this.data;
+    }, {});
+    console.log(jsonData);
+
+    let rawData = jsonData;
+   // let dataValues = []; //For values
+    let dataKeys = []; //For keys
+    
+    for(let key in rawData) {   //Pay attention to the 'in'
+    this.dataValues.push(rawData[key]);
+    dataKeys.push(key);
+    }
+
+    for(let d of this.dataValues) {
+     // console.log("Staffs",d);
+     
+    }
+
+  };
+
+  reader.readAsBinaryString(file);
+
+}
+
+updateList(id: number, property: string, event: any) {
+  const editField = event.target.textContent;
+  this.data[id][property] = editField;
+}
+
+changeValue(id: number, property: string, event: any) {
+  this.editField = event.target.textContent;
+}
 
 }
 

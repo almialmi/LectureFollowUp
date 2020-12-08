@@ -4,7 +4,7 @@
 <h1 style="color: white;">registor</h1>
 <h1 style="color: white;">registor</h1>
 
-<form  #form="ngForm" (ngSubmit)="onFormSubmit(form)">
+<!-- <form  #form="ngForm" (ngSubmit)="onFormSubmit(form)">
 <div class="row" style="padding-top: 20px;padding-left: 50px;">
 <div class="form-group">
   <input style="color: black;" type="file" name="uploadfile" #file id="file" (change)="handleFileInput($event.target.files)" required>
@@ -18,9 +18,69 @@
 <div class="success" *ngIf="showSucessMessage">
   <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">upload Successfully</h1>
 
+</div> -->
+<div class="container py-5" >
+  <ul class="nav nav-tabs">
+    <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link active" data-toggle="tab" href="#home">Register Using Excel</a></li>
+    <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu1">Register Using Form</a></li>
+  </ul>
+<div class="tab-content">  
+
+<div class="container" id="home" class="tab-pane fade in active show">  
+ 
+<input #myInput type="file" (change)="onFileChange($event)" multiple="false" accept=".xlsx, .xls, .csv" style="margin-top: 50px;" />
+<button  (click)="reset()">X</button>
+
+<table style="margin-top: 50px;" class="table table-bordered highlight">
+  <thead>
+    <tr>
+      <th>FirstName</th>
+      <th>MiddleName</th>
+      <th>LastName</th> 
+      <th>Email</th>
+      <th>Mobile</th>
+      <th>University</th>
+      <th>Compass</th>
+      <th>educationField</th>
+      <th>educationStatus</th> 
+       <th>role</th>
+      <th>study</th>
+      <th>department</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of data; let id = index"  >
+      <td><span (keyup)="changeValue(id, 'firstName', $event)" (blur)="updateList(id, 'firstName', $event)" contenteditable="true" >{{data.firstName}}</span></td>
+      <td><span (keyup)="changeValue(id, 'middleName', $event)" (blur)="updateList(id, 'middleName', $event)" contenteditable="true">{{data.middleName}}</span></td>
+      <td><span (keyup)="changeValue(id, 'lastName', $event)" (blur)="updateList(id, 'lastName', $event)" contenteditable="true">{{data.lastName}}</span></td>
+      <td><span (keyup)="changeValue(id, 'email', $event)" (blur)="updateList(id, 'email', $event)" contenteditable="true"  ng-pattern="emailRegex">{{data.email}}</span></td>
+      <td><span (keyup)="changeValue(id, 'mobile', $event)" (blur)="updateList(id, 'mobile', $event)" contenteditable="true">{{data.mobile}}</span></td>
+      <td><span (keyup)="changeValue(id, 'university', $event)" (blur)="updateList(id, 'university', $event)" contenteditable="true">{{data.university}}</span></td>
+      <td><span (keyup)="changeValue(id, 'compass', $event)" (blur)="updateList(id, 'compass', $event)" contenteditable="true">{{data.compass}}</span></td>
+      <td><span (keyup)="changeValue(id, 'educationField', $event)" (blur)="updateList(id, 'educationField', $event)" contenteditable="true">{{data.educationField}}</span></td>
+      <td><span (keyup)="changeValue(id, 'educationStatus', $event)" (blur)="updateList(id, 'educationStatus', $event)" contenteditable="true">{{data.educationStatus}}</span></td>
+      <td><span (keyup)="changeValue(id, 'role', $event)" (blur)="updateList(id, 'role', $event)" contenteditable="true">{{data.role}}</span></td>
+      <td><span (keyup)="changeValue(id, 'study', $event)" (blur)="updateList(id, 'study', $event)" contenteditable="true">{{data.study}}</span></td>
+      <td><span (keyup)="changeValue(id, 'department', $event)" (blur)="updateList(id, 'department', $event)" contenteditable="true">{{data.department}}</span></td>
+      </tr>
+     </tbody>
+</table> 
+<div class="col-sm-6 text-center" style="margin-top: 50px;margin-left: -20px;">
+  <button style="background-color: #056f8f" type="submit" (click)="registerFromExcelData(data)">Register</button>
+</div>
+<div class="success" *ngIf="showSucessMessage">
+  <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">Register Successfully</h1>
+
+</div>
+<div class="alert" *ngIf="serverErrorMessage">
+  <h1 style="color: red;"> {{serverErrorMessage}} </h1>
+
+ </div>
 </div>
 
-<div class="container">
+
+<div  class="container" id="menu1"  class="tab-pane fade">
   <div class="cards py-5">
   <div class="col-md-12">
    
@@ -211,7 +271,9 @@
   </div>
 
 </div>
-<app-footer></app-footer>
+</div>
+</div>
+
 
 
 <script>  

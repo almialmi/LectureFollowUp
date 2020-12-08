@@ -83,3 +83,15 @@ const importExcelData2MongoDB= (filePath)=>{
     fs.unlinkSync(filePath);
    
 } 
+
+module.exports.registerFromExcel = (req,res,next)=>{
+    Lecture.insertMany(req.body).then((result) => { 
+        console.log(`Number of documents inserted: ${result.length}`);
+        return  res.json({
+            'msg': "successfully register "
+           });
+    }).catch(err => {
+        next(err);
+        
+      })
+}
