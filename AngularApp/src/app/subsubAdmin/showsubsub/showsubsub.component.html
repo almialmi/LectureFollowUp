@@ -20,7 +20,7 @@
 
 
 
-<div class="container table-responsive py-3"  >
+<div class="container  py-3"  >
                
     <table  class="table table-bordered">
       <thead>
@@ -32,11 +32,11 @@
           <th>Mobile</th>
           <th>Universtiy</th>
           <th>Compus</th>
-          <th>educationStatus</th> 
-           <th>role</th>
-          <th>study</th>
-          <th>educationField</th>
-          <th>department</th>
+        <!--  <th style="visibility: hidden;">educationStatus</th> 
+          <th style="visibility: hidden;">role</th>
+          <th style="visibility: hidden;">study</th>
+          <th style="visibility: hidden;">educationField</th>
+          <th style="visibility: hidden;">department</th>-->
           
         </tr>
       </thead>
@@ -53,11 +53,11 @@
           <td>{{user.mobile}}</td>
           <td>{{user.university.name}}</td>
           <td>{{user.compass}}</td>
-          <td>{{user.educationStatus}}</td>
-          <td>{{user.role}}</td>
-          <td>{{user.study}}</td>
-          <td>{{user.educationField}}</td>
-          <td>{{user.department}}</td>
+          <!--<td style="visibility: hidden;">{{user.educationStatus}}</td>
+          <td style="visibility: hidden;">{{user.role}}</td>
+          <td style="visibility: hidden;">{{user.study}}</td>
+          <td style="visibility: hidden;">{{user.educationField}}</td>
+          <td style="visibility: hidden;">{{user.department}}</td>-->
           
           <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
           <td><a class="action-btn"><i class="fas fa-trash"
@@ -75,6 +75,7 @@
          
             [appendToBody]="true">
           </i></a></td> 
+          <td><a class="action-btn"  (click)="open(contentt)" (click) = "onEdit(user)"><i class="fas fa-info"></i> </a></td>
         </tr>
     
       </tbody>
@@ -91,7 +92,92 @@
 
 
   
- 
+  <ng-template #contentt let-modal>
+    <div class="modal-header">
+     
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form   #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-3 col-form-label">firstName</label>
+          <div class="col-sm-8">
+            <input  readonly  class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.firstName" name="firstName"  placeholder="Enter firstname" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">middleName</label>
+          <div class="col-sm-8">
+            <input readonly  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.middleName" name="middleName"  placeholder="Enter middlename" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">lastName</label>
+          <div class="col-sm-8">
+            <input readonly class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.lastName" name="lastName"  placeholder="Enter lastname" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">email</label>
+          <div class="col-sm-8">
+            <input  readonly  class="form-control" type="text" #email="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.email" name="email"  placeholder="Enter email" required
+            [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">Mobile</label>
+          <div class="col-sm-8">
+            <input readonly class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.mobile" name="mobile"  placeholder="Enter mobile number" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
+          </div>
+        </div>
+
+       
+
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">educationStatus</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #educationStatus="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationStatus" name="educationStatus"  placeholder="Enter educationStatus" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationStatus.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">role</label>
+          <div class="col-sm-8">
+            <input readonly class="form-control" type="text" #role="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.role" name="role"  placeholder="Enter role" required
+              [ngClass]="{'invalid-textbox' : signUpForm.submitted && !role.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">educationField</label>
+          <div class="col-sm-8">
+            <input readonly class="form-control" type="text" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField" name="educationField"  placeholder="Enter educationField" required
+              [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationField.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">department</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #department="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.department" name="department"  placeholder="Enter department" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !department.valid}">
+          </div>
+        </div>
+       
+      </form>
+    
+    
+    </div>
+   
+  </ng-template>
 
   
   <ng-template #content let-modal>
