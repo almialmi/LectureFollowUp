@@ -12,7 +12,7 @@
 
 
 
-<div class="container table-responsive py-3"  >
+<div class="container table-responsive-sm py-5"  >
                
     <table  class="table table-bordered">
       <thead>
@@ -29,7 +29,7 @@
         </tr>
       </thead> 
       <tbody>
-        <tr *ngFor="let user of subAdminService.users | filter:firstName | paginate:{id: 'listing_pagination',
+        <tr  *ngFor="let user of subAdminService.users  | paginate:{id: 'listing_pagination',
         itemsPerPage: 3,
         currentPage: page,
         totalItems:totalRecords}"
@@ -41,7 +41,8 @@
           <td>{{user.mobile}}</td>
           <td>{{user.university.name}}</td>
           <td>{{user.role}}</td>
-          <td>{{user.compass}}</td>  
+          <td>{{user.compass}}</td> 
+           
           
           <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
         <!--  <td><a class="action-btn" (click)="onDelete(user._id)"><i class="fas fa-trash"></i></a></td> -->
@@ -67,6 +68,10 @@
       <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
     </div>
   </div> 
+
+
+
+  
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title" style="font-family: 'Times New Roman', Times, serif;">Update</h4>
@@ -149,6 +154,94 @@
     </div>
    
   </ng-template>
+
+
+  <!--this code is for showing full information for tables-->
+
+
+  <ng-template #contentt let-modal>
+    <div class="modal-header">
+     
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form  #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
+        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subAdminService.selectedUnivHr._id">
+        <div class="form-group">
+          <label for="exampleInputEmail1">First name:</label>
+          <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.firstName" name="firstName"  placeholder="Enter firstname" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
+          
+        </div>
+        <div *ngIf="signUpForm.submitted && !firstname.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Middle name:</label>
+          <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.middleName" name="middleName"  placeholder="Enter middlename" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
+          </div>
+          <div *ngIf="signUpForm.submitted && !middlename.valid">
+            <label style="color: red;" class="validation-message">this field is required </label>
+
+          </div>
+
+          <div class="form-group">
+            <label   for="exampleInputPassword1">Last name:</label>
+            <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.lastName" name="lastName"  placeholder="Enter lastname" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
+            </div>
+            <div *ngIf="signUpForm.submitted && !lastname.valid">
+              <label style="color: red;" class="validation-message">this field is required </label>
+
+            </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Email:</label>
+          <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.email" name="email"  placeholder="Enter email" required
+          [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
+        </div>
+        <div *ngIf="signUpForm.submitted && email.errors">
+          <label *ngIf="email.errors.required"style="color: red;" class="validation-message">this field is required </label>
+          <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
+
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">mobile:</label>
+          <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.mobile" name="mobile"  placeholder="Enter mobile number" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
+        </div>
+        <div *ngIf="signUpForm.submitted && !mobile.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div>
+      
+     
+        <div class="form-group">
+          <label for="exampleInputPassword1">Compass:</label>
+          <input   class="form-control" type="text" #compass="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.compass" name="compass"  placeholder="Enter compass" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !compass.valid}">
+        </div>
+        <div *ngIf="signUpForm.submitted && !compass.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>--> 
+             <input style="background-color:#056f8f ;" type="submit" value="Update">
+           </div>
+       
+      </form>
+      <div class="success" *ngIf="showSucessMessage">
+        <h1 style="color: green; font-family: 'Times New Roman';" >updated successfully</h1>
+
+      </div>
+    </div>
+   
+  </ng-template>
+  
   
   
   <script>

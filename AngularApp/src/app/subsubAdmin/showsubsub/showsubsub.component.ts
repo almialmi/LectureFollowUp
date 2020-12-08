@@ -17,8 +17,8 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 })
 export class ShowsubsubComponent implements OnInit {
   data : Array<any>
-  totalRecords : Number
-  page:Number = 1
+  totalRecords : number
+  page:number = 1
   names : any;
   firstName : '';
   closeResult = '';
