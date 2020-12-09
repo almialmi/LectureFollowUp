@@ -10,15 +10,22 @@ module.exports.lectureRegister = (req,res,next)=>{
     lecture.firstName =req.body.firstName;
     lecture.middleName = req.body.middleName;
     lecture.lastName = req.body.lastName;
+    lecture.age = req.body.age;
     lecture.email = req.body.email;
     lecture.mobile = req.body.mobile;
     lecture.university = req.body.university;
     lecture.compass=req.body.compass;
-    lecture.educationStatus = req.body.educationStatus;
+    lecture.professionalTitle = req.body.professionalTitle;
     lecture.role = req.body.role;
     lecture.study = req.body.study;
     lecture.educationField = req.body.educationField;
     lecture.department = req.body.department;
+    lecture.workExperience = req.body.workExperience;
+    lecture.certificate = req.body.certificate;
+    lecture.researchArea = req.body.researchArea;
+    lecture.futureResearchInterest = req.body.futureResearchInterest;
+    lecture.numberOfPublications = req.body.numberOfPublications;
+    lecture.homeBase = req.body.homeBase; 
 
     lecture.save((err,doc)=>{
         if(!err)

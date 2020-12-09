@@ -37,15 +37,23 @@
       <th>FirstName</th>
       <th>MiddleName</th>
       <th>LastName</th> 
+      <th>Age</th>
+      <th>age</th>
       <th>Email</th>
       <th>Mobile</th>
       <th>University</th>
       <th>Compass</th>
       <th>educationField</th>
-      <th>educationStatus</th> 
-       <th>role</th>
+      <th>professionalTitle</th> 
+      <th>role</th>
       <th>study</th>
       <th>department</th>
+      <th>WorkExperience</th>
+      <th>Certificate</th>
+      <th>researchArea</th>
+      <th>futureResearchInterest</th>
+      <th>NumberOfPublications</th>
+      <th>homeBase</th>
       
     </tr>
   </thead>
@@ -54,20 +62,27 @@
       <td><span (keyup)="changeValue(id, 'firstName', $event)" (blur)="updateList(id, 'firstName', $event)" contenteditable="true" >{{data.firstName}}</span></td>
       <td><span (keyup)="changeValue(id, 'middleName', $event)" (blur)="updateList(id, 'middleName', $event)" contenteditable="true">{{data.middleName}}</span></td>
       <td><span (keyup)="changeValue(id, 'lastName', $event)" (blur)="updateList(id, 'lastName', $event)" contenteditable="true">{{data.lastName}}</span></td>
+      <td><span (keyup)="changeValue(id, 'age', $event)" (blur)="updateList(id, 'age', $event)" contenteditable="true">{{data.age}}</span></td>
       <td><span (keyup)="changeValue(id, 'email', $event)" (blur)="updateList(id, 'email', $event)" contenteditable="true"  ng-pattern="emailRegex">{{data.email}}</span></td>
       <td><span (keyup)="changeValue(id, 'mobile', $event)" (blur)="updateList(id, 'mobile', $event)" contenteditable="true">{{data.mobile}}</span></td>
       <td><span (keyup)="changeValue(id, 'university', $event)" (blur)="updateList(id, 'university', $event)" contenteditable="true">{{data.university}}</span></td>
       <td><span (keyup)="changeValue(id, 'compass', $event)" (blur)="updateList(id, 'compass', $event)" contenteditable="true">{{data.compass}}</span></td>
       <td><span (keyup)="changeValue(id, 'educationField', $event)" (blur)="updateList(id, 'educationField', $event)" contenteditable="true">{{data.educationField}}</span></td>
-      <td><span (keyup)="changeValue(id, 'educationStatus', $event)" (blur)="updateList(id, 'educationStatus', $event)" contenteditable="true">{{data.educationStatus}}</span></td>
+      <td><span (keyup)="changeValue(id, 'educationStatus', $event)" (blur)="updateList(id, 'educationStatus', $event)" contenteditable="true">{{data.professionalTitle}}</span></td>
       <td><span (keyup)="changeValue(id, 'role', $event)" (blur)="updateList(id, 'role', $event)" contenteditable="true">{{data.role}}</span></td>
       <td><span (keyup)="changeValue(id, 'study', $event)" (blur)="updateList(id, 'study', $event)" contenteditable="true">{{data.study}}</span></td>
       <td><span (keyup)="changeValue(id, 'department', $event)" (blur)="updateList(id, 'department', $event)" contenteditable="true">{{data.department}}</span></td>
+      <td><span (keyup)="changeValue(id, 'workExperience', $event)" (blur)="updateList(id, 'workExperience', $event)" contenteditable="true">{{data.workExperience}}</span></td>
+      <td><span (keyup)="changeValue(id, 'certificate', $event)" (blur)="updateList(id, 'certificate', $event)" contenteditable="true">{{data.certificate}}</span></td>
+      <td><span (keyup)="changeValue(id, 'researchArea', $event)" (blur)="updateList(id, 'researchArea', $event)" contenteditable="true">{{data.researchArea}</span></td>
+      <td><span (keyup)="changeValue(id, 'futureResearchInterest', $event)" (blur)="updateList(id, 'futureResearchInterest', $event)" contenteditable="true">{{data.futureResearchInterest}}</span></td>
+      <td><span (keyup)="changeValue(id, 'numberOfPublications', $event)" (blur)="updateList(id, 'numberOfPublications', $event)" contenteditable="true">{{data.numberOfPublications}}</span></td>
+      <td><span (keyup)="changeValue(id, 'homeBase', $event)" (blur)="updateList(id, 'homeBase', $event)" contenteditable="true">{{data.homeBase}}</span></td>
       </tr>
      </tbody>
 </table> 
 <div class="col-sm-6 text-center" style="margin-top: 50px;margin-left: -20px;">
-  <button style="background-color: #056f8f" type="submit" (click)="registerFromExcelData(data)">Register</button>
+  <button style="background-color: #056f8f" type="submit"  (click)="registerFromExcelData(data)">Register</button>
 </div>
 <div class="success" *ngIf="showSucessMessage">
   <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">Register Successfully</h1>
@@ -161,6 +176,15 @@
                       <label style="color: red;" class="validation-message">this field is required </label>
     
                     </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Age:</label>
+                      <input  class="form-control" type="number" #age="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.age" name="age"  placeholder="Enter Age" required
+                      [ngClass]="{'invalid-textbox' : signUpForm.submitted && !age.valid}">
+                      </div>
+                      <div *ngIf="signUpForm.submitted && !age.valid">
+                        <label style="color: red;" class="validation-message">this field is required </label>
+      
+                      </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Email:</label>
                   <input   class="form-control" type="email" #email="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.email" name="email"  placeholder="Enter email" required
@@ -206,11 +230,11 @@
                 
                
                   <div class="form-group">
-                      <label   for="exampleInputPassword1">educationStatus:</label>
-                      <input class="form-control" type="text" #educationStatus="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationStatus" name="educationStatus"  placeholder="Enter educationStatus" required
-                      [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationStatus.valid}">
+                      <label   for="exampleInputPassword1">professionalTitle:</label>
+                      <input class="form-control" type="text" #professionalTitle="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.professionalTitle" name="professionalTitle"  placeholder="Enter educationStatus" required
+                      [ngClass]="{'invalid-textbox' : signUpForm.submitted && !professionalTitle.valid}">
                       </div>
-                      <div *ngIf="signUpForm.submitted && !educationStatus.valid">
+                      <div *ngIf="signUpForm.submitted && !professionalTitle.valid">
                         <label style="color: red;" class="validation-message">this field is required </label>
       
                 </div>
@@ -241,7 +265,43 @@
                     <div *ngIf="signUpForm.submitted && !department.valid">
                       <label style="color: red;" class="validation-message">this field is required </label>
     
-                   </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">WorkExperience:</label>
+                  <input  class="form-control" type="number" #workExperience="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.workExperience" name="workExperience"  placeholder="Enter workExperience" required
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !workExperience.valid}">
+                </div>
+                  <div *ngIf="signUpForm.submitted && !workExperience.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Certificate:</label>
+                    <input  class="form-control" type="text" #certificate="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.certificate" name="certificate"  placeholder="Enter certificate"
+                    [ngClass]="{'invalid-textbox' : signUpForm.submitted && !workExperience.valid}">
+                  </div> 
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">ResearchArea:</label>
+                    <input  class="form-control" type="text" #researchArea="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.researchArea" name="researchArea"  placeholder="Enter researchArea" 
+                    [ngClass]="{'invalid-textbox' : signUpForm.submitted && !researchArea.valid}">
+                  </div> 
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">futureResearchInterest:</label>
+                    <input  class="form-control" type="text" #futureResearchInterest="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.futureResearchInterest" name="futureResearchInterest"  placeholder="Enter futureResearchInterest"
+                    [ngClass]="{'invalid-textbox' : signUpForm.submitted && !futureResearchInterest.valid}">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">NumberOfPublications:</label>
+                    <input  class="form-control" type="text" #numberOfPublications="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.numberOfPublications" name="numberOfPublications"  placeholder="Enter numberOfPublications" 
+                    [ngClass]="{'invalid-textbox' : signUpForm.submitted && !numberOfPublications.valid}">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">HomeBase:</label>
+                    <input  class="form-control" type="text" #homeBase="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.homeBase" name="homeBase"  placeholder="Enter homeBase"
+                    [ngClass]="{'invalid-textbox' : signUpForm.submitted && !homeBase.valid}">
+                  </div>
+                  
+
               <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 
               <input style="background-color: #056f8f" type="submit" value="Registor">
               </form>

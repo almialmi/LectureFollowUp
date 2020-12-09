@@ -22,16 +22,25 @@ export class SubsubAdminService {
     firstName : '',
     middleName: '',
     lastName:'',
+    age:0,
     email : '',
     mobile: '',
     university: '',
     compass:'',
-    educationStatus:'',
+    professionalTitle:'',
     role: '',
     study: '',
     educationField: '',
     department : '',
-    isViewed:false
+    isViewed:false,
+    workExperience:0,
+    certificate:'',
+    researchArea:'',
+    futureResearchInterest:'',
+    numberOfPublications:'',
+    homeBase:'',
+
+
 
   };
     

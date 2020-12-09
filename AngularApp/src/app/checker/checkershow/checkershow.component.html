@@ -24,12 +24,19 @@
             <th>Email</th>
             <th>Mobile</th>
             <th>University</th>
-            <th>educationStatus</th>
+            <th>professionalTitle</th>
             <th>role</th>
             <th>study</th>
             <th>compass</th>
             <th>educationField</th>
             <th>Department</th>
+            <th>age</th>
+            <th>workExperience</th>
+            <th>certificate</th>
+            <th>researchArea</th>
+            <th>futureResearchInterest</th>
+            <th>numberOfPublications</th>
+            <th>homeBase</th>
             <th>Match</th>
             
            </tr>
@@ -42,12 +49,19 @@
             <td>{{user.email}}</td>
             <td>{{user.mobile}}</td>
             <td>{{user.university.name}}</td>
-            <td>{{user.educationStatus}}</td>
+            <td>{{user.professionalTitle}}</td>
             <td>{{user.role}}</td>
             <td>{{user.study}}</td>
             <td>{{user.compass}}</td>
             <td>{{user.educationField}}</td>
             <td>{{user.department}}</td>
+            <td>{{user.age}}</td>
+            <td>{{user.workExperience}}</td>
+            <td>{{user.certificate}}</td>
+            <td>{{user.researchArea}}</td>
+            <td>{{user.futureResearchInterest}}</td>
+            <td>{{user.numberOfPublications}}</td>
+            <td>{{user.homeBase}}</td>
 
            <td><a class="action-btn" ><i class="fas fa-check-circle"  (click)="searchAndMatchL(user)" ></i> </a></td>
            <td> <a class="action-btn" ><i class="fas {{ user.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"

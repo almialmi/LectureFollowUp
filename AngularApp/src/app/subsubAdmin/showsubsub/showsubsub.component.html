@@ -2,7 +2,7 @@
 
 <app-headersubsub></app-headersubsub>
 
-<div class="container table-responsive py-3"  >
+<div class="container"  >
 
   <div class="container">
       
@@ -16,23 +16,29 @@
         </div>
   </div>
 
-  <div class="table-responsive">       
+  <div class="container table-responsive-sm">   
     <table  class="table table-bordered" #staffTable>
       <thead>
         <tr>
-          <th scope="col">firstName</th>
-          <th scope="col">middleName</th>
-          <th scope="col">lastName</th> 
-          <th scope="col">email</th>
-          <th scope="col">mobile</th>
-          <th scope="col">university</th>
-          <th scope="col">compass</th>
-          <th scope="col">educationStatus</th> 
-          <th scope="col">role</th>
-          <th scope="col">study</th>
-          <th scope="col">educationField</th>
-          <th scope="col">department</th>
-          
+          <th>firstName</th>
+          <th>middleName</th>
+          <th>lastName</th> 
+          <th>email</th>
+          <th>mobile</th>
+          <th>university</th>
+          <th>compass</th>  
+          <th>professionalTitle</th>
+          <th>role</th>
+          <th>study</th>
+          <th>educationField</th>
+          <th>department</th>
+          <th>age</th>
+          <th>workExperience</th>
+          <th>certificate</th>
+          <th>researchArea</th>
+          <th>futureResearchInterest</th>
+          <th>numberOfPublications</th>
+          <th>homeBase</th>
         </tr>
       </thead>
       <tbody>
@@ -44,11 +50,18 @@
           <td>{{user.mobile}}</td>
           <td>{{user.university.name}}</td>
           <td>{{user.compass}}</td>
-          <td>{{user.educationStatus}}</td>
+          <td>{{user.professionalTitle}}</td>
           <td>{{user.role}}</td>
           <td>{{user.study}}</td>
           <td>{{user.educationField}}</td>
           <td>{{user.department}}</td>
+          <td>{{user.age}}</td>
+          <td>{{user.workExperience}}</td>
+          <td>{{user.certificate}}</td>
+          <td>{{user.researchArea}}</td>
+          <td>{{user.futureResearchInterest}}</td>
+          <td>{{user.numberOfPublications}}</td>
+          <td>{{user.homeBase}}</td>
           
           <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
           <td><a class="action-btn"><i class="fas fa-trash"
@@ -70,7 +83,8 @@
       </tbody>
     </table>
   </div>
-  </div>
+</div> 
+  
 
   
 
@@ -135,11 +149,11 @@
         </div>
        
         <div class="form-group">
-            <label for="exampleInputPassword1">educationStatus:</label>
-            <input  class="form-control" type="text" #educationStatus="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationStatus" name="educationStatus"  placeholder="Enter educationStatus" required
-            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationStatus.valid}">
+            <label for="exampleInputPassword1">professionalTitle</label>
+            <input  class="form-control" type="text" #professionalTitle="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.professionalTitle" name="professionalTitle"  placeholder="Enter educationStatus" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !professionalTitle.valid}">
           </div>
-          <div *ngIf="signUpForm.submitted && !educationStatus.valid">
+          <div *ngIf="signUpForm.submitted && !professionalTitle.valid">
             <label style="color: red;" class="validation-message">this field is required </label>
 
           </div>
@@ -179,6 +193,49 @@
               <label style="color: red;" class="validation-message">this field is required </label>
 
             </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Age:</label>
+              <input  class="form-control" type="number" #age="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.age" name="age"  placeholder="Enter Age" required
+              [ngClass]="{'invalid-textbox' : signUpForm.submitted && !age.valid}">
+              </div>
+              <div *ngIf="signUpForm.submitted && !age.valid">
+                <label style="color: red;" class="validation-message">this field is required </label>
+
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">WorkExperience:</label>
+                <input  class="form-control" type="number" #workExperience="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.workExperience" name="workExperience"  placeholder="Enter workExperience" required
+                [ngClass]="{'invalid-textbox' : signUpForm.submitted && !workExperience.valid}">
+              </div>
+                <div *ngIf="signUpForm.submitted && !workExperience.valid">
+                  <label style="color: red;" class="validation-message">this field is required </label>
+
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Certificate:</label>
+                  <input  class="form-control" type="text" #certificate="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.certificate" name="certificate"  placeholder="Enter certificate"
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !workExperience.valid}">
+                </div> 
+                <div class="form-group">
+                  <label for="exampleInputPassword1">ResearchArea:</label>
+                  <input  class="form-control" type="text" #researchArea="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.researchArea" name="researchArea"  placeholder="Enter researchArea" 
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !researchArea.valid}">
+                </div> 
+                <div class="form-group">
+                  <label for="exampleInputPassword1">futureResearchInterest:</label>
+                  <input  class="form-control" type="text" #futureResearchInterest="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.futureResearchInterest" name="futureResearchInterest"  placeholder="Enter futureResearchInterest"
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !futureResearchInterest.valid}">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">NumberOfPublications:</label>
+                  <input  class="form-control" type="text" #numberOfPublications="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.numberOfPublications" name="numberOfPublications"  placeholder="Enter numberOfPublications" 
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !numberOfPublications.valid}">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">HomeBase:</label>
+                  <input  class="form-control" type="text" #homeBase="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.homeBase" name="homeBase"  placeholder="Enter homeBase"
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !homeBase.valid}">
+                </div>
             
          
      

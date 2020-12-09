@@ -276,8 +276,8 @@ module.exports.fetchUniversityStaff = (req,res)=>{
 module.exports.updateUniversityStaffProfile = (req,res)=>{
     
     // Validate Request
-    if(!req.body.firstName && !req.body.middleName && !req.body.lastName && !req.body.email && 
-        !req.body.mobile && !req.body.university&& !req.body.educationStatus && !req.body.role  && 
+    if(!req.body.firstName && !req.body.middleName && !req.body.age && !req.body.lastName && !req.body.email && 
+        !req.body.mobile && !req.body.university&& !req.body.professionalTitle && !req.body.role  && 
         !req.body.study && !req.body.educationField && !req.body.department) {
         return res.status(400).send({
             message: "For University staff this contents can not be empty"
@@ -291,13 +291,20 @@ module.exports.updateUniversityStaffProfile = (req,res)=>{
             firstName:req.body.firstName,
             middleName:req.body.middleName,
             lastName:req.body.lastName,
+            age:req.body.age,
             email:req.body.email,
             mobile:req.body.mobile,
-            educationStatus:req.body.educationStatus,
+            educationStatus:req.body.professionalTitle,
             role:req.body.role,
             study:req.body.study,
             educationField:req.body.educationField,
-            department:req.body.department
+            department:req.body.department,
+            workExperience:req.body.workExperience,
+            certificate : req.body.certificate,
+            researchArea : req.body.researchArea,
+            futureResearchInterest : req.body.futureResearchInterest,
+            numberOfPublications : req.body.numberOfPublications,
+            homeBase : req.body.homeBase
 
         }
         

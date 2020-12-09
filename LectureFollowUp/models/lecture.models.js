@@ -13,6 +13,10 @@ var lectureSchema = new mongoose.Schema({
         type:String,
         required:true
      },
+     age:{
+         type:String,
+         required:true
+     },
     email:{
         type:String,
         required:true
@@ -32,7 +36,7 @@ var lectureSchema = new mongoose.Schema({
         required:true
 
     },
-    educationStatus:{
+    professionalTitle:{
             type:String,
             required:true
     },
@@ -57,7 +61,30 @@ var lectureSchema = new mongoose.Schema({
         type:Boolean,
         index:true,
         default:false
+    },
+    workExperience:{
+        type:Number,
+        required:true
+    },
+    certificate:{
+        type:String
+    },
+    researchArea:{
+        type:String
+    },
+    futureResearchInterest:{
+        type:String
+    },
+    numberOfPublications:{
+        type:Number
+
+    },
+    homeBase:{
+        type:String
     }
+
+
+
     
 },{timestamps:true});
 
