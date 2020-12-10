@@ -28,16 +28,16 @@
 
 <div class="container" id="home" class="tab-pane fade in active show">  
  
-<input #myInput type="file" (change)="onFileChange($event)" multiple="false" accept=".xlsx, .xls, .csv" style="margin-top: 50px;" />
+<input #myInput type="file" (change)="onFileChange($event)" (change)="setShowTrue($event.target.value)" multiple="false" accept=".xlsx, .xls, .csv" style="margin-top: 50px;" />
 <button  (click)="reset()">X</button>
 
+<div class="container" *ngIf="show">
 <table style="margin-top: 50px;" class="table table-bordered highlight">
   <thead>
     <tr>
       <th>FirstName</th>
       <th>MiddleName</th>
       <th>LastName</th> 
-      <th>Age</th>
       <th>age</th>
       <th>Email</th>
       <th>Mobile</th>
@@ -81,7 +81,8 @@
       </tr>
      </tbody>
 </table> 
-<div class="col-sm-6 text-center" style="margin-top: 50px;margin-left: -20px;">
+</div>
+<div class="col-sm-6 text-center" style="margin-top: 50px;margin-left: -20px;" *ngIf="show">
   <button style="background-color: #056f8f" type="submit"  (click)="registerFromExcelData(data)">Register</button>
 </div>
 <div class="success" *ngIf="showSucessMessage">

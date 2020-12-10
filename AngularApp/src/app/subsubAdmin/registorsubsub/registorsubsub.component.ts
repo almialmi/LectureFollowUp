@@ -233,6 +233,12 @@ changeValue(id: number, property: string, event: any) {
   this.editField = event.target.textContent;
 }
 
+show:boolean=false;
+setShowTrue(name:any){
+  console.log(name);
+  this.show = true;
+}
+
 }
 
 
