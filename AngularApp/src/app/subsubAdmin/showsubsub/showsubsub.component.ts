@@ -34,7 +34,7 @@ export class ShowsubsubComponent implements OnInit {
   confirmClicked = true;
   cancelClicked = false;
   trackByValue: TrackByFunction<string> = (index, value) => value;
-  data: [][];
+ // data: [][];
   @ViewChild('staffTable')staffTable: ElementRef;
 
   constructor(public subsubAdminService : SubsubAdminService , public router : Router  ,private modalService: NgbModal) { }

@@ -17,7 +17,10 @@
   </div>
 
 
-  <div class="container table-responsive-sm">   
+  
+
+<div class="container  py-3"  >
+               
     <table  class="table table-bordered" #staffTable>
       <thead>
         <tr>
@@ -27,39 +30,22 @@
           <th>email</th>
           <th>mobile</th>
           <th>university</th>
-          <th>compass</th>  
-          <th>professionalTitle</th>
-          <th>role</th>
-          <th>study</th>
-          <th>educationField</th>
-          <th>department</th>
-          <th>age</th>
-          <th>workExperience</th>
-          <th>certificate</th>
-          <th>researchArea</th>
-          <th>futureResearchInterest</th>
-          <th>numberOfPublications</th>
-          <th>homeBase</th>
-
-<div class="container  py-3"  >
-               
-    <table  class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Firstname</th>
-          <th>Middlename</th>
-          <th>Lastname</th> 
-          <th>Email</th>
-          <th>Mobile</th>
-          <th>Universtiy</th>
-          <th>Compus</th>
-        <!--  <th style="visibility: hidden;">educationStatus</th> 
+          <th>compass</th>
+        <!--  <th style="visibility: hidden;">professionalTitle</th> 
           <th style="visibility: hidden;">role</th>
           <th style="visibility: hidden;">study</th>
           <th style="visibility: hidden;">educationField</th>
-          <th style="visibility: hidden;">department</th>-->
+          <th style="visibility: hidden;">department</th>
+          <th style="visibility: hidden;">age</th>
+          <th style="visibility: hidden;">workExperience</th>
+          <th style="visibility: hidden;">certificate</th>
+          <th style="visibility: hidden;">researchArea</th>
+          <th style="visibility: hidden;">futureResearchInterest</th>
+          <th style="visibility: hidden;">numberOfPublications</th>
+          <th style="visibility: hidden;">homeBase</th>
+        
+        -->
           
->>>>>>> 2b0b47f0b982fc9378ec553533c9a3eb1d6668de
         </tr>
       </thead>
       <tbody>
@@ -75,25 +61,18 @@
           <td>{{user.mobile}}</td>
           <td>{{user.university.name}}</td>
           <td>{{user.compass}}</td>
-
-          <td>{{user.professionalTitle}}</td>
-          <td>{{user.role}}</td>
-          <td>{{user.study}}</td>
-          <td>{{user.educationField}}</td>
-          <td>{{user.department}}</td>
-          <td>{{user.age}}</td>
-          <td>{{user.workExperience}}</td>
-          <td>{{user.certificate}}</td>
-          <td>{{user.researchArea}}</td>
-          <td>{{user.futureResearchInterest}}</td>
-          <td>{{user.numberOfPublications}}</td>
-          <td>{{user.homeBase}}</td>
-
-          <!--<td style="visibility: hidden;">{{user.educationStatus}}</td>
+         
+         <!-- <td style="visibility: hidden;">{{user.professionalTitle}}</td>
           <td style="visibility: hidden;">{{user.role}}</td>
           <td style="visibility: hidden;">{{user.study}}</td>
-          <td style="visibility: hidden;">{{user.educationField}}</td>
-          <td style="visibility: hidden;">{{user.department}}</td>-->
+          <td style="visibility: hidden;">{{user.department}}</td>
+          <td style="visibility: hidden;">{{user.age}}</td>
+          <td style="visibility: hidden;">{{user.workExperience}}</td>
+          <td style="visibility: hidden;">{{user.certificate}}</td>
+          <td style="visibility: hidden;">{{user.researchArea}}</td>
+          <td style="visibility: hidden;">{{user.futureResearchInterest}}</td>
+          <td style="visibility: hidden;">{{user.numberOfPublications}}</td>
+          <td style="visibility: hidden;">{{user.homeBase}}</td>-->
 
           
           <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
@@ -120,11 +99,8 @@
       <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
     </div>
   </div>
-</div> 
-  
 
   
-
 
   <ng-template #contentt let-modal>
     <div class="modal-header">
@@ -175,13 +151,11 @@
           </div>
         </div>
 
-       
-
         <div class="form-group row">
-          <label for="inputPassword" class="col-sm-3 col-form-label">educationStatus</label>
+          <label for="inputPassword" class="col-sm-3 col-form-label">professionalTitle</label>
           <div class="col-sm-8">
-            <input  readonly class="form-control" type="text" #educationStatus="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationStatus" name="educationStatus"  placeholder="Enter educationStatus" required
-            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationStatus.valid}">
+            <input readonly class="form-control" type="text" #professionalTitle="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.professionalTitle" name="professionalTitle"  placeholder="Enter professionalTitle" required
+              [ngClass]="{'invalid-textbox' : signUpForm.submitted && !professionalTitle.valid}">
           </div>
         </div>
         <div class="form-group row">
@@ -205,6 +179,63 @@
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !department.valid}">
           </div>
         </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">study</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #study="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.study" name="study"  placeholder="Enter study" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !study.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">age</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #age="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.age" name="age"  placeholder="Enter age" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !age.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">workExperience</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #workExperience="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.workExperience" name="workExperience"  placeholder="Enter workExperience" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !workExperience.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">certificate</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #certificate="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.certificate" name="certificate"  placeholder="Enter certificate" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !certificate.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">researchArea</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #researchArea="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.researchArea" name="researchArea"  placeholder="Enter researchArea" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !researchArea.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">futureResearchInterest</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #futureResearchInterest="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.futureResearchInterest" name="futureResearchInterest"  placeholder="Enter futureResearchInterest" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !futureResearchInterest.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">numberOfPublications</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #numberOfPublications="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.numberOfPublications" name="numberOfPublications"  placeholder="Enter numberOfPublications" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !numberOfPublications.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">homeBase</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #homeBase="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.homeBase" name="homeBase"  placeholder="Enter homeBase" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !homeBase.valid}">
+          </div>
+        </div>
+
        
       </form>
     
@@ -212,7 +243,6 @@
     </div>
    
   </ng-template>
-
 
   <ng-template #content let-modal>
     <div class="modal-header">
@@ -278,7 +308,7 @@
             <label for="exampleInputPassword1">professionalTitle</label>
             <input  class="form-control" type="text" #professionalTitle="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.professionalTitle" name="professionalTitle"  placeholder="Enter educationStatus" required
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !professionalTitle.valid}">
-          </div>
+        </div>
           <div *ngIf="signUpForm.submitted && !professionalTitle.valid">
             <label style="color: red;" class="validation-message">this field is required </label>
 
@@ -373,34 +403,14 @@
        
       </form>
       <div class="success" *ngIf="showSucessMessage">
-        <h1 style="color: green; font-family: 'Times New Roman';" >updated succesfully</h1>
+        <h1 style="color: green; font-family: 'Times New Roman';" >updated successfully</h1>
 
       </div>
     </div>
    
   </ng-template>
+</div>
   
- 
-  
- 
-  
-   
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
   <script>
     function openForm() {
