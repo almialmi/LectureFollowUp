@@ -16,6 +16,9 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
   providers : [SubsubAdminService]
 })
 export class ShowsubsubComponent implements OnInit {
+  data : Array<any>
+  totalRecords : number
+  page:number = 1
   names : any;
   firstName : '';
   closeResult = '';
@@ -72,6 +75,14 @@ export class ShowsubsubComponent implements OnInit {
     var compass= this.subsubAdminService.getUserCompass()
     this.subsubAdminService.showUniversityStaff(university,compass).subscribe(
       res =>{
+      //  this.subsubAdminService.users = res as SubsubAdmin[];
+        console.log( this.subsubAdminService.users)
+
+
+       //const { data, totalRecords } = res;
+       // this.data = data;
+       // this.totalRecords = totalRecords;
+        console.log(res);
         this.subsubAdminService.users = res as SubsubAdmin[];
 
       },

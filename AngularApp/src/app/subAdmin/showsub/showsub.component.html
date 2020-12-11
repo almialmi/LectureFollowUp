@@ -12,9 +12,9 @@
 
 
 
-<div class="container table-responsive py-3"  >
+<div class="container  py-5"  >
                
-    <table  class="table table-bordered ">
+    <table  class="table table-bordered">
       <thead>
         <tr>
           <th>Firstname</th>
@@ -27,9 +27,13 @@
           <th>Compass</th>
           
         </tr>
-      </thead>
+      </thead> 
       <tbody>
-        <tr *ngFor="let user of  subAdminService.users | filter:searchedKeyword" >
+        <tr  *ngFor="let user of subAdminService.users  | paginate:{id: 'listing_pagination',
+        itemsPerPage: 3,
+        currentPage: page,
+        totalItems:totalRecords}"
+ >
           <td>{{user.firstName}}</td>
           <td>{{user.middleName}}</td>
           <td>{{user.lastName}}</td>
@@ -37,7 +41,8 @@
           <td>{{user.mobile}}</td>
           <td>{{user.university.name}}</td>
           <td>{{user.role}}</td>
-          <td>{{user.compass}}</td>  
+          <td>{{user.compass}}</td> 
+           
           
           <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
         <!--  <td><a class="action-btn" (click)="onDelete(user._id)"><i class="fas fa-trash"></i></a></td> -->
@@ -55,11 +60,19 @@
           cancelButtonType="outline-secondary"
           [appendToBody]="true">
          </i></a></td>
+        
         </tr>
     
       </tbody>
     </table>
+    <div>
+      <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
+    </div>
   </div> 
+
+
+
+  
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title" style="font-family: 'Times New Roman', Times, serif;">Update</h4>
@@ -142,6 +155,12 @@
     </div>
    
   </ng-template>
+
+
+  <!--this code is for showing full information for tables-->
+
+
+  
   
   
   <script>
