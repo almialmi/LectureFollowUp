@@ -38,7 +38,7 @@
       <th>FirstName</th>
       <th>MiddleName</th>
       <th>LastName</th> 
-      <th>age</th>
+      <th>Gender</th>
       <th>Email</th>
       <th>Mobile</th>
       <th>University</th>
@@ -62,7 +62,7 @@
       <td><span (keyup)="changeValue(id, 'firstName', $event)" (blur)="updateList(id, 'firstName', $event)" contenteditable="true" >{{data.firstName}}</span></td>
       <td><span (keyup)="changeValue(id, 'middleName', $event)" (blur)="updateList(id, 'middleName', $event)" contenteditable="true">{{data.middleName}}</span></td>
       <td><span (keyup)="changeValue(id, 'lastName', $event)" (blur)="updateList(id, 'lastName', $event)" contenteditable="true">{{data.lastName}}</span></td>
-      <td><span (keyup)="changeValue(id, 'age', $event)" (blur)="updateList(id, 'age', $event)" contenteditable="true">{{data.age}}</span></td>
+      <td><span (keyup)="changeValue(id, 'gender', $event)" (blur)="updateList(id, 'gender', $event)" contenteditable="true">{{data.gender}}</span></td>
       <td><span (keyup)="changeValue(id, 'email', $event)" (blur)="updateList(id, 'email', $event)" contenteditable="true"  ng-pattern="emailRegex">{{data.email}}</span></td>
       <td><span (keyup)="changeValue(id, 'mobile', $event)" (blur)="updateList(id, 'mobile', $event)" contenteditable="true">{{data.mobile}}</span></td>
       <td><span (keyup)="changeValue(id, 'university', $event)" (blur)="updateList(id, 'university', $event)" contenteditable="true">{{data.university}}</span></td>
@@ -178,11 +178,11 @@
     
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Age:</label>
-                      <input  class="form-control" type="number" #age="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.age" name="age"  placeholder="Enter Age" required
-                      [ngClass]="{'invalid-textbox' : signUpForm.submitted && !age.valid}">
+                      <label for="exampleInputPassword1">Gender:</label>
+                      <input  class="form-control" type="text" #gender="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.gender" name="gender"  placeholder="Enter gender" required
+                      [ngClass]="{'invalid-textbox' : signUpForm.submitted && !gender.valid}">
                       </div>
-                      <div *ngIf="signUpForm.submitted && !age.valid">
+                      <div *ngIf="signUpForm.submitted && !gender.valid">
                         <label style="color: red;" class="validation-message">this field is required </label>
       
                       </div>

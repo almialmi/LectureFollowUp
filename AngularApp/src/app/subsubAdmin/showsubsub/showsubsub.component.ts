@@ -142,7 +142,7 @@ export class ShowsubsubComponent implements OnInit {
 
   }
   exportAsXLSX():void {
-    this.subsubAdminService.exportAsExcelFile(this.staffTable, 'UniversityStaff');
+    this.subsubAdminService.exportAsExcelFile(this.subsubAdminService.users, 'UniversityStaff');
   }
 
   

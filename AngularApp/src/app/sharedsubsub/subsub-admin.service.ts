@@ -22,7 +22,7 @@ export class SubsubAdminService {
     firstName : '',
     middleName: '',
     lastName:'',
-    age:0,
+    gender:'',
     email : '',
     mobile: '',
     university: '',
@@ -150,8 +150,8 @@ getUserCompass(){
 }
 }
 
-public exportAsExcelFile(element: ElementRef, excelFileName: string): void {
-  const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element.nativeElement);
+public exportAsExcelFile(json: any[], excelFileName: string): void {
+  const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
   const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
   const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
   this.saveAsExcelFile(excelBuffer, excelFileName);

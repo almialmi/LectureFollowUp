@@ -13,7 +13,7 @@ var lectureSchema = new mongoose.Schema({
         type:String,
         required:true
      },
-     age:{
+     gender:{
          type:String,
          required:true
      },

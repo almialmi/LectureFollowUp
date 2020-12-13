@@ -36,7 +36,7 @@
           <th style="visibility: hidden;">study</th>
           <th style="visibility: hidden;">educationField</th>
           <th style="visibility: hidden;">department</th>
-          <th style="visibility: hidden;">age</th>
+          <th style="visibility: hidden;">gender</th>
           <th style="visibility: hidden;">workExperience</th>
           <th style="visibility: hidden;">certificate</th>
           <th style="visibility: hidden;">researchArea</th>
@@ -66,7 +66,7 @@
           <td style="visibility: hidden;">{{user.role}}</td>
           <td style="visibility: hidden;">{{user.study}}</td>
           <td style="visibility: hidden;">{{user.department}}</td>
-          <td style="visibility: hidden;">{{user.age}}</td>
+          <td style="visibility: hidden;">{{user.gender}}</td>
           <td style="visibility: hidden;">{{user.workExperience}}</td>
           <td style="visibility: hidden;">{{user.certificate}}</td>
           <td style="visibility: hidden;">{{user.researchArea}}</td>
@@ -187,10 +187,10 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="inputPassword" class="col-sm-3 col-form-label">age</label>
+          <label for="inputPassword" class="col-sm-3 col-form-label">gender</label>
           <div class="col-sm-8">
-            <input  readonly class="form-control" type="text" #age="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.age" name="age"  placeholder="Enter age" required
-            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !age.valid}">
+            <input  readonly class="form-control" type="text" #gender="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.gender" name="gender"  placeholder="Enter gender" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !gender.valid}">
           </div>
         </div>
         <div class="form-group row">
@@ -350,11 +350,11 @@
 
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Age:</label>
-              <input  class="form-control" type="number" #age="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.age" name="age"  placeholder="Enter Age" required
-              [ngClass]="{'invalid-textbox' : signUpForm.submitted && !age.valid}">
+              <label for="exampleInputPassword1">gender:</label>
+              <input  class="form-control" type="text" #gender="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.gender" name="gender"  placeholder="Enter gender" required
+              [ngClass]="{'invalid-textbox' : signUpForm.submitted && !gender.valid}">
               </div>
-              <div *ngIf="signUpForm.submitted && !age.valid">
+              <div *ngIf="signUpForm.submitted && !gender.valid">
                 <label style="color: red;" class="validation-message">this field is required </label>
 
               </div>

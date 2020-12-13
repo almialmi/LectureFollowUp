@@ -1,7 +1,7 @@
 
 <app-headerchecker></app-headerchecker>
 
-
+<div class="container"  >
 <div class="container">
     
     <div class="search-container">
@@ -14,58 +14,226 @@
 </div>
 
 <!--this code is for -->
-  <div class="container table-responsive py-3" >
+<div class="container  py-3"  >
                
-    <table  class="table table-bordered highlight">
-      <thead> 
-        <tr>
-            <th>First Name</th>
-            <th>Middle Name</th>
-            <th>Last Name</th> 
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>University</th>
-            <th>professionalTitle</th>
-            <th>role</th>
-            <th>study</th>
-            <th>compass</th>
-            <th>educationField</th>
-            <th>Department</th>
-           </tr>
-      </thead>
-      <tbody >
-        <tr *ngFor="let lec of  searchUser">
-            <td>{{lec.firstName}}</td>
-            <td>{{lec.middleName}}</td>
-            <td>{{lec.lastName}}</td>
-            <td>{{lec.email}}</td>
-            <td>{{lec.mobile}}</td>
-            <td>{{lec.university.name}}</td>
-            <td>{{lec.professionalTitle}}</td>
-            <td>{{lec.role}}</td>
-            <td>{{lec.study}}</td>
-            <td>{{lec.compass}}</td>
-            <td>{{lec.educationField}}</td>
-            <td>{{lec.department}}</td>
-            <td> <a class="action-btn" ><i class="fas {{ lec.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"
-              mwlConfirmationPopover
-              [popoverTitle]="popoverTitle"
-              [popoverMessage]="popoverMessage"
-              [confirmText]="confirmText"
-              [cancelText]="cancelText"
-             
-              (confirm)="ViewedOrtNotViewed(lec._id,lec)"
-              (cancel)="cancelClicked = true"
-              confirmButtonType="danger"
-              cancelButtonType="outline-secondary"
-              
-              [appendToBody]="true"
-              ></i></a></td>
-        </tr>
-    
-      </tbody>
-    </table>
+  <table  class="table table-bordered" >
+    <thead>
+      <tr>
+        <th>firstName</th>
+        <th>middleName</th>
+        <th>lastName</th> 
+        <th>email</th>
+        <th>mobile</th>
+        <th>university</th>
+        <th>compass</th>
+      <!--  <th style="visibility: hidden;">professionalTitle</th> 
+        <th style="visibility: hidden;">role</th>
+        <th style="visibility: hidden;">study</th>
+        <th style="visibility: hidden;">educationField</th>
+        <th style="visibility: hidden;">department</th>
+        <th style="visibility: hidden;">gender</th>
+        <th style="visibility: hidden;">workExperience</th>
+        <th style="visibility: hidden;">certificate</th>
+        <th style="visibility: hidden;">researchArea</th>
+        <th style="visibility: hidden;">futureResearchInterest</th>
+        <th style="visibility: hidden;">numberOfPublications</th>
+        <th style="visibility: hidden;">homeBase</th>
+      
+      -->
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of  searchUser | filter:firstName | paginate:{id: 'listing_pagination',
+      itemsPerPage: 3,
+      currentPage: page,
+      totalItems:totalRecords}"
+>
+        <td>{{user.firstName}}</td>
+        <td>{{user.middleName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.mobile}}</td>
+        <td>{{user.university.name}}</td>
+        <td>{{user.compass}}</td>
+       
+       <!-- <td style="visibility: hidden;">{{user.professionalTitle}}</td>
+        <td style="visibility: hidden;">{{user.role}}</td>
+        <td style="visibility: hidden;">{{user.study}}</td>
+        <td style="visibility: hidden;">{{user.department}}</td>
+        <td style="visibility: hidden;">{{user.gender}}</td>
+        <td style="visibility: hidden;">{{user.workExperience}}</td>
+        <td style="visibility: hidden;">{{user.certificate}}</td>
+        <td style="visibility: hidden;">{{user.researchArea}}</td>
+        <td style="visibility: hidden;">{{user.futureResearchInterest}}</td>
+        <td style="visibility: hidden;">{{user.numberOfPublications}}</td>
+        <td style="visibility: hidden;">{{user.homeBase}}</td>-->
+
+           <td> <a class="action-btn" ><i class="fas {{ user.isViewed ? 'fa-eye' : 'fa-eye-slash' }}"
+            mwlConfirmationPopover
+            [popoverTitle]="popoverTitle"
+            [popoverMessage]="popoverMessage"
+            [confirmText]="confirmText"
+            [cancelText]="cancelText"
+           
+            (confirm)="ViewedOrtNotViewed(user._id,user)"
+            (cancel)="cancelClicked = true"
+            confirmButtonType="danger"
+            cancelButtonType="outline-secondary"
+            
+            [appendToBody]="true"
+            ></i></a></td>
+        <td><a class="action-btn"  (click)="open(contentt)" (click) = "onEdit(user)"><i class="fas fa-info"></i> </a></td>
+      </tr>
+  
+    </tbody>
+  </table>
+  <div>
+    <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
   </div>
+</div>
+<ng-template #contentt let-modal>
+  <div class="modal-header">
+   
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form   #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-3 col-form-label">firstName</label>
+        <div class="col-sm-8">
+          <input  readonly  class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.firstName" name="firstName"  placeholder="Enter firstname" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">middleName</label>
+        <div class="col-sm-8">
+          <input readonly  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.middleName" name="middleName"  placeholder="Enter middlename" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">lastName</label>
+        <div class="col-sm-8">
+          <input readonly class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.lastName" name="lastName"  placeholder="Enter lastname" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">email</label>
+        <div class="col-sm-8">
+          <input  readonly  class="form-control" type="text" #email="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.email" name="email"  placeholder="Enter email" required
+          [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">Mobile</label>
+        <div class="col-sm-8">
+          <input readonly class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.mobile" name="mobile"  placeholder="Enter mobile number" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">professionalTitle</label>
+        <div class="col-sm-8">
+          <input readonly class="form-control" type="text" #professionalTitle="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.professionalTitle" name="professionalTitle"  placeholder="Enter professionalTitle" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !professionalTitle.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">role</label>
+        <div class="col-sm-8">
+          <input readonly class="form-control" type="text" #role="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.role" name="role"  placeholder="Enter role" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !role.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">educationField</label>
+        <div class="col-sm-8">
+          <input readonly class="form-control" type="text" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField" name="educationField"  placeholder="Enter educationField" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationField.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">department</label>
+        <div class="col-sm-8">
+          <input  readonly class="form-control" type="text" #department="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.department" name="department"  placeholder="Enter department" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !department.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">study</label>
+        <div class="col-sm-8">
+          <input  readonly class="form-control" type="text" #study="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.study" name="study"  placeholder="Enter study" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !study.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">gender</label>
+        <div class="col-sm-8">
+          <input  readonly class="form-control" type="text" #gender="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.gender" name="gender"  placeholder="Enter gender" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !gender.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">workExperience</label>
+        <div class="col-sm-8">
+          <input  readonly class="form-control" type="text" #workExperience="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.workExperience" name="workExperience"  placeholder="Enter workExperience" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !workExperience.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">certificate</label>
+        <div class="col-sm-8">
+          <input  readonly class="form-control" type="text" #certificate="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.certificate" name="certificate"  placeholder="Enter certificate" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !certificate.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">researchArea</label>
+        <div class="col-sm-8">
+          <input  readonly class="form-control" type="text" #researchArea="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.researchArea" name="researchArea"  placeholder="Enter researchArea" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !researchArea.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">futureResearchInterest</label>
+        <div class="col-sm-8">
+          <input  readonly class="form-control" type="text" #futureResearchInterest="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.futureResearchInterest" name="futureResearchInterest"  placeholder="Enter futureResearchInterest" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !futureResearchInterest.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">numberOfPublications</label>
+        <div class="col-sm-8">
+          <input  readonly class="form-control" type="text" #numberOfPublications="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.numberOfPublications" name="numberOfPublications"  placeholder="Enter numberOfPublications" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !numberOfPublications.valid}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-3 col-form-label">homeBase</label>
+        <div class="col-sm-8">
+          <input  readonly class="form-control" type="text" #homeBase="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.homeBase" name="homeBase"  placeholder="Enter homeBase" required
+          [ngClass]="{'invalid-textbox' : signUpForm.submitted && !homeBase.valid}">
+        </div>
+      </div>
+
+     
+    </form>
+  
+  
+  </div>
+ 
+</ng-template>
+</div>
 
 
  

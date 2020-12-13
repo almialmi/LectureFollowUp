@@ -255,7 +255,7 @@ module.exports.deleteChecker= async(req,res)=>{
 
 // fetch university staff
 const getUniversityStaff=async(university,compass,res)=>{
-   Lecture.find({university:university,compass:compass},{password: 0,salSecrete:0,__v:0},(err,result)=>{
+   Lecture.find({university:university,compass:compass},{__v:0,isViewed:0,createdAt:0,updatedAt:0,_id:0},(err,result)=>{
         if(err){
             res.send(err)
 
@@ -291,7 +291,7 @@ module.exports.updateUniversityStaffProfile = (req,res)=>{
             firstName:req.body.firstName,
             middleName:req.body.middleName,
             lastName:req.body.lastName,
-            age:req.body.age,
+            gender:req.body.gender,
             email:req.body.email,
             mobile:req.body.mobile,
             educationStatus:req.body.professionalTitle,
@@ -355,7 +355,7 @@ module.exports.deleteUniversityStaff=(req,res)=>{
 
 // fetch University Staff for Checker
 module.exports.fetchUniversityStaffForChecker = async(req,res)=>{
-    Lecture.find({__v:0},(err,result)=>{
+    Lecture.find((err,result)=>{
              if(err){
                  res.send(err)
      

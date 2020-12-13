@@ -10,7 +10,7 @@ module.exports.lectureRegister = (req,res,next)=>{
     lecture.firstName =req.body.firstName;
     lecture.middleName = req.body.middleName;
     lecture.lastName = req.body.lastName;
-    lecture.age = req.body.age;
+    lecture.gender = req.body.gender;
     lecture.email = req.body.email;
     lecture.mobile = req.body.mobile;
     lecture.university = req.body.university;

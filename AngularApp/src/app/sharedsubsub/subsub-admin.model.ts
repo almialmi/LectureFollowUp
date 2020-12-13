@@ -3,7 +3,7 @@ export class SubsubAdmin {
     firstName : string;
     middleName : string;
     lastName : string;
-    age:number;
+    gender:string;
     email : string;
     mobile : string;
     university : string;
