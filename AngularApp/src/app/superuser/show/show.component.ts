@@ -18,6 +18,11 @@ declare var M:any;
   providers : [SuperuserService]
 })
 export class ShowComponent implements OnInit {
+  data : Array<any>
+ //data : SubAdmin[]
+  totalRecords : number
+  page:number = 1
+  results = [];
   closeResult = '';
   userDetails;
   showModal: boolean;

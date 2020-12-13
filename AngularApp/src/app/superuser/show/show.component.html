@@ -42,7 +42,10 @@
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of  superuserservice.UnivAdmins | filter:searchedKeyword" >
+      <tr *ngFor="let user of  superuserservice.UnivAdmins | filter:searchedKeyword | paginate:{id: 'listing_pagination',
+      itemsPerPage: 3,
+      currentPage: page,
+      totalItems:totalRecords}" >
         <td>{{user.firstName}}</td>
         <td>{{user.middleName}}</td>
         <td>{{user.lastName}}</td>
@@ -79,6 +82,9 @@
   
     </tbody>
   </table>
+  <div>
+    <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
+  </div>
   </div>
 
 
@@ -101,7 +107,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of  superuserservice.checkers | filter:searchedKeyword">
+        <tr *ngFor="let user of  superuserservice.checkers | filter:searchedKeyword | paginate:{id: 'listing_pagination',
+        itemsPerPage: 3,
+        currentPage: page,
+        totalItems:totalRecords}">
           <td>{{user.firstName}}</td>
           <td>{{user.middleName}}</td>
           <td>{{user.lastName}}</td>
@@ -142,6 +151,9 @@
     
       </tbody>
     </table>
+    <div>
+      <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
+    </div>
   </div>
 
   <!--this for university-->
@@ -159,7 +171,10 @@
       </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let univ of  superuserservice.universitys | filter:searchedKeyword" >
+        <tr *ngFor="let univ of  superuserservice.universitys | filter:searchedKeyword | paginate:{id: 'listing_pagination',
+        itemsPerPage: 3,
+        currentPage: page,
+        totalItems:totalRecords}" >
           <td>{{univ.name}}</td>
           <td>{{univ.location}}</td>
           <td>{{univ.email}}</td>
@@ -170,6 +185,9 @@
     
       </tbody>
     </table>
+    <div>
+      <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
+    </div>
     </div>
   
   
