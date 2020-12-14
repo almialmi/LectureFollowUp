@@ -107,7 +107,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of  superuserservice.checkers | filter:searchedKeyword | paginate:{id: 'listing_pagination',
+        <tr *ngFor="let user of  superuserservice.checkers | filter:searchedKeyword | paginate:{id: 'listing_pagination2',
         itemsPerPage: 3,
         currentPage: page,
         totalItems:totalRecords}">
@@ -152,7 +152,7 @@
       </tbody>
     </table>
     <div>
-      <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
+      <pagination-controls id="listing_pagination2" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
     </div>
   </div>
 
@@ -171,7 +171,7 @@
       </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let univ of  superuserservice.universitys | filter:searchedKeyword | paginate:{id: 'listing_pagination',
+        <tr *ngFor="let univ of  superuserservice.universitys | filter:searchedKeyword | paginate:{id: 'listing_pagination3',
         itemsPerPage: 3,
         currentPage: page,
         totalItems:totalRecords}" >
@@ -186,7 +186,7 @@
       </tbody>
     </table>
     <div>
-      <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
+      <pagination-controls id="listing_pagination3" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
     </div>
     </div>
   
