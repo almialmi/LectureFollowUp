@@ -17,12 +17,10 @@
   </div>
 
 
-  
-
 <div class="container  py-3"  >
                
-    <table  class="table table-bordered" #staffTable>
-      <thead>
+    <table  class="table table-bordered table-hover" #staffTable>
+      <thead class="thead-dark">
         <tr>
           <th>firstName</th>
           <th>middleName</th>
@@ -49,11 +47,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of  subsubAdminService.users | filter:searchedKeyword | filter:firstName | paginate:{id: 'listing_pagination',
-        itemsPerPage: 3,
-        currentPage: page,
-        totalItems:totalRecords}"
- >
+        <tr *ngFor="let user of subsubAdmins | filter:searchedKeyword">
           <td>{{user.firstName}}</td>
           <td>{{user.middleName}}</td>
           <td>{{user.lastName}}</td>
@@ -95,9 +89,15 @@
     
       </tbody>
     </table>
-    <div>
-      <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
-    </div>
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a (click)="previousClick()" class="page-link">Previous</a></li>
+      <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)">
+            <a (click)="getPaginationWithIndex(index)" class="page-link">
+              {{index + 1}}
+            </a>
+      </li>
+      <li class="page-item"><a (click)="nextClick()" class="page-link">Next</a></li>
+      </ul>
   </div>
 
   

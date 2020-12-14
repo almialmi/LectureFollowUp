@@ -12,9 +12,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 
-
-
-
 const fetchUser = async(role,res)=>{
    
         User.find({role:role},{password: 0,salSecrete:0,__v:0},(err,result)=>{
@@ -108,7 +105,6 @@ module.exports.fetchUnivHr = async (req,res)=>{
 module.exports.fetchChecker = async (req,res)=>{
     await fetchUser('Checker',res);
     
-
 }
 
 
@@ -254,22 +250,48 @@ module.exports.deleteChecker= async(req,res)=>{
 
 
 // fetch university staff
-const getUniversityStaff=async(university,compass,res)=>{
-   Lecture.find({university:university,compass:compass},{__v:0,isViewed:0,createdAt:0,updatedAt:0,_id:0},(err,result)=>{
-        if(err){
-            res.send(err)
-
-        }else{
-            res.send(result)
-        }
-    }).populate('university');
+module.exports.fetchUniversityStaff = async(req,res)=>{
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+        let university = req.params.university
+        let compass = req.params.compass;
+        
+        numOfStaffs = await Lecture.countDocuments({});
+        result = await Lecture.find({university:university,compass:compass},{__v:0,isViewed:0,createdAt:0,updatedAt:0,_id:0})
+                              .populate('university')  
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(numOfStaffs / limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "subsubAdmins": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
 }
 
 
 
-module.exports.fetchUniversityStaff = (req,res)=>{
+/*module.exports.fetchUniversityStaff = (req,res)=>{
     getUniversityStaff(req.params.university,req.params.compass,res);
-}
+}*/
 
 // university staff update
 
@@ -355,16 +377,78 @@ module.exports.deleteUniversityStaff=(req,res)=>{
 
 // fetch University Staff for Checker
 module.exports.fetchUniversityStaffForChecker = async(req,res)=>{
-    Lecture.find((err,result)=>{
-             if(err){
-                 res.send(err)
-     
-             }else{
-                 res.send(result)
-             }
-         }).populate('university');
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+        
+        numOfStaffs = await Lecture.countDocuments({});
+        result = await Lecture.find({})
+                              .populate('university')  
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(numOfStaffs / limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "subsubAdmins": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
     
 }
+
+module.exports.fetchUniversityStaffForPagination = async(req,res)=>{
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+        
+        numOfStaffs = await Lecture.countDocuments({});
+        result = await Lecture.find({})
+                              .populate('university')  
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(numOfStaffs / limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "subsubAdmins": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
+    
+}
+
+
 
 
 

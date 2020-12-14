@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { HttpClient , HttpHeaders,HttpParams} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Superuser  } from '../shared/superuser.=model';
 import {RepeatedStaff} from './repeatedStaff.models'
+import {Message} from '../sharedsubsub/message';
 
 @Injectable({
   providedIn: 'root'
@@ -102,4 +103,16 @@ getUserId(){
     return id
    
 }}
+
+getPagableCustomers(pageNumber: number,  pageSize: number): Observable<Message> {
+  // Initialize Params Object
+  let params = new HttpParams();
+  
+  // Begin assigning parameters
+  params = params.append('page', pageNumber.toString());
+  params = params.append('size', pageSize.toString());
+  return this.http.get<Message>(environment.apiBaseUrl + '/fetchUniversityStaffByChecker', { params: params })
+  }
+
+
 }

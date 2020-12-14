@@ -1,8 +1,9 @@
 import { Injectable,ElementRef } from '@angular/core';
-import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { HttpClient , HttpHeaders,HttpParams} from '@angular/common/http';
 
 
 import { SubsubAdmin } from './subsub-admin.model';
+import { Message } from './message';
 import { environment } from 'src/environments/environment';
 import { JsonPipe } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -161,5 +162,16 @@ private saveAsExcelFile(buffer: any, fileName: string): void {
    FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + EXCEL_EXTENSION);
 }
 
+getPagableCustomers(university:string,compass:string,pageNumber: number,  pageSize: number): Observable<Message> {
+// Initialize Params Object
+let params = new HttpParams();
+
+// Begin assigning parameters
+params = params.append('page', pageNumber.toString());
+params = params.append('size', pageSize.toString());
+return this.http.get<Message>(environment.apiBaseUrl + '/fetchUniversityStaff' + `/${university}` + `/${compass}`, { params: params })
+}
+
 
 }
+

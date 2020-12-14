@@ -1,6 +1,7 @@
 import { Component, OnInit,TrackByFunction,ViewChild, ElementRef } from '@angular/core';
 import { Router } from "@angular/router";
-import { SubsubAdmin } from '../../sharedsubsub/subsub-admin.model';;
+import { SubsubAdmin } from '../../sharedsubsub/subsub-admin.model';
+import {Message} from '../../sharedsubsub/message';
 
 import {  SubsubAdminService } from 'src/app/sharedsubsub/subsub-admin.service';
 import { NgForm } from '@angular/forms';
@@ -8,7 +9,7 @@ import { NgForm } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
-
+const pageSize:number = 3;
 @Component({
   selector: 'app-showsubsub',
   templateUrl: './showsubsub.component.html',
@@ -16,6 +17,10 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
   providers : [SubsubAdminService]
 })
 export class ShowsubsubComponent implements OnInit {
+  currentSelectedPage:number = 0;
+  totalPages: number = 0;
+  subsubAdmins: Array<SubsubAdmin> = [];
+  pageIndexes: Array<number> = [];
   data : Array<any>
   totalRecords : number
   page:number = 1
@@ -63,6 +68,7 @@ export class ShowsubsubComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshuserlist();
+    this.getPage(0);
     
    
  }
@@ -142,7 +148,47 @@ export class ShowsubsubComponent implements OnInit {
 
   }
   exportAsXLSX():void {
-    this.subsubAdminService.exportAsExcelFile(this.subsubAdminService.users, 'UniversityStaff');
+    this.subsubAdminService.exportAsExcelFile(this.subsubAdmins, 'UniversityStaff');
+  }
+
+  getPage(page: number){
+    var university = this.subsubAdminService.getUserUniversity();
+    var compass= this.subsubAdminService.getUserCompass()
+
+    this.subsubAdminService.getPagableCustomers(university,compass,page, pageSize)
+            .subscribe(
+                (message: Message) => {
+                  console.log(message);
+                  this.subsubAdmins = message.subsubAdmins;
+                  this.totalPages = message.totalPages;
+                  this.pageIndexes = Array(this.totalPages).fill(0).map((x,i)=>i);
+                  this.currentSelectedPage = message.pageNumber;
+                },
+                (error) => {
+                  console.log(error);
+                }
+            );
+  }
+  getPaginationWithIndex(index: number) {
+    this.getPage(index);
+  }
+  nextClick(){
+    if(this.currentSelectedPage < this.totalPages-1){
+      this.getPage(++this.currentSelectedPage);
+    }  
+  }
+
+  previousClick(){
+    if(this.currentSelectedPage > 0){
+      this.getPage(--this.currentSelectedPage);
+    }  
+  }
+  active(index: number) {
+    if(this.currentSelectedPage == index ){
+      return {
+        active: true
+      };
+    }
   }
 
   

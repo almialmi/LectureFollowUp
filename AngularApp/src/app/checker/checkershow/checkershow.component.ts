@@ -6,13 +6,14 @@ import {SubsubAdmin} from 'src/app/sharedsubsub/subsub-admin.model';
 import {SubsubAdminService} from 'src/app/sharedsubsub/subsub-admin.service';
 import { CheckerService} from 'src/app/sharedcheck/checker.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {Message} from '../../sharedsubsub/message';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 import { SuperuserService } from '../../shared/superuser.service';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Superuser } from 'src/app/shared/superuser.=model';
-
+const pageSize:number = 3;
 
 @Component({
   selector: 'app-checkershow',
@@ -20,6 +21,10 @@ import { Superuser } from 'src/app/shared/superuser.=model';
   styleUrls: ['./checkershow.component.css']
 })
 export class CheckershowComponent implements OnInit {
+  currentSelectedPage:number = 0;
+  totalPages: number = 0;
+  subsubAdmins: Array<SubsubAdmin> = [];
+  pageIndexes: Array<number> = [];
   submitted = false;
   searchedKeyword: string;
   totalRecords : number
@@ -64,6 +69,7 @@ export class CheckershowComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshuserlist();
+    this.getPage(0);
    
    
   }
@@ -132,6 +138,43 @@ ViewedOrtNotViewed(_id:string,user:SubsubAdmin) {
 onEdit(user : SubsubAdmin){
   this.subsubAdminService.selectedStaff = user;
 
+}
+getPage(page: number){
+
+  this.checkerservice.getPagableCustomers(page, pageSize)
+          .subscribe(
+              (message: Message) => {
+                console.log(message);
+                this.subsubAdmins = message.subsubAdmins;
+                this.totalPages = message.totalPages;
+                this.pageIndexes = Array(this.totalPages).fill(0).map((x,i)=>i);
+                this.currentSelectedPage = message.pageNumber;
+              },
+              (error) => {
+                console.log(error);
+              }
+          );
+}
+getPaginationWithIndex(index: number) {
+  this.getPage(index);
+}
+nextClick(){
+  if(this.currentSelectedPage < this.totalPages-1){
+    this.getPage(++this.currentSelectedPage);
+  }  
+}
+
+previousClick(){
+  if(this.currentSelectedPage > 0){
+    this.getPage(--this.currentSelectedPage);
+  }  
+}
+active(index: number) {
+  if(this.currentSelectedPage == index ){
+    return {
+      active: true
+    };
+  }
 }
 
 

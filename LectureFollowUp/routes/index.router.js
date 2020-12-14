@@ -38,7 +38,7 @@ router.post('/login',ctrlUser.login);
 
 router.post('/registerUniversity',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.registerUniversity);
 
-router.post('/registerFromExcel',upload.registerFromExcel);
+router.post('/registerFromExcel',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,upload.registerFromExcel);
 
 router.get('/fetchUniversity' ,ctrlUser.Authenticate,jwtHelper.verifyJwtToken,regUser.fetchUniversity);
 
@@ -97,6 +97,8 @@ router.get('/fetchUniversityStaffByChecker',ctrlUser.Authenticate,jwtHelper.veri
 router.get('/findAndMatchUniversityStaff/:query/:query1/:query2',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.findAndMatchUniversityStaff);
 
 router.put('/isViewedOrNot/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.isViewedOrNot);
+
+router.get('/fetchUniversityStaffForPagination',ctrlUser.fetchUniversityStaffForPagination);
 
 // forgot password
 router.post('/req-reset-password',ctrlUser.forgotPassword);
