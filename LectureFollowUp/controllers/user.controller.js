@@ -11,10 +11,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-
-
-
-
+/*
 const fetchUser = async(role,res)=>{
    
         User.find({role:role},{password: 0,salSecrete:0,__v:0},(err,result)=>{
@@ -37,7 +34,7 @@ const fetchUnivHr=async(role,university,res)=>{
             res.send(result)
         }
     }).populate('university');
-}
+} */
 
 
 //login User
@@ -96,19 +93,117 @@ module.exports.Authenticate = passport.authenticate("jwt",{session:false});
 // fetch User
 
 module.exports.fetchUnivAdmin = async (req,res)=>{
-    await fetchUser('UnivAdmin',res);
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+		let role = 'UnivAdmin'
+
+        
+        numOfStaffs = await User.countDocuments({});
+        result = await User.find({role:role},{password: 0,salSecrete:0,__v:0}) 
+                              .populate('university')
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(result.length / limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "UnivAdmins": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
   
 }
 
 module.exports.fetchUnivHr = async (req,res)=>{
-    await fetchUnivHr('UnivHr',req.params.university,res);
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+        let university = req.params.university
+		let role = 'UnivHr'
+
+        
+        numOfStaffs = await User.countDocuments({});
+        result = await User.find({role:role,university:university},{password: 0,salSecrete:0,__v:0})
+                              .populate('university')  
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(result.length / limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "UnivHrs": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
 
 }
 
 module.exports.fetchChecker = async (req,res)=>{
-    await fetchUser('Checker',res);
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
     
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+		let role = 'Checker'
 
+        
+        numOfStaffs = await User.countDocuments({});
+        result = await User.find({role:role},{password: 0,salSecrete:0,__v:0})  
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(result.length/ limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "Checkers": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
+    
 }
 
 
@@ -254,30 +349,69 @@ module.exports.deleteChecker= async(req,res)=>{
 
 
 // fetch university staff
-const getUniversityStaff=async(university,compass,res)=>{
-   Lecture.find({university:university,compass:compass},{password: 0,salSecrete:0,__v:0},(err,result)=>{
+module.exports.fetchUniversityStaff = async(req,res)=>{
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+        let university = req.params.university
+        let compass = req.params.compass;
+        
+        numOfStaffs = await Lecture.countDocuments({});
+        result = await Lecture.find({university:university,compass:compass},{__v:0,createdAt:0,updatedAt:0})
+                              .populate('university')  
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(numOfStaffs / limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "subsubAdmins": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
+}
+
+module.exports.fetchUniversityStaffAllForUnivHr= async (req, res) => {
+    let university = req.params.university
+    let compass = req.params.compass;
+    Lecture.find({university:university,compass:compass},{__v:0,createdAt:0,updatedAt:0},(err,result)=>{
         if(err){
             res.send(err)
 
         }else{
             res.send(result)
         }
-    }).populate('university');
-}
+    }).populate('university')
+ }
 
 
 
-module.exports.fetchUniversityStaff = (req,res)=>{
+/*module.exports.fetchUniversityStaff = (req,res)=>{
     getUniversityStaff(req.params.university,req.params.compass,res);
-}
+}*/
 
 // university staff update
 
 module.exports.updateUniversityStaffProfile = (req,res)=>{
     
     // Validate Request
-    if(!req.body.firstName && !req.body.middleName && !req.body.lastName && !req.body.email && 
-        !req.body.mobile && !req.body.university&& !req.body.educationStatus && !req.body.role  && 
+    if(!req.body.firstName && !req.body.middleName && !req.body.age && !req.body.lastName && !req.body.email && 
+        !req.body.mobile && !req.body.university&& !req.body.professionalTitle && !req.body.role  && 
         !req.body.study && !req.body.educationField && !req.body.department) {
         return res.status(400).send({
             message: "For University staff this contents can not be empty"
@@ -291,13 +425,20 @@ module.exports.updateUniversityStaffProfile = (req,res)=>{
             firstName:req.body.firstName,
             middleName:req.body.middleName,
             lastName:req.body.lastName,
+            gender:req.body.gender,
             email:req.body.email,
             mobile:req.body.mobile,
-            educationStatus:req.body.educationStatus,
+            educationStatus:req.body.professionalTitle,
             role:req.body.role,
             study:req.body.study,
             educationField:req.body.educationField,
-            department:req.body.department
+            department:req.body.department,
+            workExperience:req.body.workExperience,
+            certificate : req.body.certificate,
+            researchArea : req.body.researchArea,
+            futureResearchInterest : req.body.futureResearchInterest,
+            numberOfPublications : req.body.numberOfPublications,
+            homeBase : req.body.homeBase
 
         }
         
@@ -348,16 +489,78 @@ module.exports.deleteUniversityStaff=(req,res)=>{
 
 // fetch University Staff for Checker
 module.exports.fetchUniversityStaffForChecker = async(req,res)=>{
-    Lecture.find({__v:0},(err,result)=>{
-             if(err){
-                 res.send(err)
-     
-             }else{
-                 res.send(result)
-             }
-         }).populate('university');
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+        
+        numOfStaffs = await Lecture.countDocuments({});
+        result = await Lecture.find({})
+                              .populate('university')  
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(numOfStaffs / limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "subsubAdmins": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
     
 }
+
+module.exports.fetchUniversityStaffForPagination = async(req,res)=>{
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+        
+        numOfStaffs = await Lecture.countDocuments({});
+        result = await Lecture.find({})
+                              .populate('university')  
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(numOfStaffs / limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "subsubAdmins": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
+    
+}
+
+
 
 
 

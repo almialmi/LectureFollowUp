@@ -143,7 +143,9 @@ export class RegistorComponent implements OnInit {
       _id : '',
       name : '',
       location: '',
-      email : ''
+      email : '',
+      poBox:0,
+      fax:''
    };
     form.resetForm();
     this.serverErrorMessage = '';

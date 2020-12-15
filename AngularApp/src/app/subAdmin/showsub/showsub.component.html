@@ -14,12 +14,12 @@
 
 <div class="container  py-5"  >
                
-    <table  class="table table-bordered">
-      <thead>
+    <table  class="table table-bordered table-hover">
+      <thead class="thead-dark">
         <tr>
-          <th>Firstname</th>
-          <th>Middlename</th>
-          <th>Lastname</th> 
+          <th>First Name</th>
+          <th>Middle Name</th>
+          <th>Last Name</th> 
           <th>Email</th>
           <th>Mobile</th>
           <th>University</th>
@@ -29,11 +29,7 @@
         </tr>
       </thead> 
       <tbody>
-        <tr  *ngFor="let user of subAdminService.users  | paginate:{id: 'listing_pagination',
-        itemsPerPage: 3,
-        currentPage: page,
-        totalItems:totalRecords}"
- >
+        <tr  *ngFor="let user of UnivHrs| filter:searchedKeyword">
           <td>{{user.firstName}}</td>
           <td>{{user.middleName}}</td>
           <td>{{user.lastName}}</td>
@@ -65,9 +61,15 @@
     
       </tbody>
     </table>
-    <div>
-      <pagination-controls id="listing_pagination" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
-    </div>
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a (click)="previousClick()" class="page-link">Previous</a></li>
+      <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)">
+            <a (click)="getPaginationWithIndex(index)" class="page-link">
+              {{index + 1}}
+            </a>
+      </li>
+      <li class="page-item"><a (click)="nextClick()" class="page-link">Next</a></li>
+      </ul>
   </div> 
 
 
@@ -84,7 +86,7 @@
       <form  #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
         <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subAdminService.selectedUnivHr._id">
         <div class="form-group">
-          <label for="exampleInputEmail1">First name:</label>
+          <label for="exampleInputEmail1">First Name:</label>
           <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.firstName" name="firstName"  placeholder="Enter firstname" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
           
@@ -94,7 +96,7 @@
 
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Middle name:</label>
+          <label for="exampleInputPassword1">Middle Name:</label>
           <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.middleName" name="middleName"  placeholder="Enter middlename" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
           </div>
@@ -104,7 +106,7 @@
           </div>
 
           <div class="form-group">
-            <label   for="exampleInputPassword1">Last name:</label>
+            <label   for="exampleInputPassword1">Last Name:</label>
             <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.lastName" name="lastName"  placeholder="Enter lastname" required
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
             </div>
@@ -123,7 +125,7 @@
 
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">mobile:</label>
+          <label for="exampleInputPassword1">Mobile:</label>
           <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.mobile" name="mobile"  placeholder="Enter mobile number" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
         </div>

@@ -49,15 +49,15 @@
               
             </div>
           
-              <p class="card-text text-center">one of the ultimate track down
+              <p class="card-text text-center">One of the ultimate track down
                 ever in the history of Ethiopian Education.
               </p>
 
               <form #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)"> 
                 <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subAdminService.selectedUnivHr._id">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">First name:</label>
-                  <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.firstName" name="firstName"  placeholder="Enter firstname" required
+                  <label for="exampleInputEmail1">First Name:</label>
+                  <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.firstName" name="firstName"  placeholder="Enter First Name" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
                   
                 </div>
@@ -66,8 +66,8 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Middle name:</label>
-                  <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.middleName" name="middleName"  placeholder="Enter middlename" required
+                  <label for="exampleInputPassword1">Middle Name:</label>
+                  <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.middleName" name="middleName"  placeholder="Enter Middle Name" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
                   </div>
                   <div *ngIf="signUpForm.submitted && !middlename.valid">
@@ -76,8 +76,8 @@
                   </div>
 
                   <div class="form-group">
-                    <label   for="exampleInputPassword1">Last name:</label>
-                    <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.lastName" name="lastName"  placeholder="Enter lastname" required
+                    <label   for="exampleInputPassword1">Last Name:</label>
+                    <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.lastName" name="lastName"  placeholder="Enter Last Name" required
                     [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
                     </div>
                     <div *ngIf="signUpForm.submitted && !lastname.valid">
@@ -86,7 +86,7 @@
                     </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Email:</label>
-                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.email" name="email"  placeholder="Enter email" required
+                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.email" name="email"  placeholder="Enter Email" required
                   [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
                 </div>
                 <div *ngIf="signUpForm.submitted && email.errors">
@@ -95,8 +95,8 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">mobile:</label>
-                  <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.mobile" name="mobile"  placeholder="Enter mobile number" required
+                  <label for="exampleInputPassword1">Mobile:</label>
+                  <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.mobile" name="mobile"  placeholder="Enter Mobile Number" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
                 </div>
                 <div *ngIf="signUpForm.submitted && !mobile.valid">
@@ -128,7 +128,7 @@
 
                 <div class="form-group">
                   <label for="exampleInputPassword1">Compass:</label>
-                  <input   class="form-control" type="text" #compass="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.compass" name="compass"  placeholder="Enter compass" required
+                  <input   class="form-control" type="text" #compass="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.compass" name="compass"  placeholder="Enter Compass" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !compass.valid}">
                 </div>
                 <div *ngIf="signUpForm.submitted && !compass.valid">
@@ -163,7 +163,7 @@
               <input style="background-color: #056f8f" type="submit" value="Registor">
               </form>
               <div class="success" *ngIf="showSucessMessage">
-                <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesfully</h1>
+                <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">saved succesSfully</h1>
 
               </div>
 

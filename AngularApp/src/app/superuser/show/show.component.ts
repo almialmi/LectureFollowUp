@@ -7,9 +7,12 @@ import { SuperuserService } from '../../shared/superuser.service';
 import { NgForm } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import {Message} from '../../shared/message';
+import {MessageC} from '../../shared/messageC';
+
 
 declare var M:any;
-
+const pageSize:number = 3;
 @Component({
 
   selector: 'app-show',
@@ -18,6 +21,16 @@ declare var M:any;
   providers : [SuperuserService]
 })
 export class ShowComponent implements OnInit {
+  currentSelectedPage:number = 0;
+  totalPages: number = 0;
+  UnivAdmins: Array<Superuser> = [];
+  Checkers: Array<Superuser> = [];
+  pageIndexes: Array<number> = [];
+  data : Array<any>
+ //data : SubAdmin[]
+  totalRecords : number
+  page:number = 1
+  results = [];
   closeResult = '';
   userDetails;
   showModal: boolean;
@@ -62,6 +75,8 @@ export class ShowComponent implements OnInit {
     this.refreshuserlistchecker();
     this.refreshuserlist();
     this.refreshUniveList();
+    this.getPage(0);
+    this.getPageC(0);
  }
   onLogout(){
     this.superuserservice.deletToken();
@@ -131,7 +146,7 @@ export class ShowComponent implements OnInit {
     if(form.value._id == ""){
       this.superuserservice.postUnivAdmin(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlist();
+       this.getPage(this.currentSelectedPage);
        
       
   
@@ -139,7 +154,7 @@ export class ShowComponent implements OnInit {
     }else{
       this.superuserservice.putAllUser(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlist();
+       this.getPage(this.currentSelectedPage);
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
        
@@ -154,7 +169,7 @@ export class ShowComponent implements OnInit {
     if(form.value._id == ""){
       this.superuserservice.postChecker(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlistchecker();
+        this.getPageC(this.currentSelectedPage)
         
       
   
@@ -162,7 +177,7 @@ export class ShowComponent implements OnInit {
     }else{
       this.superuserservice.putAllUser(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlistchecker();
+       this.getPageC(this.currentSelectedPage)
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
        
@@ -176,7 +191,7 @@ export class ShowComponent implements OnInit {
   onDeletechecker(_id: string){
     if( this.confirmClicked == true){
       this.superuserservice.deleteChecker(_id).subscribe((res) => {
-        this.refreshuserlistchecker();
+        this.getPageC(this.currentSelectedPage)
        
       });
     }
@@ -195,7 +210,7 @@ export class ShowComponent implements OnInit {
   
   
 
-  active: boolean = true;
+ // active: boolean = true;
 
   activateDeactivateUnivAdmin(_id:string,user:Superuser) {
   
@@ -204,7 +219,7 @@ export class ShowComponent implements OnInit {
       if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
           console.log("confirm clicked")
-          this.refreshuserlist();
+          this.getPage(this.currentSelectedPage);
           console.log(user.isActive)
          });
       }
@@ -213,7 +228,7 @@ export class ShowComponent implements OnInit {
       console.log(user.isActive);
       if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
-          this.refreshuserlist();
+          this.getPage(this.currentSelectedPage);
          console.log (user.isActive)
         });
       }
@@ -229,7 +244,7 @@ export class ShowComponent implements OnInit {
       console.log(user.isActive);
       if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
-          this.refreshuserlistchecker();
+          this.getPageC(this.currentSelectedPage);
           console.log(user.isActive)
          });
       }
@@ -238,7 +253,7 @@ export class ShowComponent implements OnInit {
       console.log(user.isActive);
       if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
-          this.refreshuserlistchecker();
+          this.getPageC(this.currentSelectedPage);
          console.log (user.isActive)
         });
       }
@@ -247,6 +262,90 @@ export class ShowComponent implements OnInit {
     
     
   }
+
+//for UnivAdmins
+
+  getPage(page: number){
+    
+    this.superuserservice.getPagableCustomers(page, pageSize)
+            .subscribe(
+                (message: Message) => {
+                  console.log(message);
+                  this.UnivAdmins = message.UnivAdmins;
+                  this.totalPages = message.totalPages;
+                  this.pageIndexes = Array(this.totalPages).fill(0).map((x,i)=>i);
+                  this.currentSelectedPage = message.pageNumber;
+                },
+                (error) => {
+                  console.log(error);
+                }
+            );
+  }
+  getPaginationWithIndex(index: number) {
+    this.getPage(index);
+  }
+  nextClick(){
+    if(this.currentSelectedPage < this.totalPages-1){
+      this.getPage(++this.currentSelectedPage);
+    }  
+  }
+
+  previousClick(){
+    if(this.currentSelectedPage > 0){
+      this.getPage(--this.currentSelectedPage);
+    }  
+  }
+  active(index: number) {
+    if(this.currentSelectedPage == index ){
+      return {
+        active: true
+      };
+    }
+  }
+
+
+  //for checker 
+  getPageC(page: number){
+    
+    this.superuserservice.getPagableCustomersChecker(page, pageSize)
+            .subscribe(
+                (message: MessageC) => {
+                  console.log(message);
+                  this.Checkers = message.Checkers;
+                  this.totalPages = message.totalPages;
+                  this.pageIndexes = Array(this.totalPages).fill(0).map((x,i)=>i);
+                  this.currentSelectedPage = message.pageNumber;
+                },
+                (error) => {
+                  console.log(error);
+                }
+            );
+  }
+  getPaginationWithIndexChecker(index: number) {
+    this.getPageC(index);
+  }
+  nextClickChecker(){
+    if(this.currentSelectedPage < this.totalPages-1){
+      this.getPageC(++this.currentSelectedPage);
+    }  
+  }
+
+  previousClickChecker(){
+    if(this.currentSelectedPage > 0){
+      this.getPageC(--this.currentSelectedPage);
+    }  
+  }
+  activeChecker(index: number) {
+    if(this.currentSelectedPage == index ){
+      return {
+        active: true
+      };
+    }
+  }
+  
+  
+  
+
 
 }
 

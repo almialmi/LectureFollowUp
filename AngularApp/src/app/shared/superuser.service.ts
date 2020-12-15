@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { HttpClient , HttpHeaders,HttpParams} from '@angular/common/http';
 
 
 import {Superuser } from './superuser.=model';
@@ -8,6 +8,9 @@ import{University} from './unive.models'
 import { environment } from 'src/environments/environment';
 import { JsonPipe } from '@angular/common';
 import { Observable } from 'rxjs';
+import {Message} from './message';
+import {MessageC} from './messageC';
+
 
 
 
@@ -46,6 +49,8 @@ selectedUniversity:University={
   name:'',
   location:'',
   email:'',
+  poBox:0,
+  fax:'',
 
 }
 
@@ -203,4 +208,27 @@ constructor(public http : HttpClient) { }
 
     }
   }
+
+  getPagableCustomers(pageNumber: number,  pageSize: number): Observable<Message> {
+    // Initialize Params Object
+    let params = new HttpParams();
+    
+    // Begin assigning parameters
+    params = params.append('page', pageNumber.toString());
+    params = params.append('size', pageSize.toString());
+    return this.http.get<Message>(environment.apiBaseUrl + '/fetchUnivAdmin', { params: params })
+    }
+
+    getPagableCustomersChecker(pageNumber: number,  pageSize: number): Observable<MessageC> {
+      // Initialize Params Object
+      let params = new HttpParams();
+      
+      // Begin assigning parameters
+      params = params.append('page', pageNumber.toString());
+      params = params.append('size', pageSize.toString());
+      return this.http.get<MessageC>(environment.apiBaseUrl + '/fetchChecker', { params: params })
+      }
+      
+
+      
 }

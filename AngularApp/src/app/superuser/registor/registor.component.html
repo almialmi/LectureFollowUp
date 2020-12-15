@@ -50,15 +50,15 @@
               
             </div>
           
-              <p class="card-text text-center">one of the ultimate track down
+              <p class="card-text text-center">One of the ultimate track down
                 ever in the history of Ethiopian Education.
               </p>
 
               <form #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
                 <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin._id">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">First name:</label>
-                  <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.firstName" name="firstName"  placeholder="Enter firstname" required
+                  <label for="exampleInputEmail1">First Name:</label>
+                  <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.firstName" name="firstName"  placeholder="Enter First Name" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
                   
                 </div>
@@ -67,8 +67,8 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Middle name:</label>
-                  <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.middleName" name="middleName"  placeholder="Enter middlename" required
+                  <label for="exampleInputEmail1">Middle Name:</label>
+                  <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.middleName" name="middleName"  placeholder="Enter Middle Name" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
                   </div>
                   <div *ngIf="signUpForm.submitted && !middlename.valid">
@@ -77,8 +77,8 @@
                   </div>
 
                   <div class="form-group">
-                    <label   for="exampleInputEmail1">Last name:</label>
-                    <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.lastName" name="lastName"  placeholder="Enter lastname" required
+                    <label   for="exampleInputEmail1">Last Name:</label>
+                    <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.lastName" name="lastName"  placeholder="Enter Last Name" required
                     [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
                     </div>
                     <div *ngIf="signUpForm.submitted && !lastname.valid">
@@ -87,7 +87,7 @@
                     </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email:</label>
-                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.email" name="email"  placeholder="Enter email" required
+                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.email" name="email"  placeholder="Enter Email" required
                   [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
                 </div>
                 <div *ngIf="signUpForm.submitted && email.errors">
@@ -98,7 +98,7 @@
                 <span class="input-placeholder">
                   <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.password" placeholder=" Enter Your Updated Password " 
+                    <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.password" placeholder=" Enter Password " 
                     required minlength="8" [type]="hide ? 'password' : 'text'"
                     [ngClass]="{'invalid-textbox' : signUpForm.submitted && !password.valid}">
                     <mat-icon class="placeholder" (click)="myFunction()">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -114,7 +114,7 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">mobile:</label>
+                  <label for="exampleInputEmail1">Mobile:</label>
                   <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.mobile" name="mobile"  placeholder="Enter mobile number" required
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
                 </div>
@@ -125,7 +125,7 @@
               
 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">university:</label>
+                  <label for="exampleInputEmail1">University:</label>
                   <br>
                   <select  class="browser-default custom-select" #universtiy="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.university" name="university"  (change)="onSelect($event.target.value)" >
                  
@@ -202,15 +202,15 @@
               
             </div>
           
-              <p class="card-text text-center">one of the ultimate track down
+              <p class="card-text text-center">One of the ultimate track down
                 ever in the history of Ethiopian Education.
               </p>
 
               <form #signUpFormm="ngForm"  (ngSubmit) = "signUpFormm.valid && onSubmitt(signUpFormm)">
                 <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedChecker._id">
                 <div class="form-group">
-                  <label for="exampleInputPassword1">First name:</label>
-                  <input   class="form-control" type="text" #fname="ngModel" [(ngModel)]="superuserservice.selectedChecker.firstName" name="firstName"  placeholder="Enter firstname" required
+                  <label for="exampleInputPassword1">First Name:</label>
+                  <input   class="form-control" type="text" #fname="ngModel" [(ngModel)]="superuserservice.selectedChecker.firstName" name="firstName"  placeholder="Enter First Name" required
                   [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !fname.valid}">
                   
                 </div>
@@ -219,8 +219,8 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Middle name:</label>
-                  <input   class="form-control" type="text" #mname="ngModel" [(ngModel)]="superuserservice.selectedChecker.middleName" name="middleName"  placeholder="Enter middlename" required
+                  <label for="exampleInputPassword1">Middle Name:</label>
+                  <input   class="form-control" type="text" #mname="ngModel" [(ngModel)]="superuserservice.selectedChecker.middleName" name="middleName"  placeholder="Enter Middle Name" required
                   [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !mname.valid}">
                   
                 </div>
@@ -229,8 +229,8 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Last name:</label>
-                  <input   class="form-control" type="text" #lname="ngModel" [(ngModel)]="superuserservice.selectedChecker.lastName" name="lastName"  placeholder="Enter lastname" required
+                  <label for="exampleInputPassword1">Last Name:</label>
+                  <input   class="form-control" type="text" #lname="ngModel" [(ngModel)]="superuserservice.selectedChecker.lastName" name="lastName"  placeholder="Enter Last Name" required
                   [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !lname.valid}">
                   
                 </div>
@@ -241,7 +241,7 @@
                 
                 <div class="form-group">
                   <label for="exampleInputPassword1">Email:</label>
-                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedChecker.email" name="email"  placeholder="Enter email" required
+                  <input   class="form-control" type="text" #email="ngModel" [(ngModel)]="superuserservice.selectedChecker.email" name="email"  placeholder="Enter Email" required
                   [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !email.valid}" >
                 </div>
                 <div *ngIf="signUpFormm.submitted && email.errors">
@@ -250,8 +250,8 @@
 
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">mobile:</label>
-                  <input   class="form-control" type="text" #cmobile="ngModel" [(ngModel)]="superuserservice.selectedChecker.mobile" name="mobile"  placeholder="Enter mobile" required
+                  <label for="exampleInputPassword1">Mobile:</label>
+                  <input   class="form-control" type="text" #cmobile="ngModel" [(ngModel)]="superuserservice.selectedChecker.mobile" name="mobile"  placeholder="Enter Mobile" required
                   [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !cmobile.valid}">
                   
                 </div>
@@ -262,7 +262,7 @@
                 <span class="input-placeholder">
                   <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="superuserservice.selectedChecker.password" placeholder=" Enter Your Updated Password " 
+                    <input  class="form-control" type="password"  name="password" #password="ngModel" [(ngModel)]="superuserservice.selectedChecker.password" placeholder=" Enter Password " 
                     required minlength="8" [type]="hide ? 'password' : 'text'"
                     [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !password.valid}">
                     <mat-icon class="placeholder" (click)="myFunction()">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -336,7 +336,7 @@
                 
               </div>
             
-                <p class="card-text text-center">one of the ultimate track down
+                <p class="card-text text-center">One of the ultimate track down
                   ever in the history of Ethiopian Education.
                 </p>
   
@@ -369,6 +369,26 @@
                     
                   </div>
                   <div *ngIf="signUpForm1.submitted && !location.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div> 
+                  <div class="form-group">
+                    <label for="exampleInput">P.O.Box:</label>
+                    <input   class="form-control" type="number" #poBox="ngModel" [(ngModel)]="superuserservice.selectedUniversity.poBox" name="poBox"  placeholder="Where the University P.O.Box" required
+                    [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !poBox.valid}">
+                    
+                  </div>
+                  <div *ngIf="signUpForm1.submitted && !poBox.valid">
+                    <label style="color: red;" class="validation-message">this field is required </label>
+  
+                  </div> 
+                  <div class="form-group">
+                    <label for="exampleInput">Fax:</label>
+                    <input   class="form-control" type="text" #fax="ngModel" [(ngModel)]="superuserservice.selectedUniversity.fax" name="fax"  placeholder="Where the University Fax" required
+                    [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !fax.valid}">
+                    
+                  </div>
+                  <div *ngIf="signUpForm1.submitted && !fax.valid">
                     <label style="color: red;" class="validation-message">this field is required </label>
   
                   </div> 

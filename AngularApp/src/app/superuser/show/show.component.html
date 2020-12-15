@@ -25,10 +25,11 @@
   </ul>
 <div class="tab-content">
     
+
 <div class="container  py-3" id="home" class="tab-pane fade in active show" >
                
-  <table  class="table table-bordered">
-    <thead>
+  <table  class="table table-bordered table-hover">
+    <thead class="thead-dark">
       <tr>
         <th>First Name</th>
         <th>Middle Name</th>
@@ -41,7 +42,7 @@
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of  superuserservice.UnivAdmins | filter:searchedKeyword" >
+      <tr *ngFor="let user of  UnivAdmins | filter:searchedKeyword ">
         <td>{{user.firstName}}</td>
         <td>{{user.middleName}}</td>
         <td>{{user.lastName}}</td>
@@ -78,15 +79,25 @@
   
     </tbody>
   </table>
+  <ul class="pagination justify-content-center">
+    <li class="page-item"><a (click)="previousClick()" class="page-link">Previous</a></li>
+    <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)">
+          <a (click)="getPaginationWithIndex(index)" class="page-link">
+            {{index + 1}}
+          </a>
+    </li>
+    <li class="page-item"><a (click)="nextClick()" class="page-link">Next</a></li>
+    </ul>
   </div>
 
 
 
+
   <!--this code is for -->
-  <div class="container table-responsive py-3" id="menu1"  class="tab-pane fade">
+  <div class="container table-responsive-sm" id="menu1"  class="tab-pane fade">
                
-    <table  class="table table-bordered">
-      <thead>
+    <table  class="table table-bordered  table-hover">
+      <thead class="thead-dark">
         <tr>
         <th>First Name</th>
         <th>Middle Name</th>
@@ -99,7 +110,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of  superuserservice.checkers | filter:searchedKeyword">
+        <tr *ngFor="let user of Checkers | filter:searchedKeyword ">
           <td>{{user.firstName}}</td>
           <td>{{user.middleName}}</td>
           <td>{{user.lastName}}</td>
@@ -140,30 +151,49 @@
     
       </tbody>
     </table>
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a (click)="previousClickChecker()" class="page-link">Previous</a></li>
+      <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="activeChecker(index)">
+            <a (click)=" getPaginationWithIndexChecker(index)" class="page-link">
+              {{index + 1}}
+            </a>
+      </li>
+      <li class="page-item"><a (click)="nextClickChecker()" class="page-link">Next</a></li>
+      </ul>
   </div>
 
   <!--this for university-->
-  <div class="container table-responsive py-3" id="menu2" class="tab-pane fade" >
+  <div class="container table-responsive-sm" id="menu2" class="tab-pane fade" >
                
-    <table  class="table table-bordered">
-      <thead>
+    <table  class="table table-bordered table-hover">
+      <thead class="thead-dark">
         <tr>
           <th>University Name</th>
           <th>Location</th> 
-          <th>Email</th>    
+          <th>Email</th> 
+          <th>P.O.Box</th>
+          <th>Fax</th>   
           
       </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let univ of  superuserservice.universitys | filter:searchedKeyword" >
+        <tr *ngFor="let univ of  superuserservice.universitys | filter:searchedKeyword | paginate:{id: 'listing_pagination3',
+        itemsPerPage: 3,
+        currentPage: page,
+        totalItems:totalRecords}" >
           <td>{{univ.name}}</td>
           <td>{{univ.location}}</td>
           <td>{{univ.email}}</td>
+          <td>{{univ.poBox}}</td>
+          <td>{{univ.fax}}</td>
           <td><a class="action-btn"  (click)="open(contentUniv)" (click) = "onEditU(univ)"><i class="fas fa-pen-alt"></i> </a></td>
         </tr>
     
       </tbody>
     </table>
+    <div>
+      <pagination-controls id="listing_pagination3" maxSize = "5" directionlinks="true" (pageChange)="page=$event"></pagination-controls>
+    </div>
     </div>
   
   
@@ -183,7 +213,7 @@
         <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin._id">
      
         <div class="form-group">
-          <label for="exampleInputEmail1">First name:</label>
+          <label for="exampleInputEmail1">First Name:</label>
           <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.firstName" name="firstName"  placeholder="Enter firstname" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
           
@@ -193,7 +223,7 @@
 
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Middle name:</label>
+          <label for="exampleInputPassword1">Middle Name:</label>
           <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.middleName" name="middleName"  placeholder="Enter middlename" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
           </div>
@@ -203,7 +233,7 @@
           </div>
 
           <div class="form-group">
-            <label   for="exampleInputPassword1">Last name:</label>
+            <label   for="exampleInputPassword1">Last Name:</label>
             <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.lastName" name="lastName"  placeholder="Enter lastname" required
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
             </div>
@@ -222,7 +252,7 @@
 
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">mobile:</label>
+          <label for="exampleInputPassword1">Mobile:</label>
           <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.mobile" name="mobile"  placeholder="Enter mobile number" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
         </div>
@@ -257,7 +287,7 @@
         <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin._id">
      
         <div class="form-group">
-          <label for="exampleInputEmail1">First name:</label>
+          <label for="exampleInputEmail1">First Name:</label>
           <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.firstName" name="firstName"  placeholder="Enter firstname" required
           [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !firstname.valid}">
           
@@ -267,7 +297,7 @@
 
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Middle name:</label>
+          <label for="exampleInputPassword1">Middle Name:</label>
           <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.middleName" name="middleName"  placeholder="Enter middlename" required
           [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !middlename.valid}">
           </div>
@@ -277,7 +307,7 @@
           </div>
 
           <div class="form-group">
-            <label   for="exampleInputPassword1">Last name:</label>
+            <label   for="exampleInputPassword1">Last Name:</label>
             <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.lastName" name="lastName"  placeholder="Enter lastname" required
             [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !lastname.valid}">
             </div>
@@ -296,7 +326,7 @@
 
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">mobile:</label>
+          <label for="exampleInputPassword1">Mobile:</label>
           <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="superuserservice.selectedUnivAdmin.mobile" name="mobile"  placeholder="Enter mobile number" required
           [ngClass]="{'invalid-textbox' : signUpFormm.submitted && !mobile.valid}">
         </div>
@@ -360,6 +390,26 @@
           <label *ngIf="email.errors.pattern"style="color: red;" class="validation-message">invalid email </label>
 
         </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">P.O.Box:</label>
+          <input   class="form-control" type="number" #poBox="ngModel" [(ngModel)]="superuserservice.selectedUniversity.poBox" name="poBox"  placeholder="Where the University P.O.Box" required
+          [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !poBox.valid}">
+          
+        </div>
+        <div *ngIf="signUpForm1.submitted && !poBox.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div> 
+        <div class="form-group">
+          <label for="exampleInputPassword1">Fax:</label>
+          <input   class="form-control" type="text" #fax="ngModel" [(ngModel)]="superuserservice.selectedUniversity.fax" name="fax"  placeholder="Where the University Fax" required
+          [ngClass]="{'invalid-textbox' : signUpForm1.submitted && !fax.valid}">
+          
+        </div>
+        <div *ngIf="signUpForm1.submitted && !fax.valid">
+          <label style="color: red;" class="validation-message">this field is required </label>
+
+        </div> 
         <div class="modal-footer">
           <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>--> 
              <input  style="background-color: #056f8f;" type="submit" value="update">

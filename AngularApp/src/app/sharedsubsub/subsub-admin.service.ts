@@ -1,12 +1,19 @@
-import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { Injectable,ElementRef } from '@angular/core';
+import { HttpClient , HttpHeaders,HttpParams} from '@angular/common/http';
 
 
 import { SubsubAdmin } from './subsub-admin.model';
+import { Message } from './message';
 import { environment } from 'src/environments/environment';
 import { JsonPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +24,25 @@ export class SubsubAdminService {
     firstName : '',
     middleName: '',
     lastName:'',
+    gender:'',
     email : '',
     mobile: '',
     university: '',
     compass:'',
-    educationStatus:'',
+    professionalTitle:'',
     role: '',
     study: '',
     educationField: '',
     department : '',
-    isViewed:false
+    isViewed:false,
+    workExperience:0,
+    certificate:'',
+    researchArea:'',
+    futureResearchInterest:'',
+    numberOfPublications:'',
+    homeBase:'',
+
+
 
   };
     
@@ -35,22 +51,25 @@ export class SubsubAdminService {
   searchUser:SubsubAdmin[];
   noAuthHeader = {headers: new HttpHeaders({'NoAuth' : 'True'})};
 
-  constructor(public http : HttpClient) { }
+  
+
+constructor(public http : HttpClient) { }
 
 postUniversityStaff(user : SubsubAdmin){
   return  this.http.post(environment.apiBaseUrl + '/registerLectures' , user);
 
 }
-postFromExcelFile(fileToUpload: File){
-  const formData: FormData = new FormData();
-  formData.append('uploadfile', fileToUpload, fileToUpload.name);
-  return  this.http.post(environment.apiBaseUrl + '/uploadFile' ,formData);
+postFromExcelFile(Data:[]){
+  return  this.http.post(environment.apiBaseUrl + '/registerFromExcel', Data);
 
-
+}
+downloadEmptyExcelFile(){
+  return  this.http.get(environment.apiBaseUrl + '/downloadExcelFile',{ responseType: "blob" }) //set response Type properly (it is not part of headers)
+  
 }
 
 showUniversityStaff(university:string,compass:string){
-  return this.http.get(environment.apiBaseUrl + '/fetchUniversityStaff' + `/${university}` + `/${compass}`);
+  return this.http.get(environment.apiBaseUrl + '/fetchAllUniversityStaffForExcel' + `/${university}` + `/${compass}`);
 }
 deleteUniversityStaff(_id : string){
   return this.http.delete(environment.apiBaseUrl + '/deleteUniversityStaff' + `/${_id}`);
@@ -136,5 +155,27 @@ getUserCompass(){
 }
 }
 
+public exportAsExcelFile(json: any[], excelFileName: string): void {
+  const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+  const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+  const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  this.saveAsExcelFile(excelBuffer, excelFileName);
+}
+private saveAsExcelFile(buffer: any, fileName: string): void {
+   const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
+   FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + EXCEL_EXTENSION);
+}
+
+getPagableCustomers(university:string,compass:string,pageNumber: number,  pageSize: number): Observable<Message> {
+// Initialize Params Object
+let params = new HttpParams();
+
+// Begin assigning parameters
+params = params.append('page', pageNumber.toString());
+params = params.append('size', pageSize.toString());
+return this.http.get<Message>(environment.apiBaseUrl + '/fetchUniversityStaff' + `/${university}` + `/${compass}`, { params: params })
+}
+
 
 }
+

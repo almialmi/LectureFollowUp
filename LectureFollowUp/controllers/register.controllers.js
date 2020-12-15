@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Lecture = mongoose.model('Lecture');
 const User = mongoose.model('User');
-const University = mongoose.model('University')
+const University = mongoose.model('University');
+var path = require('path');
 
 
 
@@ -10,15 +11,22 @@ module.exports.lectureRegister = (req,res,next)=>{
     lecture.firstName =req.body.firstName;
     lecture.middleName = req.body.middleName;
     lecture.lastName = req.body.lastName;
+    lecture.gender = req.body.gender;
     lecture.email = req.body.email;
     lecture.mobile = req.body.mobile;
     lecture.university = req.body.university;
     lecture.compass=req.body.compass;
-    lecture.educationStatus = req.body.educationStatus;
+    lecture.professionalTitle = req.body.professionalTitle;
     lecture.role = req.body.role;
     lecture.study = req.body.study;
     lecture.educationField = req.body.educationField;
     lecture.department = req.body.department;
+    lecture.workExperience = req.body.workExperience;
+    lecture.certificate = req.body.certificate;
+    lecture.researchArea = req.body.researchArea;
+    lecture.futureResearchInterest = req.body.futureResearchInterest;
+    lecture.numberOfPublications = req.body.numberOfPublications;
+    lecture.homeBase = req.body.homeBase; 
 
     lecture.save((err,doc)=>{
         if(!err)
@@ -144,7 +152,9 @@ module.exports.registerUniversity = async (req, res,next) => {
     var univ = new University({
         name:req.body.name,
         location:req.body.location,
-        email:req.body.email
+        email:req.body.email,
+        poBox:req.body.poBox,
+        fax:req.body.fax
     });
     
     univ.save((err,doc)=>{
@@ -172,7 +182,9 @@ module.exports.registerUniversity = async (req, res,next) => {
         $set:{
             name:req.body.name,
             location:req.body.location,
-            email:req.body.email
+            email:req.body.email,
+            poBox:req.body.poBox,
+            fax:req.body.fax
         }
         
     }, {new: true})
@@ -209,6 +221,18 @@ module.exports.registerUniversity = async (req, res,next) => {
         }
     })
  }
+
+ module.exports.fetchUniversityStaffAllForChecker= async (req, res) => {
+    Lecture.find({__v:0},(err,result)=>{
+        if(err){
+            res.send(err)
+
+        }else{
+            res.send(result)
+        }
+    }).populate('university');
+ }
+
 // fetch duplicated staffs
 
 module.exports.fetchDuplicatedUniversityStaff =(req,res)=>{
@@ -231,4 +255,10 @@ module.exports.fetchDuplicatedUniversityStaff =(req,res)=>{
             }))
         }
 })
+}
+
+global.__basedir = __dirname;
+module.exports.downloadExcelFile =(req,res)=>{ 
+  const file = path.resolve(__dirname, './uploads/UniversityStaff.xlsx');
+  res.download(file); 
 }

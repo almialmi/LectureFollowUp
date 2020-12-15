@@ -1,6 +1,7 @@
 import { Component, OnInit,TrackByFunction } from '@angular/core';
 import { Router } from "@angular/router";
 import { SubAdmin } from '../../sharedsub/sub-admin.model';
+import {Message} from '../../sharedsub/message';
 
 import {  SubAdminService } from 'src/app/sharedsub/sub-admin.service';
 import { NgForm } from '@angular/forms';
@@ -8,6 +9,7 @@ import { NgForm } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
+const pageSize:number = 3;
 @Component({
   selector: 'app-showsub',
   templateUrl: './showsub.component.html',
@@ -15,6 +17,10 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
   providers : [SubAdminService]
 })
 export class ShowsubComponent implements OnInit {
+  currentSelectedPage:number = 0;
+  totalPages: number = 0;
+  UnivHrs: Array<SubAdmin> = [];
+  pageIndexes: Array<number> = [];
  data : Array<any>
  //data : SubAdmin[]
   totalRecords : number
@@ -65,6 +71,7 @@ export class ShowsubComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshuserlist();
+    this.getPage(0);
     
    
  }
@@ -98,7 +105,7 @@ export class ShowsubComponent implements OnInit {
       this.subAdminService.postUnivHr(form.value).subscribe((res) =>{
        // this.resetForm(form);
        this.newRowIndex++;
-        this.refreshuserlist();
+       this.getPage(this.currentSelectedPage);
       //  M.toast({html: 'saved successfull!' , class: 'rounded'});
       
   
@@ -106,7 +113,7 @@ export class ShowsubComponent implements OnInit {
     }else{
       this.subAdminService.putUnivHr(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlist();
+       this.getPage(this.currentSelectedPage);
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
       //  M.toast({html: 'update successfull!' , class: 'rounded'});
@@ -128,7 +135,7 @@ export class ShowsubComponent implements OnInit {
       console.log(user.isActive);
       if(this.confirmClicked == true){
         this.subAdminService.putActivateDeactivate(_id,user).subscribe((res) => {
-          this.refreshuserlist();
+          this.getPage(this.currentSelectedPage);
           console.log(user.isActive)
          });
       }
@@ -137,7 +144,7 @@ export class ShowsubComponent implements OnInit {
       console.log(user.isActive);
       if(this.confirmClicked == true){
         this.subAdminService.putActivateDeactivate(_id,user).subscribe((res) => {
-          this.refreshuserlist();
+          this.getPage(this.currentSelectedPage);
          console.log (user.isActive)
         });
       }
@@ -145,6 +152,45 @@ export class ShowsubComponent implements OnInit {
      }
     
     
+  }
+
+  getPage(page: number){
+    var university = this.subAdminService.getUserUniversity();
+    
+    this.subAdminService.getPagableCustomers(university,page, pageSize)
+            .subscribe(
+                (message: Message) => {
+                  console.log(message);
+                  this.UnivHrs = message.UnivHrs;
+                  this.totalPages = message.totalPages;
+                  this.pageIndexes = Array(this.totalPages).fill(0).map((x,i)=>i);
+                  this.currentSelectedPage = message.pageNumber;
+                },
+                (error) => {
+                  console.log(error);
+                }
+            );
+  }
+  getPaginationWithIndex(index: number) {
+    this.getPage(index);
+  }
+  nextClick(){
+    if(this.currentSelectedPage < this.totalPages-1){
+      this.getPage(++this.currentSelectedPage);
+    }  
+  }
+
+  previousClick(){
+    if(this.currentSelectedPage > 0){
+      this.getPage(--this.currentSelectedPage);
+    }  
+  }
+  active(index: number) {
+    if(this.currentSelectedPage == index ){
+      return {
+        active: true
+      };
+    }
   }
 
 }
