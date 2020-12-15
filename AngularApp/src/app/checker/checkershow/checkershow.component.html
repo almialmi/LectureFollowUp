@@ -19,25 +19,25 @@
   <table  class="table table-bordered table-hover" >
     <thead  class="thead-dark">
       <tr>
-        <th>firstName</th>
-        <th>middleName</th>
-        <th>lastName</th> 
-        <th>email</th>
-        <th>mobile</th>
-        <th>university</th>
-        <th>compass</th>
-      <!--  <th style="visibility: hidden;">professionalTitle</th> 
-        <th style="visibility: hidden;">role</th>
-        <th style="visibility: hidden;">study</th>
-        <th style="visibility: hidden;">educationField</th>
-        <th style="visibility: hidden;">department</th>
-        <th style="visibility: hidden;">gender</th>
-        <th style="visibility: hidden;">workExperience</th>
-        <th style="visibility: hidden;">certificate</th>
-        <th style="visibility: hidden;">researchArea</th>
-        <th style="visibility: hidden;">futureResearchInterest</th>
-        <th style="visibility: hidden;">numberOfPublications</th>
-        <th style="visibility: hidden;">homeBase</th>
+        <th>First Name</th>
+        <th>Middle Name</th>
+        <th>Last Name</th> 
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>University</th>
+        <th>Compass</th>
+      <!--  <th style="visibility: hidden;">Professional Title</th> 
+        <th style="visibility: hidden;">Role</th>
+        <th style="visibility: hidden;">Study</th>
+        <th style="visibility: hidden;">Education Field</th>
+        <th style="visibility: hidden;">Department</th>
+        <th style="visibility: hidden;">Gender</th>
+        <th style="visibility: hidden;">Work Experience</th>
+        <th style="visibility: hidden;">Certificate</th>
+        <th style="visibility: hidden;">Research Area</th>
+        <th style="visibility: hidden;">Future Research Interest</th>
+        <th style="visibility: hidden;">Number Of Publications</th>
+        <th style="visibility: hidden;">Home Base</th>
       
       -->
         
@@ -107,14 +107,14 @@
 
     <form   #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
       <div class="form-group row">
-        <label for="staticEmail" class="col-sm-3 col-form-label">firstName</label>
+        <label for="staticEmail" class="col-sm-3 col-form-label">First Name</label>
         <div class="col-sm-8">
           <input  readonly  class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.firstName" name="firstName"  placeholder="Enter firstname" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">middleName</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Middle Name</label>
         <div class="col-sm-8">
           <input readonly  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.middleName" name="middleName"  placeholder="Enter middlename" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
@@ -122,7 +122,7 @@
       </div>
 
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">lastName</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Last Name</label>
         <div class="col-sm-8">
           <input readonly class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.lastName" name="lastName"  placeholder="Enter lastname" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
@@ -130,7 +130,7 @@
       </div>
 
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">email</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Email</label>
         <div class="col-sm-8">
           <input  readonly  class="form-control" type="text" #email="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.email" name="email"  placeholder="Enter email" required
           [pattern]="emailRegex" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !email.valid}" >
@@ -146,86 +146,86 @@
       </div>
 
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">professionalTitle</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Professional Title</label>
         <div class="col-sm-8">
           <input readonly class="form-control" type="text" #professionalTitle="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.professionalTitle" name="professionalTitle"  placeholder="Enter professionalTitle" required
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !professionalTitle.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">role</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Role</label>
         <div class="col-sm-8">
           <input readonly class="form-control" type="text" #role="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.role" name="role"  placeholder="Enter role" required
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !role.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">educationField</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Education Field</label>
         <div class="col-sm-8">
           <input readonly class="form-control" type="text" #educationField="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.educationField" name="educationField"  placeholder="Enter educationField" required
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !educationField.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">department</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Department</label>
         <div class="col-sm-8">
           <input  readonly class="form-control" type="text" #department="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.department" name="department"  placeholder="Enter department" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !department.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">study</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Study</label>
         <div class="col-sm-8">
           <input  readonly class="form-control" type="text" #study="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.study" name="study"  placeholder="Enter study" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !study.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">gender</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Gender</label>
         <div class="col-sm-8">
           <input  readonly class="form-control" type="text" #gender="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.gender" name="gender"  placeholder="Enter gender" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !gender.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">workExperience</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Work Experience</label>
         <div class="col-sm-8">
-          <input  readonly class="form-control" type="text" #workExperience="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.workExperience" name="workExperience"  placeholder="Enter workExperience" required
+          <input  readonly class="form-control" type="text" #workExperience="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.workExperience" name="workExperience"  placeholder="Enter Work Experience" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !workExperience.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">certificate</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Certificate</label>
         <div class="col-sm-8">
-          <input  readonly class="form-control" type="text" #certificate="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.certificate" name="certificate"  placeholder="Enter certificate" required
+          <input  readonly class="form-control" type="text" #certificate="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.certificate" name="certificate"  placeholder="Enter Certificate" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !certificate.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">researchArea</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Research Area</label>
         <div class="col-sm-8">
-          <input  readonly class="form-control" type="text" #researchArea="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.researchArea" name="researchArea"  placeholder="Enter researchArea" required
+          <input  readonly class="form-control" type="text" #researchArea="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.researchArea" name="researchArea"  placeholder="Enter Research Area" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !researchArea.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">futureResearchInterest</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Future Research Interest</label>
         <div class="col-sm-8">
-          <input  readonly class="form-control" type="text" #futureResearchInterest="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.futureResearchInterest" name="futureResearchInterest"  placeholder="Enter futureResearchInterest" required
+          <input  readonly class="form-control" type="text" #futureResearchInterest="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.futureResearchInterest" name="futureResearchInterest"  placeholder="Enter Future Research Interest" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !futureResearchInterest.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">numberOfPublications</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Number Of Publications</label>
         <div class="col-sm-8">
-          <input  readonly class="form-control" type="text" #numberOfPublications="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.numberOfPublications" name="numberOfPublications"  placeholder="Enter numberOfPublications" required
+          <input  readonly class="form-control" type="text" #numberOfPublications="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.numberOfPublications" name="numberOfPublications"  placeholder="Enter Number Of Publications" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !numberOfPublications.valid}">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">homeBase</label>
+        <label for="inputPassword" class="col-sm-3 col-form-label">Home Base</label>
         <div class="col-sm-8">
-          <input  readonly class="form-control" type="text" #homeBase="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.homeBase" name="homeBase"  placeholder="Enter homeBase" required
+          <input  readonly class="form-control" type="text" #homeBase="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.homeBase" name="homeBase"  placeholder="Enter Home Base" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !homeBase.valid}">
         </div>
       </div>

@@ -9,7 +9,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import {Message} from '../../shared/message';
 import {MessageC} from '../../shared/messageC';
-import {MessageU} from '../../shared/messageU';
+
 
 declare var M:any;
 const pageSize:number = 3;

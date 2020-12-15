@@ -86,7 +86,7 @@
       <form  #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
         <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subAdminService.selectedUnivHr._id">
         <div class="form-group">
-          <label for="exampleInputEmail1">First name:</label>
+          <label for="exampleInputEmail1">First Name:</label>
           <input   class="form-control" type="text" #firstname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.firstName" name="firstName"  placeholder="Enter firstname" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !firstname.valid}">
           
@@ -96,7 +96,7 @@
 
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Middle name:</label>
+          <label for="exampleInputPassword1">Middle Name:</label>
           <input  class="form-control" type="text" #middlename="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.middleName" name="middleName"  placeholder="Enter middlename" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !middlename.valid}">
           </div>
@@ -106,7 +106,7 @@
           </div>
 
           <div class="form-group">
-            <label   for="exampleInputPassword1">Last name:</label>
+            <label   for="exampleInputPassword1">Last Name:</label>
             <input class="form-control" type="text" #lastname="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.lastName" name="lastName"  placeholder="Enter lastname" required
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !lastname.valid}">
             </div>
@@ -125,7 +125,7 @@
 
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">mobile:</label>
+          <label for="exampleInputPassword1">Mobile:</label>
           <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.mobile" name="mobile"  placeholder="Enter mobile number" required
           [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
         </div>

@@ -108,6 +108,7 @@ module.exports.fetchUnivAdmin = async (req,res)=>{
         
         numOfStaffs = await User.countDocuments({});
         result = await User.find({role:role},{password: 0,salSecrete:0,__v:0}) 
+                              .populate('university')
                               .skip(offset) 
                               .limit(limit); 
           
