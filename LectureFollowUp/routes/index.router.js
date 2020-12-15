@@ -41,6 +41,7 @@ router.get('/fetchUniversity' ,ctrlUser.Authenticate,jwtHelper.verifyJwtToken,re
 router.put('/universityUpdate/:id',regUser.updateUniversity);
 
 
+
 //fetch by role
 
 router.get('/fetchUnivAdmin',ctrlUser.fetchUnivAdmin);
