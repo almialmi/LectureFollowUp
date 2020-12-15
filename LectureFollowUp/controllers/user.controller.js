@@ -11,7 +11,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-
+/*
 const fetchUser = async(role,res)=>{
    
         User.find({role:role},{password: 0,salSecrete:0,__v:0},(err,result)=>{
@@ -34,7 +34,7 @@ const fetchUnivHr=async(role,university,res)=>{
             res.send(result)
         }
     }).populate('university');
-}
+} */
 
 
 //login User
@@ -93,17 +93,115 @@ module.exports.Authenticate = passport.authenticate("jwt",{session:false});
 // fetch User
 
 module.exports.fetchUnivAdmin = async (req,res)=>{
-    await fetchUser('UnivAdmin',res);
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+		let role = 'UnivAdmin'
+
+        
+        numOfStaffs = await User.countDocuments({});
+        result = await User.find({role:role},{password: 0,salSecrete:0,__v:0}) 
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(result.length / limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "UnivAdmins": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
   
 }
 
 module.exports.fetchUnivHr = async (req,res)=>{
-    await fetchUnivHr('UnivHr',req.params.university,res);
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+        let university = req.params.university
+		let role = 'UnivHr'
+
+        
+        numOfStaffs = await User.countDocuments({});
+        result = await User.find({role:role,university:university},{password: 0,salSecrete:0,__v:0})
+                              .populate('university')  
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(result.length / limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "UnivHrs": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
 
 }
 
 module.exports.fetchChecker = async (req,res)=>{
-    await fetchUser('Checker',res);
+    try {
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.size);
+       
+        const offset = page ? page * limit : 0;
+    
+        console.log("offset = " + offset);    
+    
+        let result = {};
+        let numOfStaffs;
+		let role = 'Checker'
+
+        
+        numOfStaffs = await User.countDocuments({});
+        result = await User.find({role:role},{password: 0,salSecrete:0,__v:0})  
+                              .skip(offset) 
+                              .limit(limit); 
+          
+        const response = {
+          "totalItems": numOfStaffs,
+          "totalPages": Math.ceil(result.length/ limit),
+          "pageNumber": page,
+          "pageSize": result.length,
+          "Checkers": result
+        };
+    
+        res.status(200).json(response);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error -> Can NOT complete a paging request!",
+          error: error.message,
+        });
+      }
     
 }
 

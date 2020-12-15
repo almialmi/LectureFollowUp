@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { HttpClient , HttpHeaders,HttpParams} from '@angular/common/http';
 
 
 import {SubAdmin } from './sub-admin.model';
@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { JsonPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Message } from './message';
 
 
 @Injectable({
@@ -112,6 +113,15 @@ getUserUniversity(){
 
   }
 }
+getPagableCustomers(university:string,pageNumber: number,  pageSize: number): Observable<Message> {
+  // Initialize Params Object
+  let params = new HttpParams();
+  
+  // Begin assigning parameters
+  params = params.append('page', pageNumber.toString());
+  params = params.append('size', pageSize.toString());
+  return this.http.get<Message>(environment.apiBaseUrl + '/fetchUnivHr' + `/${university}`, { params: params })
+  }
 
 
 }
