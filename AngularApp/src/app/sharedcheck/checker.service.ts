@@ -55,7 +55,7 @@ selectedRepeatedStaff:RepeatedStaff={
    }
 
   showUniversityStaff(){
-    return this.http.get(environment.apiBaseUrl + '/fetchUniversityStaffByChecker');
+    return this.http.get(environment.apiBaseUrl + '/fetchUniversityStaffAllForCheckerSearch');
 
   }
   setToken(token : string){

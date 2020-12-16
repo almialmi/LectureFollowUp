@@ -12,6 +12,7 @@ import { DataService } from 'src/app/subAdmin/registorsub/dataService';
 import { from } from 'rxjs';
 import { $ } from 'protractor';
 import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 
 
@@ -23,6 +24,7 @@ import * as XLSX from 'xlsx';
  providers: [DataService]
 })
 export class RegistorsubsubComponent implements OnInit {
+  fileName = 'UniversityStaff';
   fileToUpload: File = null;
   selectedStudy:Study = new Study(0, 'Natural'); 
   selectedStudyy:Educationalfield= new Educationalfield(0 ,"Natural", "medicine") ;
@@ -82,8 +84,14 @@ export class RegistorsubsubComponent implements OnInit {
   ngOnInit(): void {
     
   }
+show:boolean=false;
+setShowTrue(name:any){
+  console.log(name);
+  this.show = true;
+}
   reset() {
     this.myInputVariable.nativeElement.value = '';
+    this.show = false;
   }
   onSelect(countryidd) {
     this.fields = this._dataService.getFields()
@@ -233,10 +241,17 @@ changeValue(id: number, property: string, event: any) {
   this.editField = event.target.textContent;
 }
 
-show:boolean=false;
-setShowTrue(name:any){
-  console.log(name);
-  this.show = true;
+downloadFile() {
+  this.subsubAdminService.downloadEmptyExcelFile().subscribe(
+      res => {
+          const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
+          const file = new File([blob],this.fileName + '.xlsx', { type: 'application/vnd.ms.excel' });
+          saveAs(file);
+      },
+      res => {
+          // notify error
+      }
+  );
 }
 
 }

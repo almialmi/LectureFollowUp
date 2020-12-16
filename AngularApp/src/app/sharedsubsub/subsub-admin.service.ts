@@ -14,6 +14,7 @@ import * as XLSX from 'xlsx';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -52,7 +53,7 @@ export class SubsubAdminService {
 
   
 
-  constructor(public http : HttpClient) { }
+constructor(public http : HttpClient) { }
 
 postUniversityStaff(user : SubsubAdmin){
   return  this.http.post(environment.apiBaseUrl + '/registerLectures' , user);
@@ -61,11 +62,14 @@ postUniversityStaff(user : SubsubAdmin){
 postFromExcelFile(Data:[]){
   return  this.http.post(environment.apiBaseUrl + '/registerFromExcel', Data);
 
-
+}
+downloadEmptyExcelFile(){
+  return  this.http.get(environment.apiBaseUrl + '/downloadExcelFile',{ responseType: "blob" }) //set response Type properly (it is not part of headers)
+  
 }
 
 showUniversityStaff(university:string,compass:string){
-  return this.http.get(environment.apiBaseUrl + '/fetchUniversityStaff' + `/${university}` + `/${compass}`);
+  return this.http.get(environment.apiBaseUrl + '/fetchAllUniversityStaffForExcel' + `/${university}` + `/${compass}`);
 }
 deleteUniversityStaff(_id : string){
   return this.http.delete(environment.apiBaseUrl + '/deleteUniversityStaff' + `/${_id}`);

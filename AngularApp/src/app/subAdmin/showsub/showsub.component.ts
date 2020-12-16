@@ -105,7 +105,7 @@ export class ShowsubComponent implements OnInit {
       this.subAdminService.postUnivHr(form.value).subscribe((res) =>{
        // this.resetForm(form);
        this.newRowIndex++;
-        this.refreshuserlist();
+       this.getPage(this.currentSelectedPage);
       //  M.toast({html: 'saved successfull!' , class: 'rounded'});
       
   
@@ -113,7 +113,7 @@ export class ShowsubComponent implements OnInit {
     }else{
       this.subAdminService.putUnivHr(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlist();
+       this.getPage(this.currentSelectedPage);
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
       //  M.toast({html: 'update successfull!' , class: 'rounded'});
@@ -135,7 +135,7 @@ export class ShowsubComponent implements OnInit {
       console.log(user.isActive);
       if(this.confirmClicked == true){
         this.subAdminService.putActivateDeactivate(_id,user).subscribe((res) => {
-          this.refreshuserlist();
+          this.getPage(this.currentSelectedPage);
           console.log(user.isActive)
          });
       }
@@ -144,7 +144,7 @@ export class ShowsubComponent implements OnInit {
       console.log(user.isActive);
       if(this.confirmClicked == true){
         this.subAdminService.putActivateDeactivate(_id,user).subscribe((res) => {
-          this.refreshuserlist();
+          this.getPage(this.currentSelectedPage);
          console.log (user.isActive)
         });
       }

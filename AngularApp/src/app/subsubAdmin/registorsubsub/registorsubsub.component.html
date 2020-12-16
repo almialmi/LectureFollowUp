@@ -27,9 +27,14 @@
 <div class="tab-content">  
 
 <div class="container" id="home" class="tab-pane fade in active show">  
- 
+<div style="margin-bottom: 20px;" class="search-container">
+<form action="#" class="row">
 <input #myInput type="file" (change)="onFileChange($event)" (change)="setShowTrue($event.target.value)" multiple="false" accept=".xlsx, .xls, .csv" style="margin-top: 50px;" />
-<button  (click)="reset()">X</button>
+<button style="height: 30px; margin-top: 50px;background-color: #056f8f;"  (click)="reset()">X</button>
+<p style="margin-top:50px;margin-left: 100px;">Download Sample by clicking the button</p>
+<button style="margin-left:5px;height: 60px; margin-top: 40px;" (click)="downloadFile()"><i class="fa fa-file-excel-o" style="font-size:48px;color:blue"></i></button>
+</form>
+</div> 
 
 <div class="container" *ngIf="show">
 <table style="margin-top: 50px;" class="table table-bordered highlight">
@@ -43,17 +48,17 @@
       <th>Mobile</th>
       <th>University</th>
       <th>Compass</th>
-      <th>educationField</th>
-      <th>professionalTitle</th> 
+      <th>EducationField</th>
+      <th>ProfessionalTitle</th> 
       <th>role</th>
       <th>study</th>
       <th>department</th>
       <th>WorkExperience</th>
       <th>Certificate</th>
       <th>researchArea</th>
-      <th>futureResearchInterest</th>
+      <th>FutureResearchInterest</th>
       <th>NumberOfPublications</th>
-      <th>homeBase</th>
+      <th>HomeBase</th>
       
     </tr>
   </thead>

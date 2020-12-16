@@ -88,7 +88,7 @@ module.exports.registerFromExcel = (req,res,next)=>{
     Lecture.insertMany(req.body).then((result) => { 
         console.log(`Number of documents inserted: ${result.length}`);
         return  res.json({
-            'msg': "successfully register "
+            'msg': `Number of documents inserted: ${result.length}` 
            });
     }).catch(err => {
         next(err);

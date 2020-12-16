@@ -364,7 +364,7 @@ module.exports.fetchUniversityStaff = async(req,res)=>{
         let compass = req.params.compass;
         
         numOfStaffs = await Lecture.countDocuments({});
-        result = await Lecture.find({university:university,compass:compass},{__v:0,isViewed:0,createdAt:0,updatedAt:0,_id:0})
+        result = await Lecture.find({university:university,compass:compass},{__v:0,createdAt:0,updatedAt:0})
                               .populate('university')  
                               .skip(offset) 
                               .limit(limit); 
@@ -385,6 +385,19 @@ module.exports.fetchUniversityStaff = async(req,res)=>{
         });
       }
 }
+
+module.exports.fetchUniversityStaffAllForUnivHr= async (req, res) => {
+    let university = req.params.university
+    let compass = req.params.compass;
+    Lecture.find({university:university,compass:compass},{__v:0,createdAt:0,updatedAt:0},(err,result)=>{
+        if(err){
+            res.send(err)
+
+        }else{
+            res.send(result)
+        }
+    }).populate('university')
+ }
 
 
 

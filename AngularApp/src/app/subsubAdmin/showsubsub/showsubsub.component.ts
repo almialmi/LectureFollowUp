@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
+
 const pageSize:number = 3;
 @Component({
   selector: 'app-showsubsub',
@@ -81,13 +82,7 @@ export class ShowsubsubComponent implements OnInit {
     var compass= this.subsubAdminService.getUserCompass()
     this.subsubAdminService.showUniversityStaff(university,compass).subscribe(
       res =>{
-      //  this.subsubAdminService.users = res as SubsubAdmin[];
         console.log( this.subsubAdminService.users)
-
-
-       //const { data, totalRecords } = res;
-       // this.data = data;
-       // this.totalRecords = totalRecords;
         console.log(res);
         this.subsubAdminService.users = res as SubsubAdmin[];
 
@@ -98,36 +93,18 @@ export class ShowsubsubComponent implements OnInit {
     );
 
   }
-  Search(){
-    /*
-    this.subAdminService.SearchUser().subscribe(
-      res =>{
-        this.subAdminService.users = res as SubsubAdmin[];
-
-      },
-      err =>{
-
-      }
-    )*/
-  }
   
   onSubmit(form : NgForm){
    
     if(form.value._id == ""){
       this.subsubAdminService.postUniversityStaff(form.value).subscribe((res) =>{
-       // this.resetForm(form);
-        this.refreshuserlist();
-      //  M.toast({html: 'saved successfull!' , class: 'rounded'});
-      
-  
+        this.getPage(this.currentSelectedPage);
       });
     }else{
       this.subsubAdminService.putUniversityStaff(form.value).subscribe((res) =>{
-       // this.resetForm(form);
-        this.refreshuserlist();
+        this.getPage(this.currentSelectedPage);
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
-      //  M.toast({html: 'update successfull!' , class: 'rounded'});
   
       });
   
@@ -137,8 +114,7 @@ export class ShowsubsubComponent implements OnInit {
   onDelete(_id: string){
     if( this.confirmClicked == true){
       this.subsubAdminService.deleteUniversityStaff(_id).subscribe((res) => {
-        this.refreshuserlist();
-       // M.toast({html: 'Deleted successfully' , classes: 'rounded'});
+        this.getPage(this.currentSelectedPage);
       });
     }
 
@@ -148,7 +124,7 @@ export class ShowsubsubComponent implements OnInit {
 
   }
   exportAsXLSX():void {
-    this.subsubAdminService.exportAsExcelFile(this.subsubAdmins, 'UniversityStaff');
+    this.subsubAdminService.exportAsExcelFile(this.subsubAdminService.users, 'UniversityStaff');
   }
 
   getPage(page: number){
@@ -190,6 +166,15 @@ export class ShowsubsubComponent implements OnInit {
       };
     }
   }
+  onItemChange(event){
+    if(event.target.value=="All"){
+        this.subsubAdminService.exportAsExcelFile(this.subsubAdminService.users, 'UniversityStaff');
+    }else{
+      this.subsubAdminService.exportAsExcelFile(this.subsubAdmins, 'UniversityStaff');
+
+    }
+  }
+  
 
   
 

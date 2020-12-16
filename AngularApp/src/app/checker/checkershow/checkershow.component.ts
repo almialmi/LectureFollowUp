@@ -127,7 +127,7 @@ ViewedOrtNotViewed(_id:string,user:SubsubAdmin) {
     console.log(user.isViewed);
     if( this.confirmClicked == true){
       this.subsubAdminService.putViewedOrNot(_id,user).subscribe((res) => {
-        this.refreshuserlist();
+        this.getPage(this.currentSelectedPage);
         console.log(user.isViewed)
        });
     }

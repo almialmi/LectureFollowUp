@@ -78,11 +78,13 @@ router.delete('/deleteChecker/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToke
 // export from excel and register
 router.post('/uploadFile',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,upload.uploadFileAndRegisterUniversityStaff);
 
+router.get('/downloadExcelFile',ctrlUser.Authenticate,regUser.downloadExcelFile);
+
 // fetch university staff by hr 
 //fetch university staff
 
 router.get('/fetchUniversityStaff/:university/:compass',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchUniversityStaff);
-
+router.get('/fetchAllUniversityStaffForExcel/:university/:compass',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchUniversityStaffAllForUnivHr);
 // update university staff
 
 router.put('/updateUniversityStaffProfile/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.updateUniversityStaffProfile);
@@ -98,7 +100,7 @@ router.get('/findAndMatchUniversityStaff/:query/:query1/:query2',ctrlUser.Authen
 
 router.put('/isViewedOrNot/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.isViewedOrNot);
 
-router.get('/fetchUniversityStaffForPagination',ctrlUser.fetchUniversityStaffForPagination);
+router.get('/fetchUniversityStaffAllForCheckerSearch',regUser.fetchUniversityStaffAllForChecker);
 
 // forgot password
 router.post('/req-reset-password',ctrlUser.forgotPassword);

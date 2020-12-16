@@ -146,7 +146,7 @@ export class ShowComponent implements OnInit {
     if(form.value._id == ""){
       this.superuserservice.postUnivAdmin(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlist();
+       this.getPage(this.currentSelectedPage);
        
       
   
@@ -154,7 +154,7 @@ export class ShowComponent implements OnInit {
     }else{
       this.superuserservice.putAllUser(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlist();
+       this.getPage(this.currentSelectedPage);
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
        
@@ -169,7 +169,7 @@ export class ShowComponent implements OnInit {
     if(form.value._id == ""){
       this.superuserservice.postChecker(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlistchecker();
+        this.getPageC(this.currentSelectedPage)
         
       
   
@@ -177,7 +177,7 @@ export class ShowComponent implements OnInit {
     }else{
       this.superuserservice.putAllUser(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlistchecker();
+       this.getPageC(this.currentSelectedPage)
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
        
@@ -191,7 +191,7 @@ export class ShowComponent implements OnInit {
   onDeletechecker(_id: string){
     if( this.confirmClicked == true){
       this.superuserservice.deleteChecker(_id).subscribe((res) => {
-        this.refreshuserlistchecker();
+        this.getPageC(this.currentSelectedPage)
        
       });
     }
@@ -219,7 +219,7 @@ export class ShowComponent implements OnInit {
       if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
           console.log("confirm clicked")
-          this.refreshuserlist();
+          this.getPage(this.currentSelectedPage);
           console.log(user.isActive)
          });
       }
@@ -228,7 +228,7 @@ export class ShowComponent implements OnInit {
       console.log(user.isActive);
       if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
-          this.refreshuserlist();
+          this.getPage(this.currentSelectedPage);
          console.log (user.isActive)
         });
       }
@@ -244,7 +244,7 @@ export class ShowComponent implements OnInit {
       console.log(user.isActive);
       if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
-          this.refreshuserlistchecker();
+          this.getPageC(this.currentSelectedPage);
           console.log(user.isActive)
          });
       }
@@ -253,7 +253,7 @@ export class ShowComponent implements OnInit {
       console.log(user.isActive);
       if(this.confirmClicked == true){
         this.superuserservice. putActivateDeactivateUser(_id,user).subscribe((res) => {
-          this.refreshuserlistchecker();
+          this.getPageC(this.currentSelectedPage);
          console.log (user.isActive)
         });
       }

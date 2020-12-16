@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Lecture = mongoose.model('Lecture');
 const User = mongoose.model('User');
-const University = mongoose.model('University')
+const University = mongoose.model('University');
+var path = require('path');
 
 
 
@@ -220,6 +221,18 @@ module.exports.registerUniversity = async (req, res,next) => {
         }
     })
  }
+
+ module.exports.fetchUniversityStaffAllForChecker= async (req, res) => {
+    Lecture.find({__v:0},(err,result)=>{
+        if(err){
+            res.send(err)
+
+        }else{
+            res.send(result)
+        }
+    }).populate('university');
+ }
+
 // fetch duplicated staffs
 
 module.exports.fetchDuplicatedUniversityStaff =(req,res)=>{
@@ -242,4 +255,10 @@ module.exports.fetchDuplicatedUniversityStaff =(req,res)=>{
             }))
         }
 })
+}
+
+global.__basedir = __dirname;
+module.exports.downloadExcelFile =(req,res)=>{ 
+  const file = path.resolve(__dirname, './uploads/UniversityStaff.xlsx');
+  res.download(file); 
 }

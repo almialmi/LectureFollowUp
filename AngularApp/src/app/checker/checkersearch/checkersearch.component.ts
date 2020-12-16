@@ -33,7 +33,7 @@ export class CheckersearchComponent implements OnInit {
   showSucessMessage: boolean;
 
   ngOnInit(): void {
-    this.refreshuserlist()
+    this.refreshUserList()
     this.searchAndMatchL()
     
   }
@@ -63,7 +63,7 @@ export class CheckersearchComponent implements OnInit {
     if(form.value._id == ""){
       this.subsubAdminService.postUniversityStaff(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlist();
+        this.refreshUserList();
       //  M.toast({html: 'saved successfull!' , class: 'rounded'});
       
   
@@ -71,7 +71,7 @@ export class CheckersearchComponent implements OnInit {
     }else{
       this.subsubAdminService.putUniversityStaff(form.value).subscribe((res) =>{
        // this.resetForm(form);
-        this.refreshuserlist();
+        this.refreshUserList();
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
       //  M.toast({html: 'update successfull!' , class: 'rounded'});
@@ -83,14 +83,13 @@ export class CheckersearchComponent implements OnInit {
   }
 
   
-  refreshuserlist(){
+  refreshUserList(){
     this.checkerservice.showUniversityStaff().subscribe(
       res =>{
         this.newRowIndex++;
         this.subsubAdminService.users = res as SubsubAdmin[];
 
       }
-     
     );
 
   }
@@ -114,7 +113,7 @@ export class CheckersearchComponent implements OnInit {
       console.log(user.isViewed);
       if( this.confirmClicked == true){
         this.subsubAdminService.putViewedOrNot(_id,user).subscribe((res) => {
-          this.refreshuserlist();
+          this.refreshUserList();
           console.log(user.isViewed)
          });
       }
