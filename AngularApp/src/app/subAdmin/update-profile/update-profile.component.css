@@ -79,3 +79,26 @@ select{
 .input-placeholder {
   position: relative;
 }
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    .placeholder{
+        position: absolute;
+        top: 24px;
+        bottom: 0;
+        height: 24px;
+        font-size: 25px;
+        left: -28px;
+        margin: auto;
+        margin-left: 250px;
+        color: black;
+        margin-top: 10px;
+    }
+    
+    .input-placeholder {
+      position: relative;
+    }
+
+}
+
+

@@ -2,11 +2,11 @@
 
 <app-header></app-header>
 
-<div class="container">
+<div class="container py-5">
 
 <div class="container">
     
-    <div class="search-container">
+    <div class="search-container py-5">
         <form action="#">
           <input type="text" placeholder="Enter a name.." name="search" [(ngModel)]="searchedKeyword">
           <button type="submit">search</button>
@@ -15,9 +15,7 @@
 
 </div>
 
-
-
-<div class="container py-5" >
+<div class="container" >
   <ul class="nav nav-tabs">
       <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link active" data-toggle="tab" href="#home">Admin</a></li>
       <li class="nav-item"><a style="font-family: 'Times New Roman', Times, serif;color: #056f8f;font-size: 25px;" class="nav-link" data-toggle="tab" href="#menu1">Checker</a></li>
@@ -28,7 +26,7 @@
 
 <div class="container  py-3" id="home" class="tab-pane fade in active show" >
                
-  <table  class="table table-bordered table-hover">
+  <table  class="table table-bordered table-hover table1">
     <thead class="thead-dark">
       <tr>
         <th>First Name</th>
@@ -96,7 +94,7 @@
   <!--this code is for -->
   <div class="container table-responsive-sm" id="menu1"  class="tab-pane fade">
                
-    <table  class="table table-bordered  table-hover">
+    <table  class="table table-bordered  table-hover table2">
       <thead class="thead-dark">
         <tr>
         <th>First Name</th>
@@ -165,7 +163,7 @@
   <!--this for university-->
   <div class="container table-responsive-sm" id="menu2" class="tab-pane fade" >
                
-    <table  class="table table-bordered table-hover">
+    <table  class="table table-bordered table-hover table3">
       <thead class="thead-dark">
         <tr>
           <th>University Name</th>
@@ -425,6 +423,7 @@
   </ng-template>
 
   </div>
+  <app-footer></app-footer>
   
  
   

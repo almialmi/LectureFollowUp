@@ -61,6 +61,163 @@ label{
   border-bottom: none;
 }
 
+/*Small devices (landscape phones, less than 768px) */
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+  /* Force table to not be like tables anymore */
+	table.table1,table.table1 thead,table.table1 tbody,table.table1 th,table.table1 td,table.table1 tr { 
+    display: block; 
+    color: black;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+  table.table1 thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	table.table1 tr { border: 1px solid #ccc; }
+	
+	table.table1 td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	table.table1 td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+  */
+	table.table1 td:nth-of-type(1):before { content: "First Name"; }
+  table.table1 td:nth-of-type(2):before { content: "Last Name"; }
+  table.table1 td:nth-of-type(3):before { content: "Last Name"; }
+	table.table1 td:nth-of-type(4):before { content: "Email"; }
+	table.table1 td:nth-of-type(5):before { content: "Mobile"; }
+	table.table1 td:nth-of-type(6):before { content: "University"; }
+	table.table1 td:nth-of-type(7):before { content: "Role"; }
+  table.table1 td:nth-of-type(8):before { content: "Update"; }
+  table.table1 td:nth-of-type(9):before { content: "Lock/Unlock"; }
+	
+}
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+  /* Force table to not be like tables anymore */
+	table.table2,table.table2 thead,table.table2 tbody,table.table2 th,table.table2 td,table.table2 tr { 
+    display: block; 
+    color: black;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+  table.table2 thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	table.table2 tr { border: 1px solid #ccc; }
+	
+	table.table2 td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	table.table2 td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+  */
+	table.table2 td:nth-of-type(1):before { content: "First Name"; }
+  table.table2 td:nth-of-type(2):before { content: "Last Name"; }
+  table.table2 td:nth-of-type(3):before { content: "Last Name"; }
+	table.table2 td:nth-of-type(4):before { content: "Email"; }
+	table.table2 td:nth-of-type(5):before { content: "Mobile"; }
+	table.table2 td:nth-of-type(6):before { content: "Role"; }
+  table.table2 td:nth-of-type(7):before { content: "Update"; }
+  table.table2 td:nth-of-type(8):before { content: "Delete"; }
+  table.table2 td:nth-of-type(9):before { content: "Lock/Unlock"; }
+	
+}
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+  /* Force table to not be like tables anymore */
+	table.table3,table.table3 thead,table.table3 tbody,table.table3 th,table.table3 td,table.table3 tr { 
+    display: block; 
+    color: black;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+  table.table3 thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	table.table3 tr { border: 1px solid #ccc; }
+	
+	table.table3 td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	table.table3 td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+  */
+	table.table3 td:nth-of-type(1):before { content: "University Name"; }
+  table.table3 td:nth-of-type(2):before { content: "Location"; }
+  table.table3 td:nth-of-type(3):before { content: "Email"; }
+	table.table3 td:nth-of-type(4):before { content: "P.O.Box"; }
+	table.table3 td:nth-of-type(5):before { content: "Fax"; }
+	table.table3 td:nth-of-type(6):before { content: "Update"; }
+	
+}
+
 
 
 
