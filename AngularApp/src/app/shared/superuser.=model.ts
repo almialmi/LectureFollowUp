@@ -4,7 +4,7 @@ export class Superuser {
    middleName : string;
    lastName : string;
    email : string;
-   mobile : string;
+   mobile : number;
    university : string;
    password : string;
    isActive:boolean;

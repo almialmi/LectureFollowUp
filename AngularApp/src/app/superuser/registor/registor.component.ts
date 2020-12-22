@@ -108,7 +108,7 @@ export class RegistorComponent implements OnInit {
       firstName : '',
       middleName: '',
       lastName: '',
-      mobile:'',
+      mobile:0,
       email : '',
       university : '',
       password : '',

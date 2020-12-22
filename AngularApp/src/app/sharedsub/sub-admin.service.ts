@@ -24,7 +24,7 @@ export class SubAdminService {
     middleName: '',
     lastName:'',
     email : '',
-    mobile: '',
+    mobile: 0,
     university: '',
     compass:'',
     password:'',

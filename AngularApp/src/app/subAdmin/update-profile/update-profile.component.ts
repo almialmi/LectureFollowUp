@@ -59,7 +59,7 @@ export class UpdateProfileComponent implements OnInit {
       middleName: '',
       lastName:'',
       email : '',
-      mobile: '',
+      mobile: 0,
       university: '',
       compass:'',
       role:'',

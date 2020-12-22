@@ -16,7 +16,7 @@ export class CheckerService {
    middleName: '',
    lastName:'',
    email : '',
-   mobile: '',
+   mobile: 0,
    university: '',
    password:'',
    isActive:true,

@@ -21,7 +21,10 @@ var userSchema = new mongoose.Schema({
         required:true
     },
     mobile:{
-        type:String
+        type:Number,
+        required:true,
+        minlength:10,
+        maxlength:13
     },
     university:{
         type: mongoose.Schema.Types.ObjectId,

@@ -4,7 +4,7 @@ export class SubAdmin {
     middleName : string;
     lastName : string;
     email : string;
-    mobile : string;
+    mobile : number;
     university : string;
     compass:string;
     isActive:boolean;

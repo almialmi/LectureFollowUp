@@ -140,7 +140,7 @@ export class RegistorsubComponent implements OnInit {
       firstName : '',
       middleName: '',
       lastName: '',
-      mobile:'',
+      mobile:0,
       email : '',
       university : '',
       compass:'',

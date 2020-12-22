@@ -5,7 +5,7 @@ export class SubsubAdmin {
     lastName : string;
     gender:string;
     email : string;
-    mobile : string;
+    mobile : number;
     university : string;
     compass:string;
     professionalTitle: string;

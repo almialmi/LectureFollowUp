@@ -53,7 +53,7 @@ export class UpdateProfilesubsubComponent implements OnInit {
     firstName : '',
     middleName: '',
     lastName: '',
-    mobile:'',
+    mobile:0,
     email : '',
     university : '',
     compass : '',

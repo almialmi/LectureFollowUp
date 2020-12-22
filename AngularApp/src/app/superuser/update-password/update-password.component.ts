@@ -61,7 +61,7 @@ export class UpdatePasswordComponent implements OnInit {
       firstName : '',
       middleName: '',
       lastName: '',
-      mobile:'',
+      mobile:0,
       email : '',
       university : '',
       password : '',

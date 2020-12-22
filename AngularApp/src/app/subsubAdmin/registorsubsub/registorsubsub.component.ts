@@ -127,7 +127,7 @@ setShowTrue(name:any){
       middleName: '',
       lastName: '',
       gender:'',
-      mobile:'',
+      mobile:0,
       email : '',
       university : '',
       compass : '',

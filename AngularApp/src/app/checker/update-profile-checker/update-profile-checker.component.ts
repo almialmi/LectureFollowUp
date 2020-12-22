@@ -54,7 +54,7 @@ export class UpdateProfileCheckerComponent implements OnInit {
       middleName: '',
       lastName:'',
       email : '',
-      mobile: '',
+      mobile: 0,
       university: '',
       password:'',
       isActive:true,
