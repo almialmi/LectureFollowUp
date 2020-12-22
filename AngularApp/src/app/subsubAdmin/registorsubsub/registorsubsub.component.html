@@ -89,15 +89,17 @@
 </div>
 <div class="col-sm-6 text-center" style="margin-top: 50px;margin-left: -20px;" *ngIf="show">
   <button style="background-color: #056f8f" type="submit"  (click)="registerFromExcelData(data)">Register</button>
-</div>
-<div class="success" *ngIf="showSucessMessage">
-  <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">Register Successfully</h1>
 
+  <div class="success" *ngIf="showSucessMessage">
+    <h1 style="color: green; font-family: 'Times New Roman', Times, serif;">Register Successfully</h1>
+  
+  </div>
+  <div class="alert" *ngIf="showServerError">
+    <h1 style="color: red;"> {{serverErrorMessage}} </h1>
+  
+   </div>
 </div>
-<div class="alert" *ngIf="serverErrorMessage">
-  <h1 style="color: red;"> {{serverErrorMessage}} </h1>
 
- </div>
 </div>
 
 
