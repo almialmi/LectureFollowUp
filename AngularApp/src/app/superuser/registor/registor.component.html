@@ -119,7 +119,7 @@
                   minlength="10" maxlength="13" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
                 </div>
                 <div *ngIf="signUpForm.submitted && mobile.errors?.minlength && mobile.errors?.maxlength">
-                  <label style="color: red;" class="validation-message">must be 10 number</label>
+                  <label style="color: red;" class="validation-message">min must be 10 number and max must be 13</label>
                 </div>
                 <div *ngIf="signUpForm.submitted && !mobile.valid">
                   <label style="color: red;" class="validation-message">this field is required </label>
