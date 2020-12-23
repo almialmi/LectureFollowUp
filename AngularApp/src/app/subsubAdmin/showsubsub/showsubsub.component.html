@@ -309,7 +309,7 @@
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Mobile:</label>
-          <input  class="form-control" type="text" #mobile="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.mobile" name="mobile"  placeholder="Enter mobile number" required
+          <input  class="form-control" type="number" #mobile="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.mobile" name="mobile"  placeholder="Enter mobile number" required
           minlength="10" maxlength="13" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
         </div>
         <div *ngIf="signUpForm.submitted && mobile.errors?.minlength && mobile.errors?.maxlength">
