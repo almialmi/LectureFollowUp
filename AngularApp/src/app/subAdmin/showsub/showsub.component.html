@@ -126,18 +126,14 @@
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Mobile:</label>
-          <input  class="form-control" type="number" #mobile="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.mobile" name="mobile"  placeholder="Enter mobile number" required
-          minlength="10" maxlength="13" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
+          <input  class="form-control" type="tel" #mobile="ngModel" [(ngModel)]="subAdminService.selectedUnivHr.mobile" name="mobile"  placeholder="Enter mobile number" required
+          minlength="10" maxlength="10" [ngClass]="{'invalid-textbox' : signUpForm.submitted && !mobile.valid}">
         </div>
         <div *ngIf="signUpForm.submitted && !mobile.valid">
-          <label style="color: red;" class="validation-message">this field is required </label>
-
-        </div>
-        <div *ngIf="signUpForm.submitted && mobile.errors?.minlength && mobile.errors?.maxlength">
           <label style="color: red;" class="validation-message">must be 10 number</label>
 
         </div>
-      
+        
      
         <div class="form-group">
           <label for="exampleInputPassword1">Compass:</label>
