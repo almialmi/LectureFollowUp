@@ -80,6 +80,7 @@ export class RegistorsubsubComponent implements OnInit {
   showSucessMessage: boolean;
   serverErrorMessage : string;
   showServerError:boolean;
+  showServerError1:boolean;
 
 
   ngOnInit(): void {
@@ -112,10 +113,14 @@ setShowTrue(name:any){
       },
       err => {
         if( err.status == 422){
+          this.showServerError1=true;
           this.serverErrorMessage = err.error.join('<br>');
+          setTimeout(() => this.showServerError1 = false,4000);
         }
         else
-          this.serverErrorMessage = 'something went wrong'
+          this.showServerError1=true;
+          this.serverErrorMessage = "something went wrong";
+          setTimeout(() => this.showServerError1 = false,4000);
       }
     );
 
