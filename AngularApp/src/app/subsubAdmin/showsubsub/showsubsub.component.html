@@ -42,6 +42,7 @@
           <th>Mobile</th>
           <th>University</th>
           <th>Compass</th>
+          <th>LED</th>
         <!--  <th style="visibility: hidden;">Professional Title</th> 
           <th style="visibility: hidden;">Role</th>
           <th style="visibility: hidden;">Study</th>
@@ -54,6 +55,7 @@
           <th style="visibility: hidden;">Future Research Interest</th>
           <th style="visibility: hidden;">Number Of Publications</th>
           <th style="visibility: hidden;">Home Base</th>
+          
         
         -->
           
@@ -68,6 +70,8 @@
           <td>{{user.mobile}}</td>
           <td>{{user.university.name}}</td>
           <td>{{user.compass}}</td>
+          <td><a (click)="downloadPdfFile(user.latestEducationDocument.data)"><i class="fas fa-download" ></i></a></td>
+          
          
          <!-- <td style="visibility: hidden;">{{user.professionalTitle}}</td>
           <td style="visibility: hidden;">{{user.role}}</td>
@@ -79,7 +83,9 @@
           <td style="visibility: hidden;">{{user.researchArea}}</td>
           <td style="visibility: hidden;">{{user.futureResearchInterest}}</td>
           <td style="visibility: hidden;">{{user.numberOfPublications}}</td>
-          <td style="visibility: hidden;">{{user.homeBase}}</td>-->
+          <td style="visibility: hidden;">{{user.homeBase}}</td>
+          
+        -->
 
           
           <td><a class="action-btn"  (click)="open(content)" (click) = "onEdit(user)"><i class="fas fa-pen-alt"></i> </a></td>
@@ -90,7 +96,7 @@
             [confirmText]="confirmText"
             [cancelText]="cancelText"
            
-            (confirm)="onDelete(user._id)"
+            (confirm)="onDelete(user._id,user.latestEducationDocument.data)"
             (cancel)="cancelClicked = true"
             confirmButtonType="danger"
             cancelButtonType="outline-secondary"
@@ -112,6 +118,10 @@
       <li class="page-item"><a (click)="nextClick()" class="page-link">Next</a></li>
       </ul>
   </div>
+  <div class="alert" *ngIf="showServerError">
+    <h1 style="color: red;"> {{serverErrorMessage}} </h1>
+
+   </div>
 
   
 
@@ -237,7 +247,7 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-3 col-form-label">Number Of Publications</label>
           <div class="col-sm-8">
-            <input  readonly class="form-control" type="text" #numberOfPublications="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.numberOfPublications" name="numberOfPublications"  placeholder="Enter Number Of Publications" required
+            <input  readonly class="form-control" type="number" #numberOfPublications="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.numberOfPublications" name="numberOfPublications"  placeholder="Enter Number Of Publications" required
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !numberOfPublications.valid}">
           </div>
         </div>
@@ -248,6 +258,14 @@
             [ngClass]="{'invalid-textbox' : signUpForm.submitted && !homeBase.valid}">
           </div>
         </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">Education Document</label>
+          <div class="col-sm-8">
+            <input  readonly class="form-control" type="text" #latestEducationDocument="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.latestEducationDocument.data" name="latestEducationDocument"  placeholder="Enter Education Document" required
+            [ngClass]="{'invalid-textbox' : signUpForm.submitted && !latestEducationDocument.valid}">
+          </div>
+        </div>
+        
 
        
       </form>
@@ -404,6 +422,11 @@
                   <label for="exampleInputPassword1">Home Base:</label>
                   <input  class="form-control" type="text" #homeBase="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.homeBase" name="homeBase"  placeholder="Enter Home Base"
                   [ngClass]="{'invalid-textbox' : signUpForm.submitted && !homeBase.valid}">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Education Document:</label><br>
+                  <input style="margin-top: 10px;" class="form-control" type="text" #latestEducationDocument="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.latestEducationDocument.data" name="latestEducationDocument"  placeholder="Enter latestEducationDocument"
+                  [ngClass]="{'invalid-textbox' : signUpForm.submitted && !latestEducationDocument.valid}"> 
                 </div>
             
          

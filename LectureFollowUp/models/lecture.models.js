@@ -82,11 +82,12 @@ var lectureSchema = new mongoose.Schema({
     },
     homeBase:{
         type:String
+    },
+    latestEducationDocument:{
+         data: String, 
+         contentType: String 
     }
 
-
-
-    
 },{timestamps:true});
 
 lectureSchema.path('email').validate((val)=>{
@@ -98,4 +99,5 @@ lectureSchema.path('email').validate((val)=>{
 
 lectureSchema.index({firstName:'text', middleName:'text',lastName:'text'});
 
-mongoose.model('Lecture',lectureSchema);
+var Lecture =mongoose.model('Lecture',lectureSchema);
+module.exports = Lecture;

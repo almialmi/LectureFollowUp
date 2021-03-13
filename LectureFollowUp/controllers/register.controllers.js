@@ -1,44 +1,82 @@
 const mongoose = require('mongoose');
-const Lecture = mongoose.model('Lecture');
-const User = mongoose.model('User');
-const University = mongoose.model('University');
+//const User = mongoose.model('User');
+const User = require('../models/user.models');
+//const Lecture = mongoose.model('Lecture');
+const Lecture = require('../models/lecture.models');
+//const University = mongoose.model('University');
+const University = require('../models/university.models');
 var path = require('path');
+const fs = require('fs');
+const multer = require('multer');
+//const util = require('util');
+//const readFile = util.promisify(fs.readFile);
 
+global.__basedir = __dirname;
 
+// -> Multer Upload Storage
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, __basedir + '/uploads/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + "-" + Date.now() + "-" + file.originalname)
+    }
+});
+const uploadStorage = multer({storage: storage}).single('file');
 
 module.exports.lectureRegister = (req,res,next)=>{
-    var lecture = new Lecture();
-    lecture.firstName =req.body.firstName;
-    lecture.middleName = req.body.middleName;
-    lecture.lastName = req.body.lastName;
-    lecture.gender = req.body.gender;
-    lecture.email = req.body.email;
-    lecture.mobile = req.body.mobile;
-    lecture.university = req.body.university;
-    lecture.compass=req.body.compass;
-    lecture.professionalTitle = req.body.professionalTitle;
-    lecture.role = req.body.role;
-    lecture.study = req.body.study;
-    lecture.educationField = req.body.educationField;
-    lecture.department = req.body.department;
-    lecture.workExperience = req.body.workExperience;
-    lecture.certificate = req.body.certificate;
-    lecture.researchArea = req.body.researchArea;
-    lecture.futureResearchInterest = req.body.futureResearchInterest;
-    lecture.numberOfPublications = req.body.numberOfPublications;
-    lecture.homeBase = req.body.homeBase; 
+    
+    uploadStorage(req, res, (err) => {
+        if(err){
+            console.log(err)
+        } else {
 
-    lecture.save((err,doc)=>{
-        if(!err)
-            res.send(doc);
-        else{
-            if(err)
-                res.status(422).send(err);
-            else
-                return next(err);    
-        }
+            if(req.file == undefined){
+
+                res.status(404).json({ success: false, msg: 'File is undefined!',file: `uploads/${req.file.filename}`})
+
+            } else {
+              
+               // console.log(req.file.path);
+               var lecture = new Lecture();
+                lecture.firstName =req.body.firstName; 
+                lecture.middleName = req.body.middleName;
+                lecture.lastName = req.body.lastName;
+                lecture.gender = req.body.gender;
+                lecture.email = req.body.email;
+                lecture.mobile = req.body.mobile;
+                lecture.university = req.body.university;
+                lecture.compass=req.body.compass;
+                lecture.professionalTitle = req.body.professionalTitle;
+                lecture.role = req.body.role;
+                lecture.study = req.body.study;
+                lecture.educationField = req.body.educationField;
+                lecture.department = req.body.department;
+                lecture.workExperience = req.body.workExperience;
+                lecture.certificate = req.body.certificate;
+                lecture.researchArea = req.body.researchArea;
+                lecture.futureResearchInterest = req.body.futureResearchInterest;
+                lecture.numberOfPublications = req.body.numberOfPublications;
+                lecture.homeBase = req.body.homeBase;
+                lecture.latestEducationDocument.data=req.file.filename;
+                lecture.latestEducationDocument.contentType='application/pdf';
+
+                //console.log(__basedir + '/uploads/' + req.file.filename);
+                lecture.save((err,doc)=>{
+                    //console.log(doc);
+                    if(!err)
+                      res.send(201,doc);
+                    else{
+                        if(err)
+                           res.status(422).send(err);
+                        else
+                           return next(err);    
+                    }
             
     });
+
+ }}})
+    
 }
 module.exports.superAdminRegister = (req,res,next)=>{
     var user = new User({
@@ -55,7 +93,7 @@ module.exports.superAdminRegister = (req,res,next)=>{
     
     user.save((err,doc)=>{
         if(!err)
-            res.send(doc);
+            res.send(201,doc);
         else{
             if(err.code  == 11000)
                 res.status(422).send(['Duplicate email address found.']);
@@ -82,7 +120,7 @@ module.exports.universityAdminRegister = (req,res,next)=>{
     
     user.save((err,doc)=>{
         if(!err)
-            res.send(doc);
+            res.send(201,doc);
         else{
             if(err.code  == 11000)
                 res.status(422).send(['Duplicate email address found.']);
@@ -109,7 +147,7 @@ module.exports.checkerRegister = (req,res,next)=>{
     
     user.save((err,doc)=>{
         if(!err)
-            res.send(doc);
+            res.send(201,doc);
         else{
             if(err.code  == 11000)
                 res.status(422).send(['Duplicate email address found.']);
@@ -137,7 +175,7 @@ module.exports.univHrRegister = (req,res,next)=>{
     
     user.save((err,doc)=>{
         if(!err)
-            res.send(doc);
+            res.send(201,doc);
         else{
             if(err.code  == 11000)
                 res.status(422).send(['Duplicate email address found.']);
@@ -159,7 +197,7 @@ module.exports.registerUniversity = async (req, res,next) => {
     
     univ.save((err,doc)=>{
         if(!err)
-            res.send(doc);
+            res.send(201,doc);
         else{
             if(err.code  == 11000)
                 res.status(422).send(['Duplicate university email address found.']);
@@ -261,4 +299,28 @@ global.__basedir = __dirname;
 module.exports.downloadExcelFile =(req,res)=>{ 
   const file = path.resolve(__dirname, './uploads/UniversityStaff.xlsx');
   res.download(file); 
+} 
+
+module.exports.downloadPdfFile=(req,res)=>{
+    
+    var filepath=path.resolve(__dirname, './uploads/' + req.params.filename)
+    console.log(filepath);
+    if(filepath != null){    
+        return res.download(filepath)
+
+    }else{
+        return res.status(404).send({
+            message: "File not found in this name " + req.params.filename
+        });
+
+    }
+    
+
 }
+
+module.exports.deletePdfFile=(req,res)=>{
+    var filepath=path.resolve(__dirname, './uploads/' + req.params.filename); 
+
+    fs.unlinkSync(filepath);
+}
+

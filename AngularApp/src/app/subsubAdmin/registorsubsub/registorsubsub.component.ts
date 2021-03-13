@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit,ViewChild} from '@angular/core';
 import {  SubsubAdminService } from 'src/app/sharedsubsub/subsub-admin.service';
-import { FormGroup, NgForm,FormBuilder}  from '@angular/forms';
+import { FormGroup, NgForm,FormBuilder,FormControl,Validators}  from '@angular/forms';
 import { Router } from "@angular/router";
 import { Educstatus } from "src/app/sharedsub/educstatus.model";
 import {Role} from "src/app/sharedsub/role.model";
@@ -24,8 +24,10 @@ import { saveAs } from 'file-saver';
  providers: [DataService]
 })
 export class RegistorsubsubComponent implements OnInit {
+  myForm:NgForm;
   fileName = 'UniversityStaff';
   fileToUpload: File = null;
+  uploadedFile: Array<File>= null ;
   selectedStudy:Study = new Study(0, 'Natural'); 
   selectedStudyy:Educationalfield= new Educationalfield(0 ,"Natural", "medicine") ;
   studys : Study[];
@@ -59,6 +61,7 @@ export class RegistorsubsubComponent implements OnInit {
   dataValues = [];
   editField: string;
   @ViewChild('myInput') myInputVariable: ElementRef;
+  @ViewChild('myInput1') myInputVariable1: ElementRef;
 
   constructor(public subsubAdminService : SubsubAdminService , public router : Router , private _dataService: DataService,private formBuilder: FormBuilder) {
     this.studys = this._dataService.getStudy();
@@ -91,10 +94,14 @@ setShowTrue(name:any){
   console.log(name);
   this.show = true;
 }
-  reset() {
+reset() {
     this.myInputVariable.nativeElement.value = '';
     this.show = false;
-  }
+}
+reset1() {
+  this.myInputVariable1.nativeElement.value = '';
+  this.show = false;
+}
   onSelect(countryidd) {
     this.fields = this._dataService.getFields()
                  .filter((item)=> item.studyname == countryidd);
@@ -103,12 +110,40 @@ setShowTrue(name:any){
     this.dept = this._dataService.getDepartment()
                  .filter((item)=> item.fieldname == countryidd);
   }
+  fileChange(event) {
+    this.uploadedFile = event.target.files;
+  }
   onSubmit(form : NgForm){
-    this.subsubAdminService.postUniversityStaff(form.value).subscribe(
+    if(this.uploadedFile.length>0){
+      let file: File = this.uploadedFile[0];
+      let formData:FormData = new FormData();
+
+      formData.append('firstName',form.value.firstName);
+      formData.append('middleName',form.value.middleName);
+      formData.append('lastName',form.value.lastName);
+      formData.append('gender',form.value.gender);
+      formData.append('mobile',form.value.mobile);
+      formData.append('email',form.value.email);
+      formData.append('university',form.value.university);
+      formData.append('compass',form.value.compass);
+      formData.append('professionalTitle',form.value.professionalTitle);
+      formData.append('role',form.value.role);
+      formData.append('study',form.value.study);
+      formData.append('educationField',form.value.educationField);
+      formData.append('department',form.value.department);
+      formData.append('workExperience',form.value.workExperience);
+      formData.append('certificate',form.value.certificate);
+      formData.append('researchArea',form.value.researchArea);
+      formData.append('futureResearchInterest',form.value.futureResearchInterest);
+      formData.append('numberOfPublications',form.value.numberOfPublications);
+      formData.append('file', file,file.name);
+      
+    this.subsubAdminService.postUniversityStaff(formData).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false,4000);
         this.resetForm(form);
+        this.reset1();
        
       },
       err => {
@@ -124,7 +159,7 @@ setShowTrue(name:any){
       }
     );
 
-  }
+  }}
   resetForm(form : NgForm){
     this.subsubAdminService.selectedStaff = {
       _id : '',
@@ -146,8 +181,11 @@ setShowTrue(name:any){
       certificate:'',
       researchArea:'',
       futureResearchInterest:'',
-      numberOfPublications:'',
+      numberOfPublications:0,
       homeBase:'',
+      latestEducationDocument:{
+        data:''
+      },
 };
     form.resetForm();
     this.serverErrorMessage = '';

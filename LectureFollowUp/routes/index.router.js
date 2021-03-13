@@ -80,6 +80,10 @@ router.post('/uploadFile',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,upload.
 
 router.get('/downloadExcelFile',ctrlUser.Authenticate,regUser.downloadExcelFile);
 
+router.get('/downloadPdfFile/:filename',ctrlUser.Authenticate,regUser.downloadPdfFile);
+
+router.get('/deletePdfFile/:id',ctrlUser.Authenticate,regUser.deletePdfFile);
+
 // fetch university staff by hr 
 //fetch university staff
 
@@ -90,7 +94,7 @@ router.get('/fetchAllUniversityStaffForExcel/:university/:compass',ctrlUser.Auth
 router.put('/updateUniversityStaffProfile/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.updateUniversityStaffProfile);
 
 // delete university staff
-router.delete('/deleteUniversityStaff/:id',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.deleteUniversityStaff);
+router.delete('/deleteUniversityStaff/:id/:filename',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.deleteUniversityStaff);
 
 // fetch university staff by checker
 router.get('/fetchUniversityStaffByChecker',ctrlUser.Authenticate,jwtHelper.verifyJwtToken,ctrlUser.fetchUniversityStaffForChecker);

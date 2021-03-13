@@ -23,4 +23,6 @@ var universitySchema = new mongoose.Schema({
     }
    });
 
-   mongoose.model('University',universitySchema);
+  var University = mongoose.model('University',universitySchema);
+
+  module.exports=University;

@@ -8,6 +8,8 @@ import { NgForm } from '@angular/forms';
 //import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { DomSanitizer } from '@angular/platform-browser';
+import { saveAs } from 'file-saver';
 
 
 const pageSize:number = 3;
@@ -18,6 +20,9 @@ const pageSize:number = 3;
   providers : [SubsubAdminService]
 })
 export class ShowsubsubComponent implements OnInit {
+  serverErrorMessage : string;
+  showServerError:boolean;
+  fileName = 'LatestEducationDocument';
   currentSelectedPage:number = 0;
   totalPages: number = 0;
   subsubAdmins: Array<SubsubAdmin> = [];
@@ -42,8 +47,14 @@ export class ShowsubsubComponent implements OnInit {
   trackByValue: TrackByFunction<string> = (index, value) => value;
  // data: [][];
   @ViewChild('staffTable')staffTable: ElementRef;
+  
 
-  constructor(public subsubAdminService : SubsubAdminService , public router : Router  ,private modalService: NgbModal) { }
+
+  constructor(public subsubAdminService : SubsubAdminService , public router : Router  ,private modalService: NgbModal,private sanitizer: DomSanitizer) {}
+   
+  transform(value: any) {
+    return this.sanitizer.bypassSecurityTrustUrl(value);
+  }
 
   emailRegex =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   showSucessMessage: boolean;
@@ -94,6 +105,8 @@ export class ShowsubsubComponent implements OnInit {
 
   }
   
+  
+  
   onSubmit(form : NgForm){
    
     if(form.value._id == ""){
@@ -111,9 +124,9 @@ export class ShowsubsubComponent implements OnInit {
     }
    
   }
-  onDelete(_id: string){
+  onDelete(_id: string,filename){
     if( this.confirmClicked == true){
-      this.subsubAdminService.deleteUniversityStaff(_id).subscribe((res) => {
+      this.subsubAdminService.deleteUniversityStaff(_id,filename).subscribe((res) => {
         this.getPage(this.currentSelectedPage);
       });
     }
@@ -135,6 +148,7 @@ export class ShowsubsubComponent implements OnInit {
             .subscribe(
                 (message: Message) => {
                   console.log(message);
+                 // console.log(this.Decodeuint8arr(this.subsubAdmins.latestEducationDocument.data.))
                   this.subsubAdmins = message.subsubAdmins;
                   this.totalPages = message.totalPages;
                   this.pageIndexes = Array(this.totalPages).fill(0).map((x,i)=>i);
@@ -174,9 +188,36 @@ export class ShowsubsubComponent implements OnInit {
 
     }
   }
-  
 
-  
+downloadPdfFile(filename) {
+  console.log(filename);
+  this.subsubAdminService.downloadPdfFile(filename).subscribe(
+      res => {
+          const blob = new Blob([res], { type : 'application/pdf' });
+          const file = new File([blob],filename, { type: 'application/pdf' });
+          saveAs(file);
+      },
+      err => {
+        this.showServerError=true;
+        this.serverErrorMessage = err.error;
+        setTimeout(() => this.showServerError = false,4000);
+      }
+  );
+}
+
+deletePdfFile(filename){
+  this.subsubAdminService.deletePdfFile(filename).subscribe(
+    res => {
+        console.log('successfully remove from server');
+    },
+    err => {
+      console.log(err.toString());
+        // notify error
+    }
+);
+
+}
+
 
 }
 

@@ -153,7 +153,7 @@
                 ever in the history of Ethiopian Education.
               </p>
 
-              <form #signUpForm="ngForm"  (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
+              <form #signUpForm="ngForm" enctype="multipart/form-data" (ngSubmit) = "signUpForm.valid && onSubmit(signUpForm)">
                 <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="subsubAdminService.selectedStaff._id">
                 <div class="form-group">
                   <label for="exampleInputEmail1">First Name:</label>
@@ -301,7 +301,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Number Of Publications:</label>
-                    <input  class="form-control" type="text" #numberOfPublications="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.numberOfPublications" name="numberOfPublications"  placeholder="Enter Number Of Publications" 
+                    <input  class="form-control" type="number" #numberOfPublications="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.numberOfPublications" name="numberOfPublications"  placeholder="Enter Number Of Publications" 
                     [ngClass]="{'invalid-textbox' : signUpForm.submitted && !numberOfPublications.valid}">
                   </div>
                   <div class="form-group">
@@ -309,6 +309,13 @@
                     <input  class="form-control" type="text" #homeBase="ngModel" [(ngModel)]="subsubAdminService.selectedStaff.homeBase" name="homeBase"  placeholder="Enter Home Base"
                     [ngClass]="{'invalid-textbox' : signUpForm.submitted && !homeBase.valid}">
                   </div>
+                  <div class="form-group">
+                    <label>Latest Education Document:</label><br>
+                    <input #myInput1 type="file" (change)="fileChange($event)" name="file" multiple="false" accept="application/pdf" 
+                    >
+                    <button  style="height: 30px;background-color: #056f8f85;"  (click)="reset1()">X</button>
+                   </div>
+                   
                   
 
               <!-- <button type="button" class="btn  text-center btn-sm px-5">submit</button>--> 

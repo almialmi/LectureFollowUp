@@ -13,6 +13,7 @@ const rstIndex = require('./routes/index.router');
 
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({origin:'http://localhost:4200'}));
 app.use(passport.initialize());
 require("./config/passportConfig")(passport);

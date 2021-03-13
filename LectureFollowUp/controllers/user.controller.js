@@ -7,9 +7,13 @@ const passwordResetToken=mongoose.model('passwordResetToken');
 const nodemailer = require('nodemailer');
 const async = require('async');
 const crypto = require('crypto');
-
+const fs = require('fs');
+var path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+
+global.__basedir = __dirname;
 
 /*
 const fetchUser = async(role,res)=>{
@@ -401,9 +405,7 @@ module.exports.fetchUniversityStaffAllForUnivHr= async (req, res) => {
 
 
 
-/*module.exports.fetchUniversityStaff = (req,res)=>{
-    getUniversityStaff(req.params.university,req.params.compass,res);
-}*/
+
 
 // university staff update
 
@@ -412,7 +414,7 @@ module.exports.updateUniversityStaffProfile = (req,res)=>{
     // Validate Request
     if(!req.body.firstName && !req.body.middleName && !req.body.age && !req.body.lastName && !req.body.email && 
         !req.body.mobile && !req.body.university&& !req.body.professionalTitle && !req.body.role  && 
-        !req.body.study && !req.body.educationField && !req.body.department) {
+        !req.body.study && !req.body.educationField && !req.body.department && !req.body.workExperience) {
         return res.status(400).send({
             message: "For University staff this contents can not be empty"
         });
@@ -438,7 +440,12 @@ module.exports.updateUniversityStaffProfile = (req,res)=>{
             researchArea : req.body.researchArea,
             futureResearchInterest : req.body.futureResearchInterest,
             numberOfPublications : req.body.numberOfPublications,
-            homeBase : req.body.homeBase
+            homeBase : req.body.homeBase,
+            latestEducationDocument:{
+                data:req.body.latestEducationDocument,
+                contentType:"application/pdf"
+            }
+
 
         }
         
@@ -465,7 +472,11 @@ module.exports.updateUniversityStaffProfile = (req,res)=>{
 }
 
 // delete university staff
-module.exports.deleteUniversityStaff=(req,res)=>{
+module.exports.deleteUniversityStaff=(req,res)=>{  
+    //console.log(req.params.filename);
+    console.log(__basedir);
+    var filepath= path.resolve(__basedir, './uploads/' + req.params.filename);  
+    console.log(filepath); 
     Lecture.findByIdAndRemove(req.params.id)
     .then(lecture => {
         if(!lecture) {
@@ -484,6 +495,9 @@ module.exports.deleteUniversityStaff=(req,res)=>{
             message: "Could not delete University staff with id " + req.params.id
         });
     });
+    fs.unlinkSync(filepath);
+
+    
 
 } 
 
@@ -549,7 +563,6 @@ module.exports.fetchUniversityStaffForPagination = async(req,res)=>{
           "pageSize": result.length,
           "subsubAdmins": result
         };
-    
         res.status(200).json(response);
       } catch (error) {
         res.status(500).send({

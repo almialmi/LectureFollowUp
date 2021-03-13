@@ -18,7 +18,10 @@ export class SubsubAdmin {
     certificate:string;
     researchArea:string;
     futureResearchInterest:string;
-    numberOfPublications:string;
+    numberOfPublications:number;
     homeBase:string;
+    latestEducationDocument:{
+        data:string
+    };
     
 }

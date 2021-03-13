@@ -36,11 +36,14 @@ export class SubsubAdminService {
     department : '',
     isViewed:false,
     workExperience:0,
-    certificate:'',
+    certificate:'', 
     researchArea:'',
     futureResearchInterest:'',
-    numberOfPublications:'',
+    numberOfPublications:0,
     homeBase:'',
+    latestEducationDocument:{
+      data:''
+    },
 
 
 
@@ -55,8 +58,8 @@ export class SubsubAdminService {
 
 constructor(public http : HttpClient) { }
 
-postUniversityStaff(user : SubsubAdmin){
-  return  this.http.post(environment.apiBaseUrl + '/registerLectures' , user);
+postUniversityStaff(formData:FormData){
+  return  this.http.post(environment.apiBaseUrl + '/registerLectures' , formData);
 
 }
 postFromExcelFile(Data:[]){
@@ -67,12 +70,19 @@ downloadEmptyExcelFile(){
   return  this.http.get(environment.apiBaseUrl + '/downloadExcelFile',{ responseType: "blob" }) //set response Type properly (it is not part of headers)
   
 }
+downloadPdfFile(filepath){
+  return this.http.get(environment.apiBaseUrl + '/downloadPdfFile' + `/${filepath}`,{responseType: "blob"});
+}
+
+deletePdfFile(filepath){
+  return this.http.get(environment.apiBaseUrl + '/deletePdfFile' + `/${filepath}`);
+}
 
 showUniversityStaff(university:string,compass:string){
   return this.http.get(environment.apiBaseUrl + '/fetchAllUniversityStaffForExcel' + `/${university}` + `/${compass}`);
 }
-deleteUniversityStaff(_id : string){
-  return this.http.delete(environment.apiBaseUrl + '/deleteUniversityStaff' + `/${_id}`);
+deleteUniversityStaff(_id : string,filename){
+  return this.http.delete(environment.apiBaseUrl + '/deleteUniversityStaff' + `/${_id}` +`/${filename}`);
 
 
 }
